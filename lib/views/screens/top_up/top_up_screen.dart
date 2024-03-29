@@ -9,6 +9,7 @@ import '../../../bloc/top_up/top_up_bloc.dart';
 import '../../../helpers/response_ob.dart';
 import '../../../resources/colors.dart';
 import '../../../resources/constants.dart';
+import '../../../widgets/app_bar_title_view.dart';
 import '../../../widgets/long_button_view.dart';
 import '../../widgets/error_alert_widget.dart';
 
@@ -64,29 +65,7 @@ class _TopUpScreenState extends State<TopUpScreen> {
       backgroundColor: Colors.grey.shade200,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: AppBar(
-            toolbarHeight: 70,
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            leading: IconButton(
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                color: colorPrimary,
-              ),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-            title: const Text(
-              "Top-Up",
-              style: TextStyle(
-                fontSize: 16,
-                color: colorPrimary,
-                fontWeight: FontWeight.w800,
-              ),
-            ),
-          ),
-        ),
+        child: AppBarTitleView(text: "Top-Up",),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),

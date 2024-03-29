@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_version_checker/flutter_app_version_checker.dart';
 import 'package:fluttericon/iconic_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

@@ -1,7 +1,7 @@
 name: nathan_app
 description: A new Flutter project.
 
-version: 1.0.1+4
+version: 1.0.0+2
 
 environment:
   sdk: '>=2.19.2 <3.10.6'
@@ -31,7 +31,7 @@ dependencies:
   flutter_spinkit: ^5.1.0
   flutter_launcher_icons: ^0.13.0
   percent_indicator: ^4.2.3
-  http: ^1.1.0
+  http: ^0.13.4
   flutter_staggered_grid_view: ^0.7.0
   retrofit: ^4.0.1
   retrofit_generator: ^8.0.4
@@ -46,6 +46,8 @@ dependencies:
   intl: any
   geolocator: ^11.0.0
   geocoding: ^3.0.0
+  flutter_app_version_checker: ^0.3.2
+  url_launcher: ^6.2.5
 
 dev_dependencies:
   flutter_test:

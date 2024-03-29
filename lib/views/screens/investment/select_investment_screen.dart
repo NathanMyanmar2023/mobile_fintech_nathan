@@ -9,6 +9,8 @@ import 'package:nathan_app/views/screens/investment/investment_screen.dart';
 import 'package:nathan_app/widgets/long_button_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../widgets/app_bar_title_view.dart';
+
 class SelectInvestmentScreen extends StatefulWidget {
   final String second_wallet_balance;
 
@@ -85,25 +87,7 @@ class _SelectInvestmentScreenState extends State<SelectInvestmentScreen> {
           backgroundColor: Colors.white,
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(70),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: AppBar(
-                toolbarHeight: 70,
-                elevation: 0,
-                backgroundColor: Colors.transparent,
-                leading: IconButton(
-                  icon: const Icon(Icons.arrow_back_ios, color: colorPrimary),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-                title:  Text(AppLocalizations.of(context)!.investment,
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: colorPrimary,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-              ),
-            ),
+            child: AppBarTitleView(text: AppLocalizations.of(context)!.investment,),
           ),
           body: SingleChildScrollView(
             child: Padding(

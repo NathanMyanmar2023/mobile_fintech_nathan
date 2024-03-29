@@ -11,6 +11,8 @@ import 'package:nathan_app/widgets/long_button_view.dart';
 import 'package:nathan_app/widgets/text_field_with_label_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../widgets/app_bar_title_view.dart';
+
 class MoneyInvestmentScreen extends StatefulWidget {
 
   const MoneyInvestmentScreen({
@@ -101,29 +103,7 @@ class _MoneyInvestmentScreenState extends State<MoneyInvestmentScreen> {
           backgroundColor: Colors.white,
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(70),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: AppBar(
-                toolbarHeight: 70,
-                elevation: 0,
-                backgroundColor: Colors.transparent,
-                leading: IconButton(
-                  icon: const Icon(
-                    Icons.arrow_back_ios,
-                    color: colorPrimary,
-                  ),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-                title: const Text(
-                  "Money Market",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: colorPrimary,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-              ),
-            ),
+            child: AppBarTitleView(text: "Money Market",),
           ),
           body: const Padding(
             padding:  EdgeInsets.symmetric(horizontal: 30),

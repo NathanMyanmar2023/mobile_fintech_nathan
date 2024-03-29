@@ -10,6 +10,7 @@ class SharedPref {
   static const locale = 'locale';
   static const language_code = 'language_code';
   static const currency = "currency";
+  static const newVersion = "newVersion";
 
   static Future<bool> setData({String? key, String? value}) async {
     SharedPreferences shp = await SharedPreferences.getInstance();
