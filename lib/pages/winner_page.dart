@@ -4,6 +4,7 @@ import 'package:nathan_app/bloc/winner_bloc.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/objects/winner_ob.dart';
 import 'package:nathan_app/resources/colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WinnerPage extends StatefulWidget {
   const WinnerPage({super.key});
@@ -61,7 +62,14 @@ class _WinnerPageState extends State<WinnerPage> {
           ),
         ),
       ),
-      body: ListView.builder(
+      body: winnerList.isEmpty ?
+      Padding(
+        padding: const EdgeInsets.only(top: 50),
+        child:  Center(
+          child: Text(
+            AppLocalizations.of(context)!.no_more_data,),
+        ),
+      ) : ListView.builder(
         itemCount: winnerList.length,
         padding: const EdgeInsets.only(bottom: 8),
         itemBuilder: (BuildContext context, int index) => WinnerView(

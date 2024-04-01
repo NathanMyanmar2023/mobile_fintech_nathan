@@ -83,44 +83,44 @@ class _TopUpScreenState extends State<TopUpScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 20,
-            ),
-            const Text(
-              "Select Your SIM Card Name",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            DropdownButtonFormField<DefaultInfoOb>(
-              padding: EdgeInsets.zero,
-              isExpanded: true,
-              value: operatorList.first,
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.only(left: 10, right: 5, top: 0, bottom: 0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-              ),
-              onChanged: (newValue) {
-                setState(() {
-                  newData = newValue;
-                });
-              },
-              items: operatorList.map((option) {
-                return DropdownMenuItem<DefaultInfoOb>(
-                  value: option,
-                  child: Text(option.name ?? '-'),
-                );
-              }).toList(),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
+            // const SizedBox(
+            //   height: 20,
+            // ),
+            // const Text(
+            //   "Select Operator",
+            //   style: TextStyle(
+            //     fontSize: 18,
+            //     fontWeight: FontWeight.w700,
+            //   ),
+            // ),
+            // const SizedBox(
+            //   height: 10,
+            // ),
+            // DropdownButtonFormField<DefaultInfoOb>(
+            //   padding: EdgeInsets.zero,
+            //   isExpanded: true,
+            //   value: operatorList.first,
+            //   decoration: InputDecoration(
+            //     contentPadding: const EdgeInsets.only(left: 10, right: 5, top: 0, bottom: 0),
+            //     border: OutlineInputBorder(
+            //       borderRadius: BorderRadius.circular(15),
+            //     ),
+            //   ),
+            //   onChanged: (newValue) {
+            //     setState(() {
+            //       newData = newValue;
+            //     });
+            //   },
+            //   items: operatorList.map((option) {
+            //     return DropdownMenuItem<DefaultInfoOb>(
+            //       value: option,
+            //       child: Text(option.name ?? '-'),
+            //     );
+            //   }).toList(),
+            // ),
+            // const SizedBox(
+            //   height: 10,
+            // ),
             TextField(
               controller: phoneController,
               keyboardType: TextInputType.number,

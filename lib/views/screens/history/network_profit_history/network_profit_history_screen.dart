@@ -139,34 +139,38 @@ class _NetworkProfitHistoryScreenState
               child: historyList.isEmpty ? Center(child: Text(AppLocalizations.of(context)!.no_more_data,),) :  ListView.builder(
                 controller: scroll_controller,
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount: historyList.length + 1,
+                itemCount: historyList.length,
                 itemBuilder: (context, index) {
-                  if (index < historyList.length) {
-                    final history = historyList[index];
-                    return NetworkProfitHistorySelectorWidget(
-                      data: history,
-                    );
-                  } else {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 20),
-                      child: Center(
-                        child: hasMore
-                            ? const SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                ))
-                            : Text(
-                          AppLocalizations.of(context)!.no_more_data,
-                                style: TextStyle(
-                                  fontSize: 13,
-                                ),
-                              ),
-                      ),
-                    );
-                  }
+                  final history = historyList[index];
+                  return NetworkProfitHistorySelectorWidget(
+                    data: history,
+                  );
+                  // if (index < historyList.length) {
+                  //   final history = historyList[index];
+                  //   return NetworkProfitHistorySelectorWidget(
+                  //     data: history,
+                  //   );
+                  // } else {
+                  //   return Padding(
+                  //     padding: const EdgeInsets.symmetric(
+                  //         horizontal: 20, vertical: 20),
+                  //     child: Center(
+                  //       child: hasMore
+                  //           ? const SizedBox(
+                  //               width: 20,
+                  //               height: 20,
+                  //               child: CircularProgressIndicator(
+                  //                 strokeWidth: 2,
+                  //               ))
+                  //           : Text(
+                  //         AppLocalizations.of(context)!.no_more_data,
+                  //               style: TextStyle(
+                  //                 fontSize: 13,
+                  //               ),
+                  //             ),
+                  //     ),
+                  //   );
+                  // }
                 },
               ),
             )),

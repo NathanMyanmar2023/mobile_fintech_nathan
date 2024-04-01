@@ -145,37 +145,45 @@ class _ReturnMoneyHistoryScreenState extends State<ReturnMoneyHistoryScreen> {
               child: history_list.isEmpty ? Center(child: Text(AppLocalizations.of(context)!.no_more_data,),) : ListView.builder(
                 controller: scroll_controller,
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount: history_list.length + 1,
+                itemCount: history_list.length,
                 itemBuilder: (context, index) {
-                  if (index < history_list.length) {
-                    final history = history_list[index];
-                    return ReturnMoneyHistorySelectorWidget(
-                      id: history[0],
-                      amount: history[1],
-                      invest_date: history[2],
-                      return_date: history[3],
-                    );
-                  } else {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 20),
-                      child: Center(
-                        child: hasMore
-                            ? const SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                ))
-                            : Text(
-                          AppLocalizations.of(context)!.no_more_data,
-                                style: TextStyle(
-                                  fontSize: 13,
-                                ),
-                              ),
-                      ),
-                    );
-                  }
+
+                  final history = history_list[index];
+                  return ReturnMoneyHistorySelectorWidget(
+                    id: history[0],
+                    amount: history[1],
+                    invest_date: history[2],
+                    return_date: history[3],
+                  );
+                  // if (index < history_list.length) {
+                  //   final history = history_list[index];
+                  //   return ReturnMoneyHistorySelectorWidget(
+                  //     id: history[0],
+                  //     amount: history[1],
+                  //     invest_date: history[2],
+                  //     return_date: history[3],
+                  //   );
+                  // } else {
+                  //   return Padding(
+                  //     padding: const EdgeInsets.symmetric(
+                  //         horizontal: 20, vertical: 20),
+                  //     child: Center(
+                  //       child: hasMore
+                  //           ? const SizedBox(
+                  //               width: 20,
+                  //               height: 20,
+                  //               child: CircularProgressIndicator(
+                  //                 strokeWidth: 2,
+                  //               ))
+                  //           : Text(
+                  //         AppLocalizations.of(context)!.no_more_data,
+                  //               style: TextStyle(
+                  //                 fontSize: 13,
+                  //               ),
+                  //             ),
+                  //     ),
+                  //   );
+                  // }
                 },
               ),
             )),

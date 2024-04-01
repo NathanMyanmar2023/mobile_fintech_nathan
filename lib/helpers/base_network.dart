@@ -90,20 +90,20 @@ class BaseNetwork {
       int? statusCode = response.statusCode;
       ResponseOb respOb = ResponseOb(success: false); //data,message,err
       ResponseDataOb respDataOb = ResponseDataOb(status: "fail");
+
       if (statusCode == 200 && response.data["success"] == true) {
         //data
-        respOb.data = response.data;
         respOb.success = response.data["success"];
         respOb.message = response.data["message"];
+        respOb.data = response.data;
         onDataCallBack!(respOb);
-      } else if (statusCode == 200 && response.data["status"] == true) { // for checking deposit resp
+      } else if (statusCode == 400 && response.data["success"] == false)  {
+        // when data is null
+        respOb.message = response.data["message"];
+        errorCallBack!(respOb);
+  } else if (statusCode == 200 && response.data["status"] == true) { // for checking deposit resp
         //data
         respOb.message = response.data["message"];
-        SharedPref.setData(
-          key: SharedPref.responseError,
-          value: respOb.message,
-        );
-        print("roeo ${respOb.message}");
         errorCallBack!(respOb);
       } else {
         //error
