@@ -40,6 +40,8 @@ const REQUEST_OTP = "${API_URL}resend/code";
 const VERIFY_OTP = "${API_URL}verify";
 
 const UPLOAD_KYC = "${API_URL}kyc/store";
+const NRC_TYPE = "${API_URL}nrc-information";
+const NRC_TOWNSHIP = "${API_URL}nrc-information/detail/";
 
 const WALLETS = "${API_URL}user/wallets";
 const USER_INFO = "${API_URL}user/infos";

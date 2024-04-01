@@ -8,7 +8,9 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nathan_app/bloc/kyc/kyc_bloc.dart';
+import 'package:nathan_app/bloc/nrc_type_bloc.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
+import 'package:nathan_app/objects/Nrc_type_ob.dart';
 import 'package:nathan_app/resources/colors.dart';
 import 'package:nathan_app/views/screens/kyc/success_kyc_screen.dart';
 import 'package:nathan_app/views/widgets/error_alert_widget.dart';
@@ -19,9 +21,13 @@ import 'package:provider/provider.dart';
 import 'package:rabbit_converter/rabbit_converter.dart';
 import '../../../view_models/app_language_view_model.dart';
 import '../../../widgets/theme_text.dart';
+import '../../bloc/nrc_township_bloc.dart';
 import '../../bloc/region_bloc.dart';
 import '../../bloc/township_bloc.dart';
 import '../../objects/default_info_ob.dart';
+import '../../objects/nrc_state_lists.dart';
+import '../../objects/nrc_township_list_ob.dart';
+import '../../objects/nrc_type_lists.dart';
 import '../../objects/region_ob.dart';
 import '../../objects/township_ob.dart';
 import '../../widgets/text_field_view.dart';
@@ -66,40 +72,51 @@ class _TestKycScreenState extends State<TestKycScreen> {
   int selectedTownshipId = 0;
   DefaultInfoOb? valueData;
 
-  List<DefaultInfoOb> countList = [
-    DefaultInfoOb(id: 1, name: "1"),
-    DefaultInfoOb(id: 2, name: "2"),
-    DefaultInfoOb(id: 3, name: "3"),
-    DefaultInfoOb(id: 4, name: "4"),
-    DefaultInfoOb(id: 5, name: "5"),
-    DefaultInfoOb(id: 6, name: "6"),
-    DefaultInfoOb(id: 7, name: "7"),
-    DefaultInfoOb(id: 8, name: "8"),
-    DefaultInfoOb(id: 9, name: "9"),
-    DefaultInfoOb(id: 10, name: "10"),
-    DefaultInfoOb(id: 11, name: "11"),
-    DefaultInfoOb(id: 12, name: "12")
-  ];
+  String selNrcType = "0";
+  String selNrcState = "0";
+  String selNrcTown = "0";
 
-  final _regionBloc = RegionBloc();
-  late Stream<ResponseOb> _regionStream;
-  List<RegionData> regionList = [];
-  RegionData? townShipData;
+  final _nrcTypeBloc = NRCTypeBloc();
+  late Stream<ResponseOb> _nrcTypeStream;
+  List<NrcTypeLists> nrcTypeList = [];
+  NrcTypeLists? nrcTypeData;
+
+  List<NrcStateLists> nrcStateList = [];
+  NrcStateLists? nrcStateData;
+
+  final _nrcTownshipBloc = NRCTownshipBloc();
+  late Stream<ResponseOb> _nrcTownshipStream;
+  List<NRCTownshipData?> nrcTownshipList = [];
+  NRCTownshipData? nrcTownshipData;
 
   @override
   void initState() {
     super.initState();
-    /// region list stream
-    _regionStream = _regionBloc.regionStream();
-    _regionStream.listen((ResponseOb resp) {
+    /// nrc type list stream
+    _nrcTypeStream = _nrcTypeBloc.nrcTypeStream();
+    _nrcTypeStream.listen((ResponseOb resp) {
       if (resp.success) {
         setState(() {
-          regionList = (resp.data as RegionOb).data ?? [];
+          nrcTypeList = (resp.data as NrcTypeOb).data!.nrcTypeLists ?? [];
+          nrcStateList = (resp.data as NrcTypeOb).data!.nrcStateLists ?? [];
         //  _townShipBloc.getTownShip(id: regionList.first.id ?? 0);
         });
       } else {}
     });
-    _regionBloc.getRegions();
+    _nrcTypeBloc.getNRCType();
+
+    /// nrc township list stream
+    _nrcTownshipStream = _nrcTownshipBloc.nrcTownshipStream();
+    _nrcTownshipStream.listen((ResponseOb resp) {
+      print("doofo ${resp.success}");
+      if (resp.success) {
+        setState(() {
+          nrcTownshipList = NrcTownshipListOb.fromJson(resp.data).data ?? [];
+          print("List $nrcTownshipList");
+        });
+      } else {}
+    });
+    _nrcTownshipBloc.getNRCTownShip("12");
 
     _kyc_stream = _kyc_bloc.uploadKycStream();
     _kyc_stream.listen((ResponseOb resp) {
@@ -179,7 +196,7 @@ class _TestKycScreenState extends State<TestKycScreen> {
             ),
           ),
           body: Consumer<AppLanguageViewModel>(
-              builder: (context, model, child) {
+              builder: (consumerContext, model, child) {
                 return SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -241,102 +258,115 @@ class _TestKycScreenState extends State<TestKycScreen> {
                             FilteringTextInputFormatter.allow(RegExp(r'[0-9()/A-Za-z]')),
                           ],
                         ),
+                        const SizedBox(
+                          height: 20,
+                        ),
                         Row(
                           children: [
-                            Expanded(
-                              child: DropdownButtonFormField<DefaultInfoOb>(
-                                isExpanded: false,
-                                value: ischange ? valueData : countList.first,
+                            SizedBox(
+                              width: 60,
+                              child: DropdownButtonFormField<NrcStateLists>(
+                                padding: EdgeInsets.zero,
+                                isExpanded: true,
+                                value: ischange ? nrcStateData : nrcStateList[11],
                                 decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.only(left: 20, right: 10, top: 0, bottom: 0),
+                                  contentPadding: const EdgeInsets.only(left: 10, right: 5, top: 0, bottom: 0),
                                   border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(50),
+                                    borderRadius: BorderRadius.circular(15),
                                   ),
                                 ),
                                 onChanged: (newValue) {
                                   //  selectedTownshipId = newValue.name;
                                   setState(() {
-                                    valueData = newValue;
+                                    nrcStateData = newValue;
+                                    selNrcState = "${nrcStateData!.numberEn}";
+                                    _nrcTownshipBloc.getNRCTownShip("${nrcStateData!.numberEn}");
                                   });
-                                  print("seol $valueData");
                                 },
-                                items: countList.map((option) {
-                                  return DropdownMenuItem<DefaultInfoOb>(
+                                items: nrcStateList.map((option) {
+                                  return DropdownMenuItem<NrcStateLists>(
                                     value: option,
-                                    child: Text(option.name ?? '-'),
-                                  );
-                                }).toList(),
-                              ),
-                            ),
-                            const Padding(
-                              padding:  EdgeInsets.symmetric(horizontal: 5),
-                              child:  Text("/",
-                                style: TextStyle(
-                                color: colorBlack,
-                                fontSize: 28,
-                                fontWeight: FontWeight.w800,
-                              ),),
-                            ),
-                            Expanded(
-                              child: DropdownButtonFormField<RegionData>(
-                                isExpanded: false,
-                                value: ischange ? townShipData : regionList.first,
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.only(left: 20, right: 10, top: 0, bottom: 0),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(50),
-                                  ),
-                                ),
-                                onChanged: (newValue) {
-                                  //  selectedTownshipId = newValue.name;
-                                  setState(() {
-                                    townShipData = newValue;
-                                  });
-                                  print("seol $valueData");
-                                },
-                                items: regionList.map((option) {
-                                  return DropdownMenuItem<RegionData>(
-                                    value: option,
-                                    child: Text(option.name ?? '-'),
+                                    child: Text(option.numberEn ?? '-'),
                                   );
                                 }).toList(),
                               ),
                             ),
                             const SizedBox(width: 5,),
+                            // const Padding(
+                            //   padding:  EdgeInsets.symmetric(horizontal: 5),
+                            //   child:  Text("/",
+                            //     style: TextStyle(
+                            //     color: colorBlack,
+                            //     fontSize: 28,
+                            //     fontWeight: FontWeight.w800,
+                            //   ),),
+                            // ),
                             Expanded(
-                              child: DropdownButtonFormField<DefaultInfoOb>(
-                                isExpanded: false,
-                                value: ischange ? valueData : countList.first,
+                              child: DropdownButtonFormField<NRCTownshipData>(
+                                isExpanded: true,
+                                value: ischange ? nrcTownshipData : nrcTownshipList.first,
                                 decoration: InputDecoration(
                                   contentPadding: const EdgeInsets.only(left: 20, right: 10, top: 0, bottom: 0),
                                   border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(50),
+                                    borderRadius: BorderRadius.circular(15),
                                   ),
                                 ),
                                 onChanged: (newValue) {
                                   //  selectedTownshipId = newValue.name;
                                   setState(() {
-                                    valueData = newValue;
+                                    nrcTownshipData = newValue;
+                                    selNrcTown = "${nrcTownshipData!.shortEn}";
                                   });
                                   print("seol $valueData");
                                 },
-                                items: countList.map((option) {
-                                  return DropdownMenuItem<DefaultInfoOb>(
+                                items: nrcTownshipList.map((option) {
+                                  return DropdownMenuItem<NRCTownshipData>(
                                     value: option,
-                                    child: Text(option.name ?? '-'),
+                                    child: Text(option!.shortEn ?? '-'),
                                   );
                                 }).toList(),
                               ),
                             ),
                             const SizedBox(width: 5,),
-                            Expanded(child:
-                            TextFieldView(controller: nrc_number_tec, hintText: "23***4",
-                              keyboardType: TextInputType.number,
-                              radius: 30,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                              ],
-                            ),),
+                            SizedBox(
+                              width: 50,
+                              child: DropdownButtonFormField<NrcTypeLists>(
+                                isExpanded: true,
+                                value: ischange ? nrcTypeData : nrcTypeList.first,
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(left: 10, right: 5, top: 0, bottom: 0),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                ),
+                                onChanged: (newValue) {
+                                  //  selectedTownshipId = newValue.name;
+                                  setState(() {
+                                    nrcTypeData = newValue;
+                                    selNrcType = "${nrcTypeData!.nrcTypeEN}";
+                                  });
+                                  print("seol $valueData");
+                                },
+                                items: nrcTypeList.map((option) {
+                                  return DropdownMenuItem<NrcTypeLists>(
+                                    value: option,
+                                    child: Text(option.nrcTypeEN ?? '-'),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                            const SizedBox(width: 5,),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.254,
+                              child: TextFieldView(controller: nrc_number_tec, hintText: "23***4",
+                                keyboardType: TextInputType.number,
+                                radius: 15,
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(6),
+                                  FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                         const SizedBox(
@@ -503,12 +533,11 @@ class _TestKycScreenState extends State<TestKycScreen> {
                             ),
                           ),
                         ),
-                        Text("အကျိုးခံစားခွင့်"),
                         const SizedBox(
                           height: 20,
                         ),
                         TextFieldWithLabelView(
-                          label: model.appLocal.languageCode != 'my' ? AppLocalizations.of(context)!.benefi_name
+                          label: model.appLocal!.languageCode != 'my' ? AppLocalizations.of(context)!.benefi_name
                               : "${ThemeText.mmText("အကျိုး")}${AppLocalizations.of(context)!.benefi_name}",
                           controller: beneficial_name_tec,
                           hintText: "*****Tun",
@@ -521,7 +550,7 @@ class _TestKycScreenState extends State<TestKycScreen> {
                           height: 20,
                         ),
                         TextFieldWithLabelView(
-                          label: model.appLocal.languageCode != 'my' ? AppLocalizations.of(context)!.benefi_phone
+                          label: model.appLocal!.languageCode != 'my' ? AppLocalizations.of(context)!.benefi_phone
                               : "${ThemeText.mmText("အကျိုး")}${AppLocalizations.of(context)!.benefi_phone}",
                           controller: beneficial_phone_tec,
                           hintText: "925****4567",
@@ -543,7 +572,7 @@ class _TestKycScreenState extends State<TestKycScreen> {
                             },
                           ),
                         ),
-                        NathanTextView(text: model.appLocal.languageCode != 'my' ? AppLocalizations.of(context)!.benefi_phone
+                        NathanTextView(text: model.appLocal!.languageCode != 'my' ? AppLocalizations.of(context)!.benefi_phone
                             : "${ThemeText.mmText("အကျိုး")}${AppLocalizations.of(context)!.benefi_phone}",
                           color: colorPrimary,
                           fontWeight: FontWeight.w800,
@@ -589,7 +618,7 @@ class _TestKycScreenState extends State<TestKycScreen> {
                           height: 20,
                         ),
                         TextFieldWithLabelView(
-                          label: model.appLocal.languageCode != 'my' ? AppLocalizations.of(context)!.benefi_nrc_no
+                          label: model.appLocal!.languageCode != 'my' ? AppLocalizations.of(context)!.benefi_nrc_no
                               : "${ThemeText.mmText("အကျိုး")}${AppLocalizations.of(context)!.benefi_nrc_no}",
                           controller: beneficial_nrc_tec,
                           hintText: "12/BaHaNa(N)****24",
@@ -601,7 +630,7 @@ class _TestKycScreenState extends State<TestKycScreen> {
                           height: 20,
                         ),
                         TextFieldWithLabelView(
-                          label: model.appLocal.languageCode != 'my' ? AppLocalizations.of(context)!.benefi_email
+                          label: model.appLocal!.languageCode != 'my' ? AppLocalizations.of(context)!.benefi_email
                               : "${ThemeText.mmText("အကျိုး")}${AppLocalizations.of(context)!.benefi_email}",
                           controller: beneficial_email_tec,
                           hintText: "*****abc@gmail.com",
@@ -668,8 +697,10 @@ class _TestKycScreenState extends State<TestKycScreen> {
       return;
     }
 
-
-
+    selNrcState == "0" ? selNrcState = "12" : selNrcState;
+    selNrcTown == "0" ? selNrcTown = "DAGAYA" : selNrcTown;
+    selNrcType == "0" ? selNrcType = "N" : selNrcType;
+print('UserAll $selNrcState/$selNrcTown($selNrcType)${nrc_number_tec.text}');
     if(_currentPosition?.latitude != null) {
       print("odoer ${_currentPosition?.latitude}");
       setState(() {
@@ -677,7 +708,7 @@ class _TestKycScreenState extends State<TestKycScreen> {
       });
       Map<String, dynamic> map = {
         'full_name': full_name_tec.text,
-        'nrc_number': nrc_number_tec.text,
+        'nrc_number': '$selNrcState/$selNrcTown($selNrcType)${nrc_number_tec.text}',
         'bank_name': bank_name_tec.text,
         'current_address': current_address_tec.text,
         'payment_address': payment_address_tec.text,

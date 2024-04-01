@@ -1,3 +1,4 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../bloc/top_up/top_up_bloc.dart';
 import '../../../helpers/response_ob.dart';
+import '../../../objects/default_info_ob.dart';
 import '../../../resources/colors.dart';
 import '../../../resources/constants.dart';
 import '../../../widgets/app_bar_title_view.dart';
@@ -26,7 +28,6 @@ class _TopUpScreenState extends State<TopUpScreen> {
 
   final _topUp_bloc = TopUpBloc();
   late Stream<ResponseOb> _topUpStream;
-
   @override
   void initState() {
     super.initState();
@@ -59,6 +60,15 @@ class _TopUpScreenState extends State<TopUpScreen> {
     });
   }
 
+  List<DefaultInfoOb> operatorList = [
+    DefaultInfoOb(id: 1, name: "MPT"),
+    DefaultInfoOb(id: 2, name: "ATOM"),
+    DefaultInfoOb(id: 3, name: "Ooredoo"),
+    DefaultInfoOb(id: 4, name: "MyTel"),
+  ];
+  DefaultInfoOb? newData;
+  String _phone_code = '+95';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,21 +83,72 @@ class _TopUpScreenState extends State<TopUpScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            const SizedBox(
+              height: 20,
+            ),
+            const Text(
+              "Select Your SIM Card Name",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            DropdownButtonFormField<DefaultInfoOb>(
+              padding: EdgeInsets.zero,
+              isExpanded: true,
+              value: operatorList.first,
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.only(left: 10, right: 5, top: 0, bottom: 0),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+              ),
+              onChanged: (newValue) {
+                setState(() {
+                  newData = newValue;
+                });
+              },
+              items: operatorList.map((option) {
+                return DropdownMenuItem<DefaultInfoOb>(
+                  value: option,
+                  child: Text(option.name ?? '-'),
+                );
+              }).toList(),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
             TextField(
               controller: phoneController,
               keyboardType: TextInputType.number,
               inputFormatters: [
+                LengthLimitingTextInputFormatter(10),
                 FilteringTextInputFormatter.digitsOnly,
               ],
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 hintText: "959****34",
                 labelText: "Mobile number",
-                labelStyle: TextStyle(color: colorPrimary),
-                enabledBorder: UnderlineInputBorder(
+                labelStyle: const TextStyle(color: colorPrimary, fontSize: 18),
+                enabledBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(color: colorPrimary),
                 ),
-                focusedBorder: UnderlineInputBorder(
+                focusedBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(color: colorPrimary),
+                ),
+                prefix: CountryCodePicker(
+                  enabled: false,
+                  padding: EdgeInsets.zero,
+                  initialSelection: _phone_code,
+                  showFlag: true,
+                  textStyle: const TextStyle(fontSize: 16, color: colorBlack),
+                  onChanged: (value) {
+                    setState(() {
+                      _phone_code = value.dialCode.toString();
+                    });
+                  },
                 ),
               ),
             ),
