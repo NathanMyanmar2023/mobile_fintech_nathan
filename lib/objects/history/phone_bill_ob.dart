@@ -28,7 +28,8 @@ class PhoneBillOb {
 }
 
 class PhoneBillData {
-  int? id, status, amount;
+  int? id, amount;
+  String? status;
   String? phone;
   String? operator;
   String? date;

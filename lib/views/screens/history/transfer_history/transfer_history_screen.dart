@@ -149,43 +149,57 @@ class _TransferHistoryScreenState extends State<TransferHistoryScreen> {
               child: history_list.isEmpty ? Center(child: Text(AppLocalizations.of(context)!.no_more_data,),) : ListView.builder(
                 controller: scroll_controller,
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount: history_list.length + 1,
+                itemCount: history_list.length,
                 itemBuilder: (context, index) {
-                  if (index < history_list.length) {
-                    final history = history_list[index];
-                    return TransferHistorySelectorWidget(
-                      id: history[0],
-                      is_transfer: history[1],
-                      sender_name: history[2],
-                      sender_phone: history[3],
-                      currency: history[4],
-                      receiver_name: history[5],
-                      receiver_phone: history[6],
-                      amount: history[7],
-                      note: history[8],
-                      created_at: history[9],
-                    );
-                  } else {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 20),
-                      child: Center(
-                        child: hasMore
-                            ? const SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                ))
-                            : Text(
-                          AppLocalizations.of(context)!.no_more_data,
-                                style: TextStyle(
-                                  fontSize: 13,
-                                ),
-                              ),
-                      ),
-                    );
-                  }
+
+                  final history = history_list[index];
+                  return TransferHistorySelectorWidget(
+                    id: history[0],
+                    is_transfer: history[1],
+                    sender_name: history[2],
+                    sender_phone: history[3],
+                    currency: history[4],
+                    receiver_name: history[5],
+                    receiver_phone: history[6],
+                    amount: history[7],
+                    note: history[8],
+                    created_at: history[9],
+                  );
+                  // if (index < history_list.length) {
+                  //   final history = history_list[index];
+                  //   return TransferHistorySelectorWidget(
+                  //     id: history[0],
+                  //     is_transfer: history[1],
+                  //     sender_name: history[2],
+                  //     sender_phone: history[3],
+                  //     currency: history[4],
+                  //     receiver_name: history[5],
+                  //     receiver_phone: history[6],
+                  //     amount: history[7],
+                  //     note: history[8],
+                  //     created_at: history[9],
+                  //   );
+                  // } else {
+                  //   return Padding(
+                  //     padding: const EdgeInsets.symmetric(
+                  //         horizontal: 20, vertical: 20),
+                  //     child: Center(
+                  //       child: hasMore
+                  //           ? const SizedBox(
+                  //               width: 20,
+                  //               height: 20,
+                  //               child: CircularProgressIndicator(
+                  //                 strokeWidth: 2,
+                  //               ))
+                  //           : Text(
+                  //         AppLocalizations.of(context)!.no_more_data,
+                  //               style: TextStyle(
+                  //                 fontSize: 13,
+                  //               ),
+                  //             ),
+                  //     ),
+                  //   );
+                  // }
                 },
               ),
             )),

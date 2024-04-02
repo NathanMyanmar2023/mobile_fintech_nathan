@@ -153,23 +153,30 @@ class _CartScreenState extends State<CartScreen> {
                                 physics: const AlwaysScrollableScrollPhysics(),
                                 padding: EdgeInsets.zero,
                                 itemCount:
-                                    cartViewModel.cartItemList.length + 1,
+                                    cartViewModel.cartItemList.length,
                                 itemBuilder: (context, index) {
-                                  if (index <
-                                      cartViewModel.cartItemList.length) {
-                                    CartItems cartItems =
-                                        cartViewModel.cartItemList[index];
-                                    return CartItemWidget(
-                                      cartItems: cartItems,
-                                      onTap: () {},
-                                    );
-                                  } else {
-                                    return Container(
-                                      height: 10,
-                                      width: double.infinity,
-                                      color: Colors.grey.shade200,
-                                    );
-                                  }
+
+                                  CartItems cartItems =
+                                  cartViewModel.cartItemList[index];
+                                  return CartItemWidget(
+                                    cartItems: cartItems,
+                                    onTap: () {},
+                                  );
+                                  // if (index <
+                                  //     cartViewModel.cartItemList.length) {
+                                  //   CartItems cartItems =
+                                  //       cartViewModel.cartItemList[index];
+                                  //   return CartItemWidget(
+                                  //     cartItems: cartItems,
+                                  //     onTap: () {},
+                                  //   );
+                                  // } else {
+                                  //   return Container(
+                                  //     height: 10,
+                                  //     width: double.infinity,
+                                  //     color: Colors.grey.shade200,
+                                  //   );
+                                  // }
                                 },
                               ),
                             ),

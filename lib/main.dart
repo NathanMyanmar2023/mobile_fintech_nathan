@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nathan_app/l10n/l10n.dart';
 import 'package:nathan_app/view_models/add_address_view_model.dart';
 import 'package:nathan_app/view_models/cart_view_model.dart';
 import 'package:nathan_app/view_models/app_language_view_model.dart';
@@ -15,8 +14,6 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'helpers/shared_pref.dart';
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   AppLanguageViewModel appLanguage = AppLanguageViewModel();
@@ -26,11 +23,9 @@ Future<void> main() async {
   ));
 }
 
-
 class Nathan extends StatelessWidget {
   AppLanguageViewModel? appLanguage;
   Nathan({super.key, required this.appLanguage});
-
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(builder: (context, orientation, screenType) {

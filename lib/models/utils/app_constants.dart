@@ -3,7 +3,7 @@
 import 'package:nathan_app/config/config.dart';
 
 const API_URL = "${Config.productionUrl}api/";
-const App_Version = "1.0.1";
+const App_Version = Config.releaseVersion;
 const PRESIGN = "${API_URL}presign";
 const GET_COUNTRIES = "${API_URL}countries";
 const CHECK_REFER = "${API_URL}check/refer_code";
@@ -15,6 +15,7 @@ const REGISTER_URL = "${API_URL}register";
 const LOGIN_URL = "${API_URL}login";
 const FORGOT_PASS_URL = "${API_URL}forgot/password";
 const PHONE_BILL_URL = "${API_URL}phone/billing";
+const PHONE_OPERATOR_URL = "${API_URL}phone/operators";
 
 const LUCKY_DRAW = "${API_URL}lucky/draws";
 const CHECK_TICKET = "${API_URL}check/lucky/tickets";
@@ -40,6 +41,8 @@ const REQUEST_OTP = "${API_URL}resend/code";
 const VERIFY_OTP = "${API_URL}verify";
 
 const UPLOAD_KYC = "${API_URL}kyc/store";
+const NRC_TYPE = "${API_URL}nrc-information";
+const NRC_TOWNSHIP = "${API_URL}nrc-information/detail/";
 
 const WALLETS = "${API_URL}user/wallets";
 const USER_INFO = "${API_URL}user/infos";

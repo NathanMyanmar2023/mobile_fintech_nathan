@@ -11,6 +11,8 @@ import 'package:nathan_app/views/widgets/error_alert_widget.dart';
 import 'package:nathan_app/widgets/long_button_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../widgets/app_bar_title_view.dart';
+
 class ExchangeScreen extends StatefulWidget {
   const ExchangeScreen({super.key});
 
@@ -92,25 +94,7 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
           backgroundColor: Colors.grey.shade200,
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(70),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: AppBar(
-                toolbarHeight: 70,
-                elevation: 0,
-                backgroundColor: Colors.transparent,
-                leading: IconButton(
-                  icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-                title: Text(
-                  AppLocalizations.of(context)!.wallet_exchange,
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ),
+            child: AppBarTitleView(text: AppLocalizations.of(context)!.wallet_exchange,),
           ),
           body: SingleChildScrollView(
             child: Padding(

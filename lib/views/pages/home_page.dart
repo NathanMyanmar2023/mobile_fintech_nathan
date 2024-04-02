@@ -8,7 +8,6 @@ import 'package:nathan_app/itemviews/wallet_item_view.dart';
 import 'package:nathan_app/models/utils/app_utils.dart';
 import 'package:nathan_app/pages/lucky_draw_page.dart';
 import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/pages/test_kyc_screen.dart';
 import 'package:nathan_app/views/screens/deposit/deposit_select%20_country_screen.dart';
 import 'package:nathan_app/views/screens/exchange/exchange_screen.dart';
 import 'package:nathan_app/views/screens/investment/select_investment_screen.dart';
@@ -465,7 +464,7 @@ class _HomePageState extends State<HomePage>
                           color: colorWhite,
                         ),
                         menu_name: AppLocalizations.of(context)!.top_up,
-                        target_page: const TopUpScreen(),
+                        target_page:  const TopUpScreen(),
                       ),
                     ],
                   ),
