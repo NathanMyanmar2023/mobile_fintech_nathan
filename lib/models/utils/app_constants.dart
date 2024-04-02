@@ -3,7 +3,7 @@
 import 'package:nathan_app/config/config.dart';
 
 const API_URL = "${Config.productionUrl}api/";
-const App_Version = "1.0.2";
+const App_Version = Config.releaseVersion;
 const PRESIGN = "${API_URL}presign";
 const GET_COUNTRIES = "${API_URL}countries";
 const CHECK_REFER = "${API_URL}check/refer_code";

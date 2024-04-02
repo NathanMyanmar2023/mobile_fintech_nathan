@@ -260,7 +260,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                    ProfileMenuWidget(
                     icon: Icons.leaderboard_outlined,
                     label: AppLocalizations.of(context)!.rank,
-                    targe_page: RankScreen(),
+                    targe_page: const RankScreen(),
                   ),
                 const SizedBox(
                   height: 20,

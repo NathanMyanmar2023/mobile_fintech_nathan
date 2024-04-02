@@ -189,6 +189,9 @@ class _TransferPasswordScreenState extends State<TransferPasswordScreen> {
                 child: LongButtonView(
                   text: 'Transfer',
                   onTap: () {
+                    setState(() {
+                      isLoading = true;
+                    });
                     Map<String, dynamic> map = {
                       'phone': widget.phone,
                       'amount': widget.amount,
@@ -196,9 +199,6 @@ class _TransferPasswordScreenState extends State<TransferPasswordScreen> {
                       'note': widget.note,
                     };
                     _transfer_bloc.transfer(map);
-                    setState(() {
-                      isLoading = true;
-                    });
                   },
                 ),
               ),

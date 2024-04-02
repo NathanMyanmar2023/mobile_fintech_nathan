@@ -18,23 +18,26 @@ class _RankScreenState extends State<RankScreen>
   bool get wantKeepAlive => true;
   bool isLoading = true;
 
-  int is_y_plan = 0;
   int is_ic = 0;
   int is_supervisor = 0;
   int is_manager = 0;
   int is_general_manager = 0;
   int is_director = 0;
   int is_president = 0;
-  int is_owner = 0;
-  int y_plan_count = 0;
-  int ic_count = 0;
-  int supervisor_count = 0;
-  int manager_count = 0;
-  int general_manager_count = 0;
-  int director_count = 0;
-  int president_count = 0;
-  int owner_count = 0;
-  int one_time_bonus_count = 0;
+
+  int total_ic = 0;
+  int total_sup = 0;
+  int total_mana = 0;
+  int total_gm = 0;
+  int total_dir = 0;
+  int total_pres = 0;
+
+  bool is_bonus_ic = false;
+  bool is_bonus_sup = false;
+  bool is_bonus_mana = false;
+  bool is_bonus_gm = false;
+  bool is_bonus_dir = false;
+  bool is_bonus_pres = false;
 
   final _rank_bloc = RankBloc();
   late Stream<ResponseOb> _rank_stream;
@@ -54,16 +57,20 @@ class _RankScreenState extends State<RankScreen>
           is_general_manager = resp.data.data.generalManager.is_general_manager;
           is_director = resp.data.data.director.is_director;
           is_president = resp.data.data.president.is_president;
-       //    is_owner = resp.data.data.isOwner;
-       //    y_plan_count = resp.data.data.yPlanCount;
-       //    ic_count = resp.data.data.icCount;
-       //    supervisor_count = resp.data.data.supervisorCount;
-       //    manager_count = resp.data.data.managerCount;
-       //    general_manager_count = resp.data.data.generalManagerCount;
-       //    director_count = resp.data.data.directorCount;
-       //    president_count = resp.data.data.presidentCount;
-       //    owner_count = resp.data.data.ownerCount;
-       //    one_time_bonus_count = resp.data.data.oneTimeBonusCount;
+
+          total_ic = resp.data.data.iC.total_child;
+           total_sup = resp.data.data.supervisor.total_child;
+           total_mana = resp.data.data.manager.total_child;
+           total_gm = resp.data.data.generalManager.total_child;
+           total_dir = resp.data.data.director.total_child;
+           total_pres = resp.data.data.president.total_child;
+
+           is_bonus_ic = resp.data.data.iC.is_gave_bonus;
+           is_bonus_sup = resp.data.data.supervisor.is_gave_bonus;
+           is_bonus_mana = resp.data.data.manager.is_gave_bonus;
+           is_bonus_gm = resp.data.data.generalManager.is_gave_bonus;
+           is_bonus_dir = resp.data.data.director.is_gave_bonus;
+           is_bonus_pres = resp.data.data.president.is_gave_bonus;
 
           isLoading = false;
         });
@@ -147,175 +154,101 @@ class _RankScreenState extends State<RankScreen>
                       const SizedBox(
                         width: 10,
                       ),
-                      if (is_y_plan == 0)
-                        Expanded(
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 5),
-                            color: Colors.red,
-                            child:  Row(
-                              children: [
-                                Icon(
-                                  Icons.lock,
-                                  size: 15,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Flexible(
-                                  child: Text(
-                                    AppLocalizations.of(context)!.locked,
-                                    maxLines: 2,
-                                    softWrap: true,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                if (is_y_plan == 0)
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.info_outline,
-                        size: 15,
-                        color: Colors.red,
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Flexible(
-                        child: Text(
-                          AppLocalizations.of(context)!.invest_10USD,
-                          maxLines: 2,
-                          softWrap: true,
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey.shade500,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                 RankWidget(
-                  count: y_plan_count,
-                  target_count: 39,
-                  status: is_y_plan,
-                  percent: y_plan_count / 39,
-                  message: AppLocalizations.of(context)!.need_39_10USD,
+                  count: total_ic,
+                  target_count: 8,
+                  percent: total_ic / 8,
+                  message: "Invest amount 5,000USD of 8 persons to direct referral",
                   title: AppLocalizations.of(context)!.ic,
-                  reward_amount: "31.20",
+                  reward_amount: "1,500",
                   icon: Icons.account_tree_outlined,
                   icon_name: 'ic_rank.png',
                   color: Colors.green,
                   bg_color: Colors.green.shade50,
+                  bonus: is_bonus_ic,
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 RankWidget(
-                  count: supervisor_count,
+                  count: total_sup,
                   target_count: 8,
-                  status: is_supervisor,
-                  percent: supervisor_count / 8,
-                  message: AppLocalizations.of(context)!.need_8_ic,
+                  percent: total_sup / 8,
+                  message: "8 persons of IC rank to direct referral",
                   title: AppLocalizations.of(context)!.supervisor,
-                  reward_amount: "156.00",
+                  reward_amount: "6,000",
                   icon: Icons.supervisor_account_rounded,
                   icon_name: 'supervisor_rank.png',
                   color: Colors.green,
                   bg_color: Colors.green.shade50,
+                  bonus: is_bonus_sup,
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 RankWidget(
-                  count: manager_count,
+                  count: total_mana,
                   target_count: 8,
-                  status: is_manager,
-                  percent: manager_count / 8,
-                  message: AppLocalizations.of(context)!.need_8_supervisor,
+                  percent: total_mana / 8,
+                  message: "8 persons of Supervisor rank to direct referral",
                   title: AppLocalizations.of(context)!.manager,
-                  reward_amount: "748.80",
+                  reward_amount: "13,000",
                   icon: Icons.manage_accounts_outlined,
                   icon_name: 'manager_rank.png',
                   color: Colors.green,
                   bg_color: Colors.green.shade50,
+                  bonus: is_bonus_mana,
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 RankWidget(
-                  count: general_manager_count,
+                  count: total_gm,
                   target_count: 8,
-                  status: is_general_manager,
-                  percent: general_manager_count / 8,
-                  message: AppLocalizations.of(context)!.need_8_manager,
+                  percent: total_gm / 8,
+                  message: "8 persons of Manager rank to direct referral",
                   title: AppLocalizations.of(context)!.general_manager,
-                  reward_amount: "3,993.60",
+                  reward_amount: "57,000",
                   icon: Icons.groups,
                   icon_name: 'general_manager_rank.png',
                   color: Colors.green,
                   bg_color: Colors.green.shade50,
+                  bonus: is_bonus_gm,
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 RankWidget(
-                  count: supervisor_count,
+                  count: total_dir,
                   target_count: 8,
-                  status: is_supervisor,
-                  percent: supervisor_count / 8,
-                  message: AppLocalizations.of(context)!.need_8_general_mana,
+                  percent: total_dir / 8,
+                  message: "8 persons of GM rank to direct referral",
                   title: AppLocalizations.of(context)!.director,
-                  reward_amount: "15,974.40",
+                  reward_amount: "120,000",
                   icon: Icons.supervised_user_circle_outlined,
                   icon_name: 'director_rank.png',
                   color: Colors.green,
                   bg_color: Colors.green.shade50,
+                  bonus: is_bonus_dir,
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 RankWidget(
-                  count: supervisor_count,
+                  count: total_pres,
                   target_count: 8,
-                  status: is_supervisor,
-                  percent: supervisor_count / 8,
-                  message: AppLocalizations.of(context)!.need_8_director,
+                  percent: total_pres / 8,
+                  message: "7 persons of Director rank to direct referral",
                   title: AppLocalizations.of(context)!.president,
-                  reward_amount: "102,236.16",
+                  reward_amount: "550,000",
                   icon: Icons.supervised_user_circle_outlined,
                   icon_name: 'owner_rank.png',
                   color: Colors.green,
                   bg_color: Colors.green.shade50,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                RankWidget(
-                  count: supervisor_count,
-                  target_count: 8,
-                  status: is_supervisor,
-                  percent: supervisor_count / 8,
-                  message: AppLocalizations.of(context)!.need_8_president,
-                  title: AppLocalizations.of(context)!.owner,
-                  reward_amount: "511,180.80",
-                  icon: Icons.supervised_user_circle_outlined,
-                  icon_name: 'president_rank.png',
-                  color: Colors.green,
-                  bg_color: Colors.green.shade50,
+                  bonus: is_bonus_pres,
                 ),
                 const SizedBox(
                   height: 50,
@@ -340,7 +273,6 @@ class RankWidget extends StatelessWidget {
     super.key,
     required this.count,
     required this.target_count,
-    required this.status,
     required this.percent,
     required this.message,
     required this.title,
@@ -349,11 +281,10 @@ class RankWidget extends StatelessWidget {
     required this.icon_name,
     required this.color,
     required this.bg_color,
+    required this.bonus,
   });
-
   final int count;
   final int target_count;
-  final int status;
   final double percent;
   final String message;
   final String title;
@@ -362,6 +293,7 @@ class RankWidget extends StatelessWidget {
   final String icon_name;
   final Color color;
   final Color bg_color;
+  final bool bonus;
 
   @override
   Widget build(BuildContext context) {
@@ -399,12 +331,48 @@ class RankWidget extends StatelessWidget {
                               color: Colors.grey.shade800,
                             ),
                           ),
+                          const SizedBox(width: 10,),
+                          SizedBox(
+                            width: bonus ? 90 : 80,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 5, vertical: 5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: bonus ? Colors.green.withOpacity(0.8) : Colors.red.withOpacity(0.5),
+                              ),
+                              child:  Row(
+                                children: [
+                                  Icon(
+                                    bonus ? Icons.check : Icons.lock,
+                                    size: 15,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Flexible(
+                                    child: Text(
+                                      bonus ? "Success" : AppLocalizations.of(context)!.locked,
+                                      maxLines: 2,
+                                      softWrap: true,
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                       const SizedBox(
                         height: 5,
                       ),
                       Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             "${AppLocalizations.of(context)!.reward} : ",
