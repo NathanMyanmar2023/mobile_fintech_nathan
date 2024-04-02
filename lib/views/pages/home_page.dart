@@ -465,7 +465,7 @@ class _HomePageState extends State<HomePage>
                           color: colorWhite,
                         ),
                         menu_name: AppLocalizations.of(context)!.top_up,
-                        target_page: const TopUpScreen(),
+                        target_page:  const TopUpScreen(),
                       ),
                     ],
                   ),

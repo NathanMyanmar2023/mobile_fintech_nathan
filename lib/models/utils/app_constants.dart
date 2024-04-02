@@ -15,6 +15,7 @@ const REGISTER_URL = "${API_URL}register";
 const LOGIN_URL = "${API_URL}login";
 const FORGOT_PASS_URL = "${API_URL}forgot/password";
 const PHONE_BILL_URL = "${API_URL}phone/billing";
+const PHONE_OPERATOR_URL = "${API_URL}phone/operators";
 
 const LUCKY_DRAW = "${API_URL}lucky/draws";
 const CHECK_TICKET = "${API_URL}check/lucky/tickets";

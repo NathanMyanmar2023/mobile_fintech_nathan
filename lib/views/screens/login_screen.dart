@@ -332,11 +332,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         )
                       ],
                     ),
-                    const SizedBox(height: 30),
-                    LongButtonView(
-                      text: "LOGIN",
-                      onTap: () => login(),
-                    ),
+                      const SizedBox(height: 30),
+                      LongButtonView(
+                        text: "LOGIN",
+                        onTap: () => login(),
+                      ),
                     const SizedBox(
                       height: 20,
                     ),
