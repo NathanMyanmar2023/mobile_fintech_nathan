@@ -4,11 +4,11 @@ class Config {
   static const httpRequestTimeout = 15;
 
   /// Production
-  static const releaseVersion = "1.0.2";
- //  static const String productionUrl = "https://nathanfintech.com/";
+  static const releaseVersion = "1.0.3";
+   static const String productionUrl = "https://nathanfintech.com/";
 
   /// uat testing
-  static const String productionUrl = "http://thecreatorcreates.com/";
+ // static const String productionUrl = "http://thecreatorcreates.com/";
 
   static const bool isLiveVoucher = false;
 }

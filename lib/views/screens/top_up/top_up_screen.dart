@@ -454,6 +454,7 @@ class _TopUpScreenState extends State<TopUpScreen> {
                                 if (newData!.name!.toLowerCase() == "mpt") {
                                   List<String> mptList = [
                                     "20",
+                                    "21",
                                     "50",
                                     "51",
                                     "52",
@@ -463,7 +464,7 @@ class _TopUpScreenState extends State<TopUpScreen> {
                                     "56",
                                     "57",
                                     "58",
-                                    "59"
+                                    "59",
                                   ];
                                   opType = mptList.contains(phone) ? "${newData!.id}" : "";
                                   print("type8 $opType");
@@ -472,10 +473,8 @@ class _TopUpScreenState extends State<TopUpScreen> {
                                   9) {
                                 if (newData!.name!.toLowerCase() == "mpt") {
                                   List<String> mptList = [
-                                    "76",
-                                    "77",
-                                    "78",
-                                    "79"
+                                    "73",
+                                    "49",
                                   ];
                                   opType = mptList.contains(phone) ? "${newData!.id}" : "";
                                   print("type9 $opType");
@@ -491,13 +490,14 @@ class _TopUpScreenState extends State<TopUpScreen> {
                                   "42",
                                   "43",
                                   "44",
-                                  "45"
+                                  "45",
+                                  "88","89",
                                 ];
                                 opType = mptList.contains(phone) ? "${newData!.id}" : "";
                                 print("type $opType");
                               } else if (newData!.name!.toLowerCase() ==
                                   "atom") {
-                                List<String> atomList = ["77", "78", "79"];
+                                List<String> atomList = ["75","76","77", "78", "79"];
                                 opType = atomList.contains(phone) ? "${newData!.id}" : "";
                                 print("type $opType");
                               } else if (newData!.name!.toLowerCase() ==
@@ -507,7 +507,7 @@ class _TopUpScreenState extends State<TopUpScreen> {
                                   "96",
                                   "97",
                                   "98",
-                                  "99"
+                                  "99",
                                 ];
                                 opType = ooredooList.contains(phone)
                                     ? "${newData!.id}"
@@ -519,7 +519,7 @@ class _TopUpScreenState extends State<TopUpScreen> {
                                   "66",
                                   "67",
                                   "68",
-                                  "69"
+                                  "69",
                                 ];
                                 opType =
                                     mytelList.contains(phone) ? "${newData!.id}" : "";
