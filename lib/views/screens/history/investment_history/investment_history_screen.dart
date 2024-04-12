@@ -67,6 +67,7 @@ class _InvestmentHistoryScreenState extends State<InvestmentHistoryScreen> {
   Future fetch() async {
     print(hasMore);
 
+    _investment_history_bloc.getInvestmentHistory(page);
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
@@ -139,39 +140,33 @@ class _InvestmentHistoryScreenState extends State<InvestmentHistoryScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 itemCount: history_list.length,
                 itemBuilder: (context, index) {
-
-                  final history = history_list[index];
+                  if (index < history_list.length) {
+                    final history = history_list[index];
                   return InvestmentHistorySelectorWidget(
                     history: history,
                     isYearly: history.plan?.id == 2,
                   );
-                  // if (index < history_list.length) {
-                  //   final history = history_list[index];
-                  //   return InvestmentHistorySelectorWidget(
-                  //     history: history,
-                  //     isYearly: history.plan?.id == 2,
-                  //   );
-                  // } else {
-                  //   return Padding(
-                  //     padding: const EdgeInsets.symmetric(
-                  //         horizontal: 20, vertical: 20),
-                  //     child: Center(
-                  //       child: hasMore
-                  //           ? const SizedBox(
-                  //               width: 20,
-                  //               height: 20,
-                  //               child: CircularProgressIndicator(
-                  //                 strokeWidth: 2,
-                  //               ))
-                  //           : Text(
-                  //         AppLocalizations.of(context)!.no_more_data,
-                  //               style: TextStyle(
-                  //                 fontSize: 13,
-                  //               ),
-                  //             ),
-                  //     ),
-                  //   );
-                  // }
+                  } else {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 20),
+                      child: Center(
+                        child: hasMore
+                            ? const SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ))
+                            : Text(
+                          AppLocalizations.of(context)!.no_more_data,
+                                style: TextStyle(
+                                  fontSize: 13,
+                                ),
+                              ),
+                      ),
+                    );
+                  }
                 },
               ),
             )),

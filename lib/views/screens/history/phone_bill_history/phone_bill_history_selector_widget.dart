@@ -37,7 +37,7 @@ class PhoneBillHistorySelectorWidget extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: status == "1"
+                color: status == "success"
                     ? Colors.green.shade50
                     : Colors.orange.shade50,
               ),
@@ -47,8 +47,8 @@ class PhoneBillHistorySelectorWidget extends StatelessWidget {
                 width: 60,
                 child: Center(
                   child: Icon(
-                    status == "1" ? Icons.check_outlined : Icons.access_time,
-                    color: status == "1" ? Colors.green : Colors.orange,
+                    status == "success" ? Icons.check_outlined : Icons.access_time,
+                    color: status == "success" ? Colors.green : Colors.orange,
                   ),
                 ),
               ),
@@ -114,10 +114,10 @@ class PhoneBillHistorySelectorWidget extends StatelessWidget {
                   height: 5,
                 ),
                 Text(
-                  status == "1" ? "${AppLocalizations.of(context)!.completed}" : "${AppLocalizations.of(context)!.waiting}",
+                  status,
                   style: TextStyle(
                     fontSize: 14,
-                    color: status == "1" ? Colors.green : Colors.orange,
+                    color: status == "success" ? Colors.green : Colors.orange,
                   ),
                 ),
               ],

@@ -5,6 +5,8 @@ import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/views/screens/history/phone_bill_history/phone_bill_history_selector_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../objects/history/phone_bill_ob.dart';
+
 class PhoneBillHistoryScreen extends StatefulWidget {
   const PhoneBillHistoryScreen({
     super.key,
@@ -23,11 +25,11 @@ class _PhoneBillHistoryScreenState
 
   final _phone_bill_bloc = PhoneBillBloc();
   late Stream<ResponseOb> _phone_bill_history_stream;
+  //List<PhoneBillData> history_list = [];
 
   int page = 1;
   int limit = 20;
   bool hasMore = true;
-
   List history_list = [];
 
   @override
@@ -40,6 +42,9 @@ class _PhoneBillHistoryScreenState
     _phone_bill_history_stream.listen((ResponseOb resp) {
       if (resp.success) {
         setState(() {
+          // print("daal ${resp.data.data.length}");
+          // history_list = (resp.data as PhoneBillOb).data ?? [];
+          // print("hiiii 343 ${history_list.length}");
           for (var i = 0; i < resp.data.data.length; i++) {
             history_list.add([
               resp.data.data[i].id.toString(),
@@ -63,7 +68,6 @@ class _PhoneBillHistoryScreenState
         print("ERROR");
       }
     });
-
     fetch();
 
     //Scroll controller
@@ -77,7 +81,7 @@ class _PhoneBillHistoryScreenState
 
   Future fetch() async {
     print(hasMore);
-
+    _phone_bill_bloc.getPhoneBillHistory(page);
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
@@ -88,9 +92,9 @@ class _PhoneBillHistoryScreenState
 
   Future refersh() async {
     setState(() {
-      isFetching = false;
-      hasMore = true;
-      page = 1;
+     isFetching = false;
+     hasMore = true;
+     page = 1;
       history_list.clear();
     });
 
@@ -147,15 +151,49 @@ class _PhoneBillHistoryScreenState
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 itemCount: history_list.length,
                 itemBuilder: (context, index) {
-                  final history = history_list[index];
-                return PhoneBillHistorySelectorWidget(
-                  id: history[0].toString(),
-                  status: history[1].toString(),
-                  amount: history[2].toString(),
-                  phone: history[3].toString(),
-                  operator: history[4].toString(),
-                  billed_time: history[6].toString(),
-                );
+                    final history = history_list[index];
+                  if (index < history_list.length) {
+                    return PhoneBillHistorySelectorWidget(
+                      id: history[0].toString(),
+                      status: history[1].toString(),
+                      amount: history[2].toString(),
+                      phone: history[3].toString(),
+                      operator: history[4].toString(),
+                      billed_time: history[6].toString(),
+                    );
+
+
+                  } else {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 20),
+                      child: Center(
+                        child: hasMore
+                            ? const SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                            ))
+                            : Text(
+                          AppLocalizations.of(context)!.no_more_data,
+                          style: TextStyle(
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+
+                  // return PhoneBillHistorySelectorWidget(
+                  //   id: history[0].toString(),
+                  //   status: history[1].toString(),
+                  //   amount: history[2].toString(),
+                  //   phone: history[3].toString(),
+                  //   operator: history[4].toString(),
+                  //   billed_time: history[6].toString(),
+                  // );
+
                 },
               ),
             )),

@@ -1,7 +1,7 @@
 name: nathan_app
 description: A new Flutter project.
 
-version: 1.0.3+6
+version: 1.0.4+9
 
 environment:
   sdk: '>=2.19.2 <3.10.6'

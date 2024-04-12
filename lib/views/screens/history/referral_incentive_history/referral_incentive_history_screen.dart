@@ -77,6 +77,7 @@ class _ReferralIncentiveHistoryScreenState
 
   Future fetch() async {
     print(hasMore);
+    _referral_incentive_history_bloc.getReferralIncentiveHistory(page);
 
     if (isFetching) return;
     isFetching = true;
@@ -149,15 +150,10 @@ class _ReferralIncentiveHistoryScreenState
                 itemBuilder: (context, index) {
                   if (index < history_list.length) {
                     final history = history_list[index];
-                    print("hii ${history[1]}");
-                    print("hii ${history[2]}");
-                    print("hii ${history[5]}");
                     return ReferralIncentiveHistorySelectorWidget(
                       id: history[0],
                       from_user_name: history[1],
                       amount: history[2],
-                      // seventy_percent_amount: history[3],
-                      // thirty_Percent_amount: history[4],
                       percent: history[5],
                       created_at: history[6],
                     );

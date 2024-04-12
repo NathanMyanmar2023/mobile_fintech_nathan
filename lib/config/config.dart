@@ -4,7 +4,7 @@ class Config {
   static const httpRequestTimeout = 15;
 
   /// Production
-  static const releaseVersion = "1.0.3";
+  static const releaseVersion = "1.0.4";
    static const String productionUrl = "https://nathanfintech.com/";
 
   /// uat testing
