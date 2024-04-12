@@ -76,6 +76,7 @@ class _ExchangeHistoryScreenState extends State<ExchangeHistoryScreen> {
   Future fetch() async {
     print(hasMore);
 
+    _exchange_history_bloc.getExchangeHistory(page);
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
@@ -148,49 +149,38 @@ class _ExchangeHistoryScreenState extends State<ExchangeHistoryScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 itemCount: history_list.length,
                 itemBuilder: (context, index) {
-
-                  final history = history_list[index];
-                  return ExchangeHistorySelectorWidget(
-                    id: history[0],
-                    is_to_main_wallet: history[1],
-                    from_amount: history[2],
-                    from_currency: history[3],
-                    to_amount: history[4],
-                    to_currency: history[5],
-                    created_at: history[6],
-                  );
-                  // if (index < history_list.length) {
-                  //   final history = history_list[index];
-                  //   return ExchangeHistorySelectorWidget(
-                  //     id: history[0],
-                  //     is_to_main_wallet: history[1],
-                  //     from_amount: history[2],
-                  //     from_currency: history[3],
-                  //     to_amount: history[4],
-                  //     to_currency: history[5],
-                  //     created_at: history[6],
-                  //   );
-                  // } else {
-                  //   return Padding(
-                  //     padding: const EdgeInsets.symmetric(
-                  //         horizontal: 20, vertical: 20),
-                  //     child: Center(
-                  //       child: hasMore
-                  //           ? const SizedBox(
-                  //               width: 20,
-                  //               height: 20,
-                  //               child: CircularProgressIndicator(
-                  //                 strokeWidth: 2,
-                  //               ))
-                  //           :  Text(
-                  //         AppLocalizations.of(context)!.no_more_data,
-                  //               style: TextStyle(
-                  //                 fontSize: 13,
-                  //               ),
-                  //             ),
-                  //     ),
-                  //   );
-                  // }
+                  if (index < history_list.length) {
+                    final history = history_list[index];
+                    return ExchangeHistorySelectorWidget(
+                      id: history[0],
+                      is_to_main_wallet: history[1],
+                      from_amount: history[2],
+                      from_currency: history[3],
+                      to_amount: history[4],
+                      to_currency: history[5],
+                      created_at: history[6],
+                    );
+                  } else {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 20),
+                      child: Center(
+                        child: hasMore
+                            ? const SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ))
+                            :  Text(
+                          AppLocalizations.of(context)!.no_more_data,
+                                style: const TextStyle(
+                                  fontSize: 13,
+                                ),
+                              ),
+                      ),
+                    );
+                  }
                 },
               ),
             )),

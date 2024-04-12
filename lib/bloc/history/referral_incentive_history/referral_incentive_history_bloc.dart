@@ -11,7 +11,7 @@ class ReferralIncentiveHistoryBloc extends BaseNetwork {
       referralIncentiveHistoryController.stream;
 
   getReferralIncentiveHistory(int page) async {
-    getReq("${API_URL}history/referral_incentive",
+    getReq("${API_URL}history/referral_incentive?page=$page",
         onDataCallBack: (ResponseOb resp) {
       if (resp.success == true) {
         resp.data = ReferralIncentiveHistoryOb.fromJson(resp.data);

@@ -78,6 +78,7 @@ class _ShoppingNetworkHistoryScreenState extends State<ShoppingNetworkHistoryScr
   Future fetch() async {
     print(hasMore);
 
+    _shopping_network_history_bloc.getShoppingNetworkHistory(page);
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
@@ -150,37 +151,36 @@ class _ShoppingNetworkHistoryScreenState extends State<ShoppingNetworkHistoryScr
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 itemCount: history_list.length,
                 itemBuilder: (context, index) {
-
-                  final history = history_list[index];
-                  return ShoppingNetworkHistorySelectorWidget(
-                    id: history[0],
-                    totalAmount: history[1],
-                    currency: history[2],
-                    fromUser: history[3],
-                    date: history[4],
-                  );
-                  // if (index < history_list.length) {
-                  // } else {
-                  //   return Padding(
-                  //     padding: const EdgeInsets.symmetric(
-                  //         horizontal: 20, vertical: 20),
-                  //     child: Center(
-                  //       child: hasMore
-                  //           ? const SizedBox(
-                  //           width: 20,
-                  //           height: 20,
-                  //           child: CircularProgressIndicator(
-                  //             strokeWidth: 2,
-                  //           ))
-                  //           : Text(
-                  //         AppLocalizations.of(context)!.no_more_data,
-                  //         style: TextStyle(
-                  //           fontSize: 13,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   );
-                  // }
+                  if (index < history_list.length) {
+                    final history = history_list[index];
+                    return ShoppingNetworkHistorySelectorWidget(
+                      id: history[0],
+                      totalAmount: history[1],
+                      currency: history[2],
+                      fromUser: history[3],
+                      date: history[4],
+                    );
+                  } else {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 20),
+                      child: Center(
+                        child: hasMore
+                            ? const SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                            ))
+                            : Text(
+                          AppLocalizations.of(context)!.no_more_data,
+                          style: const TextStyle(
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    );
+                  }
                 },
               ),
             )),

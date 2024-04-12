@@ -13,7 +13,7 @@ class PhoneBillBloc extends BaseNetwork {
       phoneBillController.stream;
 
   getPhoneBillHistory(int page) async {
-    getReq("${API_URL}history/phone/bills",
+    getReq("${API_URL}history/phone/bills?page=$page",
         onDataCallBack: (ResponseOb resp) {
           if (resp.success == true) {
             resp.data = PhoneBillOb.fromJson(resp.data);
