@@ -17,6 +17,9 @@ class NathanTextView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       "$text",
+      maxLines: 2,
+      softWrap: true,
+      overflow: TextOverflow.ellipsis,
       style: TextStyle(
         fontSize: fontSize,
         color: color,

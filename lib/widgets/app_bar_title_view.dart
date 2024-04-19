@@ -97,7 +97,7 @@ class _AppBarTitleViewState extends State<AppBarTitleView> {
                         ),
                         onPressed: () => _launchURL(PLAY_STORE_URL),
                         style:
-                        ElevatedButton.styleFrom(primary: colorPrimary),
+                        ElevatedButton.styleFrom(backgroundColor: colorPrimary),
                       ),
                     ],
                   )

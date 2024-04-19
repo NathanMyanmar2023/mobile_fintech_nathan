@@ -11,7 +11,7 @@ class LoginBloc extends BaseNetwork {
   Stream<ResponseOb> loginStream() => loginController.stream;
 
   login(Map<String, dynamic> map) async {
-    print("dd r$map");
+    print("dd r$LOGIN_URL");
     postReq(LOGIN_URL, params: map, onDataCallBack: (ResponseOb resp) {
       print("no error $resp");
       if (resp.success == true) {

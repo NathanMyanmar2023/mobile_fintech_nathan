@@ -45,6 +45,52 @@ class LongButtonView extends StatelessWidget {
   }
 }
 
+
+class textButtonView extends StatelessWidget {
+  final String text;
+  final Color? textColor;
+  final Color? backgroundColor;
+  final Function onTap;
+  final double width;
+  final double size;
+  final BorderRadiusGeometry? borderRadius;
+
+  const textButtonView({
+    super.key,
+    required this.text,
+    required this.onTap,
+    this.textColor,
+    this.backgroundColor,
+    this.borderRadius,
+    this.size = 15,
+    this.width = double.infinity,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => onTap(),
+      child: Container(
+        width: width,
+          padding: const EdgeInsets.symmetric(vertical: 3),
+        decoration: BoxDecoration(
+          color: backgroundColor ?? colorPrimary,
+          borderRadius: borderRadius ?? BorderRadius.circular(100),
+        ),
+        child: Center(
+          child: Text(
+            text,
+            style: TextStyle(
+              fontSize: size,
+              fontWeight: FontWeight.w700,
+              color: textColor ?? colorWhite,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
 class LongInfoView extends StatelessWidget {
   final String titleText;
   final String msgText;
