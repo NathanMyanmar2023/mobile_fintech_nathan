@@ -17,6 +17,7 @@ import '../../../widgets/app_bar_title_view.dart';
 import '../../../widgets/long_button_view.dart';
 import '../../../widgets/nathan_text_view.dart';
 import 'agree_selection_view.dart';
+import 'auction_round/auction_round_view.dart';
 import 'money_market_screen.dart';
 
 class BillAuctionJoinedScreen extends StatefulWidget {
@@ -148,89 +149,6 @@ class _BillAuctionJoinedScreenState extends State<BillAuctionJoinedScreen> {
             });
       }
     });
-    //
-    // /// request leave gp stream
-    // _auctionLeaveStream = _auctionLeaveBloc.auctionLeaveStream();
-    // _auctionLeaveStream.listen((ResponseOb resp) {
-    //   if (resp.success) {
-    //     showDialog(
-    //         context: context,
-    //         builder: (context) {
-    //           return AlertDialog(
-    //             title: const Text('Success'),
-    //             content: Column(
-    //               crossAxisAlignment: CrossAxisAlignment.center,
-    //               mainAxisSize: MainAxisSize.min,
-    //               children: [
-    //                 Image.asset('images/welcome.png', height: 100, width: 100),
-    //                 const SizedBox(height: 10),
-    //                 Text(
-    //                   resp.message.toString(),
-    //                 ),
-    //               ],
-    //             ),
-    //             actions: [
-    //               TextButton(
-    //                 onPressed: () {
-    //                   popBack(context: context);
-    //                  // _cartBloc.cartList();
-    //                   _auctionDetailBloc.getAuctionDetail(widget.auctionId);
-    //                 },
-    //                 child: const Text(
-    //                   'OK',
-    //                   style: TextStyle(
-    //                     color: colorPrimary,
-    //                   ),
-    //                 ),
-    //               ),
-    //             ],
-    //           );
-    //         });
-    //   } else {
-    //     showDialog(
-    //         context: context,
-    //         builder: (context) {
-    //           return AlertDialog(
-    //             title: const Text('Leave group!'),
-    //             content: Column(
-    //               crossAxisAlignment: CrossAxisAlignment.center,
-    //               mainAxisSize: MainAxisSize.min,
-    //               children: [
-    //                 Image.asset('images/welcome.png', height: 100, width: 100),
-    //                 const SizedBox(height: 10),
-    //                 Text(
-    //                   resp.message.toString(),
-    //                 ),
-    //               ],
-    //             ),
-    //             actions: [
-    //               TextButton(
-    //                 onPressed: () {
-    //                   popBack(context: context);
-    //                 },
-    //                 child: const Text(
-    //                   'Cancel',
-    //                   style: TextStyle(
-    //                     color: colorPrimary,
-    //                   ),
-    //                 ),
-    //               ),
-    //               TextButton(
-    //                 onPressed: () {
-    //                   requestAuctionLeave(billAuctionUserLists[index].auctionId!, 1);
-    //                 },
-    //                 child: const Text(
-    //                   'OK',
-    //                   style: TextStyle(
-    //                     color: colorPrimary,
-    //                   ),
-    //                 ),
-    //               ),
-    //             ],
-    //           );
-    //         });
-    //   }
-    // });
   }
 int? userId = 0;
   getUserData() async {
@@ -294,186 +212,190 @@ int? userId = 0;
               child: Column(
                 children: [
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            NathanTextView(
-                              text: title,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 18,
-                            ),
-                            NathanTextView(
-                              text: amount,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 18,
-                              color: colorPrimary,
-                            ),
-                          ],
-                        ),
-                        description.isNotEmpty ? Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: Column(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const NathanTextView(
-                                text: "Description",
+                              NathanTextView(
+                                text: title,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 18,
                               ),
                               NathanTextView(
-                                text: description,
+                                text: amount,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 18,
+                                color: colorPrimary,
                               ),
                             ],
                           ),
-                        ) : const SizedBox(),
-                        const Divider(height: 10,),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                           children: [
-                             const NathanTextView(
-                              text: "All Members",
-                              fontWeight: FontWeight.w600,
-                              color: colorPrimary,
-                              fontSize: 20,),
-                             leftUser > 0 ? NathanTextView(
-                               text: "Left - $leftUser",
-                               fontWeight: FontWeight.w600,
-                               color: Colors.red,
-                               fontSize: 18,
-                             ) : const SizedBox(),
-                           ],
-                         ),
-                        ListView.builder(
-                          controller: scroll_controller,
-                          itemCount: billAuctionUserLists.length,
-                          shrinkWrap: true,
-                          itemBuilder: (BuildContext context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        CircleAvatar(
-                                          backgroundColor: colorPrimary.withOpacity(0.8),
-                                          child: const Icon(Icons.person, color: colorWhite, size: 25,),
-                                        ),
-                                        const SizedBox(width: 10,),
-                                        Expanded(child: NathanTextView(text: "${billAuctionUserLists[index].username}",)),
-                                      ],
+                          description.isNotEmpty ? Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                const NathanTextView(
+                                  text: "Description",
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18,
+                                ),
+                                NathanTextView(
+                                  text: description,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18,
+                                ),
+                              ],
+                            ),
+                          ) : const SizedBox(),
+                          const Divider(height: 10,),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                             children: [
+                               const NathanTextView(
+                                text: "All Members",
+                                fontWeight: FontWeight.w600,
+                                color: colorPrimary,
+                                fontSize: 20,),
+                               leftUser > 0 ? NathanTextView(
+                                 text: "Left - $leftUser",
+                                 fontWeight: FontWeight.w600,
+                                 color: Colors.red,
+                                 fontSize: 18,
+                               ) : const SizedBox(),
+                             ],
+                           ),
+                          ListView.builder(
+                            controller: scroll_controller,
+                            itemCount: billAuctionUserLists.length,
+                            shrinkWrap: true,
+                            itemBuilder: (BuildContext context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          CircleAvatar(
+                                            backgroundColor: colorPrimary.withOpacity(0.8),
+                                            child: const Icon(Icons.person, color: colorWhite, size: 25,),
+                                          ),
+                                          const SizedBox(width: 10,),
+                                          Expanded(child: NathanTextView(text: "${billAuctionUserLists[index].username}",)),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  leftUser > 0 ? billAuctionUserLists[index].userId == userId ? textButtonView(
-                                      width: 70,
-                                      text: "Leave",
-                                      size: 14,
-                                      backgroundColor: colorSeconary.withOpacity(0.3),
-                                      textColor: Colors.red,
-                                      onTap: () {
-                                        requestAuctionLeave(billAuctionUserLists[index].auctionId!, 0);
-                                        _auctionLeaveStream = _auctionLeaveBloc.auctionLeaveStream();
-                                        _auctionLeaveStream.listen((ResponseOb resp) {
-                                          if (resp.success) {
-                                            showDialog(
-                                                context: context,
-                                                builder: (context) {
-                                                  return AlertDialog(
-                                                    title: const Text('Success'),
-                                                    content: Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                      mainAxisSize: MainAxisSize.min,
-                                                      children: [
-                                                        Image.asset('images/welcome.png', height: 100, width: 100),
-                                                        const SizedBox(height: 10),
-                                                        Text(
-                                                          resp.message.toString(),
+                                    leftUser > 0 ? billAuctionUserLists[index].userId == userId ? textButtonView(
+                                        width: 70,
+                                        text: "Leave",
+                                        size: 14,
+                                        backgroundColor: colorSeconary.withOpacity(0.3),
+                                        textColor: Colors.red,
+                                        onTap: () {
+                                          requestAuctionLeave(billAuctionUserLists[index].auctionId!, 0);
+                                          _auctionLeaveStream = _auctionLeaveBloc.auctionLeaveStream();
+                                          _auctionLeaveStream.listen((ResponseOb resp) {
+                                            if (resp.success) {
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return AlertDialog(
+                                                      title: const Text('Success'),
+                                                      content: Column(
+                                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                                        mainAxisSize: MainAxisSize.min,
+                                                        children: [
+                                                          Image.asset('images/welcome.png', height: 100, width: 100),
+                                                          const SizedBox(height: 10),
+                                                          Text(
+                                                            resp.message.toString(),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () {
+                                                            popBack(context: context);
+                                                            // _cartBloc.cartList();
+                                                            _auctionDetailBloc.getAuctionDetail(widget.auctionId);
+                                                          },
+                                                          child: const Text(
+                                                            'OK',
+                                                            style: TextStyle(
+                                                              color: colorPrimary,
+                                                            ),
+                                                          ),
                                                         ),
                                                       ],
-                                                    ),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () {
-                                                          popBack(context: context);
-                                                          // _cartBloc.cartList();
-                                                          _auctionDetailBloc.getAuctionDetail(widget.auctionId);
-                                                        },
-                                                        child: const Text(
-                                                          'OK',
-                                                          style: TextStyle(
-                                                            color: colorPrimary,
+                                                    );
+                                                  });
+                                            } else {
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return AlertDialog(
+                                                      title: const Text('Leave group!'),
+                                                      content: Column(
+                                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                                        mainAxisSize: MainAxisSize.min,
+                                                        children: [
+                                                          Image.asset('images/welcome.png', height: 100, width: 100),
+                                                          const SizedBox(height: 10),
+                                                          Text(
+                                                            resp.message.toString(),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () {
+                                                            popBack(context: context);
+                                                          },
+                                                          child: const Text(
+                                                            'Cancel',
+                                                            style: TextStyle(
+                                                              color: colorPrimary,
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
-                                                  );
-                                                });
-                                          } else {
-                                            showDialog(
-                                                context: context,
-                                                builder: (context) {
-                                                  return AlertDialog(
-                                                    title: const Text('Leave group!'),
-                                                    content: Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                      mainAxisSize: MainAxisSize.min,
-                                                      children: [
-                                                        Image.asset('images/welcome.png', height: 100, width: 100),
-                                                        const SizedBox(height: 10),
-                                                        Text(
-                                                          resp.message.toString(),
+                                                        TextButton(
+                                                          onPressed: () {
+                                                            popBack(context: context);
+                                                            requestAuctionLeave(billAuctionUserLists[index].auctionId!, 1);
+                                                          },
+                                                          child: const Text(
+                                                            'OK',
+                                                            style: TextStyle(
+                                                              color: colorPrimary,
+                                                            ),
+                                                          ),
                                                         ),
                                                       ],
-                                                    ),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () {
-                                                          popBack(context: context);
-                                                        },
-                                                        child: const Text(
-                                                          'Cancel',
-                                                          style: TextStyle(
-                                                            color: colorPrimary,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      TextButton(
-                                                        onPressed: () {
-                                                          popBack(context: context);
-                                                          requestAuctionLeave(billAuctionUserLists[index].auctionId!, 1);
-                                                        },
-                                                        child: const Text(
-                                                          'OK',
-                                                          style: TextStyle(
-                                                            color: colorPrimary,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  );
-                                                });
-                                          }
-                                        });
-                                      }
-                                  ) : const SizedBox() : const SizedBox(),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                      ],
+                                                    );
+                                                  });
+                                            }
+                                          });
+                                        }
+                                    ) : const SizedBox() : const SizedBox(),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                          // get round
+                          const AuctionRoundView(),
+                        ],
+                      ),
                     ),
                   ),
                   limitCount == existingUsers ? const SizedBox() :
@@ -486,17 +408,6 @@ int? userId = 0;
                         }
                     ),
                   ),
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(vertical: 20),
-                  //   child: LongButtonView(
-                  //       text: "Leave",
-                  //       backgroundColor: colorSeconary.withOpacity(0.5),
-                  //       textColor: Colors.red,
-                  //       onTap: () {
-                  //
-                  //       }
-                  //   ),
-                  // )
                 ],
               ),
             ),
