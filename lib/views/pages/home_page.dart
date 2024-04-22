@@ -13,6 +13,7 @@ import 'package:nathan_app/views/screens/exchange/exchange_screen.dart';
 import 'package:nathan_app/views/screens/investment/select_investment_screen.dart';
 import 'package:nathan_app/views/screens/kyc/kyc_screen.dart';
 import 'package:nathan_app/views/screens/main_screen.dart';
+import 'package:nathan_app/views/screens/money_market/test_money_screen.dart';
 import 'package:nathan_app/views/screens/transfer/transfer_screen.dart';
 import 'package:nathan_app/views/screens/welcome_screen.dart';
 import 'package:nathan_app/views/widgets/main_menu_button_widget.dart';

@@ -212,14 +212,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       color: Colors.grey,
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  Text(
+                  SizedBox(height: productDetail!.size!.isNotEmpty ? 10 : 0),
+                  productDetail!.size!.isNotEmpty ? Text(
                     "Size",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
-                  ),
+                  ) : const SizedBox(),
                   Text(
                     productDetail?.size ?? "-",
                     style: const TextStyle(
@@ -227,7 +227,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       color: Colors.grey,
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: productDetail!.size!.isNotEmpty ? 16 : 0),
                    Text(
                      AppLocalizations.of(context)!.photos,
                     style: TextStyle(
