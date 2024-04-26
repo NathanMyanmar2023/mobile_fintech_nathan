@@ -72,7 +72,7 @@ class textButtonView extends StatelessWidget {
       onTap: () => onTap(),
       child: Container(
         width: width,
-          padding: const EdgeInsets.symmetric(vertical: 3),
+          padding: const EdgeInsets.symmetric(vertical: 5),
         decoration: BoxDecoration(
           color: backgroundColor ?? colorPrimary,
           borderRadius: borderRadius ?? BorderRadius.circular(100),

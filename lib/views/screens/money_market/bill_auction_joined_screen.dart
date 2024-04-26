@@ -260,8 +260,8 @@ int? userId = 0;
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const NathanTextView(
-                              text: "All Members",
+                            NathanTextView(
+                              text: leftUser > 0 ? "All Members" : "All Round Bid",
                               fontWeight: FontWeight.w600,
                               color: colorPrimary,
                               fontSize: 20,),
@@ -271,8 +271,8 @@ int? userId = 0;
                               color: Colors.red,
                               fontSize: 18,
                             ) : textButtonView(
-                              width: 50,
-                              text: "View",
+                              width: 120,
+                              text: "Members View",
                               size: 14,
                               borderRadius: BorderRadius.circular(10),
                               backgroundColor: colorSeconary.withOpacity(0.3),
@@ -407,8 +407,8 @@ int? userId = 0;
                     ],
                   ),
                   // get round
-                  AuctionRoundView(autionId: widget.auctionId,),
-                  limitCount == existingUsers ? const SizedBox() :
+                //  AuctionRoundView(autionId: widget.auctionId,),
+                  limitCount == existingUsers ? AuctionRoundView(autionId: widget.auctionId,) :
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     child: LongButtonView(

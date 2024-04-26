@@ -48,6 +48,9 @@ dependencies:
   geocoding: ^3.0.0
   flutter_app_version_checker: ^0.3.2
   url_launcher: ^6.2.5
+  google_mobile_ads: ^5.0.0
+  device_info_plus: ^3.2.3
+  marquee: ^2.2.3
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,7 @@
+import 'dart:io';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:nathan_app/view_models/add_address_view_model.dart';
 import 'package:nathan_app/view_models/cart_view_model.dart';
 import 'package:nathan_app/view_models/app_language_view_model.dart';
@@ -16,11 +19,40 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  String _deviceToken = '';
+  _deviceToken = await _saveDeviceToken();
+  // MobileAds.instance
+  //     ..initialize()
+  //   ..updateRequestConfiguration(
+  //   RequestConfiguration(testDeviceIds: [_deviceToken]),
+  // );
+  List<String> testDeviceIds = [_deviceToken];
+  RequestConfiguration configuration = RequestConfiguration(testDeviceIds: testDeviceIds);
+  await MobileAds.instance.updateRequestConfiguration(configuration);
   AppLanguageViewModel appLanguage = AppLanguageViewModel();
   await appLanguage.fetchLocale();
   runApp( Nathan(
     appLanguage: appLanguage,
   ));
+}
+Future<String> _saveDeviceToken() async {
+  String _deviceToken = '';
+  DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+  if (Platform.isAndroid) {
+    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+    String? deviceId = androidInfo.androidId; // Unique device ID for Android
+    print('Device ID: $deviceId');
+    _deviceToken = deviceId!;
+  } else if (Platform.isIOS) {
+    IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+    String? deviceId = iosInfo.identifierForVendor; // Unique device ID for iOS
+    print('Device ID: $deviceId');
+    _deviceToken = deviceId!;
+  }
+  if (_deviceToken != null) {
+    print('--------Device Token---------- ' + _deviceToken);
+  }
+  return _deviceToken;
 }
 
 class Nathan extends StatelessWidget {

@@ -6,16 +6,14 @@ import 'package:nathan_app/resources/colors.dart';
 import '../../../../widgets/app_bar_title_view.dart';
 import '../../../../widgets/nathan_text_view.dart';
 
-class RoundDetailScreen extends StatefulWidget {
-  final int roundId;
-  final String roundNumber;
-  const RoundDetailScreen({Key? key, required this.roundId, required this.roundNumber}) : super(key: key);
+class OwnerRoundDetailScreen extends StatefulWidget {
+  const OwnerRoundDetailScreen({Key? key}) : super(key: key);
 
   @override
-  State<RoundDetailScreen> createState() => _RoundDetailScreenState();
+  State<OwnerRoundDetailScreen> createState() => _OwnerRoundDetailScreenState();
 }
 
-class _RoundDetailScreenState extends State<RoundDetailScreen> {
+class _OwnerRoundDetailScreenState extends State<OwnerRoundDetailScreen> {
   Future refersh() async {
     setState(() {});
   }
@@ -27,7 +25,7 @@ class _RoundDetailScreenState extends State<RoundDetailScreen> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70),
         child: AppBarTitleView(
-          text: "Place Bid for ${widget.roundNumber}",
+          text: "Place Bid for Round 1",
         ),
       ),
       body: RefreshIndicator(
@@ -37,10 +35,10 @@ class _RoundDetailScreenState extends State<RoundDetailScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25),
                 child: Text(
-                  "${widget.roundNumber}",
+                  "Round 1",
                   style: TextStyle(
                       fontSize: 18.0,
                       color: colorBlack,
@@ -53,15 +51,15 @@ class _RoundDetailScreenState extends State<RoundDetailScreen> {
               Container(
                 color: topColors.withOpacity(0.5),
                 padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Row(
+                child: const Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const Column(
+                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         NathanTextView(
-                          text: "Estimate",
+                          text: "Real Amount",
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
@@ -75,29 +73,6 @@ class _RoundDetailScreenState extends State<RoundDetailScreen> {
                         ),
                       ],
                     ),
-                    Container(
-                      height: 30,
-                      width: 2,
-                      color: colorSeconary,
-                    ),
-                    const Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        NathanTextView(
-                          text: "Real Amount",
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        NathanTextView(
-                          text: "3000.00",
-                          fontSize: 16,
-                          color: colorPrimary,
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),
@@ -105,7 +80,7 @@ class _RoundDetailScreenState extends State<RoundDetailScreen> {
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: Center(
                   child: NathanTextView(
-                    text: "Winner Bidder name Tun Lin",
+                    text: "Winner Bidder name Nay Zin Htet",
                     fontSize: 18,
                     color: colorPrimary,
                     fontWeight: FontWeight.w600,
@@ -144,7 +119,7 @@ class _RoundDetailScreenState extends State<RoundDetailScreen> {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(child: NathanTextView(text: "name ${index+1}",)),
-                                  NathanTextView(text: "USD1000${index+1}",),
+                                  const NathanTextView(text: "USD500",),
                                 ],
                               ),
                             );

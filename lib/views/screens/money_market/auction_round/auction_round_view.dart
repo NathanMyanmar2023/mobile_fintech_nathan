@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/objects/money_market/Auction_round_ob.dart';
+import 'package:nathan_app/views/screens/money_market/auction_round/owner_round_detail_screen.dart';
 import 'package:nathan_app/views/screens/money_market/auction_round/round_detail_screen.dart';
+import 'package:nathan_app/views/screens/money_market/auction_round/start_round_detail_screen.dart';
+import 'package:nathan_app/views/screens/money_market/auction_round/test_timer_view.dart';
 
 import '../../../../bloc/money_market/auction_round_bloc.dart';
 import '../../../../helpers/response_ob.dart';
+import '../../../../objects/money_market/Auction_round_ob.dart';
 import '../../../../resources/colors.dart';
 import '../../../../widgets/nathan_text_view.dart';
 
@@ -44,7 +46,7 @@ class _AuctionRoundViewState extends State<AuctionRoundView> {
         isLoading = false;
       });
     });
-  //  _auctionRound_bloc.getAuctionRound(widget.autionId);
+    _auctionRound_bloc.getAuctionRound(widget.autionId);
   }
 
   @override
@@ -61,15 +63,22 @@ class _AuctionRoundViewState extends State<AuctionRoundView> {
             crossAxisSpacing: 8.0, // spacing between columns
           ),
           padding: EdgeInsets.zero, // padding around the grid
-          itemCount: 10, // total number of items
+          itemCount: auctionRoundList.length, // total number of items
           itemBuilder: (context, index) {
-            return InkWell(
+            return auctionRoundList[index].userId == null ? const SizedBox() : InkWell(
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (co) => RoundDetailScreen(roundId: index+1,)));
+                Navigator.push(context, MaterialPageRoute(builder: (co) =>
+                   // index == 0 ? const OwnerRoundDetailScreen() :
+                   // index == 2 ?
+                    StartRoundDetailScreen(roundId: auctionRoundList[index].id, roundNumber: auctionRoundList[index].roundNumber)
+                        //:
+                   //RoundDetailScreen(roundId: auctionRoundList[index].id, roundNumber: auctionRoundList[index].roundNumber,)
+              //  TestTimerView()
+                ));
               },
               child: Container(
                 decoration: BoxDecoration(
-                  color: colorPrimary.withOpacity(0.8),
+                  color: topColor.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Column(
@@ -77,15 +86,15 @@ class _AuctionRoundViewState extends State<AuctionRoundView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Round ${index+1}",
+                      "${auctionRoundList[index].roundNumber}",
                       style: TextStyle(fontSize: 18.0, color: Colors.white, fontWeight: FontWeight.w600),
                     ),
                     Text(
-                      "Real Amount - 3000.00",
+                      "Real Amount - ${auctionRoundList[index].realAmount}",
                       style: TextStyle(fontSize: 14.0, color: Colors.white, fontWeight: FontWeight.w600),
                     ),
                     Text(
-                      "Estimate - 5000.00",
+                      "Estimate - ${auctionRoundList[index].baseAmount}",
                       style: TextStyle(fontSize: 13.0, color: Colors.white,fontWeight: FontWeight.w600),
                     ),
                     Column(
@@ -95,14 +104,10 @@ class _AuctionRoundViewState extends State<AuctionRoundView> {
                           style: TextStyle(fontSize: 14.0, color: Colors.white,fontWeight: FontWeight.w600),
                         ),
                         Text(
-                          "Tun Lin",
-                          style: TextStyle(fontSize: 14.0, color: Colors.white,fontWeight: FontWeight.w600),
+                          "${auctionRoundList[index].userinfo.username ?? "Tun Tun"}",
+                          style: TextStyle(fontSize: 18.0, color: colorPrimary,fontWeight: FontWeight.w600),
                         ),
                       ],
-                    ),
-                    Text(
-                      "Status - pending",
-                      style: TextStyle(fontSize: 10.0, color: Colors.white),
                     ),
                   ],
                 )

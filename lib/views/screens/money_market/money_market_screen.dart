@@ -9,6 +9,7 @@ import '../../../objects/money_market/bill_auction_ob.dart';
 import '../../../widgets/app_bar_title_view.dart';
 import '../../../widgets/nathan_text_view.dart';
 import '../../../widgets/row_icon_text.dart';
+import 'auction_round/start_round_detail_screen.dart';
 import 'bill_auction_joined_screen.dart';
 import 'bill_auction_screen.dart';
 
@@ -122,9 +123,11 @@ class _MoneyMarketScreenState extends State<MoneyMarketScreen> {
                                       auctionId: billAuctionList[index].id ?? 1,
                                       auctionName: "${billAuctionList[index].title}",
                                       auctionAmt: "${billAuctionList[index].amount}",
-                                    ) : BillAuctionJoinedScreen(
-                                  auctionId: billAuctionList[index].id ?? 1,
-                                ),
+                                    ) :
+                                StartRoundDetailScreen(roundId: 2, roundNumber: "Test Round 2"),
+                                // BillAuctionJoinedScreen(
+                                //   auctionId: billAuctionList[index].id ?? 1,
+                                // ),
                                 ));
                               }
                             },
@@ -184,7 +187,7 @@ class _MoneyMarketScreenState extends State<MoneyMarketScreen> {
                               ),
                             ),
                           ),
-                          billAuctionList[index].authUserHasStatus == 0 ? const SizedBox() : Positioned(
+                          billAuctionList[index].leftUser! > 0 && billAuctionList[index].authUserHasStatus == 0 ? const SizedBox() : Positioned(
                             bottom: 15,
                             right: 10,
                             child: Container(
@@ -194,10 +197,10 @@ class _MoneyMarketScreenState extends State<MoneyMarketScreen> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: NathanTextView(
-                                text: billAuctionList[index].stardardLimit == billAuctionList[index].existingUsers
+                                text: billAuctionList[index].leftUser! == 0
                                     && billAuctionList[index].authUserHasStatus == 0 ? "Locked" : "Joined",
                                 fontSize: 15,
-                                color: billAuctionList[index].stardardLimit == billAuctionList[index].existingUsers
+                                color: billAuctionList[index].leftUser! == 0
                                     && billAuctionList[index].authUserHasStatus == 0 ? Colors.red : Colors.green,
                               ),
                             ),
