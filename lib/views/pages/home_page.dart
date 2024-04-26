@@ -483,7 +483,7 @@ class _HomePageState extends State<HomePage>
                           color: colorWhite,
                         ),
                         menu_name: "Money Market",
-                        target_page: MoneyMarketScreen(),
+                        target_page: TestMoneyMarketScreen(),
                       ),
                       const SizedBox(width: 18,),
                       Expanded(

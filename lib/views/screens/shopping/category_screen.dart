@@ -94,60 +94,53 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 itemCount: categoryViewList.length,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (BuildContext context, int index) => Column(
-                  children: [
-                    InkWell(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (co) => BrandsScreen(categoryId: categoryViewList[index].id ?? 0,)));
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: Container(
-                          color: topColors.withOpacity(0.3),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 30),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    NathanTextView(
-                                      text: categoryViewList[index].name,
-                                      color: colorBlack,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18,
-                                    ),
-                                    Container(
-                                      width: double.tryParse("${categoryViewList[index].name!.length * 8}"), //MediaQuery.of(context).size.width * 0.2,
-                                      height: 2,
-                                      color: colorPrimary,
-                                      margin: const EdgeInsets.only(top: 3),
-                                    )
-                                  ],
+                itemBuilder: (BuildContext context, int index) => InkWell(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (co) => BrandsScreen(categoryId: categoryViewList[index].id ?? 0,)));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Container(
+                      color: topColors.withOpacity(0.3),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 30),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                NathanTextView(
+                                  text: categoryViewList[index].name,
+                                  color: colorBlack,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18,
                                 ),
-                              ),
-                              Container(
-                                color: colorSeconary.withOpacity(0.3),
-                                width: MediaQuery.of(context).size.width * 0.3,
-                                height: MediaQuery.of(context).size.height * 0.15,
-                                child: CachedNetworkImage(
-                                  imageUrl: categoryViewList[index].photo ?? imageUrl,
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ],
+                                Container(
+                                  width: double.tryParse("${categoryViewList[index].name!.length * 8}"), //MediaQuery.of(context).size.width * 0.2,
+                                  height: 2,
+                                  color: colorPrimary,
+                                  margin: const EdgeInsets.only(top: 3),
+                                )
+                              ],
+                            ),
                           ),
-                        ),
+                          Container(
+                            color: colorSeconary.withOpacity(0.3),
+                            width: MediaQuery.of(context).size.width * 0.3,
+                            height: MediaQuery.of(context).size.height * 0.15,
+                            child: CachedNetworkImage(
+                              imageUrl: categoryViewList[index].photo ?? imageUrl,
+                              width: double.infinity,
+                              height: double.infinity,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    categoryViewList.length > 5 ? index%3 == 0 ?
-                    _isBannerAdReady ?
-                    bannerAdWidget(): const SizedBox(): const SizedBox() : const SizedBox(),
-                  ],
+                  ),
                 )),
             if (_isBannerAdReady)
               Align(
