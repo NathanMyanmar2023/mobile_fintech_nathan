@@ -69,6 +69,13 @@ const GET_LEVELS = "${API_URL}all/user/level";
 
 const GET_LEVEL_ONE_USERS = "${API_URL}level/one/users";
 
+// bill Auction
+const GET_BILL_AUCTION = "${API_URL}bill-auction-market";
+const GET_AUCTION_RULE = "${API_URL}bill-auction-market/insterest-user";
+const GET_AUCTION_DETAIL = "${API_URL}bill-auction-market/detail/";
+const REQUEST_LEAVE_AUCTION = "${API_URL}bill-auction-market/leave-user/";
+const GET_AUCTION_ROUND = "${API_URL}bill-auction-market/round-list/";
+
 //Ecommerce
 const GET_PRODUCTS = "${API_URL}products";
 const GET_PHOTOS = "${API_URL}product";

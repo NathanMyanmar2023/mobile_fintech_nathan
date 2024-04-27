@@ -142,7 +142,7 @@ class _MainScreenState extends State<MainScreen> {
                           ),
                           onPressed: () => _launchURL(PLAY_STORE_URL),
                           style:
-                              ElevatedButton.styleFrom(primary: colorPrimary),
+                              ElevatedButton.styleFrom(backgroundColor: colorPrimary),
                         ),
                       ],
                     )

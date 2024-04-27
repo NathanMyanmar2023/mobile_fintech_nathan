@@ -29,7 +29,8 @@ class ProductData {
   ProductData({
       this.productCode, 
       this.id, 
-      this.name, 
+      this.name,
+    this.size,
       this.stock, 
       this.price, 
       this.discount, 
@@ -47,6 +48,7 @@ class ProductData {
     productCode = json['product_code'];
     id = json['id'];
     name = json['name'];
+    size = json['size'];
     stock = json['stock'];
     price = json['price'];
     discount = json['discount'];
@@ -63,6 +65,7 @@ class ProductData {
   String? productCode;
   int? id;
   String? name;
+  String? size;
   int? stock;
   String? price;
   dynamic discount;
@@ -81,6 +84,7 @@ class ProductData {
     map['product_code'] = productCode;
     map['id'] = id;
     map['name'] = name;
+    map['size'] = size;
     map['stock'] = stock;
     map['price'] = price;
     map['discount'] = discount;

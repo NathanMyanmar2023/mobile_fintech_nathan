@@ -13,7 +13,7 @@ import 'package:nathan_app/views/screens/exchange/exchange_screen.dart';
 import 'package:nathan_app/views/screens/investment/select_investment_screen.dart';
 import 'package:nathan_app/views/screens/kyc/kyc_screen.dart';
 import 'package:nathan_app/views/screens/main_screen.dart';
-import 'package:nathan_app/views/screens/money_market/money_market_screen.dart';
+import 'package:nathan_app/views/screens/money_market/test_money_screen.dart';
 import 'package:nathan_app/views/screens/transfer/transfer_screen.dart';
 import 'package:nathan_app/views/screens/welcome_screen.dart';
 import 'package:nathan_app/views/widgets/main_menu_button_widget.dart';
@@ -21,6 +21,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../bloc/user_info_bloc.dart';
 import '../../helpers/shared_pref.dart';
+import '../screens/money_market/money_market_screen.dart';
 import '../screens/shopping/category_screen.dart';
 import '../screens/top_up/top_up_screen.dart';
 
@@ -482,7 +483,7 @@ class _HomePageState extends State<HomePage>
                           color: colorWhite,
                         ),
                         menu_name: "Money Market",
-                        target_page: MoneyMarketScreen(),
+                        target_page: TestMoneyMarketScreen(),
                       ),
                       const SizedBox(width: 18,),
                       Expanded(

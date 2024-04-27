@@ -1,6 +1,7 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
 import 'package:nathan_app/views/custom/snack_bar.dart';
 import 'package:nathan_app/views/screens/top_up/success_bill_screen.dart';
@@ -88,7 +89,25 @@ class _TopUpScreenState extends State<TopUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return isLoading
+        ? MediaQuery(
+      data: MediaQuery.of(context)
+          .copyWith(textScaler: const TextScaler.linear(1.0)),
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: SpinKitFadingFour(
+          itemBuilder: (BuildContext context, int index) {
+            return DecoratedBox(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: index.isEven ? Colors.blue : Colors.grey.shade800,
+              ),
+            );
+          },
+        ),
+      ),
+    )
+        : Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
@@ -405,13 +424,11 @@ class _TopUpScreenState extends State<TopUpScreen> {
                         child: LongButtonView(
                             text: AppLocalizations.of(context)!.pay,
                             onTap: () async {
-                              print("ee ${phoneController.text.trim()}");
-
                               setState(() {
+                                Navigator.pop(context);
                                 isLoading = true;
                               });
                               if (phoneController.text == "") {
-                                Navigator.pop(context);
                                 showDialog(
                                   context: context,
                                   builder: (context) {
@@ -529,7 +546,8 @@ class _TopUpScreenState extends State<TopUpScreen> {
                                   ? failOperator()
                                   : successOperator(
                                       "$_phone_code$billPhone", billAmt, opType);
-                            }),
+                            },
+                        ),
                       ),
                     ],
                   ),
@@ -556,7 +574,9 @@ class _TopUpScreenState extends State<TopUpScreen> {
   }
 
   failOperator() {
-    Navigator.pop(context);
+    setState(() {
+      isLoading = false;
+    });
     context.showSnack(
       "Please Make sure your Correct Operator with mobile number",
       Colors.white,
