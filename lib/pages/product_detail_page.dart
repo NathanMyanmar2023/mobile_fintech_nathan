@@ -4,6 +4,7 @@ import 'package:nathan_app/extensions/navigation_extensions.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/objects/product_detail_ob.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../bloc/add_to_cart_bloc.dart';
 import '../resources/colors.dart';
@@ -134,11 +135,27 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.network(
-              productDetail?.photo ?? "",
-              height: 200,
-              width: double.infinity,
-              fit: BoxFit.cover,
+            Stack(
+              children: [
+                Image.network(
+                  productDetail?.photo ?? "",
+                  height: 200,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+                productDetail!.stock! > 0 ? const SizedBox() : Positioned(
+                  top: 0,
+                  right: 0,
+                  bottom: 0,
+                  left: 0,
+                  child: Container(
+                      color: Colors.black.withOpacity(0.5),
+                      child: Center(
+                        child: Text("Out of Stock", style: TextStyle(color: Colors.yellow, fontWeight: FontWeight.w600, fontSize: 18.sp)),
+                      )
+                  ),
+                ),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),
@@ -149,11 +166,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        productDetail?.name ?? "-",
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                      Expanded(
+                        child: Text(
+                          productDetail?.name ?? "-",
+                          maxLines: 3,
+                          softWrap: true,
+                          style: TextStyle(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       LongButtonView(
@@ -212,8 +233,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       color: Colors.grey,
                     ),
                   ),
-                  SizedBox(height: productDetail!.size!.isNotEmpty ? 10 : 0),
-                  productDetail!.size!.isNotEmpty ? Text(
+                  SizedBox(height: productDetail!.size!.isNotEmpty && productDetail?.size != "0" ? 10 : 0),
+                  productDetail!.size!.isNotEmpty && productDetail?.size != "0" ? Text(
                     "Size",
                     style: TextStyle(
                       fontSize: 18,
@@ -221,13 +242,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     ),
                   ) : const SizedBox(),
                   Text(
-                    productDetail?.size ?? "-",
+                    productDetail?.size == "0" ? "" :productDetail?.size ?? "-",
                     style: const TextStyle(
                       fontSize: 16,
                       color: Colors.grey,
                     ),
                   ),
-                  SizedBox(height: productDetail!.size!.isNotEmpty ? 16 : 0),
+                  SizedBox(height: productDetail!.size!.isNotEmpty && productDetail?.size != "0" ? 16 : 0),
                    Text(
                      AppLocalizations.of(context)!.photos,
                     style: TextStyle(

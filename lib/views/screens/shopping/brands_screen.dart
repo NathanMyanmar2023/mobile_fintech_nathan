@@ -177,7 +177,7 @@ class _BrandsScreenState extends State<BrandsScreen> {
                   physics: const NeverScrollableScrollPhysics(),
                   children:
                     List.generate(brandsList.length, (indexView) {
-                      return ShoppingPage(brandId: indexView,);
+                      return ShoppingPage(brandId: brandsList[indexView].id,);
                     }).toList(),
 
                 ),
