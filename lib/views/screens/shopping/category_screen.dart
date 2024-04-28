@@ -55,11 +55,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
         onAdLoaded: (_) {
           setState(() {
             _isBannerAdReady = true;
+            print("Well ADS");
           });
         },
         onAdFailedToLoad: (ad, err) {
           _isBannerAdReady = false;
           ad.dispose();
+          print("ADS error $err");
         },
       ),
     );
@@ -87,6 +89,15 @@ class _CategoryScreenState extends State<CategoryScreen> {
       SingleChildScrollView(
         child: Column(
           children: [
+            if (_isBannerAdReady)
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: SizedBox(
+                width: _bannerAd.size.width.toDouble(),
+                height: _bannerAd.size.height.toDouble(),
+                child: AdWidget(ad: _bannerAd),
+              ),
+            ),
             ListView.builder(
                 padding: const EdgeInsets.only(
                   top: 8,
@@ -94,53 +105,59 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 itemCount: categoryViewList.length,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (BuildContext context, int index) => InkWell(
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (co) => BrandsScreen(categoryId: categoryViewList[index].id ?? 0,)));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: Container(
-                      color: topColors.withOpacity(0.3),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 30),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                NathanTextView(
-                                  text: categoryViewList[index].name,
-                                  color: colorBlack,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 18,
+                itemBuilder: (BuildContext context, int index) => Column(
+                  children: [
+                    InkWell(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (co) => BrandsScreen(categoryId: categoryViewList[index].id ?? 0,)));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Container(
+                          color: topColors.withOpacity(0.3),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 30),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    NathanTextView(
+                                      text: categoryViewList[index].name,
+                                      color: colorBlack,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 18,
+                                    ),
+                                    Container(
+                                      width: double.tryParse("${categoryViewList[index].name!.length * 8}"), //MediaQuery.of(context).size.width * 0.2,
+                                      height: 2,
+                                      color: colorPrimary,
+                                      margin: const EdgeInsets.only(top: 3),
+                                    )
+                                  ],
                                 ),
-                                Container(
-                                  width: double.tryParse("${categoryViewList[index].name!.length * 8}"), //MediaQuery.of(context).size.width * 0.2,
-                                  height: 2,
-                                  color: colorPrimary,
-                                  margin: const EdgeInsets.only(top: 3),
-                                )
-                              ],
-                            ),
+                              ),
+                              Container(
+                                color: colorSeconary.withOpacity(0.3),
+                                width: MediaQuery.of(context).size.width * 0.3,
+                                height: MediaQuery.of(context).size.height * 0.15,
+                                child: CachedNetworkImage(
+                                  imageUrl: categoryViewList[index].photo ?? imageUrl,
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ],
                           ),
-                          Container(
-                            color: colorSeconary.withOpacity(0.3),
-                            width: MediaQuery.of(context).size.width * 0.3,
-                            height: MediaQuery.of(context).size.height * 0.15,
-                            child: CachedNetworkImage(
-                              imageUrl: categoryViewList[index].photo ?? imageUrl,
-                              width: double.infinity,
-                              height: double.infinity,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
-                  ),
+                    // index%2 == 1 ? _isBannerAdReady ?
+                    // bannerAdWidget(): const SizedBox() : const SizedBox(),
+                  ],
                 )),
             if (_isBannerAdReady)
               Align(

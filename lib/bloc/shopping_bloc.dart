@@ -9,8 +9,8 @@ class ShoppingBloc extends BaseNetwork {
 
   Stream<ResponseOb> shoppingStream() => shoppingController.stream;
 
-  getShoppingProduct({required int? brandId}) async {
-    getReq("$SHOPPING_BRAND$brandId", onDataCallBack: (ResponseOb resp) {
+  getShoppingProduct({required int? brandId, required int? page}) async {
+    getReq("$SHOPPING_BRAND$brandId?page=$page", onDataCallBack: (ResponseOb resp) {
       resp.data = ShoppingOb.fromJson(resp.data);
       shoppingController.sink.add(resp);
     }, errorCallBack: (ResponseOb resp) {

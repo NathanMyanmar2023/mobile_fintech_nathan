@@ -37,7 +37,7 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
     super.initState();
     // Calculate the time difference
     DateTime now = DateTime.now();
-    DateTime targetTime = DateTime(now.year, now.month, now.day, 17, 25); // 5:00 PM today
+    DateTime targetTime = DateTime(now.year, now.month, now.day, 20, 45); // 5:00 PM today
     _difference = targetTime.difference(now);
     print("d ${targetTime}");
     // Start the countdown timer
