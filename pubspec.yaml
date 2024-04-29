@@ -51,6 +51,9 @@ dependencies:
   google_mobile_ads: ^5.0.0
   device_info_plus: ^3.2.3
   marquee: ^2.2.3
+  firebase_core: ^2.27.0
+  firebase_messaging: ^14.7.19
+  awesome_notifications: any
 
 dev_dependencies:
   flutter_test:

@@ -21,6 +21,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../bloc/user_info_bloc.dart';
 import '../../helpers/shared_pref.dart';
+import '../notification/notification_setup.dart';
 import '../screens/money_market/money_market_screen.dart';
 import '../screens/shopping/category_screen.dart';
 import '../screens/top_up/top_up_screen.dart';
@@ -36,6 +37,8 @@ class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
+
+  final NotificationSetup _noti = NotificationSetup();
 
   //wallet card controller
   final _wallet_card_controller = PageController();
@@ -64,6 +67,9 @@ class _HomePageState extends State<HomePage>
 
   @override
   void initState() {
+    _noti.configurePushNotifications(context);
+    _noti.eventListenerCallback(context);
+    
     // TODO: implement initState
     super.initState();
     _wallets_stream = _wallets_bloc.walletsStream();

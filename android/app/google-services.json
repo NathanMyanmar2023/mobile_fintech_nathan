@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "314757345053",
+    "project_id": "nathanfintech-c0270",
+    "storage_bucket": "nathanfintech-c0270.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:314757345053:android:e28306e83b68b3f6897bf4",
+        "android_client_info": {
+          "package_name": "com.fintech.app.nathan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4IYa0nJ7Z2tmXBG38k7Z9Sn1hJc7bWNc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

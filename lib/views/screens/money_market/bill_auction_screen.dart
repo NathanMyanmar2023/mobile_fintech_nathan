@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:nathan_app/extensions/navigation_extensions.dart';
@@ -142,10 +143,13 @@ class _BillAuctionScreenState extends State<BillAuctionScreen> {
     _auctionRuleBloc.getAuctionRule(data: map);
   }
 
-  void requestAuctionRule() {
+  void requestAuctionRule() async {
+    String? fcmToken = await FirebaseMessaging.instance.getToken();
+    print('FCM Token: $fcmToken');
     Map<String, dynamic> map = {
       'agress': 1,
       'auctionID': widget.auctionId,
+      'fcm_token': fcmToken,
     };
     _auctionInstBloc.requestAuctionInst(data: map);
     setState(() {
