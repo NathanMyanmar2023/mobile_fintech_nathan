@@ -75,6 +75,7 @@ const GET_AUCTION_RULE = "${API_URL}bill-auction-market/insterest-user";
 const GET_AUCTION_DETAIL = "${API_URL}bill-auction-market/detail/";
 const REQUEST_LEAVE_AUCTION = "${API_URL}bill-auction-market/leave-user/";
 const GET_AUCTION_ROUND = "${API_URL}bill-auction-market/round-list/";
+const ROUND_MONTHLY_PAY = "${API_URL}bill-auction-market/round-list/monthly/";
 
 //Ecommerce
 const GET_PRODUCTS = "${API_URL}products";

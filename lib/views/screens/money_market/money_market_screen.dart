@@ -124,10 +124,9 @@ class _MoneyMarketScreenState extends State<MoneyMarketScreen> {
                                       auctionName: "${billAuctionList[index].title}",
                                       auctionAmt: "${billAuctionList[index].amount}",
                                     ) :
-                                StartRoundDetailScreen(roundId: 2, roundNumber: "Test Round 2"),
-                                // BillAuctionJoinedScreen(
-                                //   auctionId: billAuctionList[index].id ?? 1,
-                                // ),
+                                BillAuctionJoinedScreen(
+                                  auctionId: billAuctionList[index].id ?? 1,
+                                ),
                                 ));
                               }
                             },

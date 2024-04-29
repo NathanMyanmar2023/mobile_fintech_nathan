@@ -65,7 +65,7 @@ class _AuctionRoundViewState extends State<AuctionRoundView> {
           padding: EdgeInsets.zero, // padding around the grid
           itemCount: auctionRoundList.length, // total number of items
           itemBuilder: (context, index) {
-            return auctionRoundList[index].userId == null ? const SizedBox() : InkWell(
+            return auctionRoundList[index].baseAmount == 0 ? const SizedBox() : InkWell(
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (co) =>
                    // index == 0 ? const OwnerRoundDetailScreen() :
@@ -97,14 +97,14 @@ class _AuctionRoundViewState extends State<AuctionRoundView> {
                       "Estimate - ${auctionRoundList[index].baseAmount}",
                       style: TextStyle(fontSize: 13.0, color: Colors.white,fontWeight: FontWeight.w600),
                     ),
-                    Column(
+                     Column(
                       children: [
                         Text(
-                          "Winner Bidder name",
+                          auctionRoundList[index].userId == null ? "" : "Winner Bidder name",
                           style: TextStyle(fontSize: 14.0, color: Colors.white,fontWeight: FontWeight.w600),
                         ),
                         Text(
-                          "${auctionRoundList[index].userinfo.username ?? "Tun Tun"}",
+                          auctionRoundList[index].userId == null ? "" : "${auctionRoundList[index].userinfo.username ?? "Tun Tun"}",
                           style: TextStyle(fontSize: 18.0, color: colorPrimary,fontWeight: FontWeight.w600),
                         ),
                       ],
