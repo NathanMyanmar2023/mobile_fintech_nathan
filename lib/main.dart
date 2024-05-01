@@ -1,11 +1,14 @@
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:nathan_app/view_models/add_address_view_model.dart';
 import 'package:nathan_app/view_models/cart_view_model.dart';
 import 'package:nathan_app/view_models/app_language_view_model.dart';
+import 'package:nathan_app/views/notification/notification_service.dart';
 import 'package:nathan_app/views/screens/login_screen.dart';
 import 'package:nathan_app/views/screens/main_screen.dart';
 import 'package:nathan_app/views/screens/register_screen.dart';
@@ -33,9 +36,12 @@ Future<void> main() async {
   await MobileAds.instance.updateRequestConfiguration(configuration);
   AppLanguageViewModel appLanguage = AppLanguageViewModel();
   await appLanguage.fetchLocale();
-  runApp( Nathan(
-    appLanguage: appLanguage,
-  ));
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp( Nathan(
+      appLanguage: appLanguage,
+    ));
+  });
 }
 Future<String> _saveDeviceToken() async {
   String _deviceToken = '';

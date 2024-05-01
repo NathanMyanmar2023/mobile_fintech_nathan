@@ -26,12 +26,14 @@ class AuctionRoundMonthlyBidOb {
 
 class RoundMonthlyData {
   RoundMonthlyData({
+    this.bitstandardAmount,
     this.bidAmountEndtime,
     this.bitStartime,
     this.bidUsersLists,
     this.lastBidUser,});
 
   RoundMonthlyData.fromJson(dynamic json) {
+    bitstandardAmount =json['bitstandardAmount'];
     bidAmountEndtime = json['bidAmountEndtime'];
     bitStartime = json['bitStartime'];
     if (json['bidUsersLists'] != null) {
@@ -43,12 +45,14 @@ class RoundMonthlyData {
     lastBidUser = json['lastBidUser'] != null ? LastBidUser.fromJson(json['lastBidUser']) : null;
   }
   dynamic bidAmountEndtime;
+  String? bitstandardAmount;
   String? bitStartime;
   List<BidUsersLists>? bidUsersLists;
   LastBidUser? lastBidUser;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['bitstandardAmount'] = bitstandardAmount;
     map['bidAmountEndtime'] = bidAmountEndtime;
     map['bitStartime'] = bitStartime;
     if (bidUsersLists != null) {

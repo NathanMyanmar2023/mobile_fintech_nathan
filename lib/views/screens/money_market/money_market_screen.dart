@@ -10,6 +10,7 @@ import '../../../widgets/app_bar_title_view.dart';
 import '../../../widgets/nathan_text_view.dart';
 import '../../../widgets/row_icon_text.dart';
 import 'auction_round/start_round_detail_screen.dart';
+import 'aution_group_screen.dart';
 import 'bill_auction_joined_screen.dart';
 import 'bill_auction_screen.dart';
 
@@ -120,12 +121,14 @@ class _MoneyMarketScreenState extends State<MoneyMarketScreen> {
                               }else {
                                 Navigator.push(context, MaterialPageRoute(builder: (co) =>
                                 billAuctionList[index].authUserHasStatus == 0 ?  BillAuctionScreen(
-                                      auctionId: billAuctionList[index].id ?? 1,
+                                      auctionId: billAuctionList[index].id ?? 0,
                                       auctionName: "${billAuctionList[index].title}",
                                       auctionAmt: "${billAuctionList[index].amount}",
                                     ) :
-                                BillAuctionJoinedScreen(
-                                  auctionId: billAuctionList[index].id ?? 1,
+                                billAuctionList[index].existingUsers == 10 ? AuctionGroupScreen(
+                                  auctionId: billAuctionList[index].id ?? 0,
+                                ) : BillAuctionJoinedScreen(
+                                  auctionId: billAuctionList[index].id ?? 0,
                                 ),
                                 ));
                               }

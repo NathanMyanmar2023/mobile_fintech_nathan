@@ -38,7 +38,10 @@ class _HomePageState extends State<HomePage>
   @override
   bool get wantKeepAlive => true;
 
-  final NotificationSetup _noti = NotificationSetup();
+  //final NotificationSetup _noti = NotificationSetup();
+
+  final _messagingService = MessagingService();
+
 
   //wallet card controller
   final _wallet_card_controller = PageController();
@@ -67,8 +70,11 @@ class _HomePageState extends State<HomePage>
 
   @override
   void initState() {
-    _noti.configurePushNotifications(context);
-    _noti.eventListenerCallback(context);
+    // _noti.configurePushNotifications(context);
+    // _noti.eventListenerCallback(context);
+
+    _messagingService.init(context);
+    _messagingService.initializeNotification(context);
     
     // TODO: implement initState
     super.initState();
@@ -465,13 +471,13 @@ class _HomePageState extends State<HomePage>
                       const SizedBox(
                         width: 10,
                       ),
-                      MainMenuButtonWidget(
+                      const MainMenuButtonWidget(
                         menu_icon: Icon(
-                          Icons.topic,
+                          Icons.card_giftcard,
                           color: colorWhite,
                         ),
-                        menu_name: AppLocalizations.of(context)!.top_up,
-                        target_page:  const TopUpScreen(),
+                        menu_name: "Gift card",
+                        target_page: TestMoneyMarketScreen(),
                       ),
                     ],
                   ),
@@ -483,6 +489,17 @@ class _HomePageState extends State<HomePage>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      MainMenuButtonWidget(
+                        menu_icon: Icon(
+                          Icons.topic,
+                          color: colorWhite,
+                        ),
+                        menu_name: AppLocalizations.of(context)!.top_up,
+                        target_page:  const TopUpScreen(),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
                       const MainMenuButtonWidget(
                         menu_icon:  Icon(
                           Linecons.shop,
@@ -491,9 +508,9 @@ class _HomePageState extends State<HomePage>
                         menu_name: "Money Market",
                         target_page: MoneyMarketScreen(),
                       ),
-                      const SizedBox(width: 18,),
+                      const SizedBox(width: 10,),
                       Expanded(
-                        flex: 3,
+                        flex: 2,
                         child: AspectRatio(
                           aspectRatio: 1,
                           child: Container(),

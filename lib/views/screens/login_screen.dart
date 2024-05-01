@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:nathan_app/bloc/login_bloc.dart';
@@ -140,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return regExp.hasMatch(email);
   }
 
-  void login() {
+  void login() async {
     String email = emailTec.text.toString();
     String password = passwordTec.text.toString();
 
@@ -160,9 +161,12 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
+    String? fcmToken = await FirebaseMessaging.instance.getToken();
+    print('FCM Token: $fcmToken');
     Map<String, dynamic> map = {
       'email': email,
       'password': password,
+      'fcm_token': fcmToken,
     };
     _loginBloc.login(map);
     setState(() {

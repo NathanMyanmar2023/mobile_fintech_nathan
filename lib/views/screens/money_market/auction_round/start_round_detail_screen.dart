@@ -1,18 +1,15 @@
 import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
-import 'package:marquee/marquee.dart';
 import 'package:nathan_app/extensions/navigation_extensions.dart';
 import 'package:nathan_app/resources/colors.dart';
+import 'package:nathan_app/views/custom/snack_bar.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
 import '../../../../bloc/money_market/auction_round_monthly_bid_bloc.dart';
 import '../../../../bloc/money_market/request_auction_round_monthly_bid_bloc.dart';
 import '../../../../helpers/response_ob.dart';
+import '../../../../helpers/shared_pref.dart';
 import '../../../../objects/money_market/auction_round_monthly_bid_ob.dart';
 import '../../../../widgets/app_bar_title_view.dart';
 import '../../../../widgets/h_m_s_row_view.dart';
@@ -22,7 +19,8 @@ import '../../../../widgets/nathan_text_view.dart';
 class StartRoundDetailScreen extends StatefulWidget {
   final int roundId;
   final String roundNumber;
-  const StartRoundDetailScreen({Key? key, required this.roundId, required this.roundNumber}) : super(key: key);
+  final String baseAmount;
+  const StartRoundDetailScreen({Key? key, required this.roundId, required this.roundNumber, required this.baseAmount}) : super(key: key);
 
   @override
   State<StartRoundDetailScreen> createState() => _StartRoundDetailScreenState();
@@ -37,8 +35,9 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
 
   var ticketTec = TextEditingController();
 
-  late Timer _timer;
-  late Duration _difference;
+
+ // late Duration _difference;
+  Duration _difference = const Duration(seconds: 1);
 
   final _roundMonthlyBidBloc = AuctionRoundMonthlyBidBloc();
   late Stream<ResponseOb> _roundMonthlyBidStream;
@@ -47,22 +46,32 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
   String lastBidAmount = "";
   String lastBidUsername = "";
   String bidStarTime = "";
+  String bitstandardAmount = "";
+  bool noOneUserPage = false;
   final _requestRoundMonthlyBidBloc = RequestAuctionRoundMonthlyBidBloc();
   late Stream<ResponseOb> _requestRoundMonthlyBidStream;
+  Timer? callTimer;
   @override
   void initState() {
     super.initState();
+    callTimer = Timer.periodic(const Duration(seconds: 10), (Timer t) => firstCallTimer());
 
     // get round bid history
     _roundMonthlyBidStream = _roundMonthlyBidBloc.auctionRoundMonthlyStream();
     _roundMonthlyBidStream.listen((ResponseOb resp) {
       if (resp.success) {
-        setState(() {
-          lastBidAmount = resp.data.data.lastBidUser.amount ?? "";
-          bidStarTime = resp.data.data.bitStartime ?? "";
-          bidUsersLists = (resp.data as AuctionRoundMonthlyBidOb).data!.bidUsersLists ?? [];
-          checkDateTime(bidStarTime);
-        });
+        if(resp.message == "Sorry, there are no one users") {
+          setState(() {
+            noOneUserPage = true;
+          });
+        } else {
+          setState(() {
+            lastBidAmount = resp.data.data.lastBidUser.amount ?? "0";
+            bitstandardAmount = resp.data.data.bitstandardAmount ?? "0";
+            bidStarTime = resp.data.data.bitStartime ?? "0";
+            bidUsersLists = (resp.data as AuctionRoundMonthlyBidOb).data!.bidUsersLists ?? [];
+          });
+        }
       } else {}
     });
     _roundMonthlyBidBloc.getRoundMonthlyBid(widget.roundId);
@@ -74,6 +83,7 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
         setState(() {
           _roundMonthlyBidBloc.getRoundMonthlyBid(widget.roundId);
           startTimer();
+          hideButton = true;
         });
       } else {
         showDialog(
@@ -97,7 +107,10 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
                     onPressed: () {
                       popBack(context: context);
                       if(resp.message.toString() == "Sorry, there are not have other one bid user") {
-                        startTimer();
+                        setState(() {
+                          hideButton = true;
+                          startTimer();
+                        });
                       }else {
                         setState(() {
                           hideButton = false;
@@ -119,33 +132,71 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
     });
   }
 
-  checkDateTime(String defaultDate) {
-    DateTime dateTime = new DateFormat("yyyy-MM-dd hh:mm:ss").parse(defaultDate);
-    String year = DateFormat.y().format(dateTime);
-    String month = DateFormat.M().format(dateTime);
-    String date = DateFormat.d().format(dateTime);
-    String hour = DateFormat.H().format(dateTime);
-    String min = DateFormat.m().format(dateTime);
-    String sec = DateFormat.s().format(dateTime);
-    print("def $defaultDate");
-    print("dda $dateTime");
-    print("year $year & $month & $date & $hour & $min & $sec");
-    // Calculate the time difference
-    DateTime now = DateTime.now();
-    DateTime targetTime = DateTime(2024, 4, 31, 0, 0); // 5:00 PM today
-    _difference = targetTime.difference(now);
-    print("d ${targetTime}");
-    // Start the countdown timer
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+  firstCallTimer() async {
+    print("calling final");
+    _roundMonthlyBidBloc.getRoundMonthlyBid(widget.roundId);
+    String? accountId = await SharedPref.getData(key: SharedPref.accountId);
+    int userId = int.parse(accountId!);
+    print("usood $userId & ${userId.runtimeType}");
+    print("bidUsersLists.last.userId ${bidUsersLists.first.userId} & ${bidUsersLists.last.userId.runtimeType}");
+    print("acccu $accountId");
+    if(bidUsersLists.first.userId == userId) {
+      print("samme");
       setState(() {
-        if (_difference.inSeconds > 0) {
-          _difference -= const Duration(seconds: 1);
-        } else {
-          _timer.cancel();
-        }
+        startTimer();
       });
-    });
+    } else {
+      print("no same");
+    }
   }
+
+  finalCallTimer() async {
+    print("calling final");
+    _roundMonthlyBidBloc.getRoundMonthlyBid(widget.roundId);
+    String? accountId = await SharedPref.getData(key: SharedPref.accountId);
+    int userId = int.parse(accountId!);
+    print("usood $userId & ${userId.runtimeType}");
+    print("bidUsersLists.last.userId ${bidUsersLists.first.userId} & ${bidUsersLists.last.userId.runtimeType}");
+    print("acccu $accountId");
+    if(bidUsersLists.first.userId == userId) {
+      print("samme");
+      setState(() {
+        callTimer!.cancel();
+        resultBidPrice(bidUsersLists.first.amount.toString());
+      });
+    } else {
+      print("no same");
+      setState(() {
+        _start = 0;
+      });
+    }
+  }
+  // checkDateTime(String defaultDate) {
+  //   DateTime dateTime = new DateFormat("yyyy-MM-dd hh:mm:ss").parse(defaultDate);
+  //   String year = DateFormat.y().format(dateTime);
+  //   String month = DateFormat.M().format(dateTime);
+  //   String date = DateFormat.d().format(dateTime);
+  //   String hour = DateFormat.H().format(dateTime);
+  //   String min = DateFormat.m().format(dateTime);
+  //   String sec = DateFormat.s().format(dateTime);
+  //   print("def $defaultDate");
+  //   print("dda $dateTime");
+  //   print("year $year & $month & $date & $hour & $min & $sec");
+  //   // Calculate the time difference
+  //   DateTime now = DateTime.now();
+  //   DateTime targetTime = DateTime(2024, 4, 31, 2, 20); // 5:00 PM today
+  //   _difference = targetTime.difference(now);
+  //   // Start the countdown timer
+  //   _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+  //     setState(() {
+  //       if (_difference.inSeconds > 0) {
+  //         _difference -= const Duration(seconds: 1);
+  //       } else {
+  //         _timer!.cancel();
+  //       }
+  //     });
+  //   });
+  // }
 
   void requestPayBid(String bidAmount) {
     Map<String, dynamic> map = {
@@ -155,12 +206,13 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
   }
   @override
   void dispose() {
-    _timer.cancel();
-    _waittimer.cancel();
+    _waittimer!.cancel();
+    callTimer!.cancel();
     super.dispose();
   }
-  late Timer _waittimer;
+  Timer? _waittimer;
   int _start = 10;
+  int _finalCount = 10;
   bool hideBid = false;
   bool hideButton = false;
   var unixTime = DateTime.now().millisecondsSinceEpoch / 1000;
@@ -178,11 +230,8 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
             hideBid = false;
             hideButton = false;
             timer.cancel();
-            _roundMonthlyBidBloc.getRoundMonthlyBid(widget.roundId);
-            // Navigator.pushReplacement(
-            //     context,
-            //     MaterialPageRoute(
-            //         builder: (BuildContext context) => super.widget));
+            callTimer!.cancel();
+            finalCallTimer();
           });
         } else {
           setState(() {
@@ -193,12 +242,75 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
     );
   }
 
+  void resultBidPrice(String amount) async {
+    String message = "You are winner of Bid Price $amount";
+    String btnLabel = "Ok";
+    showDialog<String>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Center(
+              child: Text(
+                "Congratulations!",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  color: colorPrimary,
+                ),
+              )),
+          // content:  AlertVersionInfoView(),
+          content: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            // margin: const EdgeInsets.only(top: 10),
+            height: 130,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                NathanTextView(
+                  text: message,
+                  fontSize: 14,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      child: Text(
+                        btnLabel,
+                        style: TextStyle(color: colorWhite),
+                      ),
+                      onPressed: () => Navigator.pop(context),
+                      style:
+                      ElevatedButton.styleFrom(backgroundColor: colorPrimary),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+          backgroundColor: colorWhite,
+          contentPadding: EdgeInsets.zero,
+          titlePadding: const EdgeInsets.only(top: 15),
+          surfaceTintColor: Colors.transparent,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    int hours = _difference.inHours;
-    int minutes = _difference.inMinutes.remainder(60);
-    int seconds = _difference.inSeconds.remainder(60);
-    print("so $hours & $minutes & $seconds");
+    // int hours = _difference.inHours;
+    // int minutes = _difference.inMinutes.remainder(60);
+    // int seconds = _difference.inSeconds.remainder(60);
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: PreferredSize(
@@ -214,11 +326,8 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
             Expanded(
               child: Column(
                 children: [
-                  Container(
-                    height: hours > 0 || minutes > 0 || seconds > 0 ? hideBid ? MediaQuery.of(context).size.height * 0.269
-                        : MediaQuery.of(context).size.height * 0.21 :
-                    MediaQuery.of(context).size.height * 0.2,
-                 //  color: hours > 0 || minutes > 0 || seconds > 0 ? hideBid ? Colors.red : Colors.green : Colors.blue,
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.2,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -236,17 +345,38 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
                                     color: colorBlack,
                                     fontWeight: FontWeight.w600),
                               ),
-                              hours > 0 || minutes > 0 || seconds > 0 ? Row(
+                              noOneUserPage ? const SizedBox() : Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    "Ends In ",
-                                    style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.w600),
+                                  NathanTextView(
+                                    text: "Count Timer ",
+                                    fontSize: 16.sp,
+                                    color: colorBlack,
                                   ),
-                                  HMSRowView(hour: hours.toString(), min: minutes.toString(), sec: seconds.toString(),),
+                                  NathanTextView(
+                                    text: "$_start",
+                                    fontSize: 18.sp,
+                                    color: Colors.red,
+                                  ),
+                                  NathanTextView(
+                                    text: " sec.",
+                                    fontSize: 16.sp,
+                                    color: colorBlack,
+                                  ),
                                 ],
-                              ) : const SizedBox(),
+                              ),
+                              // noOneUserPage ? const SizedBox() : hours > 0 || minutes > 0 || seconds > 0 ? Row(
+                              //   children: [
+                              //     const Text(
+                              //       "Count ",
+                              //       style: TextStyle(
+                              //           fontSize: 18.0,
+                              //           fontWeight: FontWeight.w600),
+                              //     ),
+                              //     HMSRowView(hour: hours.toString(), min: minutes.toString(), sec: seconds.toString(),),
+                              //   ],
+                              // ) : const SizedBox(),
                             ],
                           ),
                         ),
@@ -258,32 +388,32 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: noOneUserPage ? MainAxisAlignment.center : MainAxisAlignment.spaceEvenly,
                             children: [
-                              const Column(
+                              Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  NathanTextView(
-                                    text: "Estimate",
+                                  const NathanTextView(
+                                    text: "Ask Price",
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 5,
                                   ),
                                   NathanTextView(
-                                    text: "5000.00",
+                                    text: noOneUserPage ? widget.baseAmount : bitstandardAmount,
                                     fontSize: 16,
                                     color: colorPrimary,
                                   ),
                                 ],
                               ),
-                              Container(
+                              noOneUserPage ? const SizedBox() : Container(
                                 height: 30,
                                 width: 2,
                                 color: colorSeconary,
                               ),
-                              Column(
+                              noOneUserPage ? const SizedBox() : Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   const NathanTextView(
@@ -325,32 +455,32 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
                         //     decelerationCurve: Curves.easeOut,
                         //   ),
                         // ),
-                        hideBid ? Container(
-                          color: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          margin: const EdgeInsets.only(bottom: 10),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              NathanTextView(
-                                text: "Please wait who can pay of lower bid within ",
-                                fontSize: 16.sp,
-                                color: colorBlack,
-                              ),
-                              NathanTextView(
-                                text: "$_start",
-                                fontSize: 16.sp,
-                                color: Colors.red,
-                              ),
-                              NathanTextView(
-                                text: " s.",
-                                fontSize: 16.sp,
-                                color: colorBlack,
-                              ),
-                            ],
-                          ),
-                        ) : const SizedBox(),
+                        // hideBid ? Container(
+                        //   color: Colors.white,
+                        //   padding: const EdgeInsets.symmetric(vertical: 10),
+                        //   margin: const EdgeInsets.only(bottom: 10),
+                        //   child: Row(
+                        //     crossAxisAlignment: CrossAxisAlignment.center,
+                        //     mainAxisAlignment: MainAxisAlignment.center,
+                        //     children: [
+                        //       NathanTextView(
+                        //         text: "Please wait who can pay of lower bid within ",
+                        //         fontSize: 16.sp,
+                        //         color: colorBlack,
+                        //       ),
+                        //       NathanTextView(
+                        //         text: "$_start",
+                        //         fontSize: 16.sp,
+                        //         color: Colors.red,
+                        //       ),
+                        //       NathanTextView(
+                        //         text: " s.",
+                        //         fontSize: 16.sp,
+                        //         color: colorBlack,
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ) : const SizedBox(),
                         const Padding(
                            padding: EdgeInsets.symmetric(horizontal: 25),
                            child: NathanTextView(
@@ -405,7 +535,7 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
                 ],
               ),
             ),
-            hideButton ? const SizedBox() : Padding(
+            Padding(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
               child: Row(
                 children: [
@@ -434,11 +564,20 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
                     child: LongButtonView(
                         text: "Confirm",
                         onTap: () {
-                        setState(() {
-                          hideButton = true;
-                          requestPayBid(ticketTec.text);
-                          ticketTec.clear();
-                        });
+                              if(ticketTec.text.isEmpty) {
+                                context.showSnack("Enter your Bid amount first!",
+                                  Colors.white,
+                                  Colors.red,
+                                  Icons.close,
+                                );
+                              } else {
+                                setState(() {
+                                  noOneUserPage = false;
+                                  hideButton = true;
+                                  requestPayBid(ticketTec.text);
+                                  ticketTec.clear();
+                                });
+                              }
                         }
                     ),
                   ),

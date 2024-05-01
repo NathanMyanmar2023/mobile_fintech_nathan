@@ -14,7 +14,7 @@ class HMSRowView extends StatelessWidget {
       children: [
         Container(
           color: Colors.white,
-          padding: EdgeInsets.symmetric(horizontal: 3, vertical: 2),
+          padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
           child: Text(
             hour,
             style: const TextStyle(
@@ -35,12 +35,12 @@ class HMSRowView extends StatelessWidget {
         ),
         Container(
           color: Colors.white,
-          padding: EdgeInsets.symmetric(horizontal: 3, vertical: 2),
+          padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
           child: Text(
             min,
             style: const TextStyle(
                 fontSize: 18.0,
-                color: Colors.black,
+                color: colorPrimary,
                 fontWeight: FontWeight.w600),
           ),
         ),
@@ -56,12 +56,12 @@ class HMSRowView extends StatelessWidget {
         ),
         Container(
           color: Colors.white,
-          padding: EdgeInsets.symmetric(horizontal: 3, vertical: 2),
+          padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
           child: Text(
             sec,
             style: const TextStyle(
                 fontSize: 18.0,
-                color: Colors.black,
+                color: colorPrimary,
                 fontWeight: FontWeight.w600),
           ),
         ),

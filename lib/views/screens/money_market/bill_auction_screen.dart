@@ -84,7 +84,7 @@ class _BillAuctionScreenState extends State<BillAuctionScreen> {
                   TextButton(
                     onPressed: () {
                       popBack(context: context);
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (co) => const MoneyMarketScreen()));
+                      popBack(context: context);
                     },
                     child: const Text(
                       'OK',
@@ -143,13 +143,10 @@ class _BillAuctionScreenState extends State<BillAuctionScreen> {
     _auctionRuleBloc.getAuctionRule(data: map);
   }
 
-  void requestAuctionRule() async {
-    String? fcmToken = await FirebaseMessaging.instance.getToken();
-    print('FCM Token: $fcmToken');
+  void requestAuctionRule() {
     Map<String, dynamic> map = {
       'agress': 1,
       'auctionID': widget.auctionId,
-      'fcm_token': fcmToken,
     };
     _auctionInstBloc.requestAuctionInst(data: map);
     setState(() {

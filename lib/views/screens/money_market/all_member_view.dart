@@ -2,23 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:nathan_app/bloc/money_market/auction_detail_bloc.dart';
 import 'package:nathan_app/bloc/money_market/auction_leave_bloc.dart';
-import 'package:nathan_app/extensions/navigation_extensions.dart';
-import 'package:nathan_app/objects/money_market/Auction_rule_ob.dart';
 import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/custom/snack_bar.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../bloc/money_market/auction_insterest_bloc.dart';
-import '../../../bloc/money_market/auction_rule_bloc.dart';
 import '../../../helpers/response_ob.dart';
-import '../../../helpers/shared_pref.dart';
 import '../../../objects/money_market/auction_detail_ob.dart';
 import '../../../widgets/app_bar_title_view.dart';
-import '../../../widgets/long_button_view.dart';
 import '../../../widgets/nathan_text_view.dart';
-import 'agree_selection_view.dart';
-import 'auction_round/auction_round_view.dart';
-import 'money_market_screen.dart';
 
 class AllMemberView extends StatefulWidget {
   final int auctionId;

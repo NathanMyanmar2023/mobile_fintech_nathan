@@ -11,7 +11,11 @@ class AuctionRoundMonthlyBidBloc extends BaseNetwork {
   getRoundMonthlyBid(int roundID) {
     getReq("$ROUND_MONTHLY_PAY$roundID", onDataCallBack: (ResponseOb resp) {
       if (resp.success == true) {
-        resp.data = AuctionRoundMonthlyBidOb.fromJson(resp.data);
+        if(resp.message == "Sorry, there are no one users") {
+          print("NO user");
+        } else {
+          resp.data = AuctionRoundMonthlyBidOb.fromJson(resp.data);
+        }
       }
       auctionRoundMonthlyController.sink.add(resp);
     }, errorCallBack: (ResponseOb resp) {
