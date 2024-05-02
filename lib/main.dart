@@ -31,9 +31,17 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  List<String> testDeviceIds = [_deviceToken];
-  RequestConfiguration configuration = RequestConfiguration(testDeviceIds: testDeviceIds);
-  await MobileAds.instance.updateRequestConfiguration(configuration);
+  await MobileAds.instance.initialize();
+  // thing to add
+  List<String> testDeviceIds = ["6CB9DF638CDF0411C30830373D9580A0"];
+  RequestConfiguration configuration =
+  RequestConfiguration(testDeviceIds: testDeviceIds);
+  MobileAds.instance.updateRequestConfiguration(configuration);
+
+  // List<String> testDeviceIds = [_deviceToken];
+  // RequestConfiguration configuration = RequestConfiguration(testDeviceIds: testDeviceIds);
+  // await MobileAds.instance.updateRequestConfiguration(configuration);
+
   AppLanguageViewModel appLanguage = AppLanguageViewModel();
   await appLanguage.fetchLocale();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])

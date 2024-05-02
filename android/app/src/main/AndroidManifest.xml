@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.fintech.app.nathan">
     <uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -16,6 +17,9 @@
             android:name="com.google.android.gms.ads.AD_MANAGER_APP"
             android:value="true" />
         <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/notification_icon" />
         <meta-data
@@ -25,11 +29,6 @@
             android:name="com.dexterous.flutterlocalnotifications.ForegroundService"
             android:exported="false"
             android:stopWithTask="false"/>
-        <receiver android:name="androidx.media.session.MediaButtonReceiver" >
-            <intent-filter>
-                <action android:name="android.intent.action.MEDIA_BUTTON" />
-            </intent-filter>
-        </receiver>
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -64,6 +63,6 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~9214589741"/> <!--Sample AdMob app ID -->
+            android:value="ca-app-pub-8463236560007525~2207847350"/> <!-- AdMob app ID -->
     </application>
 </manifest>
