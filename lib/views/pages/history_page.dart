@@ -16,6 +16,7 @@ import 'package:nathan_app/views/screens/main_screen.dart';
 import 'package:nathan_app/views/widgets/select_history_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../screens/history/promotion_history/promotion_history_screen.dart';
 import '../screens/history/shopping_network_history/shopping_network_history_screen.dart';
 
 class HistoryPage extends StatefulWidget {
@@ -60,6 +61,11 @@ class _HistoryPageState extends State<HistoryPage> {
                 target_page: const InvestmentHistoryScreen(),
                 history_name: AppLocalizations.of(context)!.investment_history,
                 history_icon: Icons.account_balance_outlined,
+              ),
+              SelectHistoryWidget(
+                target_page: const PromotionHistoryScreen(),
+                history_name: AppLocalizations.of(context)!.promotion_history,
+                history_icon: Icons.discount,
               ),
               const SizedBox(
                 width: 10,

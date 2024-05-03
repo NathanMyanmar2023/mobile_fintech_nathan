@@ -18,6 +18,7 @@ import '../../../widgets/app_bar_title_view.dart';
 import '../../../widgets/long_button_view.dart';
 import '../../../widgets/nathan_text_view.dart';
 import 'all_member_view.dart';
+import 'auction_round/end_bid_round_screen.dart';
 import 'auction_round/owner_round_detail_screen.dart';
 import 'auction_round/round_detail_screen.dart';
 import 'auction_round/start_round_detail_screen.dart';
@@ -284,7 +285,7 @@ class _AuctionGroupScreenState extends State<AuctionGroupScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const NathanTextView(
-                              text: "New All Round Bid",
+                              text: "All Round Bid",
                               fontWeight: FontWeight.w600,
                               color: colorPrimary,
                               fontSize: 20,),
@@ -339,7 +340,7 @@ class AuctionRoundView extends StatelessWidget {
         padding: EdgeInsets.zero, // padding around the grid
         itemCount: auctionRoundList.length, // total number of items
         itemBuilder: (context, index) {
-          return auctionRoundList[index].userId == 0 ? const SizedBox() : GestureDetector(
+          return auctionRoundList[index].statusMessage == "Pending" ? const SizedBox() : GestureDetector(
             onTap: (){
               auctionRoundList[index].userId != null ? print("can't go") : Navigator.push(context, MaterialPageRoute(builder: (co) =>
               // auctionRoundList[index].userId != null ? OwnerRoundDetailScreen(
@@ -349,6 +350,7 @@ class AuctionRoundView extends StatelessWidget {
               //   estimateAmt: auctionRoundList[index].baseAmount.toString(),
               //    winnerBidName: auctionRoundList[index].userinfo.username,
               // ) :
+              auctionRoundList[index].roundBidStop == 1 ? DoneBidRoundScreen(roundId: auctionRoundList[index].id, roundName: auctionRoundList[index].roundNumber,) :
               StartRoundDetailScreen(roundId: auctionRoundList[index].id, roundNumber: auctionRoundList[index].roundNumber,
                 baseAmount: auctionRoundList[index].baseAmount.toString(),
               ),
@@ -368,7 +370,7 @@ class AuctionRoundView extends StatelessWidget {
                       "${auctionRoundList[index].roundNumber}",
                       style: const TextStyle(fontSize: 18.0, color: Colors.white, fontWeight: FontWeight.w600),
                     ),
-                    Text(
+                    auctionRoundList[index].userId == null ? const SizedBox() : Text(
                       "Bid Price - ${auctionRoundList[index].realAmount}",
                       style: const TextStyle(fontSize: 14.0, color: Colors.white, fontWeight: FontWeight.w600),
                     ),
@@ -383,7 +385,7 @@ class AuctionRoundView extends StatelessWidget {
                           style: const TextStyle(fontSize: 15.0, color: Colors.white,fontWeight: FontWeight.w600),
                         ),
                         Text(
-                          auctionRoundList[index].userId == null ? "" : "${auctionRoundList[index].userinfo.username ?? "Tun Tun"}",
+                          auctionRoundList[index].userId == null ? "" : "${auctionRoundList[index].userinfo.username ?? ""}",
                           style: const TextStyle(fontSize: 18.0, color: colorPrimary,fontWeight: FontWeight.w600),
                         ),
                       ],

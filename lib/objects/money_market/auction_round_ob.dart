@@ -36,6 +36,9 @@ class RoundData {
     this.id,
     this.roundNumber,
     this.userId,
+    this.statusMessage,
+    this.statusCode,
+    this.roundBidStop,
     this.userinfo,
     this.auctionId,
     this.baseAmount,
@@ -51,6 +54,9 @@ class RoundData {
     id = json['id'];
     roundNumber = json['roundNumber'];
     userId = json['user_id'];
+    statusMessage = json['status_message'];
+    statusCode = json['status_code'];
+    roundBidStop = json['round_bid_stop'];
     userinfo = json['userinfo'] != null ? Userinfo.fromJson(json['userinfo']) : null;
     auctionId = json['auction_id'];
     baseAmount = json['base_amount'];
@@ -65,6 +71,9 @@ class RoundData {
   int? id;
   String? roundNumber;
   int? userId;
+  String? statusMessage;
+  int? statusCode;
+  int? roundBidStop;
   Userinfo? userinfo;
   int? auctionId;
   int? baseAmount;
@@ -81,6 +90,9 @@ class RoundData {
     map['id'] = id;
     map['roundNumber'] = roundNumber;
     map['user_id'] = userId;
+    map['status_message'] = statusMessage;
+    map['status_code'] = statusCode;
+    map['round_bid_stop'] = roundBidStop;
     if (userinfo != null) {
       map['userinfo'] = userinfo?.toJson();
     }

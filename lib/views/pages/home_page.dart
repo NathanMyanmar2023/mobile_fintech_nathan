@@ -13,6 +13,7 @@ import 'package:nathan_app/views/screens/exchange/exchange_screen.dart';
 import 'package:nathan_app/views/screens/investment/select_investment_screen.dart';
 import 'package:nathan_app/views/screens/kyc/kyc_screen.dart';
 import 'package:nathan_app/views/screens/main_screen.dart';
+import 'package:nathan_app/views/screens/money_market/test_gift_card.dart';
 import 'package:nathan_app/views/screens/money_market/test_money_screen.dart';
 import 'package:nathan_app/views/screens/transfer/transfer_screen.dart';
 import 'package:nathan_app/views/screens/welcome_screen.dart';
@@ -41,7 +42,6 @@ class _HomePageState extends State<HomePage>
   //final NotificationSetup _noti = NotificationSetup();
 
   final _messagingService = MessagingService();
-
 
   //wallet card controller
   final _wallet_card_controller = PageController();
@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage>
 
     _messagingService.init(context);
     _messagingService.initializeNotification(context);
-    
+
     // TODO: implement initState
     super.initState();
     _wallets_stream = _wallets_bloc.walletsStream();
@@ -115,7 +115,8 @@ class _HomePageState extends State<HomePage>
             setState(() {
               MainScreen.kyc_message = resp.data.data.kyc_message;
             });
-          }});
+          }
+        });
       } else {
         print("error");
       }
@@ -476,8 +477,8 @@ class _HomePageState extends State<HomePage>
                           Icons.card_giftcard,
                           color: colorWhite,
                         ),
-                        menu_name: "Gift card",
-                        target_page: TestMoneyMarketScreen(),
+                        menu_name: "Gift Card",
+                        target_page: TestGiftCard(),
                       ),
                     ],
                   ),
@@ -495,20 +496,22 @@ class _HomePageState extends State<HomePage>
                           color: colorWhite,
                         ),
                         menu_name: AppLocalizations.of(context)!.top_up,
-                        target_page:  const TopUpScreen(),
+                        target_page: const TopUpScreen(),
                       ),
                       const SizedBox(
                         width: 10,
                       ),
                       const MainMenuButtonWidget(
-                        menu_icon:  Icon(
+                        menu_icon: Icon(
                           Linecons.shop,
                           color: colorWhite,
                         ),
                         menu_name: "Money Market",
                         target_page: MoneyMarketScreen(),
                       ),
-                      const SizedBox(width: 10,),
+                      const SizedBox(
+                        width: 10,
+                      ),
                       Expanded(
                         flex: 2,
                         child: AspectRatio(

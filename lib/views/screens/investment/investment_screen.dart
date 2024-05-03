@@ -13,6 +13,11 @@ class InvestmentScreen extends StatefulWidget {
   final int investmentPlanId;
   final String investmentType;
   final String second_wallet_balance;
+  final String promotionName;
+  final String promotionAmt;
+  final String promotionStartDate;
+  final String promotionEndDate;
+  final bool isPromotion;
   final int percentage;
 
   const InvestmentScreen({
@@ -22,6 +27,11 @@ class InvestmentScreen extends StatefulWidget {
     required this.investmentPlanId,
     required this.investmentType,
     required this.percentage,
+    required this.promotionName,
+    required this.promotionAmt,
+    required this.promotionStartDate,
+    required this.promotionEndDate,
+    this.isPromotion = false,
   });
 
   @override
@@ -145,6 +155,87 @@ class _InvestmentScreenState extends State<InvestmentScreen> {
                     ),
                   ],
                 ),
+                widget.isPromotion ? Container(
+                  margin: const EdgeInsets.only(top: 15),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 15,
+                    horizontal: 15,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: colorPrimary),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                       Row(
+                         crossAxisAlignment: CrossAxisAlignment.center,
+                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                       children: [
+                          const Row(
+                            children: [
+                               Icon(
+                                Icons.discount,
+                                color: colorPrimary,
+                              ),
+                               SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                "Promotion",
+                                style:  TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                         Text(
+                           widget.promotionAmt,
+                           style: const TextStyle(
+                             fontSize: 18,
+                             color: colorPrimary,
+                             fontWeight: FontWeight.bold,
+                           ),),
+                       ],
+                     ),
+                       Padding(
+                         padding: const EdgeInsets.only(left: 10, top: 10),
+                         child: Text(
+                          widget.promotionName,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),),
+                       ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10, top: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Duration Date",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              "${widget.promotionStartDate} to ${widget.promotionEndDate}",
+                              style: const TextStyle(
+                                fontSize: 16,
+                                color: colorPrimary,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ) : const SizedBox(),
                 const SizedBox(
                   height: 20,
                 ),
