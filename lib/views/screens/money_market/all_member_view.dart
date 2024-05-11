@@ -8,6 +8,7 @@ import '../../../helpers/response_ob.dart';
 import '../../../objects/money_market/auction_detail_ob.dart';
 import '../../../widgets/app_bar_title_view.dart';
 import '../../../widgets/nathan_text_view.dart';
+import '../../Ads_banner/ads_banner_widget.dart';
 
 class AllMemberView extends StatefulWidget {
   final int auctionId;
@@ -101,6 +102,7 @@ class _AllMemberViewState extends State<AllMemberView> {
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Column(
                 children: [
+                  const AdsBannerWidget(),
                   Expanded(
                     child: SingleChildScrollView(
                       child:  ListView.builder(

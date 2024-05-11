@@ -12,8 +12,7 @@ import '../../../objects/shopping/category_view_ob.dart';
 import '../../../resources/colors.dart';
 import '../../../widgets/app_bar_title_view.dart';
 import '../../../widgets/nathan_text_view.dart';
-import '../../Ads_test/ad_helper.dart';
-import '../../Ads_test/test_ads_view.dart';
+import '../../Ads_banner/ad_helper.dart';
 import 'brands_screen.dart';
 
 class CategoryScreen extends StatefulWidget {
@@ -159,17 +158,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
     );
   }
 
-  Widget bannerAdWidget() {
-    return StatefulBuilder(
-      builder: (context, setState) => Container(
-        child: AdWidget(ad: _bannerAd),
-        width: _bannerAd.size.width.toDouble(),
-        height: 100.0,
-        alignment: Alignment.center,
-      ),
-    );
-  }
-
   Widget getAd() {
     BannerAdListener bannerAdListener = BannerAdListener(
         onAdWillDismissScreen: (ad){
@@ -185,7 +173,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
     );
     bannerAd.load();
     return SizedBox(
-      height: 100,
+      height: 60,
       child: AdWidget(ad: bannerAd,),
     );
   }

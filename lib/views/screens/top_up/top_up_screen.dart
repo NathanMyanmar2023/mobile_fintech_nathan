@@ -18,6 +18,7 @@ import '../../../resources/constants.dart';
 import '../../../widgets/app_bar_title_view.dart';
 import '../../../widgets/long_button_view.dart';
 import '../../../widgets/text_field_with_label_view.dart';
+import '../../Ads_banner/ads_banner_widget.dart';
 import '../../widgets/error_alert_widget.dart';
 import 'custom_amout_widget.dart';
 
@@ -206,6 +207,7 @@ class _TopUpScreenState extends State<TopUpScreen> {
                     const SizedBox(
                       height: 20,
                     ),
+                    const AdsBannerWidget(paddingTop: 0),
                     const Text(
                       "Air Time Top-Up",
                       style: TextStyle(

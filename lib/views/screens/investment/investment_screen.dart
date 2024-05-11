@@ -17,6 +17,8 @@ class InvestmentScreen extends StatefulWidget {
   final String promotionAmt;
   final String promotionStartDate;
   final String promotionEndDate;
+  final int promotionMinInve;
+  final String promotionNetworkAmt;
   final bool isPromotion;
   final int percentage;
 
@@ -31,6 +33,8 @@ class InvestmentScreen extends StatefulWidget {
     required this.promotionAmt,
     required this.promotionStartDate,
     required this.promotionEndDate,
+    required this.promotionMinInve,
+    required this.promotionNetworkAmt,
     this.isPromotion = false,
   });
 
@@ -210,7 +214,61 @@ class _InvestmentScreenState extends State<InvestmentScreen> {
                           ),),
                        ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 10, top: 10),
+                        padding: const EdgeInsets.only(left: 10, top: 8),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Min Investment Amount",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 5),
+                              child: Text(
+                                " - ${widget.promotionMinInve} USD",
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  color: colorPrimary,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10, top: 5),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Network Percentage",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 5),
+                              child: Text(
+                                " - ${widget.promotionNetworkAmt}",
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  color: colorPrimary,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10, top: 5),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -225,7 +283,7 @@ class _InvestmentScreenState extends State<InvestmentScreen> {
                             Text(
                               "${widget.promotionStartDate} to ${widget.promotionEndDate}",
                               style: const TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                                 color: colorPrimary,
                                 fontWeight: FontWeight.bold,
                               ),

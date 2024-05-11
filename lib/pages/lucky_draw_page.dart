@@ -12,6 +12,7 @@ import 'package:nathan_app/resources/constants.dart';
 import 'package:nathan_app/widgets/long_button_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../views/Ads_banner/ads_banner_widget.dart';
 import '../widgets/app_bar_title_view.dart';
 
 class LuckyDrawPage extends StatefulWidget {
@@ -57,6 +58,7 @@ class _LuckyDrawPageState extends State<LuckyDrawPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            const AdsBannerWidget(paddingTop: 0, paddingbottom: 0,),
             Container(
               margin: const EdgeInsets.all(12),
               child: Row(

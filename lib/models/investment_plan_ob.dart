@@ -79,6 +79,8 @@ class Promotion {
     this.isAvailable,
     this.name,
     this.amount,
+    this.minInvestAmount,
+    this.networkPercentage,
     this.startDate,
     this.endDate,});
 
@@ -87,6 +89,8 @@ class Promotion {
     isAvailable = json['is_available'];
     name = json['name'];
     amount = json['amount'];
+    minInvestAmount = json['min_invest_amount'];
+    networkPercentage = json['network_percentage'];
     startDate = json['start_date'];
     endDate = json['end_date'];
   }
@@ -94,6 +98,8 @@ class Promotion {
   bool? isAvailable;
   String? name;
   String? amount;
+  int? minInvestAmount;
+  String? networkPercentage;
   String? startDate;
   String? endDate;
 
@@ -103,6 +109,8 @@ class Promotion {
     map['is_available'] = isAvailable;
     map['name'] = name;
     map['amount'] = amount;
+    map['min_invest_amount'] = minInvestAmount;
+    map['network_percentage'] = networkPercentage;
     map['start_date'] = startDate;
     map['end_date'] = endDate;
     return map;

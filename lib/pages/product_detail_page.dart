@@ -8,6 +8,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../bloc/add_to_cart_bloc.dart';
 import '../resources/colors.dart';
+import '../views/Ads_banner/ads_banner_widget.dart';
 import '../widgets/long_button_view.dart';
 import 'cart_page.dart';
 
@@ -218,9 +219,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     ),
                   ) : const SizedBox(),
                   const SizedBox(height: 16),
+                   const Center(child: AdsBannerWidget(paddingTop: 0,)),
                    Text(
                      AppLocalizations.of(context)!.product_detail,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
 import '../../../widgets/app_bar_title_view.dart';
+import '../../Ads_banner/ads_banner_widget.dart';
 
 class TestGiftCard extends StatefulWidget {
 
@@ -60,6 +61,7 @@ class _TestGiftCardState extends State<TestGiftCard> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    AdsBannerWidget(paddingTop: 0, paddingbottom: 0,),
                     SizedBox(height: 30,),
                     Center(child: Text("Under pending status")),
                   ],

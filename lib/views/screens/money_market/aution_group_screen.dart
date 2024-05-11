@@ -17,6 +17,7 @@ import '../../../objects/money_market/auction_detail_ob.dart';
 import '../../../widgets/app_bar_title_view.dart';
 import '../../../widgets/long_button_view.dart';
 import '../../../widgets/nathan_text_view.dart';
+import '../../Ads_banner/ads_banner_widget.dart';
 import 'all_member_view.dart';
 import 'auction_round/end_bid_round_screen.dart';
 import 'auction_round/owner_round_detail_screen.dart';
@@ -278,6 +279,7 @@ class _AuctionGroupScreenState extends State<AuctionGroupScreen> {
                         ),
                       ) : const SizedBox(),
                       const Divider(height: 10,),
+                      const AdsBannerWidget(),
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: leftUser > 0 ? 0 : 10),
                         child: Row(

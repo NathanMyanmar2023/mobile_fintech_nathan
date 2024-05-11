@@ -17,6 +17,7 @@ import '../../../objects/money_market/auction_detail_ob.dart';
 import '../../../widgets/app_bar_title_view.dart';
 import '../../../widgets/long_button_view.dart';
 import '../../../widgets/nathan_text_view.dart';
+import '../../Ads_banner/ads_banner_widget.dart';
 import 'all_member_view.dart';
 import 'auction_round/owner_round_detail_screen.dart';
 import 'auction_round/round_detail_screen.dart';
@@ -264,6 +265,7 @@ int? userId = 0;
                           ),
                         ) : const SizedBox(),
                         const Divider(height: 10,),
+                        const AdsBannerWidget(),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nathan_app/resources/colors.dart';
 
 class PromotionHistoryWidget extends StatelessWidget {
   final String id;
@@ -40,7 +41,7 @@ class PromotionHistoryWidget extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Colors.green.shade50,
+                    color: colorPrimary.withOpacity(0.2),
                   ),
                   padding: EdgeInsets.zero,
                   child: const SizedBox(
@@ -49,7 +50,7 @@ class PromotionHistoryWidget extends StatelessWidget {
                     child: Center(
                       child: Icon(
                         Icons.discount,
-                        color: Colors.green,
+                        color: colorPrimary,
                       ),
                     ),
                   ),

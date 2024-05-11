@@ -90,13 +90,12 @@
 // class NotificationController {
 // }
 
-
-
 import 'dart:developer';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:nathan_app/resources/colors.dart';
 
 class MessagingService {
   static String? fcmToken; // Variable to store the FCM token
@@ -109,23 +108,25 @@ class MessagingService {
 
   final FirebaseMessaging _fcm = FirebaseMessaging.instance;
 
-    Future<void> initializeNotification(BuildContext context) async {
+  Future<void> initializeNotification(BuildContext context) async {
     AwesomeNotifications().initialize('resource://drawable/notification_icon', [
-      NotificationChannel(channelKey: "high_importace_channel", channelName: "channelName", channelDescription: "channelDescription",
+      NotificationChannel(
+        channelKey: "sound_channel", channelName: "Notifications",
+        channelDescription: "Fintech Nathan",
         importance: NotificationImportance.High,
         vibrationPattern: highVibrationPattern,
         channelShowBadge: true,
-        criticalAlerts: true,
+        // criticalAlerts: true,
         playSound: true,
         onlyAlertOnce: true,
         defaultPrivacy: NotificationPrivacy.Private,
-        defaultColor: Colors.blue,
-        ledColor: Colors.blue,
+        defaultColor: colorPrimary,
+        ledColor: colorPrimary,
         icon: "resource://drawable/notification_icon",
       ),
     ]);
     AwesomeNotifications().isNotificationAllowed().then((isAllow) {
-      if(!isAllow) {
+      if (!isAllow) {
         AwesomeNotifications().requestPermissionToSendNotifications();
       }
     });
@@ -157,56 +158,19 @@ class MessagingService {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       debugPrint('Got a message whilst in the foreground!');
       debugPrint('Message data: ${message.notification!.title.toString()}');
-      
-        if(message.notification != null){
-          createOrderNotifications(
-            title: message.notification!.title,
-            body: message.notification!.body,
-          );
-          // Handling a notification click event when the app is in the background
-          FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-            debugPrint(
-                'onMessageOpenedApp: ${message.notification!.title.toString()}');
-            _handleNotificationClick(context, message);
-          });
-        }
-      // if (message.notification != null) {
-      //   if (message.notification!.title != null &&
-      //       message.notification!.body != null) {
-      //     final notificationData = message.data;
-      //
-      //     final screen = notificationData['screen'];
-      //
-      //     // Showing an alert dialog when a notification is received (Foreground state)
-      //     showDialog(
-      //       context: context,
-      //       barrierDismissible: false,
-      //       builder: (BuildContext context) {
-      //         return WillPopScope(
-      //           onWillPop: () async => false,
-      //           child: AlertDialog(
-      //             title: Text(message.notification!.title!),
-      //             content: Text(message.notification!.body!),
-      //             actions: [
-      //               if (notificationData.containsKey('screen'))
-      //                 TextButton(
-      //                   onPressed: () {
-      //                     Navigator.pop(context);
-      //                     Navigator.of(context).pushNamed(screen);
-      //                   },
-      //                   child: const Text('Open Screen'),
-      //                 ),
-      //               TextButton(
-      //                 onPressed: () => Navigator.of(context).pop(),
-      //                 child: const Text('Dismiss'),
-      //               ),
-      //             ],
-      //           ),
-      //         );
-      //       },
-      //     );
-      //   }
-      // }
+
+      if (message.notification != null) {
+        createOrderNotifications(
+          title: message.notification!.title,
+          body: message.notification!.body,
+        );
+        // Handling a notification click event when the app is in the background
+        FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+          debugPrint(
+              'onMessageOpenedApp: ${message.notification!.title.toString()}');
+          _handleNotificationClick(context, message);
+        });
+      }
     });
 
     // Handling the initial message received when the app is launched from dead (killed state)
@@ -218,19 +182,27 @@ class MessagingService {
         _handleNotificationClick(context, message);
       }
     });
-
   }
   //   void eventListenerCallback(BuildContext context) {
 //     AwesomeNotifications().setListeners(onActionReceivedMethod: onActionReceivedMethod);
 //   }
 
   Future<void> createOrderNotifications({String? title, String? body}) async {
-    await AwesomeNotifications().createNotification(content: NotificationContent(id: 0, channelKey: 'high_importace_channel', title: title, body: body,));
+    await AwesomeNotifications().createNotification(
+        content: NotificationContent(
+      id: 0,
+      channelKey: 'sound_channel',
+      title: title,
+      body: body,
+      notificationLayout: NotificationLayout.BigPicture,
+      bigPicture: 'images/nathan.png',
+    ));
   }
+
   // Handling a notification click event by navigating to the specified screen
   void _handleNotificationClick(BuildContext context, RemoteMessage message) {
     final notificationData = message.data;
-print("notiit Dat $notificationData");
+    print("notiit Dat $notificationData");
     // if (notificationData.containsKey('screen')) {
     //   final screen = notificationData['screen'];
     //   Navigator.of(context).pushNamed(screen);
@@ -245,7 +217,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // make sure you call `initializeApp` before using other Firebase services.
   debugPrint('Handling a background message: ${message.notification!.title}');
   if (message.notification != null) {
-    //No need for showing Notification manually. 
+    //No need for showing Notification manually.
     //For BackgroundMessages: Firebase automatically sends a Notification.
     //If you call the flutterLocalNotificationsPlugin.show()-Methode for
     //example the Notification will be displayed twice.

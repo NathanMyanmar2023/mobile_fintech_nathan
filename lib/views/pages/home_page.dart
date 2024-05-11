@@ -22,6 +22,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../bloc/user_info_bloc.dart';
 import '../../helpers/shared_pref.dart';
+import '../Ads_banner/ads_banner_widget.dart';
 import '../notification/notification_setup.dart';
 import '../screens/money_market/money_market_screen.dart';
 import '../screens/shopping/category_screen.dart';
@@ -342,7 +343,11 @@ class _HomePageState extends State<HomePage>
                   ),
                 ),
                 const SizedBox(
-                  height: 30,
+                  height: 15,
+                ),
+                const AdsBannerWidget(paddingTop: 0, paddingbottom: 0,),
+                const SizedBox(
+                  height: 15,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -491,7 +496,7 @@ class _HomePageState extends State<HomePage>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       MainMenuButtonWidget(
-                        menu_icon: Icon(
+                        menu_icon: const Icon(
                           Icons.topic,
                           color: colorWhite,
                         ),

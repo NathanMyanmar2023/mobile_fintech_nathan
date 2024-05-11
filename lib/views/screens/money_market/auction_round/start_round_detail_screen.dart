@@ -15,12 +15,18 @@ import '../../../../objects/money_market/auction_round_monthly_bid_ob.dart';
 import '../../../../widgets/app_bar_title_view.dart';
 import '../../../../widgets/long_button_view.dart';
 import '../../../../widgets/nathan_text_view.dart';
+import 'end_bid_round_screen.dart';
 
 class StartRoundDetailScreen extends StatefulWidget {
   final int roundId;
   final String roundNumber;
   final String baseAmount;
-  const StartRoundDetailScreen({Key? key, required this.roundId, required this.roundNumber, required this.baseAmount}) : super(key: key);
+  const StartRoundDetailScreen(
+      {Key? key,
+      required this.roundId,
+      required this.roundNumber,
+      required this.baseAmount})
+      : super(key: key);
 
   @override
   State<StartRoundDetailScreen> createState() => _StartRoundDetailScreenState();
@@ -35,11 +41,11 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
 
   var ticketTec = TextEditingController();
 
-
   final _roundMonthlyBidBloc = AuctionRoundMonthlyBidBloc();
   late Stream<ResponseOb> _roundMonthlyBidStream;
   List<BidUsersLists> bidUsersLists = [];
 
+  int roundBidStop = 0;
   String lastBidAmount = "";
   String lastBidUsername = "";
   String bidStarTime = "";
@@ -57,22 +63,40 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
   @override
   void initState() {
     super.initState();
-    autoRefersh = Timer.periodic(const Duration(seconds: 10), (Timer t) => _roundMonthlyBidBloc.getRoundMonthlyBid(widget.roundId));
+    autoRefersh = Timer.periodic(const Duration(seconds: 10),
+        (Timer t) => _roundMonthlyBidBloc.getRoundMonthlyBid(widget.roundId));
 
     // get round bid history
     _roundMonthlyBidStream = _roundMonthlyBidBloc.auctionRoundMonthlyStream();
     _roundMonthlyBidStream.listen((ResponseOb resp) {
       if (resp.success) {
-        if(resp.message == "Sorry, there are no one users") {
+        if (resp.message == "Sorry, there are no one users") {
           setState(() {
             noOneUserPage = true;
           });
         } else {
           setState(() {
+            roundBidStop = resp.data.data.roundBidStop ?? 0;
             lastBidAmount = resp.data.data.lastBidUser.amount ?? "0";
             bitstandardAmount = resp.data.data.bitstandardAmount ?? "0";
             bidStarTime = resp.data.data.bitStartime ?? "0";
-            bidUsersLists = (resp.data as AuctionRoundMonthlyBidOb).data!.bidUsersLists ?? [];
+            bidUsersLists =
+                (resp.data as AuctionRoundMonthlyBidOb).data!.bidUsersLists ??
+                    [];
+
+            if (roundBidStop == 1) {
+              setState(() {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (co) => DoneBidRoundScreen(
+                      roundId: widget.roundId,
+                      roundName: widget.roundNumber,
+                    ),
+                  ),
+                );
+              });
+            }
           });
         }
       } else {}
@@ -80,7 +104,8 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
     _roundMonthlyBidBloc.getRoundMonthlyBid(widget.roundId);
 
 // request new bid
-    _requestRoundMonthlyBidStream = _requestRoundMonthlyBidBloc.requestAuctionRoundMonthlyStream();
+    _requestRoundMonthlyBidStream =
+        _requestRoundMonthlyBidBloc.requestAuctionRoundMonthlyStream();
     _requestRoundMonthlyBidStream.listen((ResponseOb resp) {
       if (resp.message == "Success") {
         setState(() {
@@ -108,13 +133,15 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
                   TextButton(
                     onPressed: () {
                       popBack(context: context);
-                      if(resp.message.toString() == "Sorry, there are not have other one bid user") {
+                      if (resp.message.toString() ==
+                          "Sorry, there are not have other one bid user") {
                         setState(() {
                           startTimer();
                         });
-                      }else {
+                      } else {
                         setState(() {
-                          _roundMonthlyBidBloc.getRoundMonthlyBid(widget.roundId);
+                          _roundMonthlyBidBloc
+                              .getRoundMonthlyBid(widget.roundId);
                         });
                       }
                     },
@@ -131,7 +158,8 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
       }
     });
   }
- bool finalCount = false;
+
+  bool finalCount = false;
 
   Timer? _waittimer;
   int _start = 10;
@@ -141,9 +169,10 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
     String? accountId = await SharedPref.getData(key: SharedPref.accountId);
     int userId = int.parse(accountId!);
     print("usood $userId & ${userId.runtimeType}");
-    print("bidUsersLists.last.userId ${bidUsersLists.first.userId} & ${bidUsersLists.last.userId.runtimeType}");
+    print(
+        "bidUsersLists.last.userId ${bidUsersLists.first.userId} & ${bidUsersLists.last.userId.runtimeType}");
     print("acccu $accountId");
-    if(bidUsersLists.first.userId == userId) {
+    if (bidUsersLists.first.userId == userId) {
       print("samme");
       setState(() {
         _start = 10;
@@ -151,7 +180,7 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
         const oneSec = Duration(seconds: 1);
         _waittimer = Timer.periodic(
           oneSec,
-              (Timer timer) {
+          (Timer timer) {
             if (_start == 0) {
               setState(() {
                 timer.cancel();
@@ -168,7 +197,7 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
       });
     } else {
       setState(() {
-          finalCount = false;
+        finalCount = false;
         _roundMonthlyBidBloc.getRoundMonthlyBid(widget.roundId);
       });
       print("no same");
@@ -181,9 +210,10 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
     String? accountId = await SharedPref.getData(key: SharedPref.accountId);
     int userId = int.parse(accountId!);
     print("usood $userId & ${userId.runtimeType}");
-    print("bidUsersLists.last.userId ${bidUsersLists.first.userId} & ${bidUsersLists.last.userId.runtimeType}");
+    print(
+        "bidUsersLists.last.userId ${bidUsersLists.first.userId} & ${bidUsersLists.last.userId.runtimeType}");
     print("acccu $accountId");
-    if(bidUsersLists.first.userId == userId) {
+    if (bidUsersLists.first.userId == userId) {
       print("samme");
       setState(() {
         // request stop bid round
@@ -191,17 +221,19 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
         _bidStopStream = _bidStopBloc.bidStopStream();
         _bidStopStream.listen((ResponseOb resp) {
           if (resp.success) {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (co) =>
-                SuccessBidRoundScreen(
-                  roundId: widget.roundId,
-                  roundNumber: widget.roundNumber,
-                  baseAmount: widget.baseAmount,
-                  realAmount: bidUsersLists.first.amount.toString(),
-                  winnerBidName: bidUsersLists.first.username.toString(),
-                  bitStartime: bidStarTime,
-                  bidId: bidUsersLists.first.id!,
-                ),
-            ));
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (co) => SuccessBidRoundScreen(
+                    roundId: widget.roundId,
+                    roundNumber: widget.roundNumber,
+                    baseAmount: widget.baseAmount,
+                    realAmount: bidUsersLists.first.amount.toString(),
+                    winnerBidName: bidUsersLists.first.username.toString(),
+                    bitStartime: bidStarTime,
+                    bidId: bidUsersLists.first.id!,
+                  ),
+                ));
           } else {}
         });
       });
@@ -217,11 +249,13 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
     Map<String, dynamic> map = {
       'giveAmount': bidAmount,
     };
-    _requestRoundMonthlyBidBloc.requestRoundMonthlyBid(roundID: widget.roundId, data: map);
+    _requestRoundMonthlyBidBloc.requestRoundMonthlyBid(
+        roundID: widget.roundId, data: map);
     setState(() {
       startTimer();
     });
   }
+
   @override
   void dispose() {
     autoRefersh!.cancel();
@@ -236,7 +270,7 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
     const oneSec = Duration(seconds: 1);
     payTime = Timer.periodic(
       oneSec,
-          (Timer timer) {
+      (Timer timer) {
         print("start time $payStart");
         if (payStart == 0) {
           setState(() {
@@ -353,28 +387,33 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
                                     color: colorBlack,
                                     fontWeight: FontWeight.w600),
                               ),
-                              noOneUserPage ? const SizedBox() : finalCount ?
-                          Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  NathanTextView(
-                                    text: "Final Count Timer ",
-                                    fontSize: 16.sp,
-                                    color: colorBlack,
-                                  ),
-                                  NathanTextView(
-                                    text: "$_start",
-                                    fontSize: 18.sp,
-                                    color: Colors.red,
-                                  ),
-                                  NathanTextView(
-                                    text: " sec.",
-                                    fontSize: 16.sp,
-                                    color: colorBlack,
-                                  ),
-                                ],
-                              ) : const SizedBox(),
+                              noOneUserPage
+                                  ? const SizedBox()
+                                  : finalCount
+                                      ? Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            NathanTextView(
+                                              text: "Final Count Timer ",
+                                              fontSize: 16.sp,
+                                              color: colorBlack,
+                                            ),
+                                            NathanTextView(
+                                              text: "$_start",
+                                              fontSize: 18.sp,
+                                              color: Colors.red,
+                                            ),
+                                            NathanTextView(
+                                              text: " sec.",
+                                              fontSize: 16.sp,
+                                              color: colorBlack,
+                                            ),
+                                          ],
+                                        )
+                                      : const SizedBox(),
                             ],
                           ),
                         ),
@@ -386,7 +425,9 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: noOneUserPage ? MainAxisAlignment.center : MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: noOneUserPage
+                                ? MainAxisAlignment.center
+                                : MainAxisAlignment.spaceEvenly,
                             children: [
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -406,29 +447,34 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
                                   ),
                                 ],
                               ),
-                              noOneUserPage ? const SizedBox() : Container(
-                                height: 30,
-                                width: 2,
-                                color: colorSeconary,
-                              ),
-                              noOneUserPage ? const SizedBox() : Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  const NathanTextView(
-                                    text: "Lowest Bid",
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  NathanTextView(
-                                    text: lastBidAmount,
-                                    fontSize: 16,
-                                    color: colorPrimary,
-                                  ),
-                                ],
-                              ),
+                              noOneUserPage
+                                  ? const SizedBox()
+                                  : Container(
+                                      height: 30,
+                                      width: 2,
+                                      color: colorSeconary,
+                                    ),
+                              noOneUserPage
+                                  ? const SizedBox()
+                                  : Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        const NathanTextView(
+                                          text: "Lowest Bid",
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        NathanTextView(
+                                          text: lastBidAmount,
+                                          fontSize: 16,
+                                          color: colorPrimary,
+                                        ),
+                                      ],
+                                    ),
                             ],
                           ),
                         ),
@@ -480,15 +526,17 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
                         //   ),
                         // ) : const SizedBox(),
                         const Padding(
-                           padding: EdgeInsets.symmetric(horizontal: 25),
-                           child: NathanTextView(
+                          padding: EdgeInsets.symmetric(horizontal: 25),
+                          child: NathanTextView(
                             text: "Last Bid",
                             fontSize: 18,
                             color: colorBlack,
                             fontWeight: FontWeight.w600,
-                           ),
-                         ),
-                        const SizedBox(height: 15,),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
                       ],
                     ),
                   ),
@@ -496,7 +544,9 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
                     child: Container(
                       decoration: BoxDecoration(
                         color: colorSeconary.withOpacity(0.2),
-                        borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(30),
+                            topRight: Radius.circular(30)),
                         border: Border.all(
                           width: 2,
                           color: colorPrimary,
@@ -504,29 +554,44 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
                         ),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 10, bottom: 20, left: 25, right: 25),
-                        child: bidUsersLists.isEmpty ? const Center(child: Text("No More Data"),) : ListView.builder(
-                          itemCount: bidUsersLists.length,
-                          shrinkWrap: true,
-                          itemBuilder: (BuildContext context, index) {
-                            return Container(
-                              padding: const EdgeInsets.all(10.0),
-                              margin: const EdgeInsets.symmetric(vertical: 5),
-                              decoration: BoxDecoration(
-                                color: topColors.withOpacity(0.4),
-                                borderRadius: BorderRadius.circular(5),
+                        padding: const EdgeInsets.only(
+                            top: 10, bottom: 20, left: 25, right: 25),
+                        child: bidUsersLists.isEmpty
+                            ? const Center(
+                                child: Text("No More Data"),
+                              )
+                            : ListView.builder(
+                                itemCount: bidUsersLists.length,
+                                shrinkWrap: true,
+                                itemBuilder: (BuildContext context, index) {
+                                  return Container(
+                                    padding: const EdgeInsets.all(10.0),
+                                    margin:
+                                        const EdgeInsets.symmetric(vertical: 5),
+                                    decoration: BoxDecoration(
+                                      color: topColors.withOpacity(0.4),
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                            child: NathanTextView(
+                                          text:
+                                              "${bidUsersLists[index].username}",
+                                        )),
+                                        NathanTextView(
+                                          text:
+                                              "${bidUsersLists[index].amount}",
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
                               ),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(child: NathanTextView(text: "${bidUsersLists[index].username}",)),
-                                  NathanTextView(text: "${bidUsersLists[index].amount}",),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
                       ),
                     ),
                   ),
@@ -557,26 +622,32 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 20,),
+                  const SizedBox(
+                    width: 20,
+                  ),
                   Expanded(
                     child: LongButtonView(
                         text: "Confirm",
                         onTap: () {
-                              if(ticketTec.text.isEmpty) {
-                                context.showSnack("Enter your Bid amount first!",
-                                  Colors.white,
-                                  Colors.red,
-                                  Icons.close,
-                                );
-                              } else {
-                                setState(() {
-                                  noOneUserPage = false;
-                                  requestPayBid(ticketTec.text);
-                                  ticketTec.clear();
-                                });
-                              }
-                        }
-                    ),
+                          FocusScopeNode currentFocus = FocusScope.of(context);
+                          if (!currentFocus.hasPrimaryFocus) {
+                            currentFocus.unfocus();
+                          }
+                          if (ticketTec.text.isEmpty) {
+                            context.showSnack(
+                              "Enter your Bid amount first!",
+                              Colors.white,
+                              Colors.red,
+                              Icons.close,
+                            );
+                          } else {
+                            setState(() {
+                              noOneUserPage = false;
+                              requestPayBid(ticketTec.text);
+                              ticketTec.clear();
+                            });
+                          }
+                        }),
                   ),
                 ],
               ),

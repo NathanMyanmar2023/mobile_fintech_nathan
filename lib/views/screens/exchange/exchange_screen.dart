@@ -12,6 +12,7 @@ import 'package:nathan_app/widgets/long_button_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../widgets/app_bar_title_view.dart';
+import '../../Ads_banner/ads_banner_widget.dart';
 
 class ExchangeScreen extends StatefulWidget {
   const ExchangeScreen({super.key});

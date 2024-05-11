@@ -1,13 +1,15 @@
 class AuctionRoundMonthlyBidOb {
   AuctionRoundMonthlyBidOb({
-      this.success, 
-      this.message, 
-      this.data,});
+    this.success,
+    this.message,
+    this.data,
+  });
 
   AuctionRoundMonthlyBidOb.fromJson(dynamic json) {
     success = json['success'];
     message = json['message'];
-    data = json['data'] != null ? RoundMonthlyData.fromJson(json['data']) : null;
+    data =
+        json['data'] != null ? RoundMonthlyData.fromJson(json['data']) : null;
   }
   bool? success;
   String? message;
@@ -26,14 +28,17 @@ class AuctionRoundMonthlyBidOb {
 
 class RoundMonthlyData {
   RoundMonthlyData({
+    this.roundBidStop,
     this.bitstandardAmount,
     this.bidAmountEndtime,
     this.bitStartime,
     this.bidUsersLists,
-    this.lastBidUser,});
+    this.lastBidUser,
+  });
 
   RoundMonthlyData.fromJson(dynamic json) {
-    bitstandardAmount =json['bitstandardAmount'];
+    roundBidStop = json['round_bid_stop'];
+    bitstandardAmount = json['bitstandardAmount'];
     bidAmountEndtime = json['bidAmountEndtime'];
     bitStartime = json['bitStartime'];
     if (json['bidUsersLists'] != null) {
@@ -42,8 +47,11 @@ class RoundMonthlyData {
         bidUsersLists?.add(BidUsersLists.fromJson(v));
       });
     }
-    lastBidUser = json['lastBidUser'] != null ? LastBidUser.fromJson(json['lastBidUser']) : null;
+    lastBidUser = json['lastBidUser'] != null
+        ? LastBidUser.fromJson(json['lastBidUser'])
+        : null;
   }
+  int? roundBidStop;
   dynamic bidAmountEndtime;
   String? bitstandardAmount;
   String? bitStartime;
@@ -52,6 +60,7 @@ class RoundMonthlyData {
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['round_bid_stop'] = roundBidStop;
     map['bitstandardAmount'] = bitstandardAmount;
     map['bidAmountEndtime'] = bidAmountEndtime;
     map['bitStartime'] = bitStartime;
@@ -64,13 +73,15 @@ class RoundMonthlyData {
     return map;
   }
 }
+
 class BidUsersLists {
   BidUsersLists({
     this.id,
     this.auctionMonthId,
     this.userId,
     this.amount,
-    this.username,});
+    this.username,
+  });
 
   BidUsersLists.fromJson(dynamic json) {
     id = json['id'];
@@ -94,7 +105,6 @@ class BidUsersLists {
     map['username'] = username;
     return map;
   }
-
 }
 
 class LastBidUser {
@@ -103,7 +113,8 @@ class LastBidUser {
     this.auctionMonthId,
     this.userId,
     this.amount,
-    this.username,});
+    this.username,
+  });
 
   LastBidUser.fromJson(dynamic json) {
     id = json['id'];
@@ -127,5 +138,4 @@ class LastBidUser {
     map['username'] = username;
     return map;
   }
-
 }

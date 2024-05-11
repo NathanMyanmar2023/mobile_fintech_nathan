@@ -10,6 +10,7 @@ import 'package:nathan_app/widgets/long_button_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../widgets/app_bar_title_view.dart';
+import '../../Ads_banner/ads_banner_widget.dart';
 
 class SelectInvestmentScreen extends StatefulWidget {
   final String second_wallet_balance;
@@ -332,6 +333,12 @@ class _SelectInvestmentScreenState extends State<SelectInvestmentScreen> {
                                   ? investmentPlanList[1]?.promotion?.endDate
                                   : investmentPlanList[0]?.promotion?.endDate) ??
                                   "-",
+                            promotionMinInve: (isSixMonth
+                                ? investmentPlanList[1]?.promotion?.minInvestAmount
+                                : investmentPlanList[0]?.promotion?.minInvestAmount) ?? 0,
+                            promotionNetworkAmt: (isSixMonth
+                                ? investmentPlanList[1]?.promotion?.networkPercentage
+                                : investmentPlanList[0]?.promotion?.networkPercentage) ?? "-",
                             isPromotion: (isSixMonth
                                 ? investmentPlanList[1]?.promotion?.isAvailable == true ? true : false
                                 : investmentPlanList[0]?.promotion?.isAvailable == true  ? true : false),
@@ -363,6 +370,12 @@ class _SelectInvestmentScreenState extends State<SelectInvestmentScreen> {
                                   ? investmentPlanList[1]?.promotion?.amount
                                   : investmentPlanList[0]?.promotion?.amount) ??
                                   "-",
+                            promotionMinInve: (isSixMonth
+                                ? investmentPlanList[1]?.promotion?.minInvestAmount
+                                : investmentPlanList[0]?.promotion?.minInvestAmount) ?? 0,
+                            promotionNetworkAmt: (isSixMonth
+                                ? investmentPlanList[1]?.promotion?.networkPercentage
+                                : investmentPlanList[0]?.promotion?.networkPercentage) ?? "-",
     promotionStartDate: (isSixMonth
                                   ? investmentPlanList[1]?.promotion?.startDate
                                   : investmentPlanList[0]?.promotion?.startDate) ??
@@ -377,6 +390,7 @@ class _SelectInvestmentScreenState extends State<SelectInvestmentScreen> {
                           );
                         }));
                       }),
+                  const AdsBannerWidget(paddingbottom: 0,),
                   // MaterialButton(
                   //   color: Colors.blue,
                   //   shape: RoundedRectangleBorder(

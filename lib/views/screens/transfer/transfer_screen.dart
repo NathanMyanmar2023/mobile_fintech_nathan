@@ -12,6 +12,7 @@ import 'package:nathan_app/widgets/text_field_with_label_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../widgets/app_bar_title_view.dart';
+import '../../Ads_banner/ads_banner_widget.dart';
 
 class TransferScreen extends StatefulWidget {
   final String main_wallet_balance;
@@ -349,6 +350,7 @@ class _TransferScreenState extends State<TransferScreen> {
                           }
                         }
                       }),
+                  const AdsBannerWidget(paddingbottom: 0,),
                   // MaterialButton(
                   //   color: Colors.blue,
                   //   shape: RoundedRectangleBorder(

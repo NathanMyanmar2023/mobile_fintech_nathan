@@ -8,6 +8,7 @@ import '../../../pages/order_list_page.dart';
 import '../../../pages/shopping_page.dart';
 import '../../../resources/colors.dart';
 import '../../../widgets/app_bar_title_view.dart';
+import '../../Ads_banner/ads_banner_widget.dart';
 
 class BrandsScreen extends StatefulWidget {
   final int categoryId;
@@ -172,6 +173,7 @@ class _BrandsScreenState extends State<BrandsScreen> {
                   ),
                 ),
               ),
+                 const Center(child: AdsBannerWidget(paddingbottom: 10, paddingTop: 0,)),
                Expanded(
                 child: TabBarView(
                   physics: const NeverScrollableScrollPhysics(),
