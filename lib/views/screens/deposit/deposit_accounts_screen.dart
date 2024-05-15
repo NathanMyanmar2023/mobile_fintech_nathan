@@ -82,7 +82,7 @@ class _DepositAccountsScreenState extends State<DepositAccountsScreen> {
           context: context,
           builder: (context) {
             return ErrorAlert(
-              "Oppo !",
+              "Oops !",
               Image.asset('images/welcome.png'),
               resp.message.toString(),
             );
@@ -117,7 +117,7 @@ class _DepositAccountsScreenState extends State<DepositAccountsScreen> {
           context: context,
           builder: (context) {
             return ErrorAlert(
-              "Oppo !",
+              "Oops !",
               Image.asset('images/welcome.png'),
               resp.message.toString(),
             );
@@ -387,6 +387,7 @@ class _DepositAccountsScreenState extends State<DepositAccountsScreen> {
     token = await SharedPref.getData(key: SharedPref.token);
     print("accountId $accountId /// $token");
   }
+
   String? accountId = "0";
   String? token = "0";
   requestDeposit() {
@@ -399,7 +400,7 @@ class _DepositAccountsScreenState extends State<DepositAccountsScreen> {
           context: context,
           builder: (context) {
             return ErrorAlert(
-              "Oppo !",
+              "Oops !",
               Image.asset('images/welcome.png'),
               "Need to provide deposit amount",
             );
@@ -416,7 +417,7 @@ class _DepositAccountsScreenState extends State<DepositAccountsScreen> {
         context: context,
         builder: (context) {
           return ErrorAlert(
-            "Oppo !",
+            "Oops !",
             Image.asset('images/welcome.png'),
             "Invilad input amount",
           );
@@ -433,7 +434,7 @@ class _DepositAccountsScreenState extends State<DepositAccountsScreen> {
         context: context,
         builder: (context) {
           return ErrorAlert(
-            "Oppo !",
+            "Oops !",
             Image.asset('images/welcome.png'),
             "Need to provide screenshot",
           );

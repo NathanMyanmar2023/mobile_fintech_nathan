@@ -44,14 +44,15 @@ class _ForgotPassVerifyScreenState extends State<ForgotPassVerifyScreen> {
       print("ree1 ${resp.message}");
       print("ree2 ${resp.data.runtimeType}");
       print("ree3 ${resp.success}");
-       if (resp.data.runtimeType == ResponseOb && resp.message == null) {
+      if (resp.data.runtimeType == ResponseOb && resp.message == null) {
         setState(() {
-        isLoading = false;
+          isLoading = false;
         });
       }
       if (resp.success == false) {
-        if(resp.message == null) {
-          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
+        if (resp.message == null) {
+          Navigator.of(context)
+              .pushReplacement(MaterialPageRoute(builder: (context) {
             return ForgotPassResetScreen(email: widget.email);
           }));
         } else {
@@ -59,7 +60,7 @@ class _ForgotPassVerifyScreenState extends State<ForgotPassVerifyScreen> {
             context: context,
             builder: (context) {
               return ErrorAlert(
-                "Oppo !",
+                "Oops !",
                 Image.asset('images/welcome.png'),
                 resp.message.toString(),
               );
@@ -79,7 +80,6 @@ class _ForgotPassVerifyScreenState extends State<ForgotPassVerifyScreen> {
   }
 
   void verifyOTP() {
-
     Map<String, dynamic> map = {
       'code': otpCode,
       'email': widget.email,
@@ -94,175 +94,178 @@ class _ForgotPassVerifyScreenState extends State<ForgotPassVerifyScreen> {
       isLoading = true;
     });
   }
-   ResendToEmail() {
-     setState(() {
-       isLoading = true;
-     });
+
+  ResendToEmail() {
+    setState(() {
+      isLoading = true;
+    });
     _requestOtpStream = _requestOtpBloc.requestOtpStream();
-     _requestOtpStream.listen((ResponseOb resp) {
-       print("dodo resend;");
-       if (resp.success == false) {
-         showDialog(
-           context: context,
-           builder: (context) {
-             return ErrorAlert(
-               "Oppo !",
-               Image.asset('images/welcome.png'),
-               resp.message.toString(),
-             );
-           },
-         );
-         setState(() {
-           isLoading = false;
-         });
-         return;
-       } else {
-         setState(() {
-           isLoading = false;
-         });}
-     });
+    _requestOtpStream.listen((ResponseOb resp) {
+      print("dodo resend;");
+      if (resp.success == false) {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return ErrorAlert(
+              "Oops !",
+              Image.asset('images/welcome.png'),
+              resp.message.toString(),
+            );
+          },
+        );
+        setState(() {
+          isLoading = false;
+        });
+        return;
+      } else {
+        setState(() {
+          isLoading = false;
+        });
+      }
+    });
 
     _requestOtpBloc.requestOtp(email: widget.email);
   }
+
   @override
   Widget build(BuildContext context) {
     return isLoading
         ? MediaQuery(
-      data: MediaQuery.of(context)
-          .copyWith(textScaler: const TextScaler.linear(1.0)),
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: SpinKitFadingFour(
-          itemBuilder: (BuildContext context, int index) {
-            return DecoratedBox(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: index.isEven ? Colors.blue : Colors.grey.shade800,
+            data: MediaQuery.of(context)
+                .copyWith(textScaler: const TextScaler.linear(1.0)),
+            child: Scaffold(
+              backgroundColor: Colors.white,
+              body: SpinKitFadingFour(
+                itemBuilder: (BuildContext context, int index) {
+                  return DecoratedBox(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: index.isEven ? Colors.blue : Colors.grey.shade800,
+                    ),
+                  );
+                },
               ),
-            );
-          },
-        ),
-      ),
-    )
+            ),
+          )
         : MediaQuery(
-      data: MediaQuery.of(context)
-          .copyWith(textScaler: const TextScaler.linear(1.0)),
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: SizedBox(
-          width: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 200,
-                height: 200,
-                child: Image.asset('images/sms.png'),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                "OTP Verification",
-                style: TextStyle(
-                  letterSpacing: 1,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                "Enter the OTP sent to ${widget.email}",
-                style: const TextStyle(
-                  fontSize: 15,
-                ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: PinCodeTextField(
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                  ],
-                  length: 6,
-                  obscureText: false,
-                  animationType: AnimationType.scale,
-                  pinTheme: PinTheme(
-                    shape: PinCodeFieldShape.box,
-                    borderRadius: BorderRadius.circular(5),
-                    fieldHeight: 50,
-                    fieldWidth: 50,
-                    activeColor: colorPrimary,
-                    inactiveColor: Colors.grey.shade400,
-                    selectedColor: colorPrimary,
-                  ),
-                  onChanged: (String value) {
-                    otpCode = value.toString();
-                  },
-                  appContext: context,
-                ),
-              ),
-              const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: LongButtonView(
-                  text: 'Verify',
-                  onTap: () {
-                    if (otpCode.length > 5) {
-                      verifyOTP();
-                    }
-                  },
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                ),
+            data: MediaQuery.of(context)
+                .copyWith(textScaler: const TextScaler.linear(1.0)),
+            child: Scaffold(
+              backgroundColor: Colors.white,
+              body: SizedBox(
+                width: double.infinity,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Row(
-                      children: [
-                        Text(
-                          "Do not received any code?",
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: Colors.grey.shade700,
+                    SizedBox(
+                      width: 200,
+                      height: 200,
+                      child: Image.asset('images/sms.png'),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "OTP Verification",
+                      style: TextStyle(
+                        letterSpacing: 1,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Enter the OTP sent to ${widget.email}",
+                      style: const TextStyle(
+                        fontSize: 15,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: PinCodeTextField(
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
+                        length: 6,
+                        obscureText: false,
+                        animationType: AnimationType.scale,
+                        pinTheme: PinTheme(
+                          shape: PinCodeFieldShape.box,
+                          borderRadius: BorderRadius.circular(5),
+                          fieldHeight: 50,
+                          fieldWidth: 50,
+                          activeColor: colorPrimary,
+                          inactiveColor: Colors.grey.shade400,
+                          selectedColor: colorPrimary,
+                        ),
+                        onChanged: (String value) {
+                          otpCode = value.toString();
+                        },
+                        appContext: context,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: LongButtonView(
+                        text: 'Verify',
+                        onTap: () {
+                          if (otpCode.length > 5) {
+                            verifyOTP();
+                          }
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                "Do not received any code?",
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.grey.shade700,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 6,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  //   _requestOtpBloc.requestOtp(email: widget.email);
+                                  ResendToEmail();
+                                },
+                                child: const Text(
+                                  "Resend Code",
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    color: colorPrimary,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        const SizedBox(
-                          width: 6,
-                        ),
-                        InkWell(
-                          onTap: () {
-                         //   _requestOtpBloc.requestOtp(email: widget.email);
-                            ResendToEmail();
-                          },
-                          child: const Text(
-                            "Resend Code",
-                            style: TextStyle(
-                              fontSize: 13,
-                              color: colorPrimary,
-                            ),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
   }
 }

@@ -47,7 +47,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
           context: context,
           builder: (context) {
             return ErrorAlert(
-              "Oppo !",
+              "Oops !",
               Image.asset('images/welcome.png'),
               resp.message.toString(),
             );
@@ -79,7 +79,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
           context: context,
           builder: (context) {
             return ErrorAlert(
-              "Oppo !",
+              "Oops !",
               Image.asset('images/welcome.png'),
               resp.message.toString(),
             );
@@ -225,7 +225,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                               ),
                               InkWell(
                                 onTap: () {
-                                //  _requestOtpBloc.requestOtp(email: widget.email);
+                                  //  _requestOtpBloc.requestOtp(email: widget.email);
                                   ResendToEmail();
                                 },
                                 child: const Text(

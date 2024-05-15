@@ -323,7 +323,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                             context: context,
                             builder: (context) {
                               return ErrorAlert(
-                                "Oppo !",
+                                "Oops !",
                                 Image.asset('images/welcome.png'),
                                 "Please fill all fields",
                               );
@@ -337,7 +337,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                               context: context,
                               builder: (context) {
                                 return ErrorAlert(
-                                  "Oppo !",
+                                  "Oops !",
                                   Image.asset('images/welcome.png'),
                                   "You don't have enough balance",
                                 );
@@ -374,7 +374,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                   //         context: context,
                   //         builder: (context) {
                   //           return ErrorAlert(
-                  //             "Oppo !",
+                  //             "Oops !",
                   //             Image.asset('images/welcome.png'),
                   //             "Please fill all fields",
                   //           );
@@ -388,7 +388,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                   //           context: context,
                   //           builder: (context) {
                   //             return ErrorAlert(
-                  //               "Oppo !",
+                  //               "Oops !",
                   //               Image.asset('images/welcome.png'),
                   //               "You don't have enough balance",
                   //             );

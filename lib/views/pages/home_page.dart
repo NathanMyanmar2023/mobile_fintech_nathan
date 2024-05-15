@@ -24,6 +24,7 @@ import '../../bloc/user_info_bloc.dart';
 import '../../helpers/shared_pref.dart';
 import '../Ads_banner/ads_banner_widget.dart';
 import '../notification/notification_setup.dart';
+import '../screens/gift_card/gift_card_screen.dart';
 import '../screens/money_market/money_market_screen.dart';
 import '../screens/shopping/category_screen.dart';
 import '../screens/top_up/top_up_screen.dart';
@@ -483,7 +484,7 @@ class _HomePageState extends State<HomePage>
                           color: colorWhite,
                         ),
                         menu_name: "Gift Card",
-                        target_page: TestGiftCard(),
+                        target_page: GiftCardScreen(),
                       ),
                     ],
                   ),

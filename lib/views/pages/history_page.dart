@@ -17,6 +17,7 @@ import 'package:nathan_app/views/widgets/select_history_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../Ads_banner/ads_banner_widget.dart';
+import '../screens/history/gift_card_history/gift_card_history_screen.dart';
 import '../screens/history/promotion_history/promotion_history_screen.dart';
 import '../screens/history/shopping_network_history/shopping_network_history_screen.dart';
 
@@ -91,6 +92,11 @@ class _HistoryPageState extends State<HistoryPage> {
                 target_page: const ApplicationFeesHistoryScreen(),
                 history_name: AppLocalizations.of(context)!.application_fees_history,
                 history_icon: Icons.feed_outlined,
+              ),
+              const SelectHistoryWidget(
+                target_page: GiftCardHistoryScreen(),
+                history_name: "Gift Card History",
+                history_icon: Icons.card_giftcard,
               ),
               SelectHistoryWidget(
                 target_page: const PhoneBillHistoryScreen(),

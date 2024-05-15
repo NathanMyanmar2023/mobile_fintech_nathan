@@ -76,7 +76,8 @@ class _MainScreenState extends State<MainScreen> {
 
   void checkPlayStoreVersion(bool change) async {
     _checker.checkUpdate().then((value) async {
-      print("newVersion ${value.newVersion}");//return error message if found else it will return null
+      print(
+          "newVersion ${value.newVersion}"); //return error message if found else it will return null
       setState(() {
         version = value.currentVersion;
       });
@@ -124,7 +125,8 @@ class _MainScreenState extends State<MainScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         OutlinedButton(
-                          onPressed: () => change ? goBack() : Navigator.pop(context),
+                          onPressed: () =>
+                              change ? goBack() : Navigator.pop(context),
                           style: ButtonStyle(
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
@@ -141,8 +143,8 @@ class _MainScreenState extends State<MainScreen> {
                             style: TextStyle(color: colorWhite),
                           ),
                           onPressed: () => _launchURL(PLAY_STORE_URL),
-                          style:
-                              ElevatedButton.styleFrom(backgroundColor: colorPrimary),
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: colorPrimary),
                         ),
                       ],
                     )
@@ -228,7 +230,7 @@ class _MainScreenState extends State<MainScreen> {
           context: context,
           builder: (context) {
             return ErrorAlert(
-              "Oppo !",
+              "Oops !",
               Image.asset('images/welcome.png'),
               resp.message.toString(),
             );

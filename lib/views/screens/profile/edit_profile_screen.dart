@@ -70,7 +70,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           context: context,
           builder: (context) {
             return ErrorAlert(
-              "Oppo !",
+              "Oops !",
               Image.asset('images/welcome.png'),
               resp.message.toString(),
             );
@@ -99,7 +99,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           context: context,
           builder: (context) {
             return ErrorAlert(
-              "Oppo !",
+              "Oops !",
               Image.asset('images/welcome.png'),
               resp.message.toString(),
             );
@@ -117,7 +117,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     if (isLoading) {
       return MediaQuery(
-        data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+        data: MediaQuery.of(context)
+            .copyWith(textScaler: const TextScaler.linear(1.0)),
         child: Scaffold(
           backgroundColor: Colors.white,
           body: Container(
@@ -136,7 +137,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       );
     } else {
       return MediaQuery(
-        data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+        data: MediaQuery.of(context)
+            .copyWith(textScaler: const TextScaler.linear(1.0)),
         child: Scaffold(
           backgroundColor: Colors.grey.shade200,
           appBar: PreferredSize(
@@ -435,7 +437,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         context: context,
         builder: (context) {
           return ErrorAlert(
-            "Oppo !",
+            "Oops !",
             Image.asset('images/welcome.png'),
             "Please complet the fields",
           );

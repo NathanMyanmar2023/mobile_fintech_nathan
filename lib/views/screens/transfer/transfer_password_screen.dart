@@ -45,7 +45,7 @@ class _TransferPasswordScreenState extends State<TransferPasswordScreen> {
           context: context,
           builder: (context) {
             return ErrorAlert(
-              "Oppo !",
+              "Oops !",
               Image.asset('images/welcome.png'),
               resp.message.toString(),
             );

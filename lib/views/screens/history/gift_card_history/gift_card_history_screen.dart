@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/bloc/top_up/phone_bill_bloc.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/views/screens/history/phone_bill_history/phone_bill_history_selector_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../../bloc/history/gift_card_history/gift_card_history_bloc.dart';
+import 'gift_card_history_selector_widget.dart';
 
-class PhoneBillHistoryScreen extends StatefulWidget {
-  const PhoneBillHistoryScreen({
+class GiftCardHistoryScreen extends StatefulWidget {
+  const GiftCardHistoryScreen({
     super.key,
   });
 
   @override
-  State<PhoneBillHistoryScreen> createState() =>
-      _PhoneBillHistoryScreenState();
+  State<GiftCardHistoryScreen> createState() =>
+      _GiftCardHistoryScreenState();
 }
 
-class _PhoneBillHistoryScreenState
-    extends State<PhoneBillHistoryScreen> {
+class _GiftCardHistoryScreenState
+    extends State<GiftCardHistoryScreen> {
   bool isLoading = false;
   bool isFetching = false;
   final scroll_controller = ScrollController();
 
-  final _phone_bill_bloc = PhoneBillBloc();
-  late Stream<ResponseOb> _phone_bill_history_stream;
-  //List<PhoneBillData> history_list = [];
+  final _giftCard_history_bloc = GiftCardHistoryBloc();
+  late Stream<ResponseOb> _giftCardhistory_stream;
 
   int page = 1;
   int limit = 20;
@@ -35,29 +34,33 @@ class _PhoneBillHistoryScreenState
     // TODO: implement initState
     super.initState();
 
-    _phone_bill_history_stream =
-        _phone_bill_bloc.phoneBillStream();
-    _phone_bill_history_stream.listen((ResponseOb resp) {
+    _giftCardhistory_stream =
+        _giftCard_history_bloc.giftCardHistoryStream();
+    _giftCardhistory_stream.listen((ResponseOb resp) {
       if (resp.success) {
         setState(() {
-          // print("daal ${resp.data.data.length}");
-          // history_list = (resp.data as PhoneBillOb).data ?? [];
-          // print("hiiii 343 ${history_list.length}");
-          for (var i = 0; i < resp.data.data.length; i++) {
+          for (var i = 0; i < resp.data.data.transactions.length; i++) {
             history_list.add([
-              resp.data.data[i].id.toString(),
-              resp.data.data[i].status,
-              resp.data.data[i].amount,
-              resp.data.data[i].phone,
-              resp.data.data[i].operator,
-              resp.data.data[i].date,
-              resp.data.data[i].billed_time,
+              resp.data.data.transactions[i].id.toString(),
+              resp.data.data.transactions[i].userId,
+              resp.data.data.transactions[i].tag,
+              resp.data.data.transactions[i].playerId,
+              resp.data.data.transactions[i].serverId,
+              resp.data.data.transactions[i].giftCardAmount,
+              resp.data.data.transactions[i].unit,
+              resp.data.data.transactions[i].priceMmk,
+              resp.data.data.transactions[i].status,
+              resp.data.data.transactions[i].remarks,
+              resp.data.data.transactions[i].purchasedTime,
+              resp.data.data.transactions[i].completedTime,
+              resp.data.data.transactions[i].createdAt,
+              resp.data.data.transactions[i].updatedAt,
             ]);
           }
           isLoading = false;
           page++;
           isFetching = false;
-          if (resp.data.data.length < limit) {
+          if (resp.data.data.transactions.length < limit) {
             hasMore = false;
           }
         });
@@ -79,20 +82,20 @@ class _PhoneBillHistoryScreenState
 
   Future fetch() async {
     print(hasMore);
-    _phone_bill_bloc.getPhoneBillHistory(page);
+    _giftCard_history_bloc.getGiftCardHistoryHistory();
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
-      _phone_bill_bloc.getPhoneBillHistory(page);
+    //  _giftCard_history_bloc.getGiftCardHistoryHistory();
       print("getting page - $page");
     }
   }
 
   Future refersh() async {
     setState(() {
-     isFetching = false;
-     hasMore = true;
-     page = 1;
+      isFetching = false;
+      hasMore = true;
+      page = 1;
       history_list.clear();
     });
 
@@ -133,8 +136,8 @@ class _PhoneBillHistoryScreenState
                   icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
                   onPressed: () => Navigator.of(context).pop(),
                 ),
-                title: Text(
-                  AppLocalizations.of(context)!.phone_bill_history,
+                title: const Text(
+                  "Gift Card History",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.black,
@@ -149,15 +152,21 @@ class _PhoneBillHistoryScreenState
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 itemCount: history_list.length,
                 itemBuilder: (context, index) {
-                    final history = history_list[index];
+                  final history = history_list[index];
                   if (index < history_list.length) {
-                    return PhoneBillHistorySelectorWidget(
+                    return GiftCardHistorySelectorWidget(
                       id: history[0].toString(),
-                      status: history[1].toString(),
-                      amount: history[2].toString(),
-                      phone: history[3].toString(),
-                      operator: history[4].toString(),
-                      billed_time: history[6].toString(),
+                      userId: history[1].toString(),
+                      tag: history[2].toString(),
+                      playerId: history[3].toString(),
+                      serverId: history[4].toString(),
+                      giftCardAmount: history[5].toString(),
+                      unit: history[6].toString(),
+                      priceMmk: history[7].toString(),
+                      status: history[8].toString(),
+                      remarks: history[9] ?? "",
+                      purchasedTime: history[10].toString(),
+                      completedTime: history[11] ?? "",
                     );
 
 
@@ -175,23 +184,13 @@ class _PhoneBillHistoryScreenState
                             ))
                             : Text(
                           AppLocalizations.of(context)!.no_more_data,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 13,
                           ),
                         ),
                       ),
                     );
                   }
-
-                  // return PhoneBillHistorySelectorWidget(
-                  //   id: history[0].toString(),
-                  //   status: history[1].toString(),
-                  //   amount: history[2].toString(),
-                  //   phone: history[3].toString(),
-                  //   operator: history[4].toString(),
-                  //   billed_time: history[6].toString(),
-                  // );
-
                 },
               ),
             )),

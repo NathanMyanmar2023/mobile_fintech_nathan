@@ -52,7 +52,7 @@ class _ConfirmExchangeScreenState extends State<ConfirmExchangeScreen> {
           context: context,
           builder: (context) {
             return ErrorAlert(
-              "Oppo !",
+              "Oops !",
               Image.asset('images/welcome.png'),
               resp.message.toString(),
             );

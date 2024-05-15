@@ -3,7 +3,8 @@ import 'package:nathan_app/resources/colors.dart';
 import 'package:nathan_app/views/screens/main_screen.dart';
 
 class SuccessBillScreen extends StatefulWidget {
-  const SuccessBillScreen({super.key});
+  final bool isGift;
+  const SuccessBillScreen({this.isGift = false, super.key});
 
   @override
   State<SuccessBillScreen> createState() => _SuccessBillScreenState();
@@ -37,9 +38,9 @@ class _SuccessBillScreenState extends State<SuccessBillScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    const Text(
-                      "Successful phone Bill",
-                      style: TextStyle(
+                    Text(
+                      "Successful ${widget.isGift ? "Gift Card Package." : "Phone Bill."}",
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
@@ -47,12 +48,12 @@ class _SuccessBillScreenState extends State<SuccessBillScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 50),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 50),
                       child: Text(
                         textAlign: TextAlign.center,
-                        "You have bill successfully. Please wait for response",
-                        style: TextStyle(
+                        "You have ${widget.isGift ? "package" : "bill"} successfully. Please wait for response",
+                        style: const TextStyle(
                           fontSize: 14,
                         ),
                       ),

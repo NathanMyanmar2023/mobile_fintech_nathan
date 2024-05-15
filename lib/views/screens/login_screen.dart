@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
           context: context,
           builder: (context) {
             return ErrorAlert(
-              "Oppo !",
+              "Oops !",
               Image.asset('images/welcome.png'),
               resp.message.toString(),
             );
@@ -328,19 +328,18 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: const Text(
                             "Forgot Password",
                             style: TextStyle(
-                              color: colorBlack,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 13
-                            ),
+                                color: colorBlack,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 13),
                           ),
                         )
                       ],
                     ),
-                      const SizedBox(height: 30),
-                      LongButtonView(
-                        text: "LOGIN",
-                        onTap: () => login(),
-                      ),
+                    const SizedBox(height: 30),
+                    LongButtonView(
+                      text: "LOGIN",
+                      onTap: () => login(),
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
