@@ -54,6 +54,7 @@ dependencies:
   firebase_core: ^2.27.0
   firebase_messaging: ^14.7.19
   awesome_notifications: any
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:

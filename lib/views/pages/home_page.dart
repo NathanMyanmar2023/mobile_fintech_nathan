@@ -15,6 +15,7 @@ import 'package:nathan_app/views/screens/kyc/kyc_screen.dart';
 import 'package:nathan_app/views/screens/main_screen.dart';
 import 'package:nathan_app/views/screens/money_market/test_gift_card.dart';
 import 'package:nathan_app/views/screens/money_market/test_money_screen.dart';
+import 'package:nathan_app/views/screens/shopping/shopping_screen.dart';
 import 'package:nathan_app/views/screens/transfer/transfer_screen.dart';
 import 'package:nathan_app/views/screens/welcome_screen.dart';
 import 'package:nathan_app/views/widgets/main_menu_button_widget.dart';
@@ -454,7 +455,7 @@ class _HomePageState extends State<HomePage>
                         ),
                         menu_name: AppLocalizations.of(context)!.shopping,
                         target_page:
-                            const CategoryScreen(isMain: true), // ShoppingPage
+                            const ShoppingScreen(), // ShoppingPage
                       ),
                       const SizedBox(
                         width: 10,
