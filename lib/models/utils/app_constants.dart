@@ -85,6 +85,7 @@ const REQ_GIFT_BUY = "${API_URL}giftcard/purchases";
 
 //Ecommerce
 const GET_PRODUCTS = "${API_URL}products";
+const GET_CATEGORY_PRODUCTS = "${API_URL}products/category-brand/";
 const GET_PHOTOS = "${API_URL}product";
 const ADD_TO_CART = "${API_URL}add_to_cart";
 const GET_CART = "${API_URL}cart";

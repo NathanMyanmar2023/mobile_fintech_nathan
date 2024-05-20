@@ -18,8 +18,8 @@ class ShoppingBloc extends BaseNetwork {
     });
   }
 
-  getProducts(int page) async {
-    getReq("$GET_PRODUCTS?page=$page", onDataCallBack: (ResponseOb resp) {
+  getCategoryProducts({required int? categoryId, required int? page}) async {
+    getReq("$GET_CATEGORY_PRODUCTS$categoryId?page=$page", onDataCallBack: (ResponseOb resp) {
       resp.data = ShoppingOb.fromJson(resp.data);
       shoppingController.sink.add(resp);
     }, errorCallBack: (ResponseOb resp) {

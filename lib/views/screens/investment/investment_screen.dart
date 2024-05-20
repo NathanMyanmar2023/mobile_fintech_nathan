@@ -244,7 +244,7 @@ class _InvestmentScreenState extends State<InvestmentScreen> {
                                 ],
                               ),
                             ),
-                            Padding(
+                            widget.promotionNetworkAmt == "0 %" ? const SizedBox() : Padding(
                               padding: const EdgeInsets.only(left: 10, top: 5),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,

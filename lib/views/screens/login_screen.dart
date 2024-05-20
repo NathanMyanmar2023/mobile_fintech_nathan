@@ -166,7 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
     Map<String, dynamic> map = {
       'email': email,
       'password': password,
-     // 'fcm_token': fcmToken,
+      'fcm_token': fcmToken,
     };
     _loginBloc.login(map);
     setState(() {

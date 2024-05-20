@@ -101,9 +101,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
               children: [
                 InkWell(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (co) =>
-                        BrandsScreen(categoryId: categoryViewList[index].id ?? 0,)
-                    ));
+                    // Navigator.push(context, MaterialPageRoute(builder: (co) =>
+                    //     BrandsScreen(categoryId: categoryViewList[index].id ?? 0,)
+                    // ));
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 10),
@@ -124,16 +124,16 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                   fontWeight: FontWeight.w600,
                                   fontSize: 18,
                                 ),
-                                Container(
-                                  width: double.tryParse("${categoryViewList[index].name!.length * 8}"), //MediaQuery.of(context).size.width * 0.2,
-                                  height: 2,
-                                  color: colorPrimary,
-                                  margin: const EdgeInsets.only(top: 3),
-                                )
                               ],
                             ),
                           ),
+
                           Container(
+                            width: double.tryParse("${categoryViewList[index].name!.length * 8}"), //MediaQuery.of(context).size.width * 0.2,
+                            height: 2,
+                            color: colorPrimary,
+                            margin: const EdgeInsets.only(top: 3),
+                          )  ,   Container(
                             color: colorSeconary.withOpacity(0.3),
                             width: MediaQuery.of(context).size.width * 0.3,
                             height: MediaQuery.of(context).size.height * 0.15,

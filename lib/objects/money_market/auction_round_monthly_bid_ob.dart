@@ -28,6 +28,7 @@ class AuctionRoundMonthlyBidOb {
 
 class RoundMonthlyData {
   RoundMonthlyData({
+    this.totalBidUser,
     this.roundBidStop,
     this.bitstandardAmount,
     this.bidAmountEndtime,
@@ -37,6 +38,7 @@ class RoundMonthlyData {
   });
 
   RoundMonthlyData.fromJson(dynamic json) {
+    totalBidUser = json['totalBidUser'];
     roundBidStop = json['round_bid_stop'];
     bitstandardAmount = json['bitstandardAmount'];
     bidAmountEndtime = json['bidAmountEndtime'];
@@ -51,6 +53,7 @@ class RoundMonthlyData {
         ? LastBidUser.fromJson(json['lastBidUser'])
         : null;
   }
+  int? totalBidUser;
   int? roundBidStop;
   dynamic bidAmountEndtime;
   String? bitstandardAmount;
@@ -60,6 +63,7 @@ class RoundMonthlyData {
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['totalBidUser'] = totalBidUser;
     map['round_bid_stop'] = roundBidStop;
     map['bitstandardAmount'] = bitstandardAmount;
     map['bidAmountEndtime'] = bidAmountEndtime;

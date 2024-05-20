@@ -8,6 +8,7 @@ import 'package:nathan_app/bloc/money_market/auction_leave_bloc.dart';
 import 'package:nathan_app/extensions/navigation_extensions.dart';
 import 'package:nathan_app/resources/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../bloc/money_market/auction_insterest_bloc.dart';
 import '../../../bloc/money_market/auction_round_bloc.dart';
 import '../../../helpers/response_ob.dart';
@@ -55,12 +56,6 @@ class _AuctionGroupScreenState extends State<AuctionGroupScreen> {
   late Stream<ResponseOb> _auctionDetailStream;
   List<BillAuctionUserLists> billAuctionUserLists = [];
 
-  final _auctionInstBloc = AuctionInsterestBloc();
-  late Stream<ResponseOb> _auctionInsteStream;
-
-  final _auctionLeaveBloc = AuctionLeaveBloc();
-  late Stream<ResponseOb> _auctionLeaveStream;
-
   String title = "";
   String description = "";
   String amount = "";
@@ -87,82 +82,6 @@ class _AuctionGroupScreenState extends State<AuctionGroupScreen> {
       } else {}
     });
 
-    /// request join stream
-    _auctionInsteStream = _auctionInstBloc.auctionInstStream();
-    _auctionInsteStream.listen((ResponseOb resp) {
-      if (resp.success) {
-        setState(() {
-          isLoading = false;
-        });
-        showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                title:  Text(AppLocalizations.of(context)!.success,),
-                content: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Image.asset('images/welcome.png', height: 100, width: 100),
-                    const SizedBox(height: 10),
-                    Text(
-                      resp.message.toString(),
-                    ),
-                  ],
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (co) => const MoneyMarketScreen()));
-                    },
-                    child: const Text(
-                      'OK',
-                      style: TextStyle(
-                        color: colorPrimary,
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            });
-      } else {
-        setState(() {
-          isLoading = false;
-        });
-        showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                title: const Text('Error!'),
-                content: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Image.asset('images/welcome.png', height: 100, width: 100),
-                    const SizedBox(height: 10),
-                    Text(
-                      resp.message.toString(),
-                    ),
-                  ],
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      popBack(context: context);
-                    },
-                    child: const Text(
-                      'OK',
-                      style: TextStyle(
-                        color: colorPrimary,
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            });
-      }
-    });
-
     // round monthly
     _auctionRound_stream = _auctionRound_bloc.auctionRoundStream();
     _auctionRound_stream.listen((ResponseOb resp) {
@@ -184,23 +103,6 @@ class _AuctionGroupScreenState extends State<AuctionGroupScreen> {
     userId = int.parse(accountId!);
   }
 
-  void requestAuctionLeave(int auctionId, int isSecure) {
-    Map<String, dynamic> map = {
-      'isSecure': isSecure,
-    };
-    _auctionLeaveBloc.getAuctionLeave(auctionID: auctionId, data: map);
-  }
-
-  void requestAuctionRule() {
-    Map<String, dynamic> map = {
-      'agress': 1,
-      'auctionID': widget.auctionId,
-    };
-    _auctionInstBloc.requestAuctionInst(data: map);
-    setState(() {
-      isLoading = true;
-    });
-  }
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
@@ -306,7 +208,8 @@ class _AuctionGroupScreenState extends State<AuctionGroupScreen> {
                     ],
                   ),
                   // get round
-                  AuctionRoundView(auctionRoundList: auctionRoundList,)
+                  AuctionRoundView(auctionRoundList: auctionRoundList,),
+                  SizedBox(height: 1.h),
                 ],
               ),
             ),

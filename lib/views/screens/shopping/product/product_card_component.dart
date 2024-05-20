@@ -83,7 +83,7 @@ final String brandName;
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AutoSizeText(
-                        "Brand: $stock $brandName",
+                        "Brand: $brandName",
                         style: const TextStyle(
                           fontFamily: "Bold",
                           color: colorSeconary,

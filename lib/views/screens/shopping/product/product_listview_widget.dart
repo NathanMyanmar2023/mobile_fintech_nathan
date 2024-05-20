@@ -5,7 +5,9 @@ import '../../../../bloc/shopping_bloc.dart';
 import '../../../../helpers/response_ob.dart';
 import '../../../../objects/shopping_ob.dart';
 import '../../../../resources/colors.dart';
+import '../../../../widgets/circle_loading_widget.dart';
 import '../../../../widgets/nathan_text_view.dart';
+import 'all_product_screen.dart';
 
 class ProductListViewWidget extends StatefulWidget {
   final String mainTitle;
@@ -52,6 +54,7 @@ class _ProductListViewWidgetState extends State<ProductListViewWidget> {
 
     fetch();
   }
+  bool isScroll = false;
   @override
   void initState() {
     super.initState();
@@ -86,15 +89,15 @@ class _ProductListViewWidgetState extends State<ProductListViewWidget> {
           page++;
 
           isFetching = false;
-          if (resp.data.data.length < 30) {
+          if (resp.data.data.length == 10) {
             hasMore = false;
+            fetch();
           }
         });
       } else {
         isLoading = false;}
     });
-
-    fetch();
+    _shoppingBloc.getShoppingProduct(brandId: 0, page: page);
 
     //Scroll controller
     scroll_controller.addListener(() {
@@ -107,7 +110,11 @@ class _ProductListViewWidgetState extends State<ProductListViewWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return shoppingProductList.isEmpty ?
+    Padding(
+      padding: EdgeInsets.symmetric(vertical: 5.h),
+      child: const Center(child: CircleLoadingWidget()),
+    ) : Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
@@ -123,18 +130,16 @@ class _ProductListViewWidgetState extends State<ProductListViewWidget> {
               ),
               GestureDetector(
                 onTap: () {
-                  // VisualFeedback.openFullScreenDialog(
-                  //   context,
-                  //   barrierColor: primaryColor,
-                  //   widget: const SeeAllProducts(
-                  //     title: 'latest-products',
-                  //   ),
-                  // );
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => AllProductScreen(title: widget.mainTitle,),
+                    ),
+                  );
                 },
                 child: NathanTextView(
                   text: "All",
                   color: colorPrimary.withOpacity(0.8),
-                  fontSize: 14.sp,
+                  fontSize: 15.sp,
                 ),
               ),
             ],

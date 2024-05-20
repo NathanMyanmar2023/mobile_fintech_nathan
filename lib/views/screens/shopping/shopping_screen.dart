@@ -48,7 +48,7 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Categories(),
+            CategoriesWidget(),
             TopCategory(),
             ProductListViewWidget(mainTitle: "Top Selling Products", tagName: "top-selling-pp",),
             ProductListViewWidget(mainTitle: "Latest Products", tagName: "latest-pp",),

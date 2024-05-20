@@ -4,7 +4,9 @@ import '../../../../bloc/shopping/category_bloc.dart';
 import '../../../../helpers/response_ob.dart';
 import '../../../../objects/shopping/category_view_ob.dart';
 import '../../../../resources/colors.dart';
+import '../../../../widgets/circle_loading_widget.dart';
 import '../../../../widgets/nathan_text_view.dart';
+import '../brands_screen.dart';
 
 class TopCategory extends StatefulWidget {
   const TopCategory({Key? key}) : super(key: key);
@@ -36,10 +38,14 @@ class _TopCategoryState extends State<TopCategory> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return categoryViewList.isEmpty ?
+    Padding(
+      padding: EdgeInsets.symmetric(vertical: 5.h),
+      child: const Center(child: CircleLoadingWidget()),
+    ) : Padding(
       padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 1.2.h),
       child: GridView.count(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         crossAxisCount: 4,
         crossAxisSpacing: 3.0,
         mainAxisSpacing: 3.0,
@@ -52,29 +58,39 @@ class _TopCategoryState extends State<TopCategory> {
               ? 10
               : categoryViewList.length < 12 ? categoryViewList.length : 12,
               (index) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                CircleAvatar(
-                  radius: 4.5.h, // Image
-                  backgroundColor: colorSeconary,
-                  child: CircleAvatar(
-                    radius: 4.h, // Image radius
+            return GestureDetector(
+              onTap: ()=> Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => BrandsScreen(
+                    categoryId: categoryViewList[index].id ?? 0,
+                      categoryName: categoryViewList[index].name ?? "",
+                  ),
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  CircleAvatar(
+                    radius: 4.5.h, // Image
                     backgroundColor: colorSeconary,
-                    backgroundImage: NetworkImage(categoryViewList[index].photo ?? ""),
+                    child: CircleAvatar(
+                      radius: 4.h, // Image radius
+                      backgroundColor: colorSeconary,
+                      backgroundImage: NetworkImage(categoryViewList[index].photo ?? ""),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 5,),
-                Center(
-                  child: NathanTextView(
-                    text: categoryViewList[index].name ?? "",
-                    color: colorBlack,
-                    fontSize: 16.sp,
-                    isCenter: true,
+                  const SizedBox(height: 5,),
+                  Center(
+                    child: NathanTextView(
+                      text: categoryViewList[index].name ?? "",
+                      color: colorBlack,
+                      fontSize: 16.sp,
+                      isCenter: true,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             );
           },
         ),

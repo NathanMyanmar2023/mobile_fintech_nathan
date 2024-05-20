@@ -5,15 +5,17 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../../bloc/shopping/category_bloc.dart';
 import '../../../../helpers/response_ob.dart';
 import '../../../../objects/shopping/category_view_ob.dart';
+import '../brands_screen.dart';
 
-class Categories extends StatefulWidget {
-  const Categories({super.key});
+class CategoriesWidget extends StatefulWidget {
+  const CategoriesWidget({super.key});
 
   @override
-  State<Categories> createState() => _CategoriesState();
+  State<CategoriesWidget> createState() => _CategoriesWidgetState();
 }
 
-class _CategoriesState extends State<Categories> {
+class _CategoriesWidgetState extends State<CategoriesWidget> {
+  bool isLoading = true;
   final _categoryBloc = CategoryBloc();
   late Stream<ResponseOb> _categoryStream;
   List<CategoryViewData> categoryViewList = [];
@@ -27,6 +29,7 @@ class _CategoriesState extends State<Categories> {
           photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6QF8VXMSxOoe3b3lf9GLaB0idx5u_9AWpKvnCM-odNxfFtDHczv2o7_-mOiLDaHb21qw&usqp=CAU"));
       if (resp.success) {
         setState(() {
+          isLoading = false;
           categoryViewList.addAll((resp.data as CategoryViewOb).data ?? []);
         });
       } else {}
@@ -69,6 +72,14 @@ class _CategoriesState extends State<Categories> {
                           ),
                         ),
                         onPressed: () {
+                          Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => BrandsScreen(
+                              categoryId: categoryViewList[index].id ?? 0,
+                              categoryName: categoryViewList[index].name ?? "",
+                            ),
+                          ),
+                        );
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5)),

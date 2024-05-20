@@ -16,6 +16,7 @@ import '../../../../widgets/app_bar_title_view.dart';
 import '../../../../widgets/long_button_view.dart';
 import '../../../../widgets/nathan_text_view.dart';
 import 'end_bid_round_screen.dart';
+import 'no_pay_done_screen.dart';
 
 class StartRoundDetailScreen extends StatefulWidget {
   final int roundId;
@@ -45,6 +46,7 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
   late Stream<ResponseOb> _roundMonthlyBidStream;
   List<BidUsersLists> bidUsersLists = [];
 
+  int totalBidUser = 0;
   int roundBidStop = 0;
   String lastBidAmount = "";
   String lastBidUsername = "";
@@ -60,22 +62,65 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
 
   Timer? payTime;
   int payStart = 10;
+
+  bool noOneStartCheck = false;
+  bool noOne = false;
+  Timer? noOneTime;
+  int noOneStart = 10;
   @override
   void initState() {
     super.initState();
     autoRefersh = Timer.periodic(const Duration(seconds: 10),
         (Timer t) => _roundMonthlyBidBloc.getRoundMonthlyBid(widget.roundId));
-
+    oneStartBillTimer();
     // get round bid history
     _roundMonthlyBidStream = _roundMonthlyBidBloc.auctionRoundMonthlyStream();
     _roundMonthlyBidStream.listen((ResponseOb resp) {
+      print("resp.message ${resp.message}");
       if (resp.success) {
         if (resp.message == "Sorry, there are no one users") {
           setState(() {
             noOneUserPage = true;
+            noOneStartCheck = true;
+            // print("No one pay of bid $totalBidUser");
+            // Timer.periodic(const Duration(seconds: 10),
+            //         (Timer t) {
+            //   setState(() {
+            //     context.showSnack("There are no one users pay of bid. Now Starting final Count time!",
+            //       Colors.white,
+            //       Colors.red,
+            //       Icons.close,
+            //     );
+            //     noOneStart = 10;
+            //     noOne = true;
+            //     const oneSec = Duration(seconds: 1);
+            //     noOneTime = Timer.periodic(
+            //       oneSec,
+            //           (Timer timer) {
+            //         if (noOneStart == 0) {
+            //           setState(() {
+            //             timer.cancel();
+            //             noOneTime!.cancel();
+            //             context.showSnack("Now Bill Auction is stop. We will inform Tomorrow who is winner for ${widget.roundNumber}",
+            //               Colors.white,
+            //               Colors.red,
+            //               Icons.close,
+            //             );
+            //           });
+            //         } else {
+            //           setState(() {
+            //             noOneStart--;
+            //           });
+            //         }
+            //       },
+            //     );
+            //   });
+            //         },);
           });
         } else {
           setState(() {
+            noOneStartCheck = false;
+            totalBidUser = resp.data.data.totalBidUser ?? 0;
             roundBidStop = resp.data.data.roundBidStop ?? 0;
             lastBidAmount = resp.data.data.lastBidUser.amount ?? "0";
             bitstandardAmount = resp.data.data.bitstandardAmount ?? "0";
@@ -108,10 +153,41 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
         _requestRoundMonthlyBidBloc.requestAuctionRoundMonthlyStream();
     _requestRoundMonthlyBidStream.listen((ResponseOb resp) {
       if (resp.message == "Success") {
-        setState(() {
-          _roundMonthlyBidBloc.getRoundMonthlyBid(widget.roundId);
-          startTimer();
-        });
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: const Text('Success Bid!'),
+                content: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Image.asset('images/welcome.png', height: 100, width: 100),
+                    const SizedBox(height: 10),
+                    Text(
+                      resp.message.toString(),
+                    ),
+                  ],
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                        popBack(context: context);
+                        _roundMonthlyBidBloc.getRoundMonthlyBid(widget.roundId);
+                        startTimer();
+                      });
+                    },
+                    child: const Text(
+                      'OK',
+                      style: TextStyle(
+                        color: colorPrimary,
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            });
       } else {
         showDialog(
             context: context,
@@ -159,6 +235,77 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
     });
   }
 
+
+  oneStartBillTimer() async {
+    setState(() {
+      noOneStart = 10;
+      const oneSec = Duration(seconds: 1);
+      noOneTime = Timer.periodic(
+        oneSec,
+            (Timer timer) {
+          if (noOneStart == 0) {
+            setState(() {
+              _roundMonthlyBidBloc.getRoundMonthlyBid(widget.roundId);
+              timer.cancel();
+              noOneTime!.cancel();
+              if(noOneStartCheck == true){
+                setState(() {
+                  context.showSnack("There are no one users pay of bid. Now Starting final Count time!",
+                    Colors.white,
+                    Colors.red,
+                    Icons.close,
+                  );
+                  noOneStart = 10;
+                  noOne = true;
+                  const oneSec = Duration(seconds: 1);
+                  noOneTime = Timer.periodic(
+                    oneSec,
+                        (Timer timer) {
+                      if (noOneStart == 0) {
+                        setState(() {
+                          timer.cancel();
+                          noOneTime!.cancel();
+                          setState(() {
+                            _roundMonthlyBidBloc.getRoundMonthlyBid(widget.roundId);
+                            print("totalBidUser $totalBidUser");
+                            if(totalBidUser == 0 && noOneStartCheck == true) {
+                              print("request stop bid round");
+                              // request stop bid round
+                              _bidStopBloc.requestBidStop(widget.roundId);
+                              _bidStopStream = _bidStopBloc.bidStopStream();
+                              _bidStopStream.listen((ResponseOb resp) {
+                                print("roeo ${resp.message}");
+                                if (resp.success) {
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (co) =>
+                                      NoPayDoneScreen(roundNumber: widget.roundNumber,)),
+                                  );
+                                } else {}
+                              });
+                            } else {
+                              noOneStartCheck = false;
+                            }
+                          });
+                        });
+                      } else {
+                        setState(() {
+                          noOneStart--;
+                        });
+                      }
+                    },
+                  );
+                });
+              }
+            });
+          } else {
+            setState(() {
+              noOneStart--;
+            });
+          }
+        },
+      );
+    });
+  }
+
   bool finalCount = false;
 
   Timer? _waittimer;
@@ -175,8 +322,8 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
     if (bidUsersLists.first.userId == userId) {
       print("samme");
       setState(() {
-        _start = 10;
         finalCount = true;
+        _start = 10;
         const oneSec = Duration(seconds: 1);
         _waittimer = Timer.periodic(
           oneSec,
@@ -185,7 +332,16 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
               setState(() {
                 timer.cancel();
                 _waittimer!.cancel();
-                finalCallTimer();
+                setState(() {
+                  _roundMonthlyBidBloc.getRoundMonthlyBid(widget.roundId);
+                  if(bidUsersLists.first.userId == userId) {
+                    print("same;");
+                    finalCallTimer();
+                  } else {
+                    finalCount = false;
+                    print("noo same;");
+                  }
+                });
               });
             } else {
               setState(() {
@@ -213,36 +369,40 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
     print(
         "bidUsersLists.last.userId ${bidUsersLists.first.userId} & ${bidUsersLists.last.userId.runtimeType}");
     print("acccu $accountId");
-    if (bidUsersLists.first.userId == userId) {
-      print("samme");
-      setState(() {
-        // request stop bid round
-        _bidStopBloc.requestBidStop(widget.roundId);
-        _bidStopStream = _bidStopBloc.bidStopStream();
-        _bidStopStream.listen((ResponseOb resp) {
-          if (resp.success) {
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (co) => SuccessBidRoundScreen(
-                    roundId: widget.roundId,
-                    roundNumber: widget.roundNumber,
-                    baseAmount: widget.baseAmount,
-                    realAmount: bidUsersLists.first.amount.toString(),
-                    winnerBidName: bidUsersLists.first.username.toString(),
-                    bitStartime: bidStarTime,
-                    bidId: bidUsersLists.first.id!,
-                  ),
-                ));
-          } else {}
+
+    Future.delayed(const Duration(seconds: 2), () async {
+      print("calling finnal");
+      if (bidUsersLists.first.userId == userId) {
+        print("samme");
+        setState(() {
+          // request stop bid round
+          _bidStopBloc.requestBidStop(widget.roundId);
+          _bidStopStream = _bidStopBloc.bidStopStream();
+          _bidStopStream.listen((ResponseOb resp) {
+            if (resp.success) {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (co) => SuccessBidRoundScreen(
+                      roundId: widget.roundId,
+                      roundNumber: widget.roundNumber,
+                      baseAmount: widget.baseAmount,
+                      realAmount: bidUsersLists.first.amount.toString(),
+                      winnerBidName: bidUsersLists.first.username.toString(),
+                      bitStartime: bidStarTime,
+                      bidId: bidUsersLists.first.id!,
+                    ),
+                  ));
+            } else {}
+          });
         });
-      });
-    } else {
-      print("no smame");
-      setState(() {
-        finalCount = false;
-      });
-    }
+      } else {
+        print("no smame");
+        setState(() {
+          finalCount = false;
+        });
+      }
+    });
   }
 
   void requestPayBid(String bidAmount) {
@@ -251,15 +411,13 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
     };
     _requestRoundMonthlyBidBloc.requestRoundMonthlyBid(
         roundID: widget.roundId, data: map);
-    setState(() {
-      startTimer();
-    });
   }
 
   @override
   void dispose() {
     autoRefersh!.cancel();
     payTime!.cancel();
+    noOneTime!.cancel();
     _waittimer!.cancel();
     super.dispose();
   }
@@ -267,6 +425,7 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
   var unixTime = DateTime.now().millisecondsSinceEpoch / 1000;
 
   void startTimer() {
+    payStart = 10;
     const oneSec = Duration(seconds: 1);
     payTime = Timer.periodic(
       oneSec,
@@ -387,8 +546,30 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
                                     color: colorBlack,
                                     fontWeight: FontWeight.w600),
                               ),
-                              noOneUserPage
-                                  ? const SizedBox()
+                               noOneUserPage
+                                  ? noOne ? Row(
+                                 crossAxisAlignment:
+                                 CrossAxisAlignment.center,
+                                 mainAxisAlignment:
+                                 MainAxisAlignment.center,
+                                 children: [
+                                   NathanTextView(
+                                     text: "Final Count Timer ",
+                                     fontSize: 16.sp,
+                                     color: colorBlack,
+                                   ),
+                                   NathanTextView(
+                                     text: "$noOneStart",
+                                     fontSize: 18.sp,
+                                     color: Colors.red,
+                                   ),
+                                   NathanTextView(
+                                     text: " sec.",
+                                     fontSize: 16.sp,
+                                     color: colorBlack,
+                                   ),
+                                 ],
+                               ) : const SizedBox()
                                   : finalCount
                                       ? Row(
                                           crossAxisAlignment:
@@ -564,6 +745,7 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
                                 itemCount: bidUsersLists.length,
                                 shrinkWrap: true,
                                 itemBuilder: (BuildContext context, index) {
+                                    noOneUserPage = false;
                                   return Container(
                                     padding: const EdgeInsets.all(10.0),
                                     margin:

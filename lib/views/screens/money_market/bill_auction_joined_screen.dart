@@ -407,7 +407,7 @@ int? userId = 0;
                         ),
                       ],
                     ),
-                    Padding(
+                    leftUser == 0 ? const SizedBox() : Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20),
                       child: LongButtonView(
                           text: "Join New bidder this group",
