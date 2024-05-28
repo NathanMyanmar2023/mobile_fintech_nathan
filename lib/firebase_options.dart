@@ -63,6 +63,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '314757345053',
     projectId: 'nathanfintech-c0270',
     storageBucket: 'nathanfintech-c0270.appspot.com',
-    iosBundleId: 'com.fintech.app.nathan',
+    iosBundleId: 'com.fintech.nathan',
   );
 }

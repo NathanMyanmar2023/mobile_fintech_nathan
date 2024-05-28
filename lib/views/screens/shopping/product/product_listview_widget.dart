@@ -7,6 +7,7 @@ import '../../../../objects/shopping_ob.dart';
 import '../../../../resources/colors.dart';
 import '../../../../widgets/circle_loading_widget.dart';
 import '../../../../widgets/nathan_text_view.dart';
+import '../../../Ads_banner/ads_banner_widget.dart';
 import 'all_product_screen.dart';
 
 class ProductListViewWidget extends StatefulWidget {
@@ -114,12 +115,15 @@ class _ProductListViewWidgetState extends State<ProductListViewWidget> {
     Padding(
       padding: EdgeInsets.symmetric(vertical: 5.h),
       child: const Center(child: CircleLoadingWidget()),
-    ) : Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
-          child: Row(
+    ) : Padding(
+      padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const AdsBannerWidget(
+            paddingbottom: 10,
+          ),
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               NathanTextView(
@@ -144,31 +148,32 @@ class _ProductListViewWidgetState extends State<ProductListViewWidget> {
               ),
             ],
           ),
-        ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Container(
-            margin: EdgeInsets.only(left: 4.w, right: 4.w),
-            child: Row(
-              children: List.generate(
-                shoppingProductList.length,
-                    (index) {
-                  final productList = shoppingProductList[index];
-                  return ProductCardComponent(
-                    id: productList[0] ?? 0,
-                    stock: productList[2],
-                    photo: productList[6] ??
-                        "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg",
-                    name: productList[1] ?? "-",
-                    brandName: productList[9] ?? "",
-                  );
-                },
+          const SizedBox(height: 10,),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Container(
+              margin: EdgeInsets.only(right: 4.w),
+              child: Row(
+                children: List.generate(
+                  shoppingProductList.length,
+                      (index) {
+                    final productList = shoppingProductList[index];
+                    return ProductCardComponent(
+                      id: productList[0] ?? 0,
+                      stock: productList[2],
+                      photo: productList[6] ??
+                          "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg",
+                      name: productList[1] ?? "-",
+                      brandName: productList[9] ?? "",
+                    );
+                  },
 
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

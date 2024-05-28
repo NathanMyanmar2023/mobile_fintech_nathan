@@ -6,7 +6,7 @@ import 'ad_helper.dart';
 class AdsBannerWidget extends StatefulWidget {
   final double paddingTop;
   final double paddingbottom;
-  const AdsBannerWidget({Key? key, this.paddingTop = 15, this.paddingbottom = 15}) : super(key: key);
+  const AdsBannerWidget({Key? key, this.paddingTop = 15, this.paddingbottom = 15,}) : super(key: key);
 
   @override
   State<AdsBannerWidget> createState() => _AdsBannerWidgetState();

@@ -5,6 +5,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../../bloc/shopping/category_bloc.dart';
 import '../../../../helpers/response_ob.dart';
 import '../../../../objects/shopping/category_view_ob.dart';
+import '../../../Ads_banner/ads_banner_widget.dart';
 import '../brands_screen.dart';
 
 class CategoriesWidget extends StatefulWidget {
@@ -50,6 +51,9 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
               color: colorBlack,
               fontWeight: FontWeight.w500,
               fontSize: 18.sp,
+            ),
+            const AdsBannerWidget(
+              paddingbottom: 0,
             ),
             SizedBox(height: 1.h,),
             Row(

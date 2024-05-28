@@ -72,7 +72,7 @@ class _MainScreenState extends State<MainScreen> {
   String? version;
   String APP_STORE_URL = "https://apps.apple.com/mm/app/1664gym/id1664655431";
   String PLAY_STORE_URL =
-      "https://play.google.com/store/apps/details?id=com.fintech.app.nathan";
+      "https://play.google.com/store/apps/details?id=com.fintech.nathan";
 
   void checkPlayStoreVersion(bool change) async {
     _checker.checkUpdate().then((value) async {

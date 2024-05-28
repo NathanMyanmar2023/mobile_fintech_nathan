@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:nathan_app/views/screens/shopping/product/product_listview_widget.dart';
 import '../../../resources/colors.dart';
+import '../../Ads_banner/ads_banner_widget.dart';
 import 'category/categories_widget.dart';
 import 'category/top_category.dart';
 
@@ -50,7 +51,7 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
           children: [
             CategoriesWidget(),
             TopCategory(),
-            ProductListViewWidget(mainTitle: "Top Selling Products", tagName: "top-selling-pp",),
+          //  ProductListViewWidget(mainTitle: "Top Selling Products", tagName: "top-selling-pp",),
             ProductListViewWidget(mainTitle: "Latest Products", tagName: "latest-pp",),
           ],
         ),
