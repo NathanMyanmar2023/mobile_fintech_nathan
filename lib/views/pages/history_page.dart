@@ -16,6 +16,9 @@ import 'package:nathan_app/views/screens/main_screen.dart';
 import 'package:nathan_app/views/widgets/select_history_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../Ads_banner/ads_banner_widget.dart';
+import '../screens/history/gift_card_history/gift_card_history_screen.dart';
+import '../screens/history/promotion_history/promotion_history_screen.dart';
 import '../screens/history/shopping_network_history/shopping_network_history_screen.dart';
 
 class HistoryPage extends StatefulWidget {
@@ -46,6 +49,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 history_name: AppLocalizations.of(context)!.exchange_history,
                 history_icon: Iconic.exchange,
               ),
+              const AdsBannerWidget(paddingTop: 10, paddingbottom: 10,),
               SelectHistoryWidget(
                 target_page: const WithdrawHistoryScreen(),
                 history_name: AppLocalizations.of(context)!.withdraw_history,
@@ -60,6 +64,12 @@ class _HistoryPageState extends State<HistoryPage> {
                 target_page: const InvestmentHistoryScreen(),
                 history_name: AppLocalizations.of(context)!.investment_history,
                 history_icon: Icons.account_balance_outlined,
+              ),
+              const AdsBannerWidget(paddingTop: 10, paddingbottom: 10,),
+              SelectHistoryWidget(
+                target_page: const PromotionHistoryScreen(),
+                history_name: AppLocalizations.of(context)!.promotion_history,
+                history_icon: Icons.discount,
               ),
               const SizedBox(
                 width: 10,
@@ -77,10 +87,16 @@ class _HistoryPageState extends State<HistoryPage> {
                 history_name: AppLocalizations.of(context)!.return_money_history,
                 history_icon: Icons.account_balance_wallet_outlined,
               ),
+              const AdsBannerWidget(paddingTop: 10, paddingbottom: 10,),
               SelectHistoryWidget(
                 target_page: const ApplicationFeesHistoryScreen(),
                 history_name: AppLocalizations.of(context)!.application_fees_history,
                 history_icon: Icons.feed_outlined,
+              ),
+              const SelectHistoryWidget(
+                target_page: GiftCardHistoryScreen(),
+                history_name: "Gift Card History",
+                history_icon: Icons.card_giftcard,
               ),
               SelectHistoryWidget(
                 target_page: const PhoneBillHistoryScreen(),
@@ -105,6 +121,7 @@ class _HistoryPageState extends State<HistoryPage> {
                       history_name: AppLocalizations.of(context)!.referral_incentive_history,
                       history_icon: Icons.dataset_linked_outlined,
               ),
+              const AdsBannerWidget(paddingTop: 10, paddingbottom: 0,),
               // MainScreen.role == "1"
               //     ? const SelectHistoryWidget(
               //         target_page: InvestProfitHistoryScreen(),

@@ -13,6 +13,13 @@ class InvestmentScreen extends StatefulWidget {
   final int investmentPlanId;
   final String investmentType;
   final String second_wallet_balance;
+  final String promotionName;
+  final String promotionAmt;
+  final String promotionStartDate;
+  final String promotionEndDate;
+  final int promotionMinInve;
+  final String promotionNetworkAmt;
+  final bool isPromotion;
   final int percentage;
 
   const InvestmentScreen({
@@ -22,6 +29,13 @@ class InvestmentScreen extends StatefulWidget {
     required this.investmentPlanId,
     required this.investmentType,
     required this.percentage,
+    required this.promotionName,
+    required this.promotionAmt,
+    required this.promotionStartDate,
+    required this.promotionEndDate,
+    required this.promotionMinInve,
+    required this.promotionNetworkAmt,
+    this.isPromotion = false,
   });
 
   @override
@@ -83,7 +97,8 @@ class _InvestmentScreenState extends State<InvestmentScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                       Text(AppLocalizations.of(context)!.main_wallet_balance,
+                      Text(
+                        AppLocalizations.of(context)!.main_wallet_balance,
                         style: TextStyle(
                           fontSize: 14,
                           color: colorWhite,
@@ -102,7 +117,7 @@ class _InvestmentScreenState extends State<InvestmentScreen> {
                               color: colorWhite,
                             ),
                           ),
-                           Text(
+                          Text(
                             AppLocalizations.of(context)!.usd,
                             style: TextStyle(
                               fontSize: 25,
@@ -114,7 +129,7 @@ class _InvestmentScreenState extends State<InvestmentScreen> {
                       const SizedBox(
                         height: 10,
                       ),
-                       Text(
+                      Text(
                         AppLocalizations.of(context)!.united_state,
                         style: TextStyle(
                           fontSize: 14,
@@ -145,12 +160,152 @@ class _InvestmentScreenState extends State<InvestmentScreen> {
                     ),
                   ],
                 ),
+                widget.isPromotion
+                    ? Container(
+                        margin: const EdgeInsets.only(top: 15),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 15,
+                          horizontal: 15,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: colorPrimary),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Row(
+                                  children: [
+                                    Icon(
+                                      Icons.discount,
+                                      color: colorPrimary,
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      "Promotion",
+                                      style: TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Text(
+                                  widget.promotionAmt,
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    color: colorPrimary,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10, top: 10),
+                              child: Text(
+                                widget.promotionName,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10, top: 8),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "Min Investment Amount",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 5),
+                                    child: Text(
+                                      " - ${widget.promotionMinInve} USD",
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        color: colorPrimary,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            widget.promotionNetworkAmt == "0 %" ? const SizedBox() : Padding(
+                              padding: const EdgeInsets.only(left: 10, top: 5),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "Network Percentage",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 5),
+                                    child: Text(
+                                      " - ${widget.promotionNetworkAmt}",
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        color: colorPrimary,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10, top: 5),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "Duration Date",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    "${widget.promotionStartDate} to ${widget.promotionEndDate}",
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: colorPrimary,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : const SizedBox(),
                 const SizedBox(
                   height: 20,
                 ),
-                 SizedBox(
+                SizedBox(
                   width: double.infinity,
-                  child: Text(AppLocalizations.of(context)!.investment_amt,
+                  child: Text(
+                    AppLocalizations.of(context)!.investment_amt,
                   ),
                 ),
                 const SizedBox(height: 5),
@@ -245,7 +400,7 @@ class _InvestmentScreenState extends State<InvestmentScreen> {
                             context: context,
                             builder: (context) {
                               return ErrorAlert(
-                                "Oppo !",
+                                "Oops !",
                                 Image.asset('images/welcome.png'),
                                 "You don't have enough USD",
                               );
@@ -282,7 +437,7 @@ class _InvestmentScreenState extends State<InvestmentScreen> {
                 //           context: context,
                 //           builder: (context) {
                 //             return ErrorAlert(
-                //               "Oppo !",
+                //               "Oops !",
                 //               Image.asset('images/welcome.png'),
                 //               "You don't have enough USD",
                 //             );

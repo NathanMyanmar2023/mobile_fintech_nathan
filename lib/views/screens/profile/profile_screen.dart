@@ -12,6 +12,7 @@ import 'package:nathan_app/views/screens/t_and_c_screen.dart';
 import 'package:nathan_app/views/screens/welcome_screen.dart';
 import 'package:nathan_app/views/widgets/profile_menu_widget.dart';
 import 'package:nathan_app/widgets/long_button_view.dart';
+import '../../Ads_banner/ads_banner_widget.dart';
 import 'choose_lan_view.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -237,6 +238,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const SizedBox(
                     height: 20,
                   ),
+                AdsBannerWidget(paddingTop: MainScreen.role == '1' ? 0 : 10, paddingbottom: 10,),
                 if (MainScreen.role == '1')
                    SizedBox(
                     width: double.infinity,
@@ -325,6 +327,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   text: AppLocalizations.of(context)!.logout,
                   onTap: () => logout(),
                 ),
+                const AdsBannerWidget(),
                 // MaterialButton(
                 //   color: Colors.red,
                 //   shape: RoundedRectangleBorder(

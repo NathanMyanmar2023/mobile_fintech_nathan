@@ -48,8 +48,8 @@ class _ForgotPassResetScreenState extends State<ForgotPassResetScreen> {
           isLoading = false;
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (BuildContext context) {
-                return const LoginScreen();
-              }), (route) => false);
+            return const LoginScreen();
+          }), (route) => false);
         });
       } else {
         //Request Deposit Error
@@ -57,7 +57,7 @@ class _ForgotPassResetScreenState extends State<ForgotPassResetScreen> {
           context: context,
           builder: (context) {
             return ErrorAlert(
-              "Oppo !",
+              "Oops !",
               Image.asset('images/welcome.png'),
               resp.message.toString(),
             );
@@ -181,7 +181,7 @@ class _ForgotPassResetScreenState extends State<ForgotPassResetScreen> {
         context: context,
         builder: (context) {
           return ErrorAlert(
-            "Oppo !",
+            "Oops !",
             Image.asset('images/welcome.png'),
             "Please complete the fields",
           );
@@ -192,9 +192,9 @@ class _ForgotPassResetScreenState extends State<ForgotPassResetScreen> {
       });
       return;
     } else {
-print("ooo ${widget.email}");
-String? otpCode = await SharedPref.getData(key: SharedPref.otpCode);
-print("ot $otpCode");
+      print("ooo ${widget.email}");
+      String? otpCode = await SharedPref.getData(key: SharedPref.otpCode);
+      print("ot $otpCode");
       Map<String, dynamic> map = {
         'email': widget.email,
         'code': otpCode,

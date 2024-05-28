@@ -5,8 +5,6 @@ import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/views/screens/history/phone_bill_history/phone_bill_history_selector_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../objects/history/phone_bill_ob.dart';
-
 class PhoneBillHistoryScreen extends StatefulWidget {
   const PhoneBillHistoryScreen({
     super.key,

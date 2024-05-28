@@ -7,7 +7,18 @@ import '../../../../widgets/app_bar_title_view.dart';
 import '../../../../widgets/nathan_text_view.dart';
 
 class OwnerRoundDetailScreen extends StatefulWidget {
-  const OwnerRoundDetailScreen({Key? key}) : super(key: key);
+  final int roundId;
+  final String roundNumber;
+  final String realAmt;
+  final String estimateAmt;
+  final String winnerBidName;
+  const OwnerRoundDetailScreen({Key? key,
+    required this.roundId,
+    required this.roundNumber,
+    required this.realAmt,
+    required this.estimateAmt,
+    required this. winnerBidName,
+  }) : super(key: key);
 
   @override
   State<OwnerRoundDetailScreen> createState() => _OwnerRoundDetailScreenState();
@@ -25,7 +36,7 @@ class _OwnerRoundDetailScreenState extends State<OwnerRoundDetailScreen> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70),
         child: AppBarTitleView(
-          text: "Place Bid for Round 1",
+          text: "Success Bid for ${widget.roundNumber}",
         ),
       ),
       body: RefreshIndicator(
@@ -35,11 +46,11 @@ class _OwnerRoundDetailScreenState extends State<OwnerRoundDetailScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25),
+               Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Text(
-                  "Round 1",
-                  style: TextStyle(
+                  widget.roundNumber,
+                  style: const TextStyle(
                       fontSize: 18.0,
                       color: colorBlack,
                       fontWeight: FontWeight.w600),
@@ -51,23 +62,23 @@ class _OwnerRoundDetailScreenState extends State<OwnerRoundDetailScreen> {
               Container(
                 color: topColors.withOpacity(0.5),
                 padding: const EdgeInsets.symmetric(vertical: 10),
-                child: const Row(
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                      Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        NathanTextView(
+                        const NathanTextView(
                           text: "Real Amount",
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
                         NathanTextView(
-                          text: "5000.00",
+                          text: widget.realAmt,
                           fontSize: 16,
                           color: colorPrimary,
                         ),
@@ -76,60 +87,58 @@ class _OwnerRoundDetailScreenState extends State<OwnerRoundDetailScreen> {
                   ],
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
+               Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Center(
                   child: NathanTextView(
-                    text: "Winner Bidder name Nay Zin Htet",
+                    text: "Winner Bidder name ${widget.winnerBidName}",
                     fontSize: 18,
                     color: colorPrimary,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const NathanTextView(
-                        text: "Bids History",
-                        fontSize: 18,
-                        color: colorBlack,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10, bottom: 20),
-                        child: ListView.builder(
-                          itemCount: 10,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (BuildContext context, index) {
-                            return Container(
-                              padding: const EdgeInsets.all(10.0),
-                              margin: const EdgeInsets.symmetric(vertical: 5),
-                              decoration: BoxDecoration(
-                                color: topColors.withOpacity(0.5),
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(child: NathanTextView(text: "name ${index+1}",)),
-                                  const NathanTextView(text: "USD500",),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 25),
+              //   child: Column(
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     mainAxisAlignment: MainAxisAlignment.start,
+              //     children: [
+              //       const NathanTextView(
+              //         text: "Bids History",
+              //         fontSize: 18,
+              //         color: colorBlack,
+              //         fontWeight: FontWeight.w600,
+              //       ),
+              //       Padding(
+              //         padding: const EdgeInsets.only(top: 10, bottom: 20),
+              //         child: ListView.builder(
+              //           itemCount: 10,
+              //           shrinkWrap: true,
+              //           physics: const NeverScrollableScrollPhysics(),
+              //           itemBuilder: (BuildContext context, index) {
+              //             return Container(
+              //               padding: const EdgeInsets.all(10.0),
+              //               margin: const EdgeInsets.symmetric(vertical: 5),
+              //               decoration: BoxDecoration(
+              //                 color: topColors.withOpacity(0.5),
+              //                 borderRadius: BorderRadius.circular(5),
+              //               ),
+              //               child: Row(
+              //                 crossAxisAlignment: CrossAxisAlignment.center,
+              //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //                 children: [
+              //                   Expanded(child: NathanTextView(text: "name ${index+1}",)),
+              //                   const NathanTextView(text: "USD500",),
+              //                 ],
+              //               ),
+              //             );
+              //           },
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         ),

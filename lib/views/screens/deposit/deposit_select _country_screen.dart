@@ -8,6 +8,7 @@ import 'package:nathan_app/views/widgets/currency_selector_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../widgets/app_bar_title_view.dart';
+import '../../Ads_banner/ads_banner_widget.dart';
 
 class DepositSelectCountryScreen extends StatefulWidget {
   final bool isForDeposit;
@@ -99,8 +100,9 @@ class _DepositSelectCountryScreenState
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  const AdsBannerWidget(paddingbottom: 0,),
                   const SizedBox(
                     height: 20,
                   ),
@@ -117,6 +119,7 @@ class _DepositSelectCountryScreenState
                             ))
                         .toList(),
                   ),
+                  const AdsBannerWidget(),
                   const SizedBox(
                     height: 50,
                   ),

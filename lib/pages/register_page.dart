@@ -161,7 +161,7 @@
 //           context: context,
 //           builder: (context) {
 //             return ErrorAlert(
-//               "Oppo !",
+//               "Oops !",
 //               Image.asset('images/welcome.png'),
 //               resp.message.toString(),
 //             );
@@ -186,7 +186,7 @@
 //             context: context,
 //             builder: (context) {
 //               return ErrorAlert(
-//                 "Oppo !",
+//                 "Oops !",
 //                 Image.asset('images/welcome.png'),
 //                 resp.message.toString(),
 //               );
@@ -214,7 +214,7 @@
 //             context: context,
 //             builder: (context) {
 //               return ErrorAlert(
-//                 "Oppo !",
+//                 "Oops !",
 //                 Image.asset('images/welcome.png'),
 //                 resp.message.toString(),
 //               );
@@ -381,7 +381,7 @@
 //                                   context: context,
 //                                   builder: (context) {
 //                                     return ErrorAlert(
-//                                         "Oppo !",
+//                                         "Oops !",
 //                                         Image.asset('images/welcome.png'),
 //                                         "Password does not metch");
 //                                   });
@@ -395,7 +395,7 @@
 //                                     context: context,
 //                                     builder: (context) {
 //                                       return ErrorAlert(
-//                                         "Oppo !",
+//                                         "Oops !",
 //                                         Image.asset('images/welcome.png'),
 //                                         "Password need to be at least 8 character and at least one number",
 //                                       );
@@ -504,7 +504,7 @@
 //                                               context: context,
 //                                               builder: (context) {
 //                                                 return ErrorAlert(
-//                                                   "Oppo !",
+//                                                   "Oops !",
 //                                                   Image.asset(
 //                                                       'images/welcome.png'),
 //                                                   "Please fill all data correctly !",

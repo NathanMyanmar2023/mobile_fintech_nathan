@@ -45,7 +45,7 @@ class _ConfirmInvestmentScreenState extends State<ConfirmInvestmentScreen> {
           context: context,
           builder: (context) {
             return ErrorAlert(
-              "Oppo !",
+              "Oops !",
               Image.asset('images/welcome.png'),
               resp.message.toString(),
             );
@@ -137,8 +137,8 @@ class _ConfirmInvestmentScreenState extends State<ConfirmInvestmentScreen> {
                       const SizedBox(
                         height: 30,
                       ),
-                       Text(
-                         AppLocalizations.of(context)!.investment_confirmation,
+                      Text(
+                        AppLocalizations.of(context)!.investment_confirmation,
                         style: TextStyle(
                           fontSize: 18,
                           color: colorPrimary,

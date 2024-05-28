@@ -75,9 +75,17 @@ const GET_AUCTION_RULE = "${API_URL}bill-auction-market/insterest-user";
 const GET_AUCTION_DETAIL = "${API_URL}bill-auction-market/detail/";
 const REQUEST_LEAVE_AUCTION = "${API_URL}bill-auction-market/leave-user/";
 const GET_AUCTION_ROUND = "${API_URL}bill-auction-market/round-list/";
+const ROUND_MONTHLY_PAY = "${API_URL}bill-auction-market/round-list/monthly/";
+const BID_STOP_ROUND = "${API_URL}bill-auction-market/round-list/";
+
+//Gift card
+const GET_GiFT_SHOP_LIST = "${API_URL}giftcard/shop/list";
+const GET_GiFT_PKG_LIST = "${API_URL}giftcard/packages?tag=";
+const REQ_GIFT_BUY = "${API_URL}giftcard/purchases";
 
 //Ecommerce
 const GET_PRODUCTS = "${API_URL}products";
+const GET_CATEGORY_PRODUCTS = "${API_URL}products/category-brand/";
 const GET_PHOTOS = "${API_URL}product";
 const ADD_TO_CART = "${API_URL}add_to_cart";
 const GET_CART = "${API_URL}cart";

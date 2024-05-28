@@ -1,7 +1,7 @@
 name: nathan_app
 description: A new Flutter project.
 
-version: 1.0.7+12
+version: 1.0.8+8
 
 environment:
   sdk: '>=2.19.2 <3.10.6'
@@ -51,6 +51,10 @@ dependencies:
   google_mobile_ads: ^5.0.0
   device_info_plus: ^3.2.3
   marquee: ^2.2.3
+  firebase_core: ^2.27.0
+  firebase_messaging: ^14.7.19
+  awesome_notifications: any
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:

@@ -13,7 +13,9 @@ import 'package:nathan_app/views/screens/exchange/exchange_screen.dart';
 import 'package:nathan_app/views/screens/investment/select_investment_screen.dart';
 import 'package:nathan_app/views/screens/kyc/kyc_screen.dart';
 import 'package:nathan_app/views/screens/main_screen.dart';
+import 'package:nathan_app/views/screens/money_market/test_gift_card.dart';
 import 'package:nathan_app/views/screens/money_market/test_money_screen.dart';
+import 'package:nathan_app/views/screens/shopping/shopping_screen.dart';
 import 'package:nathan_app/views/screens/transfer/transfer_screen.dart';
 import 'package:nathan_app/views/screens/welcome_screen.dart';
 import 'package:nathan_app/views/widgets/main_menu_button_widget.dart';
@@ -21,6 +23,9 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../bloc/user_info_bloc.dart';
 import '../../helpers/shared_pref.dart';
+import '../Ads_banner/ads_banner_widget.dart';
+import '../notification/notification_setup.dart';
+import '../screens/gift_card/gift_card_screen.dart';
 import '../screens/money_market/money_market_screen.dart';
 import '../screens/shopping/category_screen.dart';
 import '../screens/top_up/top_up_screen.dart';
@@ -36,6 +41,10 @@ class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
+
+  //final NotificationSetup _noti = NotificationSetup();
+
+  final _messagingService = MessagingService();
 
   //wallet card controller
   final _wallet_card_controller = PageController();
@@ -64,6 +73,12 @@ class _HomePageState extends State<HomePage>
 
   @override
   void initState() {
+    // _noti.configurePushNotifications(context);
+    // _noti.eventListenerCallback(context);
+
+    _messagingService.init(context);
+    _messagingService.initializeNotification(context);
+
     // TODO: implement initState
     super.initState();
     _wallets_stream = _wallets_bloc.walletsStream();
@@ -103,7 +118,8 @@ class _HomePageState extends State<HomePage>
             setState(() {
               MainScreen.kyc_message = resp.data.data.kyc_message;
             });
-          }});
+          }
+        });
       } else {
         print("error");
       }
@@ -329,7 +345,11 @@ class _HomePageState extends State<HomePage>
                   ),
                 ),
                 const SizedBox(
-                  height: 30,
+                  height: 15,
+                ),
+                const AdsBannerWidget(paddingTop: 0, paddingbottom: 0,),
+                const SizedBox(
+                  height: 15,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -435,7 +455,7 @@ class _HomePageState extends State<HomePage>
                         ),
                         menu_name: AppLocalizations.of(context)!.shopping,
                         target_page:
-                            const CategoryScreen(isMain: true), // ShoppingPage
+                            const ShoppingScreen(), // ShoppingPage
                       ),
                       const SizedBox(
                         width: 10,
@@ -459,13 +479,13 @@ class _HomePageState extends State<HomePage>
                       const SizedBox(
                         width: 10,
                       ),
-                      MainMenuButtonWidget(
+                      const MainMenuButtonWidget(
                         menu_icon: Icon(
-                          Icons.topic,
+                          Icons.card_giftcard,
                           color: colorWhite,
                         ),
-                        menu_name: AppLocalizations.of(context)!.top_up,
-                        target_page:  const TopUpScreen(),
+                        menu_name: "Gift Card",
+                        target_page: GiftCardScreen(),
                       ),
                     ],
                   ),
@@ -477,17 +497,30 @@ class _HomePageState extends State<HomePage>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      MainMenuButtonWidget(
+                        menu_icon: const Icon(
+                          Icons.topic,
+                          color: colorWhite,
+                        ),
+                        menu_name: AppLocalizations.of(context)!.top_up,
+                        target_page: const TopUpScreen(),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
                       const MainMenuButtonWidget(
-                        menu_icon:  Icon(
+                        menu_icon: Icon(
                           Linecons.shop,
                           color: colorWhite,
                         ),
                         menu_name: "Money Market",
-                        target_page: TestMoneyMarketScreen(),
+                        target_page: MoneyMarketScreen(),
                       ),
-                      const SizedBox(width: 18,),
+                      const SizedBox(
+                        width: 10,
+                      ),
                       Expanded(
-                        flex: 3,
+                        flex: 2,
                         child: AspectRatio(
                           aspectRatio: 1,
                           child: Container(),

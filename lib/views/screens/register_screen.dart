@@ -194,7 +194,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           context: context,
           builder: (context) {
             return ErrorAlert(
-              "Oppo !",
+              "Oops !",
               Image.asset('images/welcome.png'),
               resp.message.toString(),
             );
@@ -219,7 +219,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             context: context,
             builder: (context) {
               return ErrorAlert(
-                "Oppo !",
+                "Oops !",
                 Image.asset('images/welcome.png'),
                 resp.message.toString(),
               );
@@ -246,7 +246,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             context: context,
             builder: (context) {
               return ErrorAlert(
-                "Oppo !",
+                "Oops !",
                 Image.asset('images/welcome.png'),
                 resp.message.toString(),
               );
@@ -274,7 +274,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             context: context,
             builder: (context) {
               return ErrorAlert(
-                "Oppo !",
+                "Oops !",
                 Image.asset('images/welcome.png'),
                 resp.message.toString(),
               );
@@ -386,8 +386,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ? EmailSectionView(
                                     emailController: emailTec,
                                   )
-                                : currentState ==
-                                        RegisterState.chooseUserName
+                                : currentState == RegisterState.chooseUserName
                                     ? ChooseUserNameSectionView(
                                         nameController: nameTec,
                                         usernameController: usernameTec,
@@ -427,43 +426,42 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                 },
                                                 regionController: regionTec,
                                                 cityController: cityTec,
-                                                addressController:
-                                                    addressTec,
-                                                postalController:
-                                                    postalCodeTec,
+                                                addressController: addressTec,
+                                                postalController: postalCodeTec,
                                               ),
                   ),
                   CancelAndNextButtonSectionView(
                     state: currentState,
-                    onTapCancel: () =>
-                        currentState == RegisterState.accountType
-                            ? popBack(context: context)
-                            : onHandleStep(),
+                    onTapCancel: () => currentState == RegisterState.accountType
+                        ? popBack(context: context)
+                        : onHandleStep(),
                     onTapNext: () => onTapNext(context),
                   ),
-                  currentState == RegisterState.contactInfo ? Column(
-                    children: [
-                      const Text(
-                        "By Signing up, you confirm that you agree to our\nEULA and Terms and Conditions,",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: colorBlack,
-                        ),
-                      ),
-                      CancelAndNextButtonSectionView(
-                        visibility: true,
-                        onTapCancel: () => onHandleStep(),
-                        onTapNext: () => register(),
-                        state: currentState,
-                        textColor: colorWhite,
-                        backgroundColor: colorPrimary,
-                        margin: const EdgeInsets.symmetric(
-                          horizontal: 40,
-                          vertical: 20,
-                        ),
-                      ),
-                    ],
-                  ) : const SizedBox(),
+                  currentState == RegisterState.contactInfo
+                      ? Column(
+                          children: [
+                            const Text(
+                              "By Signing up, you confirm that you agree to our\nEULA and Terms and Conditions,",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: colorBlack,
+                              ),
+                            ),
+                            CancelAndNextButtonSectionView(
+                              visibility: true,
+                              onTapCancel: () => onHandleStep(),
+                              onTapNext: () => register(),
+                              state: currentState,
+                              textColor: colorWhite,
+                              backgroundColor: colorPrimary,
+                              margin: const EdgeInsets.symmetric(
+                                horizontal: 40,
+                                vertical: 20,
+                              ),
+                            ),
+                          ],
+                        )
+                      : const SizedBox(),
                 ],
               ),
             ),
@@ -487,7 +485,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           context: context,
           builder: (context) {
             return ErrorAlert(
-              "Oppo !",
+              "Oops !",
               Image.asset('images/welcome.png'),
               "Please fill all data correctly !",
             );
@@ -707,7 +705,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       showDialog(
           context: context,
           builder: (context) {
-            return ErrorAlert("Oppo !", Image.asset('images/welcome.png'),
+            return ErrorAlert("Oops !", Image.asset('images/welcome.png'),
                 "Password does not metch");
           });
       setState(() {
@@ -720,7 +718,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             context: context,
             builder: (context) {
               return ErrorAlert(
-                "Oppo !",
+                "Oops !",
                 Image.asset('images/welcome.png'),
                 "Password need to be at least 8 character and at least one number",
               );

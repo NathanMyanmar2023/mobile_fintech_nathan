@@ -12,6 +12,7 @@ import 'package:nathan_app/widgets/text_field_with_label_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../widgets/app_bar_title_view.dart';
+import '../../Ads_banner/ads_banner_widget.dart';
 
 class TransferScreen extends StatefulWidget {
   final String main_wallet_balance;
@@ -54,7 +55,7 @@ class _TransferScreenState extends State<TransferScreen> {
           context: context,
           builder: (context) {
             return ErrorAlert(
-              "Oppo !",
+              "Oops !",
               Image.asset('images/welcome.png'),
               resp.message.toString(),
             );
@@ -109,7 +110,9 @@ class _TransferScreenState extends State<TransferScreen> {
           backgroundColor: Colors.white,
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(70),
-            child: AppBarTitleView(text: AppLocalizations.of(context)!.transfer,),
+            child: AppBarTitleView(
+              text: AppLocalizations.of(context)!.transfer,
+            ),
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -129,7 +132,7 @@ class _TransferScreenState extends State<TransferScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                         Text(
+                        Text(
                           AppLocalizations.of(context)!.main_wallet_balance,
                           style: TextStyle(
                             fontSize: 14,
@@ -178,7 +181,8 @@ class _TransferScreenState extends State<TransferScreen> {
                   Column(
                     children: [
                       TextFieldWithLabelView(
-                        label: "${AppLocalizations.of(context)!.amount} (${widget.main_wallet_currency})",
+                        label:
+                            "${AppLocalizations.of(context)!.amount} (${widget.main_wallet_currency})",
                         controller: amount_tec,
                         keyboardType: TextInputType.number,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -215,7 +219,7 @@ class _TransferScreenState extends State<TransferScreen> {
                       const SizedBox(
                         height: 20,
                       ),
-                       SizedBox(
+                      SizedBox(
                         width: double.infinity,
                         child: Text(
                           AppLocalizations.of(context)!.phone_no,
@@ -235,7 +239,8 @@ class _TransferScreenState extends State<TransferScreen> {
                         child: Row(
                           children: [
                             CountryCodePicker(
-                              initialSelection: AppLocalizations.of(context)!.th,
+                              initialSelection:
+                                  AppLocalizations.of(context)!.th,
                               onChanged: (value) {
                                 setState(() {
                                   _phone_code = value.dialCode.toString();
@@ -306,7 +311,7 @@ class _TransferScreenState extends State<TransferScreen> {
                             context: context,
                             builder: (context) {
                               return ErrorAlert(
-                                "Oppo !",
+                                "Oops !",
                                 Image.asset('images/welcome.png'),
                                 "Please fill all fields",
                               );
@@ -320,16 +325,18 @@ class _TransferScreenState extends State<TransferScreen> {
                               context: context,
                               builder: (context) {
                                 return ErrorAlert(
-                                  "Oppo !",
+                                  "Oops !",
                                   Image.asset('images/welcome.png'),
-                                  AppLocalizations.of(context)!.u_dont_have_enought_balance,
+                                  AppLocalizations.of(context)!
+                                      .u_dont_have_enought_balance,
                                 );
                               },
                             );
                             return;
                           } else {
                             if (note_tec.text == "") {
-                              transfer_note = AppLocalizations.of(context)!.transfer_note;
+                              transfer_note =
+                                  AppLocalizations.of(context)!.transfer_note;
                             } else {
                               transfer_note = note_tec.text;
                             }
@@ -349,6 +356,9 @@ class _TransferScreenState extends State<TransferScreen> {
                           }
                         }
                       }),
+                  const AdsBannerWidget(
+                    paddingbottom: 0,
+                  ),
                   // MaterialButton(
                   //   color: Colors.blue,
                   //   shape: RoundedRectangleBorder(
@@ -362,7 +372,7 @@ class _TransferScreenState extends State<TransferScreen> {
                   //         context: context,
                   //         builder: (context) {
                   //           return ErrorAlert(
-                  //             "Oppo !",
+                  //             "Oops !",
                   //             Image.asset('images/welcome.png'),
                   //             "Please fill all fields",
                   //           );
@@ -376,7 +386,7 @@ class _TransferScreenState extends State<TransferScreen> {
                   //           context: context,
                   //           builder: (context) {
                   //             return ErrorAlert(
-                  //               "Oppo !",
+                  //               "Oops !",
                   //               Image.asset('images/welcome.png'),
                   //               "You don't have enough balance",
                   //             );

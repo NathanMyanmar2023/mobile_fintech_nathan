@@ -1,8 +1,10 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:nathan_app/extensions/navigation_extensions.dart';
 import 'package:nathan_app/objects/money_market/Auction_rule_ob.dart';
 import 'package:nathan_app/resources/colors.dart';
+import 'package:nathan_app/views/Ads_banner/ads_banner_widget.dart';
 import 'package:nathan_app/views/custom/snack_bar.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -83,7 +85,7 @@ class _BillAuctionScreenState extends State<BillAuctionScreen> {
                   TextButton(
                     onPressed: () {
                       popBack(context: context);
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (co) => const MoneyMarketScreen()));
+                      popBack(context: context);
                     },
                     child: const Text(
                       'OK',
@@ -235,8 +237,9 @@ class _BillAuctionScreenState extends State<BillAuctionScreen> {
                             return NathanTextView(text: "${auctionRuleList[index]}");
                           },
                         ),
+                        const AdsBannerWidget(paddingbottom: 0,),
                         Padding(
-                          padding: const EdgeInsets.only(top: 30),
+                          padding: const EdgeInsets.only(top: 20),
                           child: AgreeSectionView(
                             isSelected: _agreeVisible,
                             onChange: (value) {

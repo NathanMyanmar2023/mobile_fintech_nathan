@@ -12,6 +12,7 @@ import 'package:nathan_app/widgets/long_button_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../widgets/app_bar_title_view.dart';
+import '../../Ads_banner/ads_banner_widget.dart';
 
 class ExchangeScreen extends StatefulWidget {
   const ExchangeScreen({super.key});
@@ -94,7 +95,9 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
           backgroundColor: Colors.grey.shade200,
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(70),
-            child: AppBarTitleView(text: AppLocalizations.of(context)!.wallet_exchange,),
+            child: AppBarTitleView(
+              text: AppLocalizations.of(context)!.wallet_exchange,
+            ),
           ),
           body: SingleChildScrollView(
             child: Padding(
@@ -122,8 +125,9 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                             Text(
-                               AppLocalizations.of(context)!.currency_exchange_rate,
+                            Text(
+                              AppLocalizations.of(context)!
+                                  .currency_exchange_rate,
                               style: TextStyle(fontSize: 12),
                             ),
                             const SizedBox(
@@ -219,7 +223,8 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
                                       // fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  Text(AppLocalizations.of(context)!.sec_wallet,
+                                  Text(
+                                    AppLocalizations.of(context)!.sec_wallet,
                                     style: TextStyle(
                                       fontSize: 11,
                                       color: !to_main_wallet
@@ -316,8 +321,9 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                               Text(
-                                AppLocalizations.of(context)!.main_wallet_balance,
+                              Text(
+                                AppLocalizations.of(context)!
+                                    .main_wallet_balance,
                                 style: const TextStyle(
                                   fontSize: 14,
                                   color: colorWhite,
@@ -361,7 +367,7 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
                         const SizedBox(
                           height: 30,
                         ),
-                         SizedBox(
+                        SizedBox(
                           width: double.infinity,
                           child: Text(
                             AppLocalizations.of(context)!.exchange_amt,
@@ -510,7 +516,7 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                               Text(
+                              Text(
                                 AppLocalizations.of(context)!.sec_wallet,
                                 style: TextStyle(
                                   fontSize: 14,
@@ -530,8 +536,8 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
                                       color: colorWhite,
                                     ),
                                   ),
-                                   Text(
-                                     AppLocalizations.of(context)!.usd,
+                                  Text(
+                                    AppLocalizations.of(context)!.usd,
                                     style: TextStyle(
                                       fontSize: 25,
                                       color: colorWhite,
@@ -542,7 +548,7 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
                               const SizedBox(
                                 height: 10,
                               ),
-                               Text(
+                              Text(
                                 AppLocalizations.of(context)!.united_state,
                                 style: TextStyle(
                                   fontSize: 14,
@@ -555,9 +561,10 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
                         const SizedBox(
                           height: 30,
                         ),
-                         SizedBox(
+                        SizedBox(
                           width: double.infinity,
-                          child: Text(AppLocalizations.of(context)!.exchange_amt,
+                          child: Text(
+                            AppLocalizations.of(context)!.exchange_amt,
                           ),
                         ),
                         const SizedBox(height: 5),
@@ -682,53 +689,58 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
                   const SizedBox(
                     height: 30,
                   ),
-                  LongButtonView(text: AppLocalizations.of(context)!.exchange, onTap: (){
-                    if (amount_tec.text != "") {
-                      if (double.parse(amount_tec.text) <
-                          double.parse(
-                              to_main_wallet ? usd_balance : balance) +
-                              1) {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return ConfirmExchangeScreen(
-                            from_amount: amount_tec.text,
-                            to_amount: change_amount_tec.text,
-                            from_country_code:
-                            to_main_wallet ? 'US' : country_code,
-                            to_country_code:
-                            !to_main_wallet ? 'US' : country_code,
-                            from_currency: to_main_wallet ? 'USD' : currency,
-                            to_currency: !to_main_wallet ? 'USD' : currency,
-                            to_main_wallet: to_main_wallet,
-                          );
-                        }));
-                      } else {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return ErrorAlert(
-                              "Oppo !",
-                              Image.asset('images/welcome.png'),
-                              AppLocalizations.of(context)!.u_dont_have_enought_balance,
+                  LongButtonView(
+                      text: AppLocalizations.of(context)!.exchange,
+                      onTap: () {
+                        if (amount_tec.text != "") {
+                          if (double.parse(amount_tec.text) <
+                              double.parse(
+                                      to_main_wallet ? usd_balance : balance) +
+                                  1) {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return ConfirmExchangeScreen(
+                                from_amount: amount_tec.text,
+                                to_amount: change_amount_tec.text,
+                                from_country_code:
+                                    to_main_wallet ? 'US' : country_code,
+                                to_country_code:
+                                    !to_main_wallet ? 'US' : country_code,
+                                from_currency:
+                                    to_main_wallet ? 'USD' : currency,
+                                to_currency: !to_main_wallet ? 'USD' : currency,
+                                to_main_wallet: to_main_wallet,
+                              );
+                            }));
+                          } else {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return ErrorAlert(
+                                  "Oops !",
+                                  Image.asset('images/welcome.png'),
+                                  AppLocalizations.of(context)!
+                                      .u_dont_have_enought_balance,
+                                );
+                              },
                             );
-                          },
-                        );
-                        return;
-                      }
-                    } else {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return ErrorAlert(
-                            "Oppo !",
-                            Image.asset('images/welcome.png'),
-                            AppLocalizations.of(context)!.amt_field_required,
+                            return;
+                          }
+                        } else {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return ErrorAlert(
+                                "Oops !",
+                                Image.asset('images/welcome.png'),
+                                AppLocalizations.of(context)!
+                                    .amt_field_required,
+                              );
+                            },
                           );
-                        },
-                      );
-                      return;
-                    }
-                  }),
+                          return;
+                        }
+                      }),
                   const SizedBox(
                     height: 70,
                   ),

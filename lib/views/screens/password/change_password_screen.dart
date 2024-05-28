@@ -56,7 +56,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           context: context,
           builder: (context) {
             return ErrorAlert(
-              "Oppo !",
+              "Oops !",
               Image.asset('images/welcome.png'),
               resp.message.toString(),
             );
@@ -189,7 +189,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         context: context,
         builder: (context) {
           return ErrorAlert(
-            "Oppo !",
+            "Oops !",
             Image.asset('images/welcome.png'),
             "Please complete the fields",
           );

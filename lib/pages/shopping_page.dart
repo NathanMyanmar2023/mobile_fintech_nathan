@@ -16,7 +16,8 @@ import '../views/screens/history/phone_bill_history/phone_bill_history_selector_
 
 class ShoppingPage extends StatefulWidget {
   final int? brandId;
-  const ShoppingPage({super.key, required this.brandId});
+  final int? categoryId;
+  const ShoppingPage({super.key, required this.brandId, required this.categoryId});
 
   @override
   State<ShoppingPage> createState() => _ShoppingPageState();
@@ -38,12 +39,14 @@ class _ShoppingPageState extends State<ShoppingPage> {
   int limit = 30;
   bool hasMore = true;
   Future fetch() async {
+    widget.brandId == 0 ? _shoppingBloc.getCategoryProducts(categoryId: widget.categoryId, page: page) :
     _shoppingBloc.getShoppingProduct(brandId: widget.brandId, page: page);
     print(hasMore);
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
       print("truh as");
+      widget.brandId == 0 ? _shoppingBloc.getCategoryProducts(categoryId: widget.categoryId, page: page) :
       _shoppingBloc.getShoppingProduct(brandId: widget.brandId, page: page);
       print("getting page - $page");
     }
@@ -69,8 +72,6 @@ class _ShoppingPageState extends State<ShoppingPage> {
       print("rese ${resp.loadPostState}");
       if (resp.success) {
         setState(() {
-         //  shoppingProductList = (resp.data as ShoppingOb).data ?? [];
-          // print("shoppingProductList $shoppingProductList");
 
 print("resp.data.data.length ${resp.data.data.length}");
           for (var i = 0; i < resp.data.data.length; i++) {
@@ -96,9 +97,11 @@ print("resp.data.data.length ${resp.data.data.length}");
           page++;
 
           isFetching = false;
-          if (resp.data.data.length < 30) {
-            hasMore = false;
-          }
+            if (resp.data.data.length == 10) {
+              print("odoeor");
+              hasMore = false;
+              fetch();
+            }
         });
       } else {
         isLoading = false;}
@@ -174,10 +177,8 @@ print("resp.data.data.length ${resp.data.data.length}");
       }
     });
 
-    //_shoppingBloc.getShoppingProduct(brandId: widget.brandId, page: page);
-   // _shoppingBloc.getProducts(page);
-
-    fetch();
+    widget.brandId == 0 ? _shoppingBloc.getCategoryProducts(categoryId: widget.categoryId, page: page) :
+    _shoppingBloc.getShoppingProduct(brandId: widget.brandId, page: page);
 
     //Scroll controller
     scroll_controller.addListener(() {
@@ -196,10 +197,13 @@ print("resp.data.data.length ${resp.data.data.length}");
           children: [
             shoppingProductList.isEmpty ?
             Center(
-              child: Text(
-                    AppLocalizations.of(context)!.no_more_data,),
+              child: Padding(
+                padding: EdgeInsets.only(top: 1.h),
+                child: Text(
+                      AppLocalizations.of(context)!.no_more_data,),
+              ),
             ): SizedBox(
-              height: MediaQuery.of(context).size.height - 50,
+             // height: MediaQuery.of(context).size.height - 120,
               child: RefreshIndicator(
                 onRefresh: refersh,
                 child: ListView.builder(
@@ -208,7 +212,7 @@ print("resp.data.data.length ${resp.data.data.length}");
                   ),
                   itemCount: shoppingProductList.length,
                   controller: scroll_controller,
-                //  shrinkWrap: true,
+                  shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
                     final productList = shoppingProductList[index];
                     if (index < shoppingProductList.length) {
@@ -253,7 +257,10 @@ print("resp.data.data.length ${resp.data.data.length}");
                                           bottom: 0,
                                           left: 0,
                                           child: Container(
-                                              color: Colors.black.withOpacity(0.5),
+                                              decoration: BoxDecoration(
+                                                color: Colors.black.withOpacity(0.5),
+                                                borderRadius: BorderRadius.circular(12),
+                                              ),
                                               child: Center(
                                                 child: Text("Out of Stock", style: TextStyle(color: Colors.yellow, fontWeight: FontWeight.w600, fontSize: 16.sp)),
                                               )

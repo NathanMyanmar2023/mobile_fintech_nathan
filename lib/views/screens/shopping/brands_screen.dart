@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:nathan_app/bloc/shopping/brands_bloc.dart';
 import 'package:nathan_app/objects/brands_ob.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../helpers/response_ob.dart';
 import '../../../pages/cart_page.dart';
 import '../../../pages/order_list_page.dart';
 import '../../../pages/shopping_page.dart';
 import '../../../resources/colors.dart';
 import '../../../widgets/app_bar_title_view.dart';
+import '../../Ads_banner/ads_banner_widget.dart';
 
 class BrandsScreen extends StatefulWidget {
   final int categoryId;
-  const BrandsScreen({Key? key, required this.categoryId}) : super(key: key);
+  final String categoryName;
+  const BrandsScreen({Key? key, required this.categoryId, required this.categoryName}) : super(key: key);
 
   @override
   State<BrandsScreen> createState() => _BrandsScreenState();
@@ -62,8 +65,8 @@ class _BrandsScreenState extends State<BrandsScreen> {
               onPressed: () => Navigator.of(context).pop(),
             ),
             title:  Text(
-              AppLocalizations.of(context)!.brand,
-              style: TextStyle(
+              "${widget.categoryName} / ${AppLocalizations.of(context)!.brand}",
+              style: const TextStyle(
                 fontSize: 18,
                 color: colorPrimary,
                 fontWeight: FontWeight.w800,
@@ -172,16 +175,21 @@ class _BrandsScreenState extends State<BrandsScreen> {
                   ),
                 ),
               ),
+                 const Center(child: AdsBannerWidget(paddingbottom: 10, paddingTop: 0,)),
                Expanded(
-                child: TabBarView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  children:
-                    List.generate(brandsList.length, (indexView) {
-                      return ShoppingPage(brandId: brandsList[indexView].id,);
-                    }).toList(),
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 2.h),
+                  child: TabBarView(
+                    physics: const NeverScrollableScrollPhysics(),
+                    children:
+                      List.generate(brandsList.length, (indexView) {
+                        return ShoppingPage(brandId: brandsList[indexView].id, categoryId: widget.categoryId,);
+                      }).toList(),
 
+                  ),
                 ),
               ),
+                 // SizedBox(height: 2.h,),
             ]),
           )),
     );

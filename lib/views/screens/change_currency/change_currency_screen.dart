@@ -97,7 +97,7 @@ class _ChangeCurrencyScreenState extends State<ChangeCurrencyScreen> {
           context: context,
           builder: (context) {
             return ErrorAlert(
-              "Oppo !",
+              "Oops !",
               Image.asset('images/welcome.png'),
               resp.message.toString(),
             );

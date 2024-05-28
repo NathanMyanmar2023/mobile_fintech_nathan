@@ -1,10 +1,14 @@
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:nathan_app/view_models/add_address_view_model.dart';
 import 'package:nathan_app/view_models/cart_view_model.dart';
 import 'package:nathan_app/view_models/app_language_view_model.dart';
+import 'package:nathan_app/views/notification/notification_service.dart';
 import 'package:nathan_app/views/screens/login_screen.dart';
 import 'package:nathan_app/views/screens/main_screen.dart';
 import 'package:nathan_app/views/screens/register_screen.dart';
@@ -17,23 +21,35 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'firebase_options.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   String _deviceToken = '';
   _deviceToken = await _saveDeviceToken();
-  // MobileAds.instance
-  //     ..initialize()
-  //   ..updateRequestConfiguration(
-  //   RequestConfiguration(testDeviceIds: [_deviceToken]),
-  // );
-  List<String> testDeviceIds = [_deviceToken];
-  RequestConfiguration configuration = RequestConfiguration(testDeviceIds: testDeviceIds);
-  await MobileAds.instance.updateRequestConfiguration(configuration);
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await MobileAds.instance.initialize();
+  // thing to add
+  List<String> testDeviceIds = ["6CB9DF638CDF0411C30830373D9580A0"];
+  RequestConfiguration configuration =
+  RequestConfiguration(testDeviceIds: testDeviceIds);
+  MobileAds.instance.updateRequestConfiguration(configuration);
+
+  // List<String> testDeviceIds = [_deviceToken];
+  // RequestConfiguration configuration = RequestConfiguration(testDeviceIds: testDeviceIds);
+  // await MobileAds.instance.updateRequestConfiguration(configuration);
+
   AppLanguageViewModel appLanguage = AppLanguageViewModel();
   await appLanguage.fetchLocale();
-  runApp( Nathan(
-    appLanguage: appLanguage,
-  ));
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp( Nathan(
+      appLanguage: appLanguage,
+    ));
+  });
 }
 Future<String> _saveDeviceToken() async {
   String _deviceToken = '';

@@ -1,6 +1,41 @@
 PODS:
+  - awesome_notifications (0.8.1):
+    - Flutter
+    - IosAwnCore (~> 0.8.0)
   - device_info_plus (0.0.1):
     - Flutter
+  - Firebase/CoreOnly (10.22.0):
+    - FirebaseCore (= 10.22.0)
+  - Firebase/Messaging (10.22.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 10.22.0)
+  - firebase_core (2.27.0):
+    - Firebase/CoreOnly (= 10.22.0)
+    - Flutter
+  - firebase_messaging (14.7.19):
+    - Firebase/Messaging (= 10.22.0)
+    - firebase_core
+    - Flutter
+  - FirebaseCore (10.22.0):
+    - FirebaseCoreInternal (~> 10.0)
+    - GoogleUtilities/Environment (~> 7.12)
+    - GoogleUtilities/Logger (~> 7.12)
+  - FirebaseCoreInternal (10.25.0):
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
+  - FirebaseInstallations (10.25.0):
+    - FirebaseCore (~> 10.0)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GoogleUtilities/UserDefaults (~> 7.8)
+    - PromisesObjC (~> 2.1)
+  - FirebaseMessaging (10.22.0):
+    - FirebaseCore (~> 10.0)
+    - FirebaseInstallations (~> 10.0)
+    - GoogleDataTransport (~> 9.3)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GoogleUtilities/Reachability (~> 7.8)
+    - GoogleUtilities/UserDefaults (~> 7.8)
+    - nanopb (< 2.30911.0, >= 2.30908.0)
   - Flutter (1.0.0)
   - flutter_app_version_checker (0.0.1):
     - Flutter
@@ -20,14 +55,50 @@ PODS:
     - Flutter
     - Google-Mobile-Ads-SDK (~> 11.2.0)
     - webview_flutter_wkwebview
+  - GoogleDataTransport (9.4.1):
+    - GoogleUtilities/Environment (~> 7.7)
+    - nanopb (< 2.30911.0, >= 2.30908.0)
+    - PromisesObjC (< 3.0, >= 1.2)
   - GoogleUserMessagingPlatform (2.4.0)
+  - GoogleUtilities/AppDelegateSwizzler (7.13.3):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Environment (7.13.3):
+    - GoogleUtilities/Privacy
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities/Logger (7.13.3):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Network (7.13.3):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Privacy
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (7.13.3)":
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Privacy (7.13.3)
+  - GoogleUtilities/Reachability (7.13.3):
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/UserDefaults (7.13.3):
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Privacy
   - image_picker_ios (0.0.1):
     - Flutter
+  - IosAwnCore (0.8.0)
+  - nanopb (2.30910.0):
+    - nanopb/decode (= 2.30910.0)
+    - nanopb/encode (= 2.30910.0)
+  - nanopb/decode (2.30910.0)
+  - nanopb/encode (2.30910.0)
   - package_info_plus (0.4.5):
     - Flutter
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - PromisesObjC (2.4.0)
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -41,7 +112,10 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - awesome_notifications (from `.symlinks/plugins/awesome_notifications/ios`)
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
+  - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
+  - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
   - flutter_app_version_checker (from `.symlinks/plugins/flutter_app_version_checker/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
@@ -58,14 +132,30 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Firebase
+    - FirebaseCore
+    - FirebaseCoreInternal
+    - FirebaseInstallations
+    - FirebaseMessaging
     - FMDB
     - Google-Mobile-Ads-SDK
+    - GoogleDataTransport
     - GoogleUserMessagingPlatform
+    - GoogleUtilities
+    - IosAwnCore
+    - nanopb
+    - PromisesObjC
     - Toast
 
 EXTERNAL SOURCES:
+  awesome_notifications:
+    :path: ".symlinks/plugins/awesome_notifications/ios"
   device_info_plus:
     :path: ".symlinks/plugins/device_info_plus/ios"
+  firebase_core:
+    :path: ".symlinks/plugins/firebase_core/ios"
+  firebase_messaging:
+    :path: ".symlinks/plugins/firebase_messaging/ios"
   Flutter:
     :path: Flutter
   flutter_app_version_checker:
@@ -94,7 +184,15 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
 
 SPEC CHECKSUMS:
+  awesome_notifications: db394d2e061e4583ba0f738ddea611e3986cc3fb
   device_info_plus: e5c5da33f982a436e103237c0c85f9031142abed
+  Firebase: 797fd7297b7e1be954432743a0b3f90038e45a71
+  firebase_core: 100945864b4aedce3cfef0c62ab864858bf013cf
+  firebase_messaging: e65050bf9b187511d80ea3a4de7cf5573d2c7543
+  FirebaseCore: 0326ec9b05fbed8f8716cddbf0e36894a13837f7
+  FirebaseCoreInternal: 910a81992c33715fec9263ca7381d59ab3a750b7
+  FirebaseInstallations: 91950fe859846fff0fbd296180909dd273103b09
+  FirebaseMessaging: 9f71037fd9db3376a4caa54e5a3949d1027b4b6e
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_app_version_checker: 2beb5e211990c45ebfc17b81aa4d08ebd7edb757
   fluttertoast: 31b00dabfa7fb7bacd9e7dbee580d7a2ff4bf265
@@ -103,10 +201,15 @@ SPEC CHECKSUMS:
   geolocator_apple: 6cbaf322953988e009e5ecb481f07efece75c450
   Google-Mobile-Ads-SDK: 5a6d005a6cb5b5e8f4c7b69ca05cdea79c181139
   google_mobile_ads: 5698dd1cd5a3cfc6688abec7db5428f237d6b1ac
+  GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
   GoogleUserMessagingPlatform: f131fa7978d2ba88d7426702b057c2cc318e6595
+  GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
   image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
+  IosAwnCore: ed1b2b6d84962a758354dbacd9ce525c72ce28a9
+  nanopb: 438bc412db1928dac798aa6fd75726007be04262
   package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
   path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
+  PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
   sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
   Toast: 1f5ea13423a1e6674c4abdac5be53587ae481c4e

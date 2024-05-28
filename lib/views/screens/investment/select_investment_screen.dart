@@ -10,6 +10,7 @@ import 'package:nathan_app/widgets/long_button_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../widgets/app_bar_title_view.dart';
+import '../../Ads_banner/ads_banner_widget.dart';
 
 class SelectInvestmentScreen extends StatefulWidget {
   final String second_wallet_balance;
@@ -98,70 +99,104 @@ class _SelectInvestmentScreenState extends State<SelectInvestmentScreen> {
                   Row(
                     children: [
                       Expanded(
-                        child: AspectRatio(
-                          aspectRatio: 1 / 1,
-                          child: InkWell(
-                            onTap: () {
-                              if (isSixMonth) {
-                                setState(() {
-                                  isSixMonth = false;
-                                });
-                              }
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                  color: !isSixMonth
-                                      ? colorPrimary
-                                      : Colors.transparent,
-                                  width: 3,
-                                ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: Image.asset(
-                                  'images/customer.png',
+                        child: Stack(
+                          children: [
+                            AspectRatio(
+                              aspectRatio: 1 / 1,
+                              child: InkWell(
+                                onTap: () {
+                                  if (isSixMonth) {
+                                    setState(() {
+                                      isSixMonth = false;
+                                    });
+                                  }
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                      color: !isSixMonth
+                                          ? colorPrimary
+                                          : Colors.transparent,
+                                      width: 3,
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Image.asset(
+                                      'images/customer.png',
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
+                            investmentPlanList[0]?.promotion?.isAvailable != true ? const SizedBox() : Positioned(
+                              top: 2,
+                              right: 3,
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.red.withOpacity(
+                                      0.8,
+                                    ),
+                                  ),
+                                padding: const EdgeInsets.only(right: 5, top: 5, left: 8, bottom: 5),
+                                  child: const Text("Promotion", style: TextStyle(color: Colors.white),)),
+                            ),
+                          ],
                         ),
                       ),
                       const SizedBox(
                         width: 30,
                       ),
                       Expanded(
-                        child: AspectRatio(
-                          aspectRatio: 1 / 1,
-                          child: InkWell(
-                            onTap: () {
-                              if (!isSixMonth) {
-                                setState(() {
-                                  isSixMonth = true;
-                                });
-                              }
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                  color: isSixMonth
-                                      ? colorPrimary
-                                      : Colors.grey.shade100,
-                                  width: 3,
-                                ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: Image.asset(
-                                  'images/distributor.png',
+                        child: Stack(
+                          children: [
+                            AspectRatio(
+                              aspectRatio: 1 / 1,
+                              child: InkWell(
+                                onTap: () {
+                                  if (!isSixMonth) {
+                                    setState(() {
+                                      isSixMonth = true;
+                                    });
+                                  }
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                      color: isSixMonth
+                                          ? colorPrimary
+                                          : Colors.grey.shade100,
+                                      width: 3,
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Image.asset(
+                                      'images/distributor.png',
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
+                            investmentPlanList[1]?.promotion?.isAvailable != true ? const SizedBox() : Positioned(
+                              top: 2,
+                              right: 3,
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.red.withOpacity(
+                                      0.8,
+                                    ),
+                                  ),
+                                  padding: const EdgeInsets.only(right: 5, top: 5, left: 8, bottom: 5),
+                                  child: const Text("Promotion", style: TextStyle(color: Colors.white),)),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -259,12 +294,13 @@ class _SelectInvestmentScreenState extends State<SelectInvestmentScreen> {
                   LongButtonView(
                       text: AppLocalizations.of(context)!.next,
                       onTap: () {
-                        isSixMonth ? investmentPlanList[1]?.is_allow == 0 ?
+                        isSixMonth ? investmentPlanList[1]?.isAllow == 0 ?
                         context.showSnack(AppLocalizations.of(context)!.sry_accept_trans_error_msg,
                           Colors.white,
                           Colors.red,
                           Icons.close,
-                        ) : Navigator.of(context)
+                        ) :
+                        Navigator.of(context)
                             .push(MaterialPageRoute(builder: (context) {
                           return InvestmentScreen(
                             isSixMonth: isSixMonth,
@@ -281,8 +317,34 @@ class _SelectInvestmentScreenState extends State<SelectInvestmentScreen> {
                                 ? investmentPlanList[1]?.profit
                                 : investmentPlanList[0]?.profit) ??
                                 0,
+                            promotionName: (isSixMonth
+                                ? investmentPlanList[1]?.promotion?.name
+                                : investmentPlanList[0]?.promotion?.name) ??
+                                "-",
+    promotionAmt: (isSixMonth
+                                  ? investmentPlanList[1]?.promotion?.amount
+                                  : investmentPlanList[0]?.promotion?.amount) ??
+                                  "-",
+    promotionStartDate: (isSixMonth
+                                  ? investmentPlanList[1]?.promotion?.startDate
+                                  : investmentPlanList[0]?.promotion?.startDate) ??
+                                  "-",
+    promotionEndDate: (isSixMonth
+                                  ? investmentPlanList[1]?.promotion?.endDate
+                                  : investmentPlanList[0]?.promotion?.endDate) ??
+                                  "-",
+                            promotionMinInve: (isSixMonth
+                                ? investmentPlanList[1]?.promotion?.minInvestAmount
+                                : investmentPlanList[0]?.promotion?.minInvestAmount) ?? 0,
+                            promotionNetworkAmt: (isSixMonth
+                                ? investmentPlanList[1]?.promotion?.networkPercentage
+                                : investmentPlanList[0]?.promotion?.networkPercentage) ?? "-",
+                            isPromotion: (isSixMonth
+                                ? investmentPlanList[1]?.promotion?.isAvailable == true ? true : false
+                                : investmentPlanList[0]?.promotion?.isAvailable == true  ? true : false),
                           );
-                        })):
+                       }))
+                        :
                         Navigator.of(context)
                             .push(MaterialPageRoute(builder: (context) {
                           return InvestmentScreen(
@@ -300,9 +362,35 @@ class _SelectInvestmentScreenState extends State<SelectInvestmentScreen> {
                                     ? investmentPlanList[1]?.profit
                                     : investmentPlanList[0]?.profit) ??
                                 0,
+                              promotionName: (isSixMonth
+                                  ? investmentPlanList[1]?.promotion?.name
+                                  : investmentPlanList[0]?.promotion?.name) ??
+                                  "-",
+    promotionAmt: (isSixMonth
+                                  ? investmentPlanList[1]?.promotion?.amount
+                                  : investmentPlanList[0]?.promotion?.amount) ??
+                                  "-",
+                            promotionMinInve: (isSixMonth
+                                ? investmentPlanList[1]?.promotion?.minInvestAmount
+                                : investmentPlanList[0]?.promotion?.minInvestAmount) ?? 0,
+                            promotionNetworkAmt: (isSixMonth
+                                ? investmentPlanList[1]?.promotion?.networkPercentage
+                                : investmentPlanList[0]?.promotion?.networkPercentage) ?? "-",
+    promotionStartDate: (isSixMonth
+                                  ? investmentPlanList[1]?.promotion?.startDate
+                                  : investmentPlanList[0]?.promotion?.startDate) ??
+                                  "-",
+    promotionEndDate: (isSixMonth
+                                  ? investmentPlanList[1]?.promotion?.endDate
+                                  : investmentPlanList[0]?.promotion?.endDate) ??
+                                  "-",
+                              isPromotion: (isSixMonth
+                                  ? investmentPlanList[1]?.promotion?.isAvailable == true ? true : false
+                                  : investmentPlanList[0]?.promotion?.isAvailable == true  ? true : false),
                           );
                         }));
                       }),
+                  const AdsBannerWidget(paddingbottom: 0,),
                   // MaterialButton(
                   //   color: Colors.blue,
                   //   shape: RoundedRectangleBorder(
