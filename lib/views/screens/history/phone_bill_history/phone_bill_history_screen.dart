@@ -83,7 +83,7 @@ class _PhoneBillHistoryScreenState
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
-      _phone_bill_bloc.getPhoneBillHistory(page);
+      //_phone_bill_bloc.getPhoneBillHistory(page);
       print("getting page - $page");
     }
   }

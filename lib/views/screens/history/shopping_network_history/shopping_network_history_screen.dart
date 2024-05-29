@@ -82,7 +82,7 @@ class _ShoppingNetworkHistoryScreenState extends State<ShoppingNetworkHistoryScr
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
-      _shopping_network_history_bloc.getShoppingNetworkHistory(page);
+    //  _shopping_network_history_bloc.getShoppingNetworkHistory(page);
       print("getting page - $page");
     }
   }

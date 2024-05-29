@@ -82,7 +82,7 @@ class _WithdrawHistoryScreenState extends State<WithdrawHistoryScreen> {
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
-      _withdraw_history_bloc.getWithdrawHistory(page);
+    //  _withdraw_history_bloc.getWithdrawHistory(page);
       print("getting page - $page");
     }
   }

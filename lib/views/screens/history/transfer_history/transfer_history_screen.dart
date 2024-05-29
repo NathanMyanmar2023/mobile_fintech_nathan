@@ -83,7 +83,7 @@ class _TransferHistoryScreenState extends State<TransferHistoryScreen> {
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
-      _transfer_history_bloc.getTransferHistory(page);
+    //  _transfer_history_bloc.getTransferHistory(page);
       print("getting page - $page");
     }
   }

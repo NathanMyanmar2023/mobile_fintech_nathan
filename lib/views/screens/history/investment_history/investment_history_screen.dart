@@ -71,7 +71,7 @@ class _InvestmentHistoryScreenState extends State<InvestmentHistoryScreen> {
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
-      _investment_history_bloc.getInvestmentHistory(page);
+     // _investment_history_bloc.getInvestmentHistory(page);
       print("getting page - $page");
     }
   }
