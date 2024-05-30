@@ -179,7 +179,7 @@ class _TopUpScreenState extends State<TopUpScreen> {
                               FilteringTextInputFormatter.digitsOnly,
                             ],
                             decoration: InputDecoration(
-                              hintText: "959****34",
+                              hintText: "925****34",
                               labelText: "Mobile number",
                               labelStyle: const TextStyle(
                                   color: colorPrimary, fontSize: 18),

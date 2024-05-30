@@ -40,9 +40,7 @@ class _PhoneBillHistoryScreenState
     _phone_bill_history_stream.listen((ResponseOb resp) {
       if (resp.success) {
         setState(() {
-          // print("daal ${resp.data.data.length}");
-          // history_list = (resp.data as PhoneBillOb).data ?? [];
-          // print("hiiii 343 ${history_list.length}");
+          print("billLen ${resp.data.data.length}");
           for (var i = 0; i < resp.data.data.length; i++) {
             history_list.add([
               resp.data.data[i].id.toString(),

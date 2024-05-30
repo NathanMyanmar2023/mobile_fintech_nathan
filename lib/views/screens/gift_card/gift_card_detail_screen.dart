@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:nathan_app/extensions/navigation_extensions.dart';
 import 'package:nathan_app/resources/colors.dart';
 import 'package:nathan_app/views/custom/snack_bar.dart';
 import 'package:nathan_app/widgets/nathan_text_view.dart';
@@ -45,7 +46,7 @@ class _GiftCardDetailScreenState extends State<GiftCardDetailScreen> {
   final _gift_buy_Bloc = GiftBuyBloc();
   late Stream<ResponseOb> _gift_buy_Stream;
 
-
+String packageName = "";
   @override
   void initState() {
     super.initState();
@@ -244,6 +245,7 @@ class _GiftCardDetailScreenState extends State<GiftCardDetailScreen> {
                                               selectedIndex = index;
                                               int pkgid = giftPackageList[index].id ?? 0;
                                               pkgID = pkgid.toString();
+                                              packageName = "${giftPackageList[index].giftCardAmount} ${giftPackageList[index].unit}";
                                             });
                                           },
                                         ),
@@ -271,7 +273,55 @@ class _GiftCardDetailScreenState extends State<GiftCardDetailScreen> {
                                           Icons.close,
                                         );
                                       } else {
-                                        requestGiftBuy();
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return AlertDialog(
+                                                title:  const Text("Gift Card Info Detail",),
+                                                content: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: [
+                                                    Image.asset('images/welcome.png', height: 100, width: 100),
+                                                    const SizedBox(height: 10),
+                                                    Text(
+                                                      "Player ID : ${playerIdController.text}",
+                                                    ),
+                                                    Text(
+                                                      "Zone ID : ${zoneIdController.text}",
+                                                    ),
+                                                    Text(
+                                                      "Package : $packageName",
+                                                    ),
+                                                  ],
+                                                ),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      popBack(context: context);
+                                                    },
+                                                    child: const Text(
+                                                      'Cancel',
+                                                      style: TextStyle(
+                                                        color: colorPrimary,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      popBack(context: context);
+                                                      requestGiftBuy();
+                                                    },
+                                                    child: const Text(
+                                                      'Confirm',
+                                                      style: TextStyle(
+                                                        color: colorPrimary,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              );
+                                            });
                                       }
                                     }
                                 ),
