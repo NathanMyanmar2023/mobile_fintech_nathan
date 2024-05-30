@@ -22,8 +22,9 @@ class GiftCardDetailScreen extends StatefulWidget {
   final String shopProfile;
   final String shopTag;
   final String shopName;
+  final bool isServer;
   GiftCardDetailScreen({required this.shopCover, required this.shopProfile,
-    required this.shopTag, required this.shopName});
+    required this.shopTag, required this.shopName, required this.isServer});
 
   @override
   State<GiftCardDetailScreen> createState() => _GiftCardDetailScreenState();
@@ -99,7 +100,7 @@ String packageName = "";
   void requestGiftBuy() {
     Map<String, dynamic> map = {
       "player_id": playerIdController.text.trim(),
-      "server_id": zoneIdController.text.trim(),
+      "server_id": widget.isServer ? zoneIdController.text.trim() : "0000",
       "package_id": pkgID,
       "user_id": userId,
     };
@@ -184,8 +185,8 @@ String packageName = "";
                                         ],
                                       ),
                                     ),
-                                    const SizedBox(width: 10,),
-                                    Expanded(
+                                    widget.isServer ? const SizedBox(width: 10,) : const SizedBox(),
+                                    widget.isServer ? Expanded(
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
@@ -208,7 +209,7 @@ String packageName = "";
                                           ),
                                         ],
                                       ),
-                                    )
+                                    ) : const SizedBox(),
                                   ],
                                 ),
                               ),
@@ -260,8 +261,8 @@ String packageName = "";
                                     text: "Buy Now",
                                     borderRadius: BorderRadius.circular(10),
                                     onTap: () {
-                                      if(playerIdController.text.isEmpty || zoneIdController.text.isEmpty) {
-                                        context.showSnack("Please enter your Player Id & Server Id first!",
+                                      if(widget.isServer ? playerIdController.text.isEmpty || zoneIdController.text.isEmpty : playerIdController.text.isEmpty) {
+                                        context.showSnack(widget.isServer ?"Please enter your Player Id & Server Id first!" : "Please enter your Player Id first!",
                                           Colors.white,
                                           Colors.red,
                                           Icons.close,
@@ -287,9 +288,9 @@ String packageName = "";
                                                     Text(
                                                       "Player ID : ${playerIdController.text}",
                                                     ),
-                                                    Text(
+                                                    widget.isServer ? Text(
                                                       "Zone ID : ${zoneIdController.text}",
-                                                    ),
+                                                    ) : const SizedBox(),
                                                     Text(
                                                       "Package : $packageName",
                                                     ),

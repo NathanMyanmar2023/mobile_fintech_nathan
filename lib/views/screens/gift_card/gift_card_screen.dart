@@ -124,6 +124,7 @@ class _GiftCardScreenState extends State<GiftCardScreen> {
                                 shopProfile: "${giftShopList[index].shopProfile}",
                                 shopTag: "${giftShopList[index].tag}",
                                 shopName: "${giftShopList[index].shopName}",
+                                  isServer: giftShopList[index].isServer == 1 ? true : false,
                               )
                           ));
                         }

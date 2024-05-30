@@ -38,6 +38,7 @@ class GiftShopData {
     this.shopLogoUrl,
     this.shopProfile,
     this.shopCover,
+    this.isServer,
     this.tag,
     this.unit,
     this.open,});
@@ -49,6 +50,7 @@ class GiftShopData {
     shopLogoUrl = json['shop_logo_url'];
     shopProfile = json['shop_profile'];
     shopCover = json['shop_cover'];
+    isServer = json['is_server'];
     tag = json['tag'];
     unit = json['unit'];
     open = json['open'];
@@ -59,6 +61,7 @@ class GiftShopData {
   String? shopLogoUrl;
   String? shopProfile;
   String? shopCover;
+  int? isServer;
   String? tag;
   String? unit;
   int? open;
@@ -71,6 +74,7 @@ class GiftShopData {
     map['shop_logo_url'] = shopLogoUrl;
     map['shop_profile'] = shopProfile;
     map['shop_cover'] = shopCover;
+    map['is_server'] = isServer;
     map['tag'] = tag;
     map['unit'] = unit;
     map['open'] = open;
