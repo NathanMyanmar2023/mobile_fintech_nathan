@@ -82,7 +82,7 @@ class _ReferralIncentiveHistoryScreenState
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
-      _referral_incentive_history_bloc.getReferralIncentiveHistory(page);
+    //  _referral_incentive_history_bloc.getReferralIncentiveHistory(page);
       print("getting page - $page");
     }
   }

@@ -73,7 +73,7 @@ class _NetworkProfitHistoryScreenState
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
-      _network_profit_history_bloc.getNetworkProfitHistory(page);
+     // _network_profit_history_bloc.getNetworkProfitHistory(page);
       print("getting page - $page");
     }
   }

@@ -73,7 +73,7 @@ class _InvestProfitHistoryScreenState extends State<InvestProfitHistoryScreen> {
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
-      _invest_profit_history_bloc.getInvestProfitHistory(page);
+    //  _invest_profit_history_bloc.getInvestProfitHistory(page);
       print("getting page - $page");
     }
   }

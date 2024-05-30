@@ -39,6 +39,7 @@ class _GiftCardHistoryScreenState
     _giftCardhistory_stream.listen((ResponseOb resp) {
       if (resp.success) {
         setState(() {
+          print("TranLen ${resp.data.data.transactions.length}");
           for (var i = 0; i < resp.data.data.transactions.length; i++) {
             history_list.add([
               resp.data.data.transactions[i].id.toString(),
@@ -82,11 +83,10 @@ class _GiftCardHistoryScreenState
 
   Future fetch() async {
     print(hasMore);
-    _giftCard_history_bloc.getGiftCardHistoryHistory();
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
-    //  _giftCard_history_bloc.getGiftCardHistoryHistory();
+     _giftCard_history_bloc.getGiftCardHistoryHistory();
       print("getting page - $page");
     }
   }

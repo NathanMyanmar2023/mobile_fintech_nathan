@@ -80,7 +80,7 @@ class _ExchangeHistoryScreenState extends State<ExchangeHistoryScreen> {
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
-      _exchange_history_bloc.getExchangeHistory(page);
+    //  _exchange_history_bloc.getExchangeHistory(page);
       print("getting page - $page");
     }
   }

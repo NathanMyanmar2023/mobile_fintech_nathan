@@ -81,7 +81,7 @@ class _DepositHistoryScreenState extends State<DepositHistoryScreen> {
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
-      _deposit_history_bloc.getDepositHistory(page);
+     // _deposit_history_bloc.getDepositHistory(page);
       print("getting page - $page");
     }
   }

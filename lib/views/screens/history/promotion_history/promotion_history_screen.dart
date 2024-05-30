@@ -80,11 +80,11 @@ class _PromotionHistoryScreenState
 
   Future fetch() async {
     print(hasMore);
-  //  _promotion_history_bloc.getPromotionHistoryHistory(page);
+    _promotion_history_bloc.getPromotionHistoryHistory(page);
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
-      _promotion_history_bloc.getPromotionHistoryHistory(page);
+   //   _promotion_history_bloc.getPromotionHistoryHistory(page);
       print("getting page - $page");
     }
   }

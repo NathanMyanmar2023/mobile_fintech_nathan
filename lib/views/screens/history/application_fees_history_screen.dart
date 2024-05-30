@@ -76,7 +76,7 @@ class _ApplicationFeesHistoryScreenState
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
-      _application_fees_history_bloc.getApplicationFeesHistory(page);
+     // _application_fees_history_bloc.getApplicationFeesHistory(page);
       print("getting page - $page");
     }
   }
