@@ -265,7 +265,7 @@ int? userId = 0;
                           ),
                         ) : const SizedBox(),
                         const Divider(height: 10,),
-                        const AdsBannerWidget(),
+                      //  const AdsBannerWidget(),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

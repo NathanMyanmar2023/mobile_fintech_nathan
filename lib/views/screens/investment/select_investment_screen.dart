@@ -390,34 +390,7 @@ class _SelectInvestmentScreenState extends State<SelectInvestmentScreen> {
                           );
                         }));
                       }),
-                  const AdsBannerWidget(paddingbottom: 0,),
-                  // MaterialButton(
-                  //   color: Colors.blue,
-                  //   shape: RoundedRectangleBorder(
-                  //     borderRadius: BorderRadius.circular(45),
-                  //   ),
-                  //   height: 45,
-                  //   elevation: 0,
-                  //   onPressed: () {
-                  //     Navigator.of(context)
-                  //         .push(MaterialPageRoute(builder: (context) {
-                  //       return InvestmentScreen(
-                  //         is_yearly: is_yearly,
-                  //         second_wallet_balance: widget.second_wallet_balance,
-                  //       );
-                  //     }));
-                  //   },
-                  //   child: const SizedBox(
-                  //     height: 20,
-                  //     child: Center(
-                  //         child: Text(
-                  //       '',
-                  //       style: TextStyle(
-                  //         color: Colors.white,
-                  //       ),
-                  //     )),
-                  //   ),
-                  // ),
+                 // const AdsBannerWidget(paddingbottom: 0,),
                   const SizedBox(
                     height: 50,
                   ),

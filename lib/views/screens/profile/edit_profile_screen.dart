@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_picker/image_picker.dart';
@@ -183,7 +184,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               child: _file != null
                                   ? ClipRRect(
                                       borderRadius: BorderRadius.circular(180),
-                                      child: Image.file(
+                                      child: kIsWeb ?
+  Image.network(_file!.path) : Image.file(
                                         _file!,
                                         fit: BoxFit.cover,
                                       ),

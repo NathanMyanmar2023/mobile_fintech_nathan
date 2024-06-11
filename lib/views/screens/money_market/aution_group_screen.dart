@@ -181,7 +181,7 @@ class _AuctionGroupScreenState extends State<AuctionGroupScreen> {
                         ),
                       ) : const SizedBox(),
                       const Divider(height: 10,),
-                      const AdsBannerWidget(),
+                    //  const AdsBannerWidget(),
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: leftUser > 0 ? 0 : 10),
                         child: Row(

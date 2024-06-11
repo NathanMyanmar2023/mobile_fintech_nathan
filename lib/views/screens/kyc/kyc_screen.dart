@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -220,7 +221,8 @@ class _KycScreenState extends State<KycScreen> {
                               width: 200,
                               height: 200,
                               child: _photo != null
-                                  ? Image.file(
+                                  ? kIsWeb ?
+  Image.network(_photo!.path) : Image.file(
                                       _photo!,
                                       fit: BoxFit.cover,
                                     )
@@ -426,7 +428,8 @@ class _KycScreenState extends State<KycScreen> {
                               width: double.infinity,
                               height: 200,
                               child: _nrc_front != null
-                                  ? Image.file(
+                                  ? kIsWeb ?
+  Image.network(_nrc_front!.path) : Image.file(
                                       _nrc_front!,
                                       fit: BoxFit.cover,
                                     )
@@ -466,7 +469,8 @@ class _KycScreenState extends State<KycScreen> {
                               width: double.infinity,
                               height: 200,
                               child: _nrc_back != null
-                                  ? Image.file(
+                                  ? kIsWeb ?
+  Image.network(_nrc_back!.path) : Image.file(
                                       _nrc_back!,
                                       fit: BoxFit.cover,
                                     )
@@ -544,7 +548,8 @@ class _KycScreenState extends State<KycScreen> {
                               width: double.infinity,
                               height: 200,
                               child: _bank_statement != null
-                                  ? Image.file(
+                                  ? kIsWeb ?
+  Image.network(_bank_statement!.path) : Image.file(
                                       _bank_statement!,
                                       fit: BoxFit.cover,
                                     )

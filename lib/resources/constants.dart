@@ -1,5 +1,5 @@
 /// image constants
-const appLogo = "assets/app_logo.jpeg";
-const loginLogo = "assets/login.png";
-const lockLogo = "assets/lock.png";
-const topupLogo = "assets/topup.png";
+const appLogo = "images/app_logo.jpeg";
+const loginLogo = "images/login.png";
+const lockLogo = "images/lock.png";
+const topupLogo = "images/topup.png";

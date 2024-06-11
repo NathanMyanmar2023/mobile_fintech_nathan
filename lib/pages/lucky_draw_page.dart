@@ -58,7 +58,7 @@ class _LuckyDrawPageState extends State<LuckyDrawPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const AdsBannerWidget(paddingTop: 0, paddingbottom: 0,),
+           // const AdsBannerWidget(paddingTop: 0, paddingbottom: 0,),
             Container(
               margin: const EdgeInsets.all(12),
               child: Row(

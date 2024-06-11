@@ -2,9 +2,9 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:nathan_app/view_models/add_address_view_model.dart';
 import 'package:nathan_app/view_models/cart_view_model.dart';
 import 'package:nathan_app/view_models/app_language_view_model.dart';
@@ -26,31 +26,41 @@ import 'firebase_options.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   String _deviceToken = '';
-  _deviceToken = await _saveDeviceToken();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  await MobileAds.instance.initialize();
-  // thing to add
-  List<String> testDeviceIds = ["6CB9DF638CDF0411C30830373D9580A0"];
-  RequestConfiguration configuration =
-  RequestConfiguration(testDeviceIds: testDeviceIds);
-  MobileAds.instance.updateRequestConfiguration(configuration);
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+        options: FirebaseOptions(
+            apiKey: "AIzaSyDD4fyBjXnKohSDE2xDHLhePuelc6z_MX4",
+            authDomain: "nathanfintech-c0270.firebaseapp.com",
+            projectId: "nathanfintech-c0270",
+            storageBucket: "nathanfintech-c0270.appspot.com",
+            messagingSenderId: "314757345053",
+            appId: "1:314757345053:web:2d8c07ac6df85572897bf4",
+            measurementId: "G-K0W6XSDX8W"));
+  } else {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    _deviceToken = await _saveDeviceToken();
+    // await MobileAds.instance.initialize();
+  }
 
-  // List<String> testDeviceIds = [_deviceToken];
-  // RequestConfiguration configuration = RequestConfiguration(testDeviceIds: testDeviceIds);
-  // await MobileAds.instance.updateRequestConfiguration(configuration);
+  // // thing to add
+  // List<String> testDeviceIds = ["6CB9DF638CDF0411C30830373D9580A0"];
+  // RequestConfiguration configuration =
+  //     RequestConfiguration(testDeviceIds: testDeviceIds);
+  // MobileAds.instance.updateRequestConfiguration(configuration);
 
   AppLanguageViewModel appLanguage = AppLanguageViewModel();
   await appLanguage.fetchLocale();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
-    runApp( Nathan(
+    runApp(Nathan(
       appLanguage: appLanguage,
     ));
   });
 }
+
 Future<String> _saveDeviceToken() async {
   String _deviceToken = '';
   DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
@@ -77,47 +87,46 @@ class Nathan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(builder: (context, orientation, screenType) {
-        return MultiProvider(
-          providers: [
-            ChangeNotifierProvider(create: (context) => AppLanguageViewModel()),
-            ChangeNotifierProvider(create: (context) => ProductViewModel()),
-            ChangeNotifierProvider(create: (context) => CartViewModel()),
-            ChangeNotifierProvider(create: (context) => AddAddressViewModel()),
-          ],
-          child: ChangeNotifierProvider(
-              create: (BuildContext context) => appLanguage,
-            child: Consumer<AppLanguageViewModel>(
-                builder: (context, model, child)  {
-                return MaterialApp(
-                  debugShowCheckedModeBanner: false,
-                  themeMode: ThemeMode.light,
-                  title: 'Fintech Nathan',
-                  localizationsDelegates: const [
-                    AppLocalizations.delegate,
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate,
-                    GlobalCupertinoLocalizations.delegate
-                  ],
-                  locale: model.appLocal,
-                  supportedLocales: const [
-                    Locale('en', 'US'),
-                    Locale('my', 'MY'),
-                  ],
-                  initialRoute: SplashScreen.id,
-                  routes: {
-                    SplashScreen.id: (context) => const SplashScreen(),
-                    WelcomeScreen.id: (context) => const WelcomeScreen(),
-                    RegisterScreen.id: (context) => const RegisterScreen(),
-                    LoginScreen.id: (context) => const LoginScreen(),
-                    RegisterSuccessScreen.id: (context) => const RegisterSuccessScreen(),
-                    MainScreen.id: (context) => const MainScreen(),
-                  },
-                );
-              }
-            ),
-          ),
-        );
-      }
-    );
+      return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => AppLanguageViewModel()),
+          ChangeNotifierProvider(create: (context) => ProductViewModel()),
+          ChangeNotifierProvider(create: (context) => CartViewModel()),
+          ChangeNotifierProvider(create: (context) => AddAddressViewModel()),
+        ],
+        child: ChangeNotifierProvider(
+          create: (BuildContext context) => appLanguage,
+          child:
+              Consumer<AppLanguageViewModel>(builder: (context, model, child) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              themeMode: ThemeMode.light,
+              title: 'Fintech Nathan',
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate
+              ],
+              locale: model.appLocal,
+              supportedLocales: const [
+                Locale('en', 'US'),
+                Locale('my', 'MY'),
+              ],
+              initialRoute: SplashScreen.id,
+              routes: {
+                SplashScreen.id: (context) => const SplashScreen(),
+                WelcomeScreen.id: (context) => const WelcomeScreen(),
+                RegisterScreen.id: (context) => const RegisterScreen(),
+                LoginScreen.id: (context) => const LoginScreen(),
+                RegisterSuccessScreen.id: (context) =>
+                    const RegisterSuccessScreen(),
+                MainScreen.id: (context) => const MainScreen(),
+              },
+            );
+          }),
+        ),
+      );
+    });
   }
 }

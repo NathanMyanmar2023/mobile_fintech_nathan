@@ -356,75 +356,8 @@ class _TransferScreenState extends State<TransferScreen> {
                           }
                         }
                       }),
-                  const AdsBannerWidget(
-                    paddingbottom: 0,
-                  ),
-                  // MaterialButton(
-                  //   color: Colors.blue,
-                  //   shape: RoundedRectangleBorder(
-                  //     borderRadius: BorderRadius.circular(45),
-                  //   ),
-                  //   height: 45,
-                  //   elevation: 0,
-                  //   onPressed: () {
-                  //     if (amount_tec.text == "" || phone_tec.text == "") {
-                  //       showDialog(
-                  //         context: context,
-                  //         builder: (context) {
-                  //           return ErrorAlert(
-                  //             "Oops !",
-                  //             Image.asset('images/welcome.png'),
-                  //             "Please fill all fields",
-                  //           );
-                  //         },
-                  //       );
-                  //       return;
-                  //     } else {
-                  //       if (double.parse(widget.main_wallet_balance) <
-                  //           double.parse(amount_tec.text)) {
-                  //         showDialog(
-                  //           context: context,
-                  //           builder: (context) {
-                  //             return ErrorAlert(
-                  //               "Oops !",
-                  //               Image.asset('images/welcome.png'),
-                  //               "You don't have enough balance",
-                  //             );
-                  //           },
-                  //         );
-                  //         return;
-                  //       } else {
-                  //         if (note_tec.text == "") {
-                  //           transfer_note = "Transfer Note";
-                  //         } else {
-                  //           transfer_note = note_tec.text;
-                  //         }
-                  //
-                  //         Map<String, dynamic> map = {
-                  //           'amount': amount_tec.text.toString(),
-                  //           'phone': _phone_code +
-                  //               (phone_tec.text.startsWith('0')
-                  //                   ? phone_tec.text.substring(1)
-                  //                   : phone_tec.text),
-                  //         };
-                  //         print(map);
-                  //         _check_user_bloc.check_user(map);
-                  //         setState(() {
-                  //           isLoading = true;
-                  //         });
-                  //       }
-                  //     }
-                  //   },
-                  //   child: const SizedBox(
-                  //     height: 20,
-                  //     child: Center(
-                  //         child: Text(
-                  //       'Next',
-                  //       style: TextStyle(
-                  //         color: Colors.white,
-                  //       ),
-                  //     )),
-                  //   ),
+                  // const AdsBannerWidget(
+                  //   paddingbottom: 0,
                   // ),
                   const SizedBox(
                     height: 40,

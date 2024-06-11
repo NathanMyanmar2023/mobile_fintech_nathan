@@ -4,7 +4,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:nathan_app/objects/history/invest_profit_history_ob.dart';
 import '../../../bloc/shopping/category_bloc.dart';
 import '../../../helpers/response_ob.dart';
@@ -32,7 +31,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
   @override
   void initState() {
     super.initState();
-    _loadBannerAd();
+   // _loadBannerAd();
     _categoryStream = _categoryBloc.categoryStream();
     _categoryStream.listen((ResponseOb resp) {
       print("rese ${resp.loadPostState}");
@@ -46,32 +45,32 @@ class _CategoryScreenState extends State<CategoryScreen> {
     _categoryBloc.getCategoryList();
   }
 
-  late BannerAd _bannerAd;
-  bool _isBannerAdReady = false;
+  // late BannerAd _bannerAd;
+  // bool _isBannerAdReady = false;
 
-  void _loadBannerAd() {
-    _bannerAd = BannerAd(
-      adUnitId: AdHelper.bannerAdUnitId,
-      request: AdRequest(),
-      size: AdSize.banner,
-      listener: BannerAdListener(
-        onAdLoaded: (_) {
-          setState(() {
-            _isBannerAdReady = true;
-            print("Well ADS");
-          });
-        },
-        onAdFailedToLoad: (ad, err) {
-          _isBannerAdReady = false;
-          ad.dispose();
-          print("ADS error $err");
-        },
-      ),
-    );
+  // void _loadBannerAd() {
+  //   _bannerAd = BannerAd(
+  //     adUnitId: AdHelper.bannerAdUnitId,
+  //     request: AdRequest(),
+  //     size: AdSize.banner,
+  //     listener: BannerAdListener(
+  //       onAdLoaded: (_) {
+  //         setState(() {
+  //           _isBannerAdReady = true;
+  //           print("Well ADS");
+  //         });
+  //       },
+  //       onAdFailedToLoad: (ad, err) {
+  //         _isBannerAdReady = false;
+  //         ad.dispose();
+  //         print("ADS error $err");
+  //       },
+  //     ),
+  //   );
 
-    _bannerAd.load();
-    print("_isBannerAdReady $_isBannerAdReady");
-  }
+  //   _bannerAd.load();
+  //   print("_isBannerAdReady $_isBannerAdReady");
+  // }
 
 
   var imageUrl = "https://images.unsplash.com/photo-1554080353-a576cf803bda?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cGhvdG98ZW58MHx8MHx8fDA%3D";
@@ -149,32 +148,30 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     ),
                   ),
                 ),
-                index % 4 == 0 ? _isBannerAdReady ? getAd() : const SizedBox() : const SizedBox(),
-                // index%2 == 1 ? _isBannerAdReady ?
-                // bannerAdWidget(): const SizedBox() : const SizedBox(),
+               // index % 4 == 0 ? _isBannerAdReady ? getAd() : const SizedBox() : const SizedBox(),
               ],
             )),
       ),
     );
   }
 
-  Widget getAd() {
-    BannerAdListener bannerAdListener = BannerAdListener(
-        onAdWillDismissScreen: (ad){
-      ad.dispose();
-    }, onAdClosed: (ad) {
-      debugPrint("Ad Got Closed");
-    });
-    BannerAd bannerAd = BannerAd(
-      size: AdSize.banner,
-      adUnitId: Platform.isAndroid ? "ca-app-pub-8463236560007525/3314380628" : "ca-app-pub-8463236560007525/3314380628",
-      listener: bannerAdListener,
-      request: const AdRequest(),
-    );
-    bannerAd.load();
-    return SizedBox(
-      height: 60,
-      child: AdWidget(ad: bannerAd,),
-    );
-  }
+  // Widget getAd() {
+  //   BannerAdListener bannerAdListener = BannerAdListener(
+  //       onAdWillDismissScreen: (ad){
+  //     ad.dispose();
+  //   }, onAdClosed: (ad) {
+  //     debugPrint("Ad Got Closed");
+  //   });
+  //   BannerAd bannerAd = BannerAd(
+  //     size: AdSize.banner,
+  //     adUnitId: Platform.isAndroid ? "ca-app-pub-8463236560007525/3314380628" : "ca-app-pub-8463236560007525/3314380628",
+  //     listener: bannerAdListener,
+  //     request: const AdRequest(),
+  //   );
+  //   bannerAd.load();
+  //   return SizedBox(
+  //     height: 60,
+  //     child: AdWidget(ad: bannerAd,),
+  //   );
+  // }
 }

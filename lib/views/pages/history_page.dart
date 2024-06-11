@@ -49,7 +49,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 history_name: AppLocalizations.of(context)!.exchange_history,
                 history_icon: Iconic.exchange,
               ),
-              const AdsBannerWidget(paddingTop: 10, paddingbottom: 10,),
+             // const AdsBannerWidget(paddingTop: 10, paddingbottom: 10,),
               SelectHistoryWidget(
                 target_page: const WithdrawHistoryScreen(),
                 history_name: AppLocalizations.of(context)!.withdraw_history,
@@ -65,7 +65,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 history_name: AppLocalizations.of(context)!.investment_history,
                 history_icon: Icons.account_balance_outlined,
               ),
-              const AdsBannerWidget(paddingTop: 10, paddingbottom: 10,),
+           //   const AdsBannerWidget(paddingTop: 10, paddingbottom: 10,),
               SelectHistoryWidget(
                 target_page: const PromotionHistoryScreen(),
                 history_name: AppLocalizations.of(context)!.promotion_history,
@@ -87,7 +87,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 history_name: AppLocalizations.of(context)!.return_money_history,
                 history_icon: Icons.account_balance_wallet_outlined,
               ),
-              const AdsBannerWidget(paddingTop: 10, paddingbottom: 10,),
+            //  const AdsBannerWidget(paddingTop: 10, paddingbottom: 10,),
               SelectHistoryWidget(
                 target_page: const ApplicationFeesHistoryScreen(),
                 history_name: AppLocalizations.of(context)!.application_fees_history,
@@ -121,7 +121,7 @@ class _HistoryPageState extends State<HistoryPage> {
                       history_name: AppLocalizations.of(context)!.referral_incentive_history,
                       history_icon: Icons.dataset_linked_outlined,
               ),
-              const AdsBannerWidget(paddingTop: 10, paddingbottom: 0,),
+             // const AdsBannerWidget(paddingTop: 10, paddingbottom: 0,),
               // MainScreen.role == "1"
               //     ? const SelectHistoryWidget(
               //         target_page: InvestProfitHistoryScreen(),

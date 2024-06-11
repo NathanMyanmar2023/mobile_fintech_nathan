@@ -102,7 +102,7 @@ class _AllMemberViewState extends State<AllMemberView> {
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Column(
                 children: [
-                  const AdsBannerWidget(),
+                //  const AdsBannerWidget(),
                   Expanded(
                     child: SingleChildScrollView(
                       child:  ListView.builder(

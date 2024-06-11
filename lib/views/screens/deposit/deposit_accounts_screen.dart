@@ -1,6 +1,6 @@
 import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,7 +13,6 @@ import 'package:nathan_app/views/widgets/error_alert_widget.dart';
 import 'package:nathan_app/views/widgets/payment_account_widget.dart';
 import 'package:nathan_app/widgets/long_button_view.dart';
 import 'package:nathan_app/widgets/text_field_with_label_view.dart';
-
 import '../../../helpers/shared_pref.dart';
 
 class DepositAccountsScreen extends StatefulWidget {
@@ -307,7 +306,9 @@ class _DepositAccountsScreenState extends State<DepositAccountsScreen> {
                               width: double.infinity,
                               height: 120,
                               child: _file != null
-                                  ? Image.file(
+                                  ? kIsWeb ?
+  Image.network(_file!.path) :
+Image.file(
                                       _file!,
                                       fit: BoxFit.cover,
                                     )

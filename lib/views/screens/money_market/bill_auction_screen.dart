@@ -237,7 +237,7 @@ class _BillAuctionScreenState extends State<BillAuctionScreen> {
                             return NathanTextView(text: "${auctionRuleList[index]}");
                           },
                         ),
-                        const AdsBannerWidget(paddingbottom: 0,),
+                        //const AdsBannerWidget(paddingbottom: 0,),
                         Padding(
                           padding: const EdgeInsets.only(top: 20),
                           child: AgreeSectionView(

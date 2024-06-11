@@ -175,7 +175,7 @@ class _BrandsScreenState extends State<BrandsScreen> {
                   ),
                 ),
               ),
-                 const Center(child: AdsBannerWidget(paddingbottom: 10, paddingTop: 0,)),
+               //  const Center(child: AdsBannerWidget(paddingbottom: 10, paddingTop: 0,)),
                Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(bottom: 2.h),

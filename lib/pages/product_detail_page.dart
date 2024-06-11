@@ -219,7 +219,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     ),
                   ) : const SizedBox(),
                   const SizedBox(height: 16),
-                   const Center(child: AdsBannerWidget(paddingTop: 0,)),
+                //   const Center(child: AdsBannerWidget(paddingTop: 0,)),
                    Text(
                      AppLocalizations.of(context)!.product_detail,
                     style: const TextStyle(

@@ -25,7 +25,7 @@ class BalanceOptionItemView extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
             child: Image.asset(
-              appLogo,
+              "images/app_logo.jpeg",
               width: MediaQuery.of(context).size.width * 0.12,
               height: MediaQuery.of(context).size.width * 0.12,
             ),
