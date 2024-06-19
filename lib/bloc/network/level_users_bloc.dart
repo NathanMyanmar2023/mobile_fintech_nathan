@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:nathan_app/helpers/base_network.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/objects/network/level_users_ob.dart';
@@ -11,7 +12,11 @@ class LevelUsersBloc extends BaseNetwork {
   getLevelUsers(int page, String level) async {
     getReq("${API_URL}level/$level/users?page=$page", onDataCallBack: (ResponseOb resp) {
       if (resp.success == true) {
-        resp.data = LevelUsersOb.fromJson(resp.data);
+        if(kIsWeb) {
+          resp.data = LevelUsersOb.fromJson(resp.data);
+        } else {
+          resp.data = LevelUsersOb.fromJson(resp.data);
+        }
       }
       levelUsersController.sink.add(resp);
     }, errorCallBack: (ResponseOb resp) {

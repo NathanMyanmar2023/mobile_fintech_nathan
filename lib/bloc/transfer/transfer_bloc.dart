@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:nathan_app/helpers/base_network.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/objects/transfer/transfer_ob.dart';
@@ -11,7 +12,11 @@ class TransferBloc extends BaseNetwork {
   transfer(Map<String, dynamic> map) async {
     postReq(TRANSFER, params: map, onDataCallBack: (ResponseOb resp) {
       if (resp.success == true) {
-        resp.data = TransferOb.fromJson(resp.data);
+        if(kIsWeb) {
+          resp.data = TransferOb.fromJson(resp.data);
+        } else {
+          resp.data = TransferOb.fromJson(resp.data);
+        }
       }
       transferController.sink.add(resp);
     }, errorCallBack: (ResponseOb resp) {

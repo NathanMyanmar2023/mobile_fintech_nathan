@@ -54,6 +54,10 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/sqflite-2.3.0" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/image_picker-1.0.5" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences_android-2.2.1" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/webview_flutter-4.8.0" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/webview_flutter_android-3.16.3" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/google_mobile_ads-5.1.0" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/webview_flutter_wkwebview-3.13.1" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

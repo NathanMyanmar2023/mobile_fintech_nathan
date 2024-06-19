@@ -8,6 +8,7 @@ import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/objects/region_ob.dart';
 import 'package:nathan_app/objects/township_ob.dart';
 import 'package:nathan_app/resources/colors.dart';
+import 'package:nathan_app/resources/constants.dart';
 import 'package:nathan_app/widgets/long_button_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -76,7 +77,7 @@ bool ischange = false;
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Image.asset('images/welcome.png', height: 100, width: 100),
+                    Image.asset(welcomeLogo, height: 100, width: 100),
                     const SizedBox(height: 10),
                     Text(
                       resp.message.toString(),
@@ -109,7 +110,7 @@ bool ischange = false;
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Image.asset('images/welcome.png', height: 100, width: 100),
+                    Image.asset(welcomeLogo, height: 100, width: 100),
                     const SizedBox(height: 10),
                     Text(
                       resp.message.toString(),

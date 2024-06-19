@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:nathan_app/helpers/base_network.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/models/utils/app_constants.dart';
@@ -14,8 +15,12 @@ class AuctionRoundMonthlyBidBloc extends BaseNetwork {
         if(resp.message == "Sorry, there are no one users") {
           print("NO user");
         } else {
-          resp.data = AuctionRoundMonthlyBidOb.fromJson(resp.data);
-        }
+          if(kIsWeb) {
+            resp.data = AuctionRoundMonthlyBidOb.fromJson(resp.data);
+          } else {
+            resp.data = AuctionRoundMonthlyBidOb.fromJson(resp.data);
+          }
+        } 
       }
       auctionRoundMonthlyController.sink.add(resp);
     }, errorCallBack: (ResponseOb resp) {

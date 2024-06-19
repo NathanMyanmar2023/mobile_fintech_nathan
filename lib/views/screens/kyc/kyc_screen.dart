@@ -96,8 +96,15 @@ class _KycScreenState extends State<KycScreen> {
     _nrcTypeStream.listen((ResponseOb resp) {
       if (resp.success) {
         setState(() {
-          nrcStateList = (resp.data as NrcTypeOb).data!.nrcStateLists ?? [];
-          nrcTypeList = (resp.data as NrcTypeOb).data!.nrcTypeLists ?? [];
+          if (kIsWeb) {
+            print("is web");
+            nrcStateList = (resp.data as NrcTypeOb).data!.nrcStateLists ?? [];
+            nrcTypeList = (resp.data as NrcTypeOb).data!.nrcTypeLists ?? [];
+            print("nrcStateList $nrcStateList");
+          } else {
+            nrcStateList = (resp.data as NrcTypeOb).data!.nrcStateLists ?? [];
+            nrcTypeList = (resp.data as NrcTypeOb).data!.nrcTypeLists ?? [];
+          }
           //   nrcStateData = nrcStateList[11];
         });
       } else {}
@@ -221,11 +228,12 @@ class _KycScreenState extends State<KycScreen> {
                               width: 200,
                               height: 200,
                               child: _photo != null
-                                  ? kIsWeb ?
-  Image.network(_photo!.path) : Image.file(
-                                      _photo!,
-                                      fit: BoxFit.cover,
-                                    )
+                                  ? kIsWeb
+                                      ? Image.network(_photo!.path)
+                                      : Image.file(
+                                          _photo!,
+                                          fit: BoxFit.cover,
+                                        )
                                   : Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
@@ -428,11 +436,12 @@ class _KycScreenState extends State<KycScreen> {
                               width: double.infinity,
                               height: 200,
                               child: _nrc_front != null
-                                  ? kIsWeb ?
-  Image.network(_nrc_front!.path) : Image.file(
-                                      _nrc_front!,
-                                      fit: BoxFit.cover,
-                                    )
+                                  ? kIsWeb
+                                      ? Image.network(_nrc_front!.path)
+                                      : Image.file(
+                                          _nrc_front!,
+                                          fit: BoxFit.cover,
+                                        )
                                   : const Center(
                                       child: Icon(
                                         Icons.add_photo_alternate_outlined,
@@ -469,11 +478,12 @@ class _KycScreenState extends State<KycScreen> {
                               width: double.infinity,
                               height: 200,
                               child: _nrc_back != null
-                                  ? kIsWeb ?
-  Image.network(_nrc_back!.path) : Image.file(
-                                      _nrc_back!,
-                                      fit: BoxFit.cover,
-                                    )
+                                  ? kIsWeb
+                                      ? Image.network(_nrc_back!.path)
+                                      : Image.file(
+                                          _nrc_back!,
+                                          fit: BoxFit.cover,
+                                        )
                                   : const Center(
                                       child: Icon(
                                         Icons.add_photo_alternate_outlined,
@@ -548,11 +558,12 @@ class _KycScreenState extends State<KycScreen> {
                               width: double.infinity,
                               height: 200,
                               child: _bank_statement != null
-                                  ? kIsWeb ?
-  Image.network(_bank_statement!.path) : Image.file(
-                                      _bank_statement!,
-                                      fit: BoxFit.cover,
-                                    )
+                                  ? kIsWeb
+                                      ? Image.network(_bank_statement!.path)
+                                      : Image.file(
+                                          _bank_statement!,
+                                          fit: BoxFit.cover,
+                                        )
                                   : const Center(
                                       child: Icon(
                                         Icons.document_scanner,

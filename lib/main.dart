@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:nathan_app/view_models/add_address_view_model.dart';
 import 'package:nathan_app/view_models/cart_view_model.dart';
 import 'package:nathan_app/view_models/app_language_view_model.dart';
@@ -37,12 +38,13 @@ Future<void> main() async {
             messagingSenderId: "314757345053",
             appId: "1:314757345053:web:2d8c07ac6df85572897bf4",
             measurementId: "G-K0W6XSDX8W"));
+           // AdManagerWeb.init();
   } else {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
     _deviceToken = await _saveDeviceToken();
-    // await MobileAds.instance.initialize();
+    await MobileAds.instance.initialize();
   }
 
   // // thing to add

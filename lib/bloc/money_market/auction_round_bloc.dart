@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:nathan_app/helpers/base_network.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/objects/deposit/payment_method_ob.dart';
@@ -14,7 +15,11 @@ class AuctionRoundBloc extends BaseNetwork {
     getReq("$GET_AUCTION_ROUND$auctionId",
         onDataCallBack: (ResponseOb resp) {
           if (resp.success == true) {
-            resp.data = AuctionRoundOb.fromJson(resp.data);
+            if(kIsWeb) {
+              resp.data = AuctionRoundOb.fromJson(resp.data);
+            } else {
+              resp.data = AuctionRoundOb.fromJson(resp.data);
+            }
           }
           auctionRoundController.sink.add(resp);
         }, errorCallBack: (ResponseOb resp) {

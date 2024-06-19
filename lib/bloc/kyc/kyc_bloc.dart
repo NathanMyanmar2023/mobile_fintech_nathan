@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:mime/mime.dart';
 import 'package:nathan_app/helpers/base_network.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
@@ -43,7 +44,11 @@ class KycBloc extends BaseNetwork {
 
     postReq(PRESIGN, params: presignMap, onDataCallBack: (ResponseOb resp) async {
       if (resp.success == true) {
-        resp.data = PresignOb.fromJson(resp.data);
+        if(kIsWeb) {
+          resp.data = PresignOb.fromJson(resp.data);
+        } else {
+          resp.data = PresignOb.fromJson(resp.data);
+        }
         String presignUrl = resp.data.data.presign.toString();
         Uint8List image = file.readAsBytesSync();
         Options options = Options(contentType: lookupMimeType(file.path), headers: {

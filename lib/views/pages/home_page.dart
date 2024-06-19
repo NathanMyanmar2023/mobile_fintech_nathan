@@ -349,7 +349,8 @@ class _HomePageState extends State<HomePage>
                 const SizedBox(
                   height: 15,
                 ),
-                //  const AdsBannerWidget(paddingTop: 0, paddingbottom: 0,),
+                Container(color: Colors.green, height: 100, width: 100,),
+                 // const AdsBannerWidget(paddingTop: 0, paddingbottom: 0,),
                 const SizedBox(
                   height: 15,
                 ),

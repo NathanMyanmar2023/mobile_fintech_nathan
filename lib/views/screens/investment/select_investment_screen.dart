@@ -4,6 +4,7 @@ import 'package:nathan_app/bloc/investment_plan_bloc.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/models/investment_plan_ob.dart';
 import 'package:nathan_app/resources/colors.dart';
+import 'package:nathan_app/resources/constants.dart';
 import 'package:nathan_app/views/custom/snack_bar.dart';
 import 'package:nathan_app/views/screens/investment/investment_screen.dart';
 import 'package:nathan_app/widgets/long_button_view.dart';
@@ -125,7 +126,7 @@ class _SelectInvestmentScreenState extends State<SelectInvestmentScreen> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(10),
                                     child: Image.asset(
-                                      'images/customer.png',
+                                      customerLogo,
                                     ),
                                   ),
                                 ),
@@ -177,7 +178,7 @@ class _SelectInvestmentScreenState extends State<SelectInvestmentScreen> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(10),
                                     child: Image.asset(
-                                      'images/distributor.png',
+                                      distributorLogo,
                                     ),
                                   ),
                                 ),

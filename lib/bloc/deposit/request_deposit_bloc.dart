@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:mime/mime.dart';
 import 'package:nathan_app/helpers/base_network.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
@@ -34,7 +35,11 @@ class RequestDepositBloc extends BaseNetwork {
     //TODO:get presign url
     postReq(PRESIGN, params: presignMap, onDataCallBack: (ResponseOb resp) async {
       if (resp.success == true) {
+        if(kIsWeb) {
         resp.data = PresignOb.fromJson(resp.data);
+        } else {
+        resp.data = PresignOb.fromJson(resp.data);
+        }
         String presignUrl = resp.data.data.presign.toString();
 print("doofo 4${resp.data}");
         //TODO:upload image to space
@@ -60,7 +65,11 @@ print("doofo 4${resp.data}");
             onDataCallBack: (ResponseOb resp) {
               print("DEPOSIT ${resp.success}");
               if (resp.success == true) {
+                if(kIsWeb) {
                 resp.data = DepositOb.fromJson(resp.data);
+                } else {
+                resp.data = DepositOb.fromJson(resp.data);
+                }
                 print("DEPOSIT dat ${resp.data}");
               }
               requestDepositController.sink.add(resp);

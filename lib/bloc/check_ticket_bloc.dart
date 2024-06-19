@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:nathan_app/helpers/base_network.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/models/utils/app_constants.dart';
@@ -11,7 +12,11 @@ class CheckTicketBloc extends BaseNetwork {
 
   checkTicket({required Map<String, dynamic> data}) async {
     postReq(CHECK_TICKET, params: data, onDataCallBack: (ResponseOb resp) {
-      resp.data = CheckTicketOb.fromJson(resp.data);
+      if(kIsWeb) {
+        resp.data = CheckTicketOb.fromJson(resp.data);
+      } else {
+        resp.data = CheckTicketOb.fromJson(resp.data);
+      }
       checkTicketController.sink.add(resp);
     }, errorCallBack: (ResponseOb resp) {
       checkTicketController.sink.add(resp);
