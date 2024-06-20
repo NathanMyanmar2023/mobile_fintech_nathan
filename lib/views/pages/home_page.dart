@@ -26,6 +26,7 @@ import '../../helpers/shared_pref.dart';
 import '../Ads_banner/ads_banner_widget.dart';
 import '../notification/notification_setup.dart';
 import '../screens/gift_card/gift_card_screen.dart';
+import '../screens/lottery/lottery_screen.dart';
 import '../screens/money_market/money_market_screen.dart';
 import '../screens/shopping/category_screen.dart';
 import '../screens/top_up/top_up_screen.dart';
@@ -521,8 +522,19 @@ class _HomePageState extends State<HomePage>
                       const SizedBox(
                         width: 10,
                       ),
+                      const MainMenuButtonWidget(
+                        menu_icon: Icon(
+                          FontAwesomeIcons.ticketSimple,
+                          color: colorWhite,
+                        ),
+                        menu_name: "Lottery",
+                        target_page: LotteryScreen(),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
                       Expanded(
-                        flex: 2,
+                        flex: 1,
                         child: AspectRatio(
                           aspectRatio: 1,
                           child: Container(),
