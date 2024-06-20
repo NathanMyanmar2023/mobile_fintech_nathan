@@ -25,7 +25,7 @@ class LongButtonView extends StatelessWidget {
       onTap: () => onTap(),
       child: Container(
         width: width,
-        padding: const EdgeInsets.symmetric(vertical: 12),
+        padding: const EdgeInsets.symmetric(vertical: 15),
         decoration: BoxDecoration(
           color: backgroundColor ?? colorPrimary,
           borderRadius: borderRadius ?? BorderRadius.circular(100),
@@ -34,7 +34,7 @@ class LongButtonView extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-              fontSize: 15,
+              fontSize: 16,
               fontWeight: FontWeight.w700,
               color: textColor ?? colorWhite,
             ),
