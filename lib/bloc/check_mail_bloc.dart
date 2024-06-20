@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:nathan_app/helpers/base_network.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/models/utils/app_constants.dart';
@@ -12,7 +13,11 @@ class CheckEmailBloc extends BaseNetwork {
   checkEmail(Map<String, dynamic> map) async {
     postReq(CHECK_EMAIL, params: map, onDataCallBack: (ResponseOb resp) {
       if (resp.success == true) {
-        resp.data = CheckEmailOb.fromJson(resp.data);
+        if(kIsWeb) {
+          resp.data = CheckEmailOb.fromJson(resp.data);
+        } else {
+          resp.data = CheckEmailOb.fromJson(resp.data);
+        }
       }
       checkEmailController.sink.add(resp);
     }, errorCallBack: (ResponseOb resp) {

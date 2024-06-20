@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:nathan_app/helpers/base_network.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/models/utils/app_constants.dart';
@@ -12,8 +13,13 @@ class NRCTypeBloc extends BaseNetwork {
 
   getNRCType() async {
     getReq(NRC_TYPE, onDataCallBack: (ResponseOb resp) {
-      resp.data = NrcTypeOb.fromJson(resp.data);
-      nrcTypeController.sink.add(resp);
+      if (kIsWeb) {
+        resp.data = NrcTypeOb.fromJson(resp.data);
+        nrcTypeController.sink.add(resp);
+      } else {
+        resp.data = NrcTypeOb.fromJson(resp.data);
+        nrcTypeController.sink.add(resp);
+      }
     }, errorCallBack: (ResponseOb resp) {
       nrcTypeController.sink.add(resp);
     });

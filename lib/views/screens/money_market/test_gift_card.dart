@@ -61,7 +61,7 @@ class _TestGiftCardState extends State<TestGiftCard> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    AdsBannerWidget(paddingTop: 0, paddingbottom: 0,),
+                   // AdsBannerWidget(paddingTop: 0, paddingbottom: 0,),
                     SizedBox(height: 30,),
                     Center(child: Text("Under pending status")),
                   ],

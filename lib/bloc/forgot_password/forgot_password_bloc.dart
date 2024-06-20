@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:nathan_app/helpers/base_network.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/helpers/shared_pref.dart';
@@ -18,7 +19,11 @@ class ForgotPasswordBloc extends BaseNetwork {
     postReq(FORGOT_PASS_URL, params: map, onDataCallBack: (ResponseOb resp) {
       print("no error $resp");
       if (resp.success == true) {
-        resp.data = ForgotPassOb.fromJson(resp.data);
+        if(kIsWeb) {
+          resp.data = ForgotPassOb.fromJson(resp.data);
+        } else {
+          resp.data = ForgotPassOb.fromJson(resp.data);
+        }
       }
       forgotPasswordController.sink.add(resp);
     }, errorCallBack: (ResponseOb resp) {

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:nathan_app/helpers/base_network.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/objects/deposit/payment_account_ob.dart';
@@ -11,7 +12,11 @@ class PaymentAccountBloc extends BaseNetwork {
   getPaymentAccounts(int paymentMethodId) async {
     getReq("${API_URL}payment/$paymentMethodId/account", onDataCallBack: (ResponseOb resp) {
       if (resp.success == true) {
-        resp.data = PaymentAccountOb.fromJson(resp.data);
+        if(kIsWeb) {
+          resp.data = PaymentAccountOb.fromJson(resp.data);
+        } else {
+          resp.data = PaymentAccountOb.fromJson(resp.data);
+        }
       }
       paymentAccountController.sink.add(resp);
     }, errorCallBack: (ResponseOb resp) {

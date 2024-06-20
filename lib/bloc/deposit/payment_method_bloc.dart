@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:nathan_app/helpers/base_network.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/objects/deposit/payment_method_ob.dart';
@@ -12,7 +13,11 @@ class PaymentMethodBloc extends BaseNetwork {
     getReq("${API_URL}currency/$currencyId/payment",
         onDataCallBack: (ResponseOb resp) {
       if (resp.success == true) {
-        resp.data = PaymentMethodOb.fromJson(resp.data);
+        if(kIsWeb) {
+          resp.data = PaymentMethodOb.fromJson(resp.data);
+        } else {
+          resp.data = PaymentMethodOb.fromJson(resp.data);
+        }
       }
       paymentMethodController.sink.add(resp);
     }, errorCallBack: (ResponseOb resp) {

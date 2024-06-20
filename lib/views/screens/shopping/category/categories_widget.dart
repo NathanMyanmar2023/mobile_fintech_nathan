@@ -52,9 +52,9 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
               fontWeight: FontWeight.w500,
               fontSize: 18.sp,
             ),
-            const AdsBannerWidget(
-              paddingbottom: 0,
-            ),
+            // const AdsBannerWidget(
+            //   paddingbottom: 0,
+            // ),
             SizedBox(height: 1.h,),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,

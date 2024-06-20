@@ -207,7 +207,7 @@ class _TopUpScreenState extends State<TopUpScreen> {
                           const SizedBox(
                             height: 20,
                           ),
-                          const AdsBannerWidget(paddingTop: 0),
+                        //  const AdsBannerWidget(paddingTop: 0),
                           const Text(
                             "Air Time Top-Up",
                             style: TextStyle(

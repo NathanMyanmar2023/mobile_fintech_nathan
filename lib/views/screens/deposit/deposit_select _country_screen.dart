@@ -102,7 +102,7 @@ class _DepositSelectCountryScreenState
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const AdsBannerWidget(paddingbottom: 0,),
+                 // const AdsBannerWidget(paddingbottom: 0,),
                   const SizedBox(
                     height: 20,
                   ),
@@ -119,7 +119,7 @@ class _DepositSelectCountryScreenState
                             ))
                         .toList(),
                   ),
-                  const AdsBannerWidget(),
+                //  const AdsBannerWidget(),
                   const SizedBox(
                     height: 50,
                   ),

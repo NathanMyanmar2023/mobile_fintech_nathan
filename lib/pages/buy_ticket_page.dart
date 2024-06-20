@@ -11,6 +11,7 @@ import 'package:nathan_app/objects/buy_ticket_ob.dart';
 import 'package:nathan_app/objects/check_ticket_ob.dart';
 import 'package:nathan_app/objects/lucky_draw_ob.dart';
 import 'package:nathan_app/resources/colors.dart';
+import 'package:nathan_app/resources/constants.dart';
 import 'package:nathan_app/views/widgets/error_alert_widget.dart';
 import 'package:nathan_app/widgets/long_button_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -63,7 +64,7 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Image.asset('images/welcome.png', height: 100, width: 100),
+                    Image.asset(welcomeLogo, height: 100, width: 100),
                     const SizedBox(height: 10),
                     Text(
                       "Your ticket${((resp.data as BuyTicketOb).data?.length ?? 0) > 1 ? "s are" : " is"} ${(resp.data as BuyTicketOb).data?.join(",") ?? " - "}.",
@@ -95,7 +96,7 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Image.asset('images/welcome.png', height: 100, width: 100),
+                    Image.asset(welcomeLogo, height: 100, width: 100),
                     const SizedBox(height: 10),
                     Text(
                       resp.message.toString(),
@@ -138,7 +139,7 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Image.asset('images/welcome.png', height: 100, width: 100),
+                    Image.asset(welcomeLogo, height: 100, width: 100),
                     const SizedBox(height: 10),
                     Text(
                       "Ticket number ${(resp.data as CheckTicketOb).data?.join(",") ?? "-"} ${((resp.data as CheckTicketOb).data?.length ?? 0) > 1 ? "are" : "is"} available. Are you sure that you like to buy this ticket?",
@@ -171,7 +172,7 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Image.asset('images/welcome.png', height: 100, width: 100),
+                    Image.asset(welcomeLogo, height: 100, width: 100),
                     const SizedBox(height: 10),
                     Text(
                       resp.message.toString(),
@@ -205,7 +206,7 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
           builder: (context) {
             return ErrorAlert(
               "Error",
-              Image.asset('images/welcome.png'),
+              Image.asset(welcomeLogo),
               "Enter ticket number.",
             );
           });

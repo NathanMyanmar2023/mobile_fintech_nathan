@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:nathan_app/helpers/base_network.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/objects/check_phone_ob.dart';
@@ -11,7 +12,11 @@ class CheckPhoneBloc extends BaseNetwork {
   checkPhone(Map<String, dynamic> map) async {
     postReq(CHECK_PHONE, params: map, onDataCallBack: (ResponseOb resp) {
       if (resp.success == true) {
-        resp.data = CheckPhoneOb.fromJson(resp.data);
+        if(kIsWeb) {
+          resp.data = CheckPhoneOb.fromJson(resp.data);
+        } else {
+          resp.data = CheckPhoneOb.fromJson(resp.data);
+        }
       }
       checkPhoneController.sink.add(resp);
     }, errorCallBack: (ResponseOb resp) {

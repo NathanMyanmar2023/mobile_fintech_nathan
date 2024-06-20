@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:nathan_app/helpers/base_network.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/helpers/shared_pref.dart';
@@ -12,7 +13,11 @@ class VerifyOtpBloc extends BaseNetwork {
   verifyOtp(Map<String, dynamic> map) async {
     postReq(VERIFY_OTP, params: map, onDataCallBack: (ResponseOb resp) {
       if (resp.success == true) {
-        resp.data = VerifyOtpOb.fromJson(resp.data);
+        if(kIsWeb) {
+          resp.data = VerifyOtpOb.fromJson(resp.data);
+        } else {
+          resp.data = VerifyOtpOb.fromJson(resp.data);
+        }
         SharedPref.setData(
           key: SharedPref.token,
           value: "Bearer " + resp.data.data.token,

@@ -9,6 +9,7 @@ import 'package:nathan_app/pages/order_list_page.dart';
 import 'package:nathan_app/pages/product_detail_page.dart';
 import 'package:nathan_app/resources/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nathan_app/resources/constants.dart';
 import 'package:nathan_app/views/custom/snack_bar.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -120,7 +121,7 @@ print("resp.data.data.length ${resp.data.data.length}");
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Image.asset('images/welcome.png', height: 100, width: 100),
+                    Image.asset(welcomeLogo, height: 100, width: 100),
                     const SizedBox(height: 10),
                     Text(
                       resp.message.toString(),
@@ -152,7 +153,7 @@ print("resp.data.data.length ${resp.data.data.length}");
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Image.asset('images/welcome.png', height: 100, width: 100),
+                    Image.asset(welcomeLogo, height: 100, width: 100),
                     const SizedBox(height: 10),
                     Text(
                       resp.message.toString(),

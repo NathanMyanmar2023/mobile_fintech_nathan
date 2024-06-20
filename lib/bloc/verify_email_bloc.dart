@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:nathan_app/helpers/base_network.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/models/utils/app_constants.dart';
@@ -13,7 +14,11 @@ class VerifyEmailBloc extends BaseNetwork {
     postReq(VERIFY_EMAIL, params: map, onDataCallBack: (ResponseOb resp) {
       print(">>>>>>>>>>>> $resp");
       if (resp.success == true) {
-        resp.data = VerifyEmailOb.fromJson(resp.data);
+        if(kIsWeb) {
+          resp.data = VerifyEmailOb.fromJson(resp.data);
+        } else {
+          resp.data = VerifyEmailOb.fromJson(resp.data);
+        }
       }
       verifyEmailController.sink.add(resp);
     }, errorCallBack: (ResponseOb resp) {

@@ -132,6 +132,8 @@ class _HomePageState extends State<HomePage>
   Future refersh() async {
     _wallets_bloc.getWallets();
     _user_info_bloc.getUserInfos();
+    String? tokenn = await SharedPref.getData(key: SharedPref.token);
+    print("main token $tokenn");
   }
 
   @override
@@ -348,7 +350,8 @@ class _HomePageState extends State<HomePage>
                 const SizedBox(
                   height: 15,
                 ),
-                const AdsBannerWidget(paddingTop: 0, paddingbottom: 0,),
+                Container(color: Colors.green, height: 100, width: 100,),
+                 // const AdsBannerWidget(paddingTop: 0, paddingbottom: 0,),
                 const SizedBox(
                   height: 15,
                 ),
@@ -455,8 +458,7 @@ class _HomePageState extends State<HomePage>
                           color: colorWhite,
                         ),
                         menu_name: AppLocalizations.of(context)!.shopping,
-                        target_page:
-                            const ShoppingScreen(), // ShoppingPage
+                        target_page: const ShoppingScreen(), // ShoppingPage
                       ),
                       const SizedBox(
                         width: 10,

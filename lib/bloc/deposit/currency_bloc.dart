@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:nathan_app/helpers/base_network.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/objects/deposit/currency_ob.dart';
@@ -11,7 +12,11 @@ class CurrencyBloc extends BaseNetwork {
   getCurrencies() async {
     getReq(GET_CURRENCIES, onDataCallBack: (ResponseOb resp) {
       if (resp.success == true) {
-        resp.data = CurrencyOb.fromJson(resp.data);
+        if(kIsWeb) {
+          resp.data = CurrencyOb.fromJson(resp.data);
+        } else {
+          resp.data = CurrencyOb.fromJson(resp.data);
+        }
       }
       currencyController.sink.add(resp);
     }, errorCallBack: (ResponseOb resp) {

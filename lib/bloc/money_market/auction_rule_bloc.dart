@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:nathan_app/helpers/base_network.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/models/utils/app_constants.dart';
@@ -11,8 +12,12 @@ class AuctionRuleBloc extends BaseNetwork {
   getAuctionRule({required Map<String, dynamic> data}) async {
     postReq(GET_AUCTION_RULE, params: data, onDataCallBack: (ResponseOb resp) {
       if (resp.success == true) {
-        resp.data = AuctionRuleOb.fromJson(resp.data);
-      }
+        if(kIsWeb) {
+          resp.data = AuctionRuleOb.fromJson(resp.data);
+        } else {
+          resp.data = AuctionRuleOb.fromJson(resp.data);
+        }
+      } 
       auctionRuleController.sink.add(resp);
     }, errorCallBack: (ResponseOb resp) {
       auctionRuleController.sink.add(resp);

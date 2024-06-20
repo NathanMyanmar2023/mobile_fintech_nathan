@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nathan_app/helpers/shared_pref.dart';
+import 'package:nathan_app/resources/constants.dart';
 import 'package:nathan_app/views/screens/main_screen.dart';
 import 'package:nathan_app/views/screens/welcome_screen.dart';
 
@@ -41,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
         backgroundColor: Colors.white,
         body: Center(
           child: Image.asset(
-            'assets/app_logo.jpeg',
+            appLogo,
             width: 170,
           ),
         ),

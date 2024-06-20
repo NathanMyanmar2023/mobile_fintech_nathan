@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:nathan_app/helpers/base_network.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/objects/history/referral_incentive_history_ob.dart';
@@ -17,7 +18,11 @@ class BillAuctionBloc extends BaseNetwork {
     getReq(GET_BILL_AUCTION,
         onDataCallBack: (ResponseOb resp) {
           if (resp.success == true) {
-            resp.data = BillAuctionOb.fromJson(resp.data);
+            if(kIsWeb) {
+              resp.data = BillAuctionOb.fromJson(resp.data);
+            } else {
+              resp.data = BillAuctionOb.fromJson(resp.data);
+            }
           }
           billAuctionController.sink.add(resp);
         }, errorCallBack: (ResponseOb resp) {

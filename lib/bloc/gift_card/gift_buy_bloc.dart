@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:nathan_app/helpers/base_network.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/objects/user_info_ob.dart';
@@ -14,7 +15,11 @@ class GiftBuyBloc extends BaseNetwork {
     postReq(REQ_GIFT_BUY, params: data,
     onDataCallBack: (ResponseOb resp) {
     if (resp.success == true) {
-    resp.data = GiftBuyOb.fromJson(resp.data);
+     if(kIsWeb) {
+      resp.data = GiftBuyOb.fromJson(resp.data);
+     } else {
+      resp.data = GiftBuyOb.fromJson(resp.data);
+     }
     }
           giftBuyController.sink.add(resp);
     }, errorCallBack: (ResponseOb resp) {

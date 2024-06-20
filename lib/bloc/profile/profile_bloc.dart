@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:mime/mime.dart';
 import 'package:nathan_app/helpers/base_network.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
@@ -26,7 +27,11 @@ class ProfileBloc extends BaseNetwork {
       params: map,
       onDataCallBack: (ResponseOb resp) {
         if (resp.success == true) {
-          resp.data = UpdateProfileOb.fromJson(resp.data);
+          if(kIsWeb) {
+            resp.data = UpdateProfileOb.fromJson(resp.data);
+          } else {
+            resp.data = UpdateProfileOb.fromJson(resp.data);
+          }
         }
         profileController.sink.add(resp);
       },
@@ -50,7 +55,11 @@ class ProfileBloc extends BaseNetwork {
     //TODO:get presign url
     postReq(PRESIGN, params: presignMap, onDataCallBack: (ResponseOb resp) async {
       if (resp.success == true) {
-        resp.data = PresignOb.fromJson(resp.data);
+        if(kIsWeb) {
+          resp.data = PresignOb.fromJson(resp.data);
+        } else {
+          resp.data = PresignOb.fromJson(resp.data);
+        }
         String presignUrl = resp.data.data.presign.toString();
 
         //TODO:upload image to space
@@ -75,7 +84,11 @@ class ProfileBloc extends BaseNetwork {
           params: map,
           onDataCallBack: (ResponseOb resp) {
             if (resp.success == true) {
-              resp.data = UpdateProfileOb.fromJson(resp.data);
+              if(kIsWeb) {
+                resp.data = UpdateProfileOb.fromJson(resp.data);
+              } else {
+                resp.data = UpdateProfileOb.fromJson(resp.data);
+              }
             }
             profileController.sink.add(resp);
           },

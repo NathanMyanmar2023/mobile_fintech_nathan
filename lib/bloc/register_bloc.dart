@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:nathan_app/helpers/base_network.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/helpers/shared_pref.dart';
@@ -13,12 +14,20 @@ class RegisterBloc extends BaseNetwork {
   register(Map<String, dynamic> map) async {
     postReq(REGISTER_URL, params: map, onDataCallBack: (ResponseOb resp) {
       if (resp.success == true) {
+        if(kIsWeb) {
+          resp.data = RegisterOb.fromJson(resp.data);
+        SharedPref.setData(
+          key: SharedPref.token,
+          value: "Bearer " + resp.data.data.token,
+        );
+        } else {
         resp.data = RegisterOb.fromJson(resp.data);
         SharedPref.setData(
           key: SharedPref.token,
           value: "Bearer " + resp.data.data.token,
         );
       }
+      } 
       registerController.sink.add(resp);
     }, errorCallBack: (ResponseOb resp) {
       registerController.sink.add(resp);

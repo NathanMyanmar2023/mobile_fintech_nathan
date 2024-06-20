@@ -120,9 +120,9 @@ class _ProductListViewWidgetState extends State<ProductListViewWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const AdsBannerWidget(
-            paddingbottom: 10,
-          ),
+          // const AdsBannerWidget(
+          //   paddingbottom: 10,
+          // ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

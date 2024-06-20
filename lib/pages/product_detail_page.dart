@@ -4,6 +4,7 @@ import 'package:nathan_app/extensions/navigation_extensions.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/objects/product_detail_ob.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nathan_app/resources/constants.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../bloc/add_to_cart_bloc.dart';
@@ -57,7 +58,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Image.asset('images/welcome.png', height: 100, width: 100),
+                    Image.asset(welcomeLogo, height: 100, width: 100),
                     const SizedBox(height: 10),
                     Text(
                       resp.message.toString(),
@@ -91,7 +92,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Image.asset('images/welcome.png', height: 100, width: 100),
+                    Image.asset(welcomeLogo, height: 100, width: 100),
                     const SizedBox(height: 10),
                     Text(
                       resp.message.toString(),
@@ -219,7 +220,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     ),
                   ) : const SizedBox(),
                   const SizedBox(height: 16),
-                   const Center(child: AdsBannerWidget(paddingTop: 0,)),
+                //   const Center(child: AdsBannerWidget(paddingTop: 0,)),
                    Text(
                      AppLocalizations.of(context)!.product_detail,
                     style: const TextStyle(

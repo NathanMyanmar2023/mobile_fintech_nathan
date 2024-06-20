@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:nathan_app/helpers/base_network.dart';
 import 'package:nathan_app/helpers/response_ob.dart';
 import 'package:nathan_app/objects/check_refer_ob.dart';
@@ -16,7 +17,11 @@ class CheckReferBloc extends BaseNetwork {
 
     postReq(CHECK_REFER, params: map, onDataCallBack: (ResponseOb resp) {
       if (resp.success == true) {
-        resp.data = CheckReferOb.fromJson(resp.data);
+        if(kIsWeb) {
+          resp.data = CheckReferOb.fromJson(resp.data);
+        } else {
+          resp.data = CheckReferOb.fromJson(resp.data);
+        }
       }
       checkReferController.sink.add(resp);
     }, errorCallBack: (ResponseOb resp) {
