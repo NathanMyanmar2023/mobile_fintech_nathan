@@ -107,16 +107,6 @@ class _ThaiLotteryScreenState extends State<ThaiLotteryScreen> {
                 const SizedBox(
                   height: 5,
                 ),
-                const NathanTextView(
-                  text:
-                  "please first select which type of lottery you want buy!",
-                  isCenter: true,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
               ],
             ),
           ),
