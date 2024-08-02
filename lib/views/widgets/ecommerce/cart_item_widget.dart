@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:nathan_app/models/response_objects/cart/cart_response_object.dart';
-import 'package:nathan_app/models/utils/app_utils.dart';
-import 'package:nathan_app/views/widgets/ecommerce/cart_item_image_error_widget.dart';
-import 'package:nathan_app/views/widgets/ecommerce/cart_item_image_loading_widget.dart';
+import 'package:fnge/models/response_objects/cart/cart_response_object.dart';
+import 'package:fnge/models/utils/app_utils.dart';
+import 'package:fnge/views/widgets/ecommerce/cart_item_image_error_widget.dart';
+import 'package:fnge/views/widgets/ecommerce/cart_item_image_loading_widget.dart';
 
 class CartItemWidget extends StatefulWidget {
   final CartItems cartItems;

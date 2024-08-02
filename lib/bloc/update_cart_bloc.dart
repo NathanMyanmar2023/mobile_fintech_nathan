@@ -1,7 +1,8 @@
-import 'package:nathan_app/helpers/base_network.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/models/utils/app_constants.dart';
-import 'package:nathan_app/objects/update_cart_ob.dart';
+import 'package:flutter/foundation.dart';
+import 'package:fnge/helpers/base_network.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/models/utils/app_constants.dart';
+import 'package:fnge/objects/update_cart_ob.dart';
 import 'package:rxdart/subjects.dart';
 
 class UpdateCartBloc extends BaseNetwork {
@@ -10,9 +11,14 @@ class UpdateCartBloc extends BaseNetwork {
   Stream<ResponseOb> updateCartStream() => _updateCartController.stream;
 
   updateCart({required Map<String, dynamic> data}) async {
-    postReq(UPDATE_SHOPPING_CART, params: data, onDataCallBack: (ResponseOb resp) {
+    postReq(UPDATE_SHOPPING_CART, params: data,
+        onDataCallBack: (ResponseOb resp) {
       if (resp.success == true) {
-        resp.data = UpdateCartOb.fromJson(resp.data);
+        if (kIsWeb) {
+          resp.data = UpdateCartOb.fromJson(resp.data);
+        } else {
+          resp.data = UpdateCartOb.fromJson(resp.data);
+        }
       }
       _updateCartController.sink.add(resp);
     }, errorCallBack: (ResponseOb resp) {

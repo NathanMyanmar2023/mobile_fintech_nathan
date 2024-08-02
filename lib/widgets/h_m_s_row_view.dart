@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:nathan_app/resources/colors.dart';
+import 'package:fnge/resources/colors.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class HMSRowView extends StatelessWidget {
   final String hour;
   final String min;
   final String sec;
-  const HMSRowView({Key? key, required this.hour, required this.min, required this.sec}) : super(key: key);
+  const HMSRowView(
+      {Key? key, required this.hour, required this.min, required this.sec})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

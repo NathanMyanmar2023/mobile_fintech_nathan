@@ -1,4 +1,4 @@
-package com.fintech.nathan
+package com.fngc.fn
 
 import io.flutter.embedding.android.FlutterActivity
 

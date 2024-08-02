@@ -8,10 +8,10 @@ class Config {
   static const String productionUrl = "https://nathanfintech.com/";
 
   /// uat testing
-  //static const String productionUrl = "http://thecreatorcreates.com/";
+ // static const String productionUrl = "http://thecreatorcreates.com/";
 
   /// localhost
- // static const String productionUrl = "http://143.198.212.100/";
+  // static const String productionUrl = "http://143.198.212.100/";
 
   static const bool isLiveVoucher = false;
 }

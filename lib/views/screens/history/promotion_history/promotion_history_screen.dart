@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/bloc/top_up/phone_bill_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/views/screens/history/phone_bill_history/phone_bill_history_selector_widget.dart';
+import 'package:fnge/bloc/top_up/phone_bill_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/views/screens/history/phone_bill_history/phone_bill_history_selector_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:nathan_app/views/screens/history/promotion_history/promotion_history_widget.dart';
+import 'package:fnge/views/screens/history/promotion_history/promotion_history_widget.dart';
 
 import '../../../../bloc/history/promotion_history/promotion_history_bloc.dart';
 import '../../../../objects/history/phone_bill_ob.dart';
@@ -16,12 +16,10 @@ class PromotionHistoryScreen extends StatefulWidget {
   });
 
   @override
-  State<PromotionHistoryScreen> createState() =>
-      _PromotionHistoryScreenState();
+  State<PromotionHistoryScreen> createState() => _PromotionHistoryScreenState();
 }
 
-class _PromotionHistoryScreenState
-    extends State<PromotionHistoryScreen> {
+class _PromotionHistoryScreenState extends State<PromotionHistoryScreen> {
   bool isLoading = false;
   bool isFetching = false;
   final scroll_controller = ScrollController();
@@ -84,7 +82,7 @@ class _PromotionHistoryScreenState
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
-   //   _promotion_history_bloc.getPromotionHistoryHistory(page);
+      //   _promotion_history_bloc.getPromotionHistoryHistory(page);
       print("getting page - $page");
     }
   }
@@ -148,44 +146,51 @@ class _PromotionHistoryScreenState
             ),
             body: RefreshIndicator(
               onRefresh: refersh,
-              child: history_list.isEmpty ? Center(child: Text(AppLocalizations.of(context)!.no_more_data,),) :  ListView.builder(
-                controller: scroll_controller,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount: history_list.length,
-                itemBuilder: (context, index) {
-                  if (index < history_list.length) {
-                    final history = history_list[index];
-                    return PromotionHistoryWidget(
-                      id: history[0].toString(),
-                      promotionName: history[1].toString(),
-                      percentage: history[2].toString(),
-                      cashAmt: history[3].toString(),
-                      investAmt: history[4].toString(),
-                      createAt: history[5].toString(),
-                    );
-                  } else {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 20),
-                      child: Center(
-                        child: hasMore
-                            ? const SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                            ))
-                            : Text(
-                          AppLocalizations.of(context)!.no_more_data,
-                          style: TextStyle(
-                            fontSize: 13,
-                          ),
-                        ),
+              child: history_list.isEmpty
+                  ? Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.no_more_data,
                       ),
-                    );
-                  }
-                },
-              ),
+                    )
+                  : ListView.builder(
+                      controller: scroll_controller,
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      itemCount: history_list.length,
+                      itemBuilder: (context, index) {
+                        if (index < history_list.length) {
+                          final history = history_list[index];
+                          return PromotionHistoryWidget(
+                            id: history[0].toString(),
+                            promotionName: history[1].toString(),
+                            percentage: history[2].toString(),
+                            cashAmt: history[3].toString(),
+                            investAmt: history[4].toString(),
+                            createAt: history[5].toString(),
+                          );
+                        } else {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 20),
+                            child: Center(
+                              child: hasMore
+                                  ? const SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                      ))
+                                  : Text(
+                                      AppLocalizations.of(context)!
+                                          .no_more_data,
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                            ),
+                          );
+                        }
+                      },
+                    ),
             )),
       );
     }

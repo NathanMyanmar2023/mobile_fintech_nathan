@@ -2,9 +2,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:nathan_app/extensions/navigation_extensions.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/custom/snack_bar.dart';
+import 'package:fnge/extensions/navigation_extensions.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/custom/snack_bar.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../../bloc/money_market/auction_round_monthly_bid_bloc.dart';
 import '../../../../bloc/money_market/request_auction_round_monthly_bid_bloc.dart';
@@ -20,7 +20,12 @@ class TestStartRound extends StatefulWidget {
   final int roundId;
   final String roundNumber;
   final String baseAmount;
-  const TestStartRound({Key? key, required this.roundId, required this.roundNumber, required this.baseAmount}) : super(key: key);
+  const TestStartRound(
+      {Key? key,
+      required this.roundId,
+      required this.roundNumber,
+      required this.baseAmount})
+      : super(key: key);
 
   @override
   State<TestStartRound> createState() => _TestStartRoundState();
@@ -34,7 +39,6 @@ class _TestStartRoundState extends State<TestStartRound> {
   }
 
   var ticketTec = TextEditingController();
-
 
   // late Duration _difference;
   Duration _difference = const Duration(seconds: 1);
@@ -54,13 +58,14 @@ class _TestStartRoundState extends State<TestStartRound> {
   @override
   void initState() {
     super.initState();
-    callTimer = Timer.periodic(const Duration(seconds: 10), (Timer t) => firstCallTimer());
+    callTimer = Timer.periodic(
+        const Duration(seconds: 10), (Timer t) => firstCallTimer());
 
     // get round bid history
     _roundMonthlyBidStream = _roundMonthlyBidBloc.auctionRoundMonthlyStream();
     _roundMonthlyBidStream.listen((ResponseOb resp) {
       if (resp.success) {
-        if(resp.message == "Sorry, there are no one users") {
+        if (resp.message == "Sorry, there are no one users") {
           setState(() {
             noOneUserPage = true;
           });
@@ -69,7 +74,9 @@ class _TestStartRoundState extends State<TestStartRound> {
             lastBidAmount = resp.data.data.lastBidUser.amount ?? "0";
             bitstandardAmount = resp.data.data.bitstandardAmount ?? "0";
             bidStarTime = resp.data.data.bitStartime ?? "0";
-            bidUsersLists = (resp.data as AuctionRoundMonthlyBidOb).data!.bidUsersLists ?? [];
+            bidUsersLists =
+                (resp.data as AuctionRoundMonthlyBidOb).data!.bidUsersLists ??
+                    [];
           });
         }
       } else {}
@@ -77,7 +84,8 @@ class _TestStartRoundState extends State<TestStartRound> {
     _roundMonthlyBidBloc.getRoundMonthlyBid(widget.roundId);
 
 // request new bid
-    _requestRoundMonthlyBidStream = _requestRoundMonthlyBidBloc.requestAuctionRoundMonthlyStream();
+    _requestRoundMonthlyBidStream =
+        _requestRoundMonthlyBidBloc.requestAuctionRoundMonthlyStream();
     _requestRoundMonthlyBidStream.listen((ResponseOb resp) {
       if (resp.message == "Success") {
         setState(() {
@@ -106,16 +114,19 @@ class _TestStartRoundState extends State<TestStartRound> {
                   TextButton(
                     onPressed: () {
                       popBack(context: context);
-                      if(resp.message.toString() == "Sorry, there are not have other one bid user") {
+                      if (resp.message.toString() ==
+                          "Sorry, there are not have other one bid user") {
                         setState(() {
                           hideButton = true;
                           startTimer();
-                          Timer.periodic(const Duration(seconds: 10), (Timer t) => firstCallTimer());
+                          Timer.periodic(const Duration(seconds: 10),
+                              (Timer t) => firstCallTimer());
                         });
-                      }else {
+                      } else {
                         setState(() {
                           hideButton = false;
-                          _roundMonthlyBidBloc.getRoundMonthlyBid(widget.roundId);
+                          _roundMonthlyBidBloc
+                              .getRoundMonthlyBid(widget.roundId);
                         });
                       }
                     },
@@ -139,9 +150,10 @@ class _TestStartRoundState extends State<TestStartRound> {
     String? accountId = await SharedPref.getData(key: SharedPref.accountId);
     int userId = int.parse(accountId!);
     print("usood $userId & ${userId.runtimeType}");
-    print("bidUsersLists.last.userId ${bidUsersLists.first.userId} & ${bidUsersLists.last.userId.runtimeType}");
+    print(
+        "bidUsersLists.last.userId ${bidUsersLists.first.userId} & ${bidUsersLists.last.userId.runtimeType}");
     print("acccu $accountId");
-    if(bidUsersLists.first.userId == userId) {
+    if (bidUsersLists.first.userId == userId) {
       print("samme");
       setState(() {
         startTimer();
@@ -166,9 +178,10 @@ class _TestStartRoundState extends State<TestStartRound> {
     String? accountId = await SharedPref.getData(key: SharedPref.accountId);
     int userId = int.parse(accountId!);
     print("usood $userId & ${userId.runtimeType}");
-    print("bidUsersLists.last.userId ${bidUsersLists.first.userId} & ${bidUsersLists.last.userId.runtimeType}");
+    print(
+        "bidUsersLists.last.userId ${bidUsersLists.first.userId} & ${bidUsersLists.last.userId.runtimeType}");
     print("acccu $accountId");
-    if(bidUsersLists.first.userId == userId) {
+    if (bidUsersLists.first.userId == userId) {
       print("samme");
       setState(() {
         callTimer!.cancel();
@@ -215,14 +228,17 @@ class _TestStartRoundState extends State<TestStartRound> {
     Map<String, dynamic> map = {
       'giveAmount': bidAmount,
     };
-    _requestRoundMonthlyBidBloc.requestRoundMonthlyBid(roundID: widget.roundId, data: map);
+    _requestRoundMonthlyBidBloc.requestRoundMonthlyBid(
+        roundID: widget.roundId, data: map);
   }
+
   @override
   void dispose() {
     _waittimer!.cancel();
     callTimer!.cancel();
     super.dispose();
   }
+
   Timer? _waittimer;
   int _start = 10;
   int _finalCount = 10;
@@ -237,7 +253,7 @@ class _TestStartRoundState extends State<TestStartRound> {
     const oneSec = Duration(seconds: 1);
     _waittimer = Timer.periodic(
       oneSec,
-          (Timer timer) {
+      (Timer timer) {
         if (_start == 0) {
           setState(() {
             hideBid = false;
@@ -265,13 +281,13 @@ class _TestStartRoundState extends State<TestStartRound> {
         return AlertDialog(
           title: const Center(
               child: Text(
-                "Congratulations!",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                  color: colorPrimary,
-                ),
-              )),
+            "Congratulations!",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+              color: colorPrimary,
+            ),
+          )),
           // content:  AlertVersionInfoView(),
           content: Container(
             padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -302,8 +318,8 @@ class _TestStartRoundState extends State<TestStartRound> {
                         style: TextStyle(color: colorWhite),
                       ),
                       onPressed: () => Navigator.pop(context),
-                      style:
-                      ElevatedButton.styleFrom(backgroundColor: colorPrimary),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: colorPrimary),
                     ),
                   ],
                 )
@@ -358,27 +374,33 @@ class _TestStartRoundState extends State<TestStartRound> {
                                     color: colorBlack,
                                     fontWeight: FontWeight.w600),
                               ),
-                              noOneUserPage ? const SizedBox() : hideBid ? const SizedBox() : Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  NathanTextView(
-                                    text: "Count Timer ",
-                                    fontSize: 16.sp,
-                                    color: colorBlack,
-                                  ),
-                                  NathanTextView(
-                                    text: "$_start",
-                                    fontSize: 18.sp,
-                                    color: Colors.red,
-                                  ),
-                                  NathanTextView(
-                                    text: " sec.",
-                                    fontSize: 16.sp,
-                                    color: colorBlack,
-                                  ),
-                                ],
-                              ),
+                              noOneUserPage
+                                  ? const SizedBox()
+                                  : hideBid
+                                      ? const SizedBox()
+                                      : Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            NathanTextView(
+                                              text: "Count Timer ",
+                                              fontSize: 16.sp,
+                                              color: colorBlack,
+                                            ),
+                                            NathanTextView(
+                                              text: "$_start",
+                                              fontSize: 18.sp,
+                                              color: Colors.red,
+                                            ),
+                                            NathanTextView(
+                                              text: " sec.",
+                                              fontSize: 16.sp,
+                                              color: colorBlack,
+                                            ),
+                                          ],
+                                        ),
                               // noOneUserPage ? const SizedBox() : hours > 0 || minutes > 0 || seconds > 0 ? Row(
                               //   children: [
                               //     const Text(
@@ -401,7 +423,9 @@ class _TestStartRoundState extends State<TestStartRound> {
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: noOneUserPage ? MainAxisAlignment.center : MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: noOneUserPage
+                                ? MainAxisAlignment.center
+                                : MainAxisAlignment.spaceEvenly,
                             children: [
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -415,35 +439,42 @@ class _TestStartRoundState extends State<TestStartRound> {
                                     width: 5,
                                   ),
                                   NathanTextView(
-                                    text: noOneUserPage ? widget.baseAmount : bitstandardAmount,
+                                    text: noOneUserPage
+                                        ? widget.baseAmount
+                                        : bitstandardAmount,
                                     fontSize: 16,
                                     color: colorPrimary,
                                   ),
                                 ],
                               ),
-                              noOneUserPage ? const SizedBox() : Container(
-                                height: 30,
-                                width: 2,
-                                color: colorSeconary,
-                              ),
-                              noOneUserPage ? const SizedBox() : Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  const NathanTextView(
-                                    text: "Lowest Bid",
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  NathanTextView(
-                                    text: lastBidAmount,
-                                    fontSize: 16,
-                                    color: colorPrimary,
-                                  ),
-                                ],
-                              ),
+                              noOneUserPage
+                                  ? const SizedBox()
+                                  : Container(
+                                      height: 30,
+                                      width: 2,
+                                      color: colorSeconary,
+                                    ),
+                              noOneUserPage
+                                  ? const SizedBox()
+                                  : Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        const NathanTextView(
+                                          text: "Lowest Bid",
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        NathanTextView(
+                                          text: lastBidAmount,
+                                          fontSize: 16,
+                                          color: colorPrimary,
+                                        ),
+                                      ],
+                                    ),
                             ],
                           ),
                         ),
@@ -503,7 +534,9 @@ class _TestStartRoundState extends State<TestStartRound> {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        const SizedBox(height: 15,),
+                        const SizedBox(
+                          height: 15,
+                        ),
                       ],
                     ),
                   ),
@@ -511,7 +544,9 @@ class _TestStartRoundState extends State<TestStartRound> {
                     child: Container(
                       decoration: BoxDecoration(
                         color: colorSeconary.withOpacity(0.2),
-                        borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(30),
+                            topRight: Radius.circular(30)),
                         border: Border.all(
                           width: 2,
                           color: colorPrimary,
@@ -519,29 +554,44 @@ class _TestStartRoundState extends State<TestStartRound> {
                         ),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 10, bottom: 20, left: 25, right: 25),
-                        child: bidUsersLists.isEmpty ? const Center(child: Text("No More Data"),) : ListView.builder(
-                          itemCount: bidUsersLists.length,
-                          shrinkWrap: true,
-                          itemBuilder: (BuildContext context, index) {
-                            return Container(
-                              padding: const EdgeInsets.all(10.0),
-                              margin: const EdgeInsets.symmetric(vertical: 5),
-                              decoration: BoxDecoration(
-                                color: topColors.withOpacity(0.4),
-                                borderRadius: BorderRadius.circular(5),
+                        padding: const EdgeInsets.only(
+                            top: 10, bottom: 20, left: 25, right: 25),
+                        child: bidUsersLists.isEmpty
+                            ? const Center(
+                                child: Text("No More Data"),
+                              )
+                            : ListView.builder(
+                                itemCount: bidUsersLists.length,
+                                shrinkWrap: true,
+                                itemBuilder: (BuildContext context, index) {
+                                  return Container(
+                                    padding: const EdgeInsets.all(10.0),
+                                    margin:
+                                        const EdgeInsets.symmetric(vertical: 5),
+                                    decoration: BoxDecoration(
+                                      color: topColors.withOpacity(0.4),
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                            child: NathanTextView(
+                                          text:
+                                              "${bidUsersLists[index].username}",
+                                        )),
+                                        NathanTextView(
+                                          text:
+                                              "${bidUsersLists[index].amount}",
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
                               ),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(child: NathanTextView(text: "${bidUsersLists[index].username}",)),
-                                  NathanTextView(text: "${bidUsersLists[index].amount}",),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
                       ),
                     ),
                   ),
@@ -572,13 +622,16 @@ class _TestStartRoundState extends State<TestStartRound> {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 20,),
+                  const SizedBox(
+                    width: 20,
+                  ),
                   Expanded(
                     child: LongButtonView(
                         text: "Confirm",
                         onTap: () {
-                          if(ticketTec.text.isEmpty) {
-                            context.showSnack("Enter your Bid amount first!",
+                          if (ticketTec.text.isEmpty) {
+                            context.showSnack(
+                              "Enter your Bid amount first!",
                               Colors.white,
                               Colors.red,
                               Icons.close,
@@ -591,8 +644,7 @@ class _TestStartRoundState extends State<TestStartRound> {
                               ticketTec.clear();
                             });
                           }
-                        }
-                    ),
+                        }),
                   ),
                 ],
               ),

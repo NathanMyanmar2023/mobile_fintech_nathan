@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/screens/main_screen.dart';
-import 'package:nathan_app/views/widgets/my_separator.dart';
-import 'package:nathan_app/widgets/long_button_view.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/screens/main_screen.dart';
+import 'package:fnge/views/widgets/my_separator.dart';
+import 'package:fnge/widgets/long_button_view.dart';
 
 class SuccessTransferScreen extends StatefulWidget {
   final String amount;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nathan_app/resources/colors.dart';
+import 'package:fnge/resources/colors.dart';
 
 class SelectHistoryWidget extends StatelessWidget {
   final String history_name;
@@ -15,7 +15,8 @@ class SelectHistoryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MediaQuery(
-      data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+      data: MediaQuery.of(context)
+          .copyWith(textScaler: const TextScaler.linear(1.0)),
       child: InkWell(
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(builder: (context) {
@@ -46,10 +47,7 @@ class SelectHistoryWidget extends StatelessWidget {
                 textAlign: TextAlign.center,
                 maxLines: 2,
                 history_name,
-                style: const TextStyle(
-                  fontSize: 13,
-                  color: colorWhite
-                ),
+                style: const TextStyle(fontSize: 13, color: colorWhite),
               ),
             ],
           ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:nathan_app/view_models/product_view_model.dart';
-import 'package:nathan_app/views/widgets/ecommerce/image_slider_widget.dart';
+import 'package:fnge/view_models/product_view_model.dart';
+import 'package:fnge/views/widgets/ecommerce/image_slider_widget.dart';
 import 'package:provider/provider.dart';
 
 import '../../../bloc/products/products_bloc.dart';
@@ -95,7 +95,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   Widget build(BuildContext context) {
     ProductViewModel productViewModel = context.watch<ProductViewModel>();
     return MediaQuery(
-      data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+      data: MediaQuery.of(context)
+          .copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(

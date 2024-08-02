@@ -1,4 +1,4 @@
-import 'package:nathan_app/objects/rank/rank_data_ob.dart';
+import 'package:fnge/objects/rank/rank_data_ob.dart';
 
 class RankOb {
   bool? success;

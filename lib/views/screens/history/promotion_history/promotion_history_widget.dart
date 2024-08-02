@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:nathan_app/resources/colors.dart';
+import 'package:fnge/resources/colors.dart';
 
 class PromotionHistoryWidget extends StatelessWidget {
   final String id;
@@ -23,7 +23,8 @@ class PromotionHistoryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MediaQuery(
-      data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+      data: MediaQuery.of(context)
+          .copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Column(
         children: [
           Container(
@@ -122,11 +123,10 @@ class PromotionHistoryWidget extends StatelessWidget {
     return formattedAmount.toString();
   }
 
-
-  String currentTime(String time)  {
-print("tti $time");
+  String currentTime(String time) {
+    print("tti $time");
     DateTime parseDate =
-    new DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(time);
+        new DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(time);
     var inputDate = DateTime.parse(parseDate.toString());
     var outputFormat = DateFormat('MMMM dd yyyy hh:mm a');
     var outputDate = outputFormat.format(inputDate);

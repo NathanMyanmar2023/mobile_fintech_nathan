@@ -1,24 +1,25 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/iconic_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nathan_app/bloc/wallets_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/itemviews/wallet_item_view.dart';
-import 'package:nathan_app/models/utils/app_utils.dart';
-import 'package:nathan_app/pages/lucky_draw_page.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/screens/deposit/deposit_select%20_country_screen.dart';
-import 'package:nathan_app/views/screens/exchange/exchange_screen.dart';
-import 'package:nathan_app/views/screens/investment/select_investment_screen.dart';
-import 'package:nathan_app/views/screens/kyc/kyc_screen.dart';
-import 'package:nathan_app/views/screens/main_screen.dart';
-import 'package:nathan_app/views/screens/money_market/test_gift_card.dart';
-import 'package:nathan_app/views/screens/money_market/test_money_screen.dart';
-import 'package:nathan_app/views/screens/shopping/shopping_screen.dart';
-import 'package:nathan_app/views/screens/transfer/transfer_screen.dart';
-import 'package:nathan_app/views/screens/welcome_screen.dart';
-import 'package:nathan_app/views/widgets/main_menu_button_widget.dart';
+import 'package:fnge/bloc/wallets_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/itemviews/wallet_item_view.dart';
+import 'package:fnge/models/utils/app_utils.dart';
+import 'package:fnge/pages/lucky_draw_page.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/screens/deposit/deposit_select%20_country_screen.dart';
+import 'package:fnge/views/screens/exchange/exchange_screen.dart';
+import 'package:fnge/views/screens/investment/select_investment_screen.dart';
+import 'package:fnge/views/screens/kyc/kyc_screen.dart';
+import 'package:fnge/views/screens/main_screen.dart';
+import 'package:fnge/views/screens/money_market/test_gift_card.dart';
+import 'package:fnge/views/screens/money_market/test_money_screen.dart';
+import 'package:fnge/views/screens/shopping/shopping_screen.dart';
+import 'package:fnge/views/screens/transfer/transfer_screen.dart';
+import 'package:fnge/views/screens/welcome_screen.dart';
+import 'package:fnge/views/widgets/main_menu_button_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../bloc/user_info_bloc.dart';
@@ -26,6 +27,7 @@ import '../../helpers/shared_pref.dart';
 import '../Ads_banner/ads_banner_widget.dart';
 import '../notification/notification_setup.dart';
 import '../screens/gift_card/gift_card_screen.dart';
+import '../screens/lottery/lottery_screen.dart';
 import '../screens/money_market/money_market_screen.dart';
 import '../screens/shopping/category_screen.dart';
 import '../screens/top_up/top_up_screen.dart';
@@ -73,8 +75,6 @@ class _HomePageState extends State<HomePage>
 
   @override
   void initState() {
-    // _noti.configurePushNotifications(context);
-    // _noti.eventListenerCallback(context);
 
     _messagingService.init(context);
     _messagingService.initializeNotification(context);
@@ -131,6 +131,8 @@ class _HomePageState extends State<HomePage>
   Future refersh() async {
     _wallets_bloc.getWallets();
     _user_info_bloc.getUserInfos();
+    String? tokenn = await SharedPref.getData(key: SharedPref.token);
+    print("main token $tokenn");
   }
 
   @override
@@ -347,7 +349,12 @@ class _HomePageState extends State<HomePage>
                 const SizedBox(
                   height: 15,
                 ),
-                const AdsBannerWidget(paddingTop: 0, paddingbottom: 0,),
+                kIsWeb
+                    ? const SizedBox()
+                    : const AdsBannerWidget(
+                        paddingTop: 0,
+                        paddingbottom: 0,
+                      ),
                 const SizedBox(
                   height: 15,
                 ),
@@ -454,8 +461,7 @@ class _HomePageState extends State<HomePage>
                           color: colorWhite,
                         ),
                         menu_name: AppLocalizations.of(context)!.shopping,
-                        target_page:
-                            const ShoppingScreen(), // ShoppingPage
+                        target_page: const ShoppingScreen(), // ShoppingPage
                       ),
                       const SizedBox(
                         width: 10,
@@ -519,12 +525,24 @@ class _HomePageState extends State<HomePage>
                       const SizedBox(
                         width: 10,
                       ),
+                      // const MainMenuButtonWidget(
+                      //   menu_icon: Icon(
+                      //     FontAwesomeIcons.ticketSimple,
+                      //     color: colorWhite,
+                      //   ),
+                      //   menu_name: "Lottery",
+                      //   target_page: LotteryScreen(),
+                      // ),
+
                       Expanded(
                         flex: 2,
                         child: AspectRatio(
                           aspectRatio: 1,
                           child: Container(),
                         ),
+                      ),
+                      const SizedBox(
+                        width: 10,
                       ),
                     ],
                   ),

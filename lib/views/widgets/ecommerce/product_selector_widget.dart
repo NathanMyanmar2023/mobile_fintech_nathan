@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:nathan_app/views/screens/ecommerce/product_detail_screen.dart';
+import 'package:fnge/views/screens/ecommerce/product_detail_screen.dart';
 
 class ProductSelectorWidget extends StatefulWidget {
   final int id;
@@ -51,7 +51,8 @@ class _ProductSelectorWidgetState extends State<ProductSelectorWidget>
   Widget build(BuildContext context) {
     super.build(context);
     return MediaQuery(
-      data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+      data: MediaQuery.of(context)
+          .copyWith(textScaler: const TextScaler.linear(1.0)),
       child: MaterialButton(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),

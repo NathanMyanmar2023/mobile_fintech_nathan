@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:nathan_app/config/config.dart';
-import 'package:nathan_app/helpers/response_data_ob.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/helpers/shared_pref.dart';
+import 'package:fnge/config/config.dart';
+import 'package:fnge/helpers/response_data_ob.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/helpers/shared_pref.dart';
 
 enum RequestType { Get, Post, Del }
 
@@ -97,11 +97,12 @@ class BaseNetwork {
         respOb.message = response.data["message"];
         respOb.data = response.data;
         onDataCallBack!(respOb);
-      } else if (statusCode == 400 && response.data["success"] == false)  {
+      } else if (statusCode == 400 && response.data["success"] == false) {
         // when data is null
         respOb.message = response.data["message"];
         errorCallBack!(respOb);
-  } else if (statusCode == 200 && response.data["status"] == true) { // for checking deposit resp
+      } else if (statusCode == 200 && response.data["status"] == true) {
+        // for checking deposit resp
         //data
         respOb.message = response.data["message"];
         errorCallBack!(respOb);
@@ -116,10 +117,10 @@ class BaseNetwork {
       ResponseOb respObb = ResponseOb(success: false);
       print("DioError ${e.response?.data['message']}");
       SharedPref.setData(
-          key: SharedPref.responseError,
-          value: e.response?.data['message'],
+        key: SharedPref.responseError,
+        value: e.response?.data['message'],
       );
-          ResponseOb respOb = ResponseOb(success: false);
+      ResponseOb respOb = ResponseOb(success: false);
       print("res ${respOb.message}");
       if (e.response?.data["success"] == false) {
         if (e.response?.data["message"] != null) {
@@ -129,15 +130,19 @@ class BaseNetwork {
         }
       } else if (e.response?.statusCode == 422) {
         print("4222");
-        if(e.response?.data['message'] == "The new password field is required. (and 1 more error)") {
-          e.response?.data["success"]  = true;
+        if (e.response?.data['message'] ==
+            "The new password field is required. (and 1 more error)") {
+          e.response?.data["success"] = true;
           e.response?.data["message"] = "Unprocessable Entity";
           onDataCallBack!(respObb);
         }
         return; // Return early to prevent further processing
       } else {
-        respOb.success =
-        e.response?.data["success"] != null ? e.response != null ? e.response?.data["success"] : false : false;
+        respOb.success = e.response?.data["success"] != null
+            ? e.response != null
+                ? e.response?.data["success"]
+                : false
+            : false;
         respOb.message =
             e.response != null ? e.response?.data["message"] : "Server Error";
       }

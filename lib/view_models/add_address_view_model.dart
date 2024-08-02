@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:nathan_app/config/config.dart';
-import 'package:nathan_app/helpers/shared_pref.dart';
-import 'package:nathan_app/models/response_objects/delivery_region/delivery_region_response_object.dart';
-import 'package:nathan_app/models/response_objects/delivery_township/delivery_township_response_object.dart';
-import 'package:nathan_app/models/services/api_service.dart';
-import 'package:nathan_app/models/services/api_status.dart';
+import 'package:fnge/config/config.dart';
+import 'package:fnge/helpers/shared_pref.dart';
+import 'package:fnge/models/response_objects/delivery_region/delivery_region_response_object.dart';
+import 'package:fnge/models/response_objects/delivery_township/delivery_township_response_object.dart';
+import 'package:fnge/models/services/api_service.dart';
+import 'package:fnge/models/services/api_status.dart';
 
 class AddAddressViewModel extends ChangeNotifier {
   bool _loading = true;
@@ -79,8 +79,8 @@ class AddAddressViewModel extends ChangeNotifier {
     print("languagelanguage2 $language");
     setLoading(true);
     try {
-      var response =
-          await apiService.getDeliveryRegions("Bearer $token", Config.apiKey, "$language");
+      var response = await apiService.getDeliveryRegions(
+          "Bearer $token", Config.apiKey, "$language");
       print("Get Region Response >> ${response.data}");
       setRegionList(response.data);
     } catch (e) {

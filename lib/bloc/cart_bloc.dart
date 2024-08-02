@@ -1,7 +1,7 @@
-import 'package:nathan_app/helpers/base_network.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/models/utils/app_constants.dart';
-import 'package:nathan_app/objects/cart_ob.dart';
+import 'package:fnge/helpers/base_network.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/models/utils/app_constants.dart';
+import 'package:fnge/objects/cart_ob.dart';
 import 'package:rxdart/subjects.dart';
 
 class CartBloc extends BaseNetwork {

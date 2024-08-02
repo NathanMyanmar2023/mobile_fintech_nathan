@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "Fintech Nathan" "\0"
+            VALUE "FileDescription", "FNGC" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "Fintech Nathan" "\0"
+            VALUE "InternalName", "FNGC" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "nathan_app.exe" "\0"
-            VALUE "ProductName", "Fintech Nathan" "\0"
+            VALUE "OriginalFilename", "fnge.exe" "\0"
+            VALUE "ProductName", "FNGC" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

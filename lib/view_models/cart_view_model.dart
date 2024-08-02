@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:nathan_app/config/config.dart';
-import 'package:nathan_app/helpers/shared_pref.dart';
-import 'package:nathan_app/models/response_objects/cart/cart_response_object.dart';
-import 'package:nathan_app/models/services/api_service.dart';
+import 'package:fnge/config/config.dart';
+import 'package:fnge/helpers/shared_pref.dart';
+import 'package:fnge/models/response_objects/cart/cart_response_object.dart';
+import 'package:fnge/models/services/api_service.dart';
 
 class CartViewModel extends ChangeNotifier {
   bool _loading = false;
@@ -68,7 +68,8 @@ class CartViewModel extends ChangeNotifier {
     print(token);
     setLoading(true);
     try {
-      var response = await apiService.getCart("Bearer $token", Config.apiKey, "$language");
+      var response =
+          await apiService.getCart("Bearer $token", Config.apiKey, "$language");
       print(response);
       setCartItemList(response.data!.items);
       setAddress(response.data!.address);

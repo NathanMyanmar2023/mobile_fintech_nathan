@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:nathan_app/resources/colors.dart';
+import 'package:fnge/resources/colors.dart';
 
 import '../../../../widgets/app_bar_title_view.dart';
 import '../../../../widgets/nathan_text_view.dart';
@@ -12,12 +12,13 @@ class OwnerRoundDetailScreen extends StatefulWidget {
   final String realAmt;
   final String estimateAmt;
   final String winnerBidName;
-  const OwnerRoundDetailScreen({Key? key,
+  const OwnerRoundDetailScreen({
+    Key? key,
     required this.roundId,
     required this.roundNumber,
     required this.realAmt,
     required this.estimateAmt,
-    required this. winnerBidName,
+    required this.winnerBidName,
   }) : super(key: key);
 
   @override
@@ -46,7 +47,7 @@ class _OwnerRoundDetailScreenState extends State<OwnerRoundDetailScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-               Padding(
+              Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Text(
                   widget.roundNumber,
@@ -66,7 +67,7 @@ class _OwnerRoundDetailScreenState extends State<OwnerRoundDetailScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                     Column(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const NathanTextView(
@@ -87,7 +88,7 @@ class _OwnerRoundDetailScreenState extends State<OwnerRoundDetailScreen> {
                   ],
                 ),
               ),
-               Padding(
+              Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Center(
                   child: NathanTextView(

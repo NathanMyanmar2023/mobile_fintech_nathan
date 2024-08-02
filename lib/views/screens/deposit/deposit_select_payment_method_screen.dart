@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/bloc/deposit/payment_method_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/screens/deposit/deposit_accounts_screen.dart';
-import 'package:nathan_app/views/screens/withdraw/withdraw_screen.dart';
-import 'package:nathan_app/views/widgets/payment_method_selector_widget.dart';
-import 'package:nathan_app/widgets/long_button_view.dart';
+import 'package:fnge/bloc/deposit/payment_method_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/screens/deposit/deposit_accounts_screen.dart';
+import 'package:fnge/views/screens/withdraw/withdraw_screen.dart';
+import 'package:fnge/views/widgets/payment_method_selector_widget.dart';
+import 'package:fnge/widgets/long_button_view.dart';
+
+import '../../Ads_banner/ads_banner_widget.dart';
 
 class DepositSelectPaymentMethodScreen extends StatefulWidget {
   final int currency_id;
@@ -129,6 +131,7 @@ class _DepositSelectPaymentMethodScreenState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const AdsBannerWidget(paddingbottom: 0,),
                 const SizedBox(
                   height: 20,
                 ),

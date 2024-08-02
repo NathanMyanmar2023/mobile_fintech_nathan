@@ -1,11 +1,11 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/extensions/navigation_extensions.dart';
-import 'package:nathan_app/objects/money_market/Auction_rule_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/Ads_banner/ads_banner_widget.dart';
-import 'package:nathan_app/views/custom/snack_bar.dart';
+import 'package:fnge/extensions/navigation_extensions.dart';
+import 'package:fnge/objects/money_market/Auction_rule_ob.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/Ads_banner/ads_banner_widget.dart';
+import 'package:fnge/views/custom/snack_bar.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../bloc/money_market/auction_insterest_bloc.dart';
@@ -21,7 +21,11 @@ class BillAuctionScreen extends StatefulWidget {
   final int auctionId;
   final String auctionName;
   final String auctionAmt;
-  const BillAuctionScreen({required this.auctionId, required this.auctionName, required this.auctionAmt, Key? key})
+  const BillAuctionScreen(
+      {required this.auctionId,
+      required this.auctionName,
+      required this.auctionAmt,
+      Key? key})
       : super(key: key);
 
   @override
@@ -35,7 +39,8 @@ class _BillAuctionScreenState extends State<BillAuctionScreen> {
 
   Future refersh() async {
     setState(() {});
-  } 
+  }
+
   final _auctionRuleBloc = AuctionRuleBloc();
   late Stream<ResponseOb> _auctionRuleStream;
   List auctionRuleList = [];
@@ -69,7 +74,9 @@ class _BillAuctionScreenState extends State<BillAuctionScreen> {
             context: context,
             builder: (context) {
               return AlertDialog(
-                title:  Text(AppLocalizations.of(context)!.success,),
+                title: Text(
+                  AppLocalizations.of(context)!.success,
+                ),
                 content: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
@@ -99,8 +106,8 @@ class _BillAuctionScreenState extends State<BillAuctionScreen> {
             });
       } else {
         setState(() {
-        isLoading = false;
-      });
+          isLoading = false;
+        });
         showDialog(
             context: context,
             builder: (context) {
@@ -136,11 +143,10 @@ class _BillAuctionScreenState extends State<BillAuctionScreen> {
     });
   }
 
-
   void getAuctionRule() {
     Map<String, dynamic> map = {
-    'auctionID': widget.auctionId,
-  };
+      'auctionID': widget.auctionId,
+    };
     _auctionRuleBloc.getAuctionRule(data: map);
   }
 
@@ -154,6 +160,7 @@ class _BillAuctionScreenState extends State<BillAuctionScreen> {
       isLoading = true;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
@@ -214,7 +221,9 @@ class _BillAuctionScreenState extends State<BillAuctionScreen> {
                           ],
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(top: 20,),
+                          padding: EdgeInsets.only(
+                            top: 20,
+                          ),
                           child: NathanTextView(
                             text: "Terms & Conditions",
                             fontWeight: FontWeight.w600,
@@ -222,7 +231,9 @@ class _BillAuctionScreenState extends State<BillAuctionScreen> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 10,),
+                          padding: const EdgeInsets.only(
+                            bottom: 10,
+                          ),
                           child: Container(
                             height: 2,
                             width: 100,
@@ -234,10 +245,11 @@ class _BillAuctionScreenState extends State<BillAuctionScreen> {
                           itemCount: auctionRuleList.length,
                           shrinkWrap: true,
                           itemBuilder: (BuildContext context, index) {
-                            return NathanTextView(text: "${auctionRuleList[index]}");
+                            return NathanTextView(
+                                text: "${auctionRuleList[index]}");
                           },
                         ),
-                        const AdsBannerWidget(paddingbottom: 0,),
+                        //const AdsBannerWidget(paddingbottom: 0,),
                         Padding(
                           padding: const EdgeInsets.only(top: 20),
                           child: AgreeSectionView(
@@ -256,15 +268,17 @@ class _BillAuctionScreenState extends State<BillAuctionScreen> {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     child: LongButtonView(
-                      text: "Join",
-                      onTap: () {
-                        _agreeVisible ? context.showSnack("Please make sure of agree our Terms & Condition",
-                          Colors.white,
-                          Colors.red,
-                          Icons.close,
-                        ) : requestAuctionRule();
-                      }
-                    ),
+                        text: "Join",
+                        onTap: () {
+                          _agreeVisible
+                              ? context.showSnack(
+                                  "Please make sure of agree our Terms & Condition",
+                                  Colors.white,
+                                  Colors.red,
+                                  Icons.close,
+                                )
+                              : requestAuctionRule();
+                        }),
                   )
                 ],
               ),

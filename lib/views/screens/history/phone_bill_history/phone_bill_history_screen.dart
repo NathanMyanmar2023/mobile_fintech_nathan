@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/bloc/top_up/phone_bill_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/views/screens/history/phone_bill_history/phone_bill_history_selector_widget.dart';
+import 'package:fnge/bloc/top_up/phone_bill_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/views/screens/history/phone_bill_history/phone_bill_history_selector_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PhoneBillHistoryScreen extends StatefulWidget {
@@ -11,12 +11,10 @@ class PhoneBillHistoryScreen extends StatefulWidget {
   });
 
   @override
-  State<PhoneBillHistoryScreen> createState() =>
-      _PhoneBillHistoryScreenState();
+  State<PhoneBillHistoryScreen> createState() => _PhoneBillHistoryScreenState();
 }
 
-class _PhoneBillHistoryScreenState
-    extends State<PhoneBillHistoryScreen> {
+class _PhoneBillHistoryScreenState extends State<PhoneBillHistoryScreen> {
   bool isLoading = false;
   bool isFetching = false;
   final scroll_controller = ScrollController();
@@ -35,8 +33,7 @@ class _PhoneBillHistoryScreenState
     // TODO: implement initState
     super.initState();
 
-    _phone_bill_history_stream =
-        _phone_bill_bloc.phoneBillStream();
+    _phone_bill_history_stream = _phone_bill_bloc.phoneBillStream();
     _phone_bill_history_stream.listen((ResponseOb resp) {
       if (resp.success) {
         setState(() {
@@ -88,9 +85,9 @@ class _PhoneBillHistoryScreenState
 
   Future refersh() async {
     setState(() {
-     isFetching = false;
-     hasMore = true;
-     page = 1;
+      isFetching = false;
+      hasMore = true;
+      page = 1;
       history_list.clear();
     });
 
@@ -101,7 +98,8 @@ class _PhoneBillHistoryScreenState
   Widget build(BuildContext context) {
     if (isLoading) {
       return MediaQuery(
-        data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+        data: MediaQuery.of(context)
+            .copyWith(textScaler: const TextScaler.linear(1.0)),
         child: Scaffold(
           backgroundColor: Colors.white,
           body: SpinKitFadingFour(
@@ -118,7 +116,8 @@ class _PhoneBillHistoryScreenState
       );
     } else {
       return MediaQuery(
-        data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+        data: MediaQuery.of(context)
+            .copyWith(textScaler: const TextScaler.linear(1.0)),
         child: Scaffold(
             backgroundColor: Colors.grey.shade200,
             appBar: PreferredSize(
@@ -142,56 +141,60 @@ class _PhoneBillHistoryScreenState
             ),
             body: RefreshIndicator(
               onRefresh: refersh,
-              child: history_list.isEmpty ? Center(child: Text(AppLocalizations.of(context)!.no_more_data,),) : ListView.builder(
-                controller: scroll_controller,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount: history_list.length,
-                itemBuilder: (context, index) {
-                    final history = history_list[index];
-                  if (index < history_list.length) {
-                    return PhoneBillHistorySelectorWidget(
-                      id: history[0].toString(),
-                      status: history[1].toString(),
-                      amount: history[2].toString(),
-                      phone: history[3].toString(),
-                      operator: history[4].toString(),
-                      billed_time: history[6].toString(),
-                    );
-
-
-                  } else {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 20),
-                      child: Center(
-                        child: hasMore
-                            ? const SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                            ))
-                            : Text(
-                          AppLocalizations.of(context)!.no_more_data,
-                          style: TextStyle(
-                            fontSize: 13,
-                          ),
-                        ),
+              child: history_list.isEmpty
+                  ? Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.no_more_data,
                       ),
-                    );
-                  }
+                    )
+                  : ListView.builder(
+                      controller: scroll_controller,
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      itemCount: history_list.length,
+                      itemBuilder: (context, index) {
+                        final history = history_list[index];
+                        if (index < history_list.length) {
+                          return PhoneBillHistorySelectorWidget(
+                            id: history[0].toString(),
+                            status: history[1].toString(),
+                            amount: history[2].toString(),
+                            phone: history[3].toString(),
+                            operator: history[4].toString(),
+                            billed_time: history[6].toString(),
+                          );
+                        } else {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 20),
+                            child: Center(
+                              child: hasMore
+                                  ? const SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                      ))
+                                  : Text(
+                                      AppLocalizations.of(context)!
+                                          .no_more_data,
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                            ),
+                          );
+                        }
 
-                  // return PhoneBillHistorySelectorWidget(
-                  //   id: history[0].toString(),
-                  //   status: history[1].toString(),
-                  //   amount: history[2].toString(),
-                  //   phone: history[3].toString(),
-                  //   operator: history[4].toString(),
-                  //   billed_time: history[6].toString(),
-                  // );
-
-                },
-              ),
+                        // return PhoneBillHistorySelectorWidget(
+                        //   id: history[0].toString(),
+                        //   status: history[1].toString(),
+                        //   amount: history[2].toString(),
+                        //   phone: history[3].toString(),
+                        //   operator: history[4].toString(),
+                        //   billed_time: history[6].toString(),
+                        // );
+                      },
+                    ),
             )),
       );
     }

@@ -2,12 +2,13 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:mime/mime.dart';
-import 'package:nathan_app/helpers/base_network.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/objects/presign_ob.dart';
-import 'package:nathan_app/objects/profile/update_profile_ob.dart';
-import 'package:nathan_app/models/utils/app_constants.dart';
+import 'package:fnge/helpers/base_network.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/objects/presign_ob.dart';
+import 'package:fnge/objects/profile/update_profile_ob.dart';
+import 'package:fnge/models/utils/app_constants.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:uuid/uuid.dart';
 import 'package:path/path.dart' as Path;
@@ -26,7 +27,11 @@ class ProfileBloc extends BaseNetwork {
       params: map,
       onDataCallBack: (ResponseOb resp) {
         if (resp.success == true) {
-          resp.data = UpdateProfileOb.fromJson(resp.data);
+          if (kIsWeb) {
+            resp.data = UpdateProfileOb.fromJson(resp.data);
+          } else {
+            resp.data = UpdateProfileOb.fromJson(resp.data);
+          }
         }
         profileController.sink.add(resp);
       },
@@ -48,14 +53,20 @@ class ProfileBloc extends BaseNetwork {
     };
 
     //TODO:get presign url
-    postReq(PRESIGN, params: presignMap, onDataCallBack: (ResponseOb resp) async {
+    postReq(PRESIGN, params: presignMap,
+        onDataCallBack: (ResponseOb resp) async {
       if (resp.success == true) {
-        resp.data = PresignOb.fromJson(resp.data);
+        if (kIsWeb) {
+          resp.data = PresignOb.fromJson(resp.data);
+        } else {
+          resp.data = PresignOb.fromJson(resp.data);
+        }
         String presignUrl = resp.data.data.presign.toString();
 
         //TODO:upload image to space
         Uint8List image = file.readAsBytesSync();
-        Options options = Options(contentType: lookupMimeType(file.path), headers: {
+        Options options =
+            Options(contentType: lookupMimeType(file.path), headers: {
           'Accept': "*/*",
           'Content-Length': image.length,
           'Connection': 'keep-alive',
@@ -63,7 +74,8 @@ class ProfileBloc extends BaseNetwork {
         });
 
         Dio dio = Dio();
-        Response response = await dio.put(presignUrl, data: Stream.fromIterable(image.map((e) => [e])), options: options);
+        Response response = await dio.put(presignUrl,
+            data: Stream.fromIterable(image.map((e) => [e])), options: options);
         //if upload image success
         if (response.statusCode == 200) {
           map.addAll({"image_name": imageFullName, "image_path": imagePath});
@@ -75,7 +87,11 @@ class ProfileBloc extends BaseNetwork {
           params: map,
           onDataCallBack: (ResponseOb resp) {
             if (resp.success == true) {
-              resp.data = UpdateProfileOb.fromJson(resp.data);
+              if (kIsWeb) {
+                resp.data = UpdateProfileOb.fromJson(resp.data);
+              } else {
+                resp.data = UpdateProfileOb.fromJson(resp.data);
+              }
             }
             profileController.sink.add(resp);
           },

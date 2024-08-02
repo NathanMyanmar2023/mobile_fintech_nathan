@@ -1,19 +1,20 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/bloc/login_bloc.dart';
-import 'package:nathan_app/extensions/navigation_extensions.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/resources/constants.dart';
-import 'package:nathan_app/views/screens/forgot_password/forgot_password_screen.dart';
-import 'package:nathan_app/views/screens/main_screen.dart';
-import 'package:nathan_app/views/screens/password/change_password_screen.dart';
-import 'package:nathan_app/views/screens/phone_verify_screen.dart';
-import 'package:nathan_app/views/screens/register_screen.dart';
-import 'package:nathan_app/views/widgets/error_alert_widget.dart';
-import 'package:nathan_app/widgets/long_button_view.dart';
-import 'package:nathan_app/widgets/show_password_section_view.dart';
+import 'package:fnge/bloc/login_bloc.dart';
+import 'package:fnge/extensions/navigation_extensions.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/resources/constants.dart';
+import 'package:fnge/views/screens/forgot_password/forgot_password_screen.dart';
+import 'package:fnge/views/screens/main_screen.dart';
+import 'package:fnge/views/screens/password/change_password_screen.dart';
+import 'package:fnge/views/screens/phone_verify_screen.dart';
+import 'package:fnge/views/screens/register_screen.dart';
+import 'package:fnge/views/widgets/error_alert_widget.dart';
+import 'package:fnge/widgets/long_button_view.dart';
+import 'package:fnge/widgets/show_password_section_view.dart';
 
 import '../../bloc/otp/request_otp_bloc.dart';
 
@@ -161,7 +162,25 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
-    String? fcmToken = await FirebaseMessaging.instance.getToken();
+    //String? fcmToken = await FirebaseMessaging.instance.getToken();
+    String? fcmToken = "";
+    if (kIsWeb) {
+      fcmToken = await FirebaseMessaging.instance.getToken(
+          vapidKey:
+              "BLSwT_WkybgjEsQ4bG4kCTsItKlF6YvJYTcN1UdP5yL75XhSsXmFWFQKVme7V__hkbxd40Vm173Y8HOp0SXCfdA");
+      FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) {
+        // TODO: If necessary send token to application server.
+
+        // Note: This callback is fired at each app startup and whenever a new
+        // token is generated.
+        print("listenn");
+      }).onError((err) {
+        // Error getting token.
+        print("Web token err $err");
+      });
+    } else {
+      fcmToken = await FirebaseMessaging.instance.getToken();
+    }
     print('FCM Token: $fcmToken');
     Map<String, dynamic> map = {
       'email': email,

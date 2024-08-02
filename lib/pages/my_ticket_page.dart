@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/bloc/my_ticket_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/objects/my_ticket_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
+import 'package:fnge/bloc/my_ticket_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/objects/my_ticket_ob.dart';
+import 'package:fnge/resources/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyTicketPage extends StatefulWidget {
@@ -90,21 +90,24 @@ class _MyTicketPageState extends State<MyTicketPage> {
               ),
             ),
             body: SingleChildScrollView(
-              child: _myTicketList.isEmpty ?  Padding(
-                padding: const EdgeInsets.only(top: 50),
-                child:  Center(
-                child: Text(
-                  AppLocalizations.of(context)!.no_more_data,),
-              ),
-              ) : ListView.builder(
-                itemCount: _myTicketList.length,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (BuildContext context, int index) =>
-                    TicketListView(
-                  ticketData: _myTicketList[index],
-                ),
-              ),
+              child: _myTicketList.isEmpty
+                  ? Padding(
+                      padding: const EdgeInsets.only(top: 50),
+                      child: Center(
+                        child: Text(
+                          AppLocalizations.of(context)!.no_more_data,
+                        ),
+                      ),
+                    )
+                  : ListView.builder(
+                      itemCount: _myTicketList.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (BuildContext context, int index) =>
+                          TicketListView(
+                        ticketData: _myTicketList[index],
+                      ),
+                    ),
             ),
           );
   }

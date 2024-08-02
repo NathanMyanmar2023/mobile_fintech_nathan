@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/resources/constants.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/resources/constants.dart';
 
 class HistoryPage extends StatelessWidget {
   const HistoryPage({super.key});

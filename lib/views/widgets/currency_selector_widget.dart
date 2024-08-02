@@ -1,7 +1,7 @@
 import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/screens/deposit/deposit_select_payment_method_screen.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/screens/deposit/deposit_select_payment_method_screen.dart';
 
 class CurrencySelectorWidget extends StatelessWidget {
   final String country_name;
@@ -26,7 +26,8 @@ class CurrencySelectorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MediaQuery(
-      data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+      data: MediaQuery.of(context)
+          .copyWith(textScaler: const TextScaler.linear(1.0)),
       child: MaterialButton(
         color: colorPrimary,
         elevation: 0,

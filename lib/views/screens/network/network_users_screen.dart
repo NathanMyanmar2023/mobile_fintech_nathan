@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/bloc/network/level_users_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/widgets/network_user_selector_widget.dart';
+import 'package:fnge/bloc/network/level_users_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/widgets/network_user_selector_widget.dart';
 
 class NetworkUsersScreen extends StatefulWidget {
   final String level;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:nathan_app/objects/history/network_profit_history_ob.dart';
+import 'package:fnge/objects/history/network_profit_history_ob.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NetworkProfitHistorySelectorWidget extends StatelessWidget {

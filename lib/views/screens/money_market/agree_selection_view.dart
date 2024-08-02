@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nathan_app/resources/colors.dart';
+import 'package:fnge/resources/colors.dart';
 
 class AgreeSectionView extends StatelessWidget {
   final Function(bool) onChange;
@@ -26,7 +26,9 @@ class AgreeSectionView extends StatelessWidget {
             // ),
           ),
         ),
-        const SizedBox(width: 5,),
+        const SizedBox(
+          width: 5,
+        ),
         const Text(
           "I agree to the Terms & Condition",
           style: TextStyle(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nathan_app/widgets/long_button_view.dart';
-import 'package:nathan_app/widgets/text_field_with_label_view.dart';
+import 'package:fnge/widgets/long_button_view.dart';
+import 'package:fnge/widgets/text_field_with_label_view.dart';
 
 class ChangePasswordPage extends StatelessWidget {
   const ChangePasswordPage({super.key});

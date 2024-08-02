@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nathan_app/resources/colors.dart';
+import 'package:fnge/resources/colors.dart';
 
 class TextFieldView extends StatelessWidget {
   final TextEditingController controller;
@@ -38,14 +38,14 @@ class TextFieldView extends StatelessWidget {
         prefixIcon: icon == null
             ? null
             : Icon(
-          icon,
-          color: colorPrimary,
-        ),
+                icon,
+                color: colorPrimary,
+              ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radius!),
         ),
         contentPadding:
-        const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+            const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
       ),
     );
   }

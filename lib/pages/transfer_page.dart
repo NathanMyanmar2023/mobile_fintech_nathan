@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nathan_app/itemviews/wallet_item_view.dart';
-import 'package:nathan_app/widgets/long_button_view.dart';
-import 'package:nathan_app/widgets/text_field_with_label_view.dart';
+import 'package:fnge/itemviews/wallet_item_view.dart';
+import 'package:fnge/widgets/long_button_view.dart';
+import 'package:fnge/widgets/text_field_with_label_view.dart';
 
 class TransferPage extends StatelessWidget {
   const TransferPage({super.key});

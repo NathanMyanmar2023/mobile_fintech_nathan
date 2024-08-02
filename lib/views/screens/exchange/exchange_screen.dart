@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttericon/iconic_icons.dart';
-import 'package:nathan_app/bloc/exchange/current_currency_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/screens/exchange/confirm_exchange_screen.dart';
-import 'package:nathan_app/views/widgets/error_alert_widget.dart';
-import 'package:nathan_app/widgets/long_button_view.dart';
+import 'package:fnge/bloc/exchange/current_currency_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/screens/exchange/confirm_exchange_screen.dart';
+import 'package:fnge/views/widgets/error_alert_widget.dart';
+import 'package:fnge/widgets/long_button_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../widgets/app_bar_title_view.dart';
@@ -104,6 +104,7 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Column(
                 children: [
+                  const AdsBannerWidget(),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(

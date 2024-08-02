@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/bloc/investment_plan_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/models/investment_plan_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/custom/snack_bar.dart';
-import 'package:nathan_app/views/screens/investment/investment_screen.dart';
-import 'package:nathan_app/widgets/long_button_view.dart';
+import 'package:fnge/bloc/investment_plan_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/models/investment_plan_ob.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/resources/constants.dart';
+import 'package:fnge/views/custom/snack_bar.dart';
+import 'package:fnge/views/screens/investment/investment_screen.dart';
+import 'package:fnge/widgets/long_button_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../widgets/app_bar_title_view.dart';
@@ -88,7 +89,9 @@ class _SelectInvestmentScreenState extends State<SelectInvestmentScreen> {
           backgroundColor: Colors.white,
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(70),
-            child: AppBarTitleView(text: AppLocalizations.of(context)!.investment,),
+            child: AppBarTitleView(
+              text: AppLocalizations.of(context)!.investment,
+            ),
           ),
           body: SingleChildScrollView(
             child: Padding(
@@ -125,25 +128,36 @@ class _SelectInvestmentScreenState extends State<SelectInvestmentScreen> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(10),
                                     child: Image.asset(
-                                      'images/customer.png',
+                                      customerLogo,
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                            investmentPlanList[0]?.promotion?.isAvailable != true ? const SizedBox() : Positioned(
-                              top: 2,
-                              right: 3,
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.red.withOpacity(
-                                      0.8,
-                                    ),
+                            investmentPlanList[0]?.promotion?.isAvailable !=
+                                    true
+                                ? const SizedBox()
+                                : Positioned(
+                                    top: 2,
+                                    right: 3,
+                                    child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: Colors.red.withOpacity(
+                                            0.8,
+                                          ),
+                                        ),
+                                        padding: const EdgeInsets.only(
+                                            right: 5,
+                                            top: 5,
+                                            left: 8,
+                                            bottom: 5),
+                                        child: const Text(
+                                          "Promotion",
+                                          style: TextStyle(color: Colors.white),
+                                        )),
                                   ),
-                                padding: const EdgeInsets.only(right: 5, top: 5, left: 8, bottom: 5),
-                                  child: const Text("Promotion", style: TextStyle(color: Colors.white),)),
-                            ),
                           ],
                         ),
                       ),
@@ -177,25 +191,36 @@ class _SelectInvestmentScreenState extends State<SelectInvestmentScreen> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(10),
                                     child: Image.asset(
-                                      'images/distributor.png',
+                                      distributorLogo,
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                            investmentPlanList[1]?.promotion?.isAvailable != true ? const SizedBox() : Positioned(
-                              top: 2,
-                              right: 3,
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.red.withOpacity(
-                                      0.8,
-                                    ),
+                            investmentPlanList[1]?.promotion?.isAvailable !=
+                                    true
+                                ? const SizedBox()
+                                : Positioned(
+                                    top: 2,
+                                    right: 3,
+                                    child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: Colors.red.withOpacity(
+                                            0.8,
+                                          ),
+                                        ),
+                                        padding: const EdgeInsets.only(
+                                            right: 5,
+                                            top: 5,
+                                            left: 8,
+                                            bottom: 5),
+                                        child: const Text(
+                                          "Promotion",
+                                          style: TextStyle(color: Colors.white),
+                                        )),
                                   ),
-                                  padding: const EdgeInsets.only(right: 5, top: 5, left: 8, bottom: 5),
-                                  child: const Text("Promotion", style: TextStyle(color: Colors.white),)),
-                            ),
                           ],
                         ),
                       ),
@@ -294,130 +319,180 @@ class _SelectInvestmentScreenState extends State<SelectInvestmentScreen> {
                   LongButtonView(
                       text: AppLocalizations.of(context)!.next,
                       onTap: () {
-                        isSixMonth ? investmentPlanList[1]?.isAllow == 0 ?
-                        context.showSnack(AppLocalizations.of(context)!.sry_accept_trans_error_msg,
-                          Colors.white,
-                          Colors.red,
-                          Icons.close,
-                        ) :
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return InvestmentScreen(
-                            isSixMonth: isSixMonth,
-                            second_wallet_balance: widget.second_wallet_balance,
-                            investmentPlanId: (isSixMonth
-                                ? investmentPlanList[1]?.id
-                                : investmentPlanList[0]?.id) ??
-                                0,
-                            investmentType: (isSixMonth
-                                ? investmentPlanList[1]?.name
-                                : investmentPlanList[0]?.name) ??
-                                "-",
-                            percentage: (isSixMonth
-                                ? investmentPlanList[1]?.profit
-                                : investmentPlanList[0]?.profit) ??
-                                0,
-                            promotionName: (isSixMonth
-                                ? investmentPlanList[1]?.promotion?.name
-                                : investmentPlanList[0]?.promotion?.name) ??
-                                "-",
-    promotionAmt: (isSixMonth
-                                  ? investmentPlanList[1]?.promotion?.amount
-                                  : investmentPlanList[0]?.promotion?.amount) ??
-                                  "-",
-    promotionStartDate: (isSixMonth
-                                  ? investmentPlanList[1]?.promotion?.startDate
-                                  : investmentPlanList[0]?.promotion?.startDate) ??
-                                  "-",
-    promotionEndDate: (isSixMonth
-                                  ? investmentPlanList[1]?.promotion?.endDate
-                                  : investmentPlanList[0]?.promotion?.endDate) ??
-                                  "-",
-                            promotionMinInve: (isSixMonth
-                                ? investmentPlanList[1]?.promotion?.minInvestAmount
-                                : investmentPlanList[0]?.promotion?.minInvestAmount) ?? 0,
-                            promotionNetworkAmt: (isSixMonth
-                                ? investmentPlanList[1]?.promotion?.networkPercentage
-                                : investmentPlanList[0]?.promotion?.networkPercentage) ?? "-",
-                            isPromotion: (isSixMonth
-                                ? investmentPlanList[1]?.promotion?.isAvailable == true ? true : false
-                                : investmentPlanList[0]?.promotion?.isAvailable == true  ? true : false),
-                          );
-                       }))
-                        :
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return InvestmentScreen(
-                            isSixMonth: isSixMonth,
-                            second_wallet_balance: widget.second_wallet_balance,
-                            investmentPlanId: (isSixMonth
-                                    ? investmentPlanList[1]?.id
-                                    : investmentPlanList[0]?.id) ??
-                                0,
-                            investmentType: (isSixMonth
-                                    ? investmentPlanList[1]?.name
-                                    : investmentPlanList[0]?.name) ??
-                                "-",
-                            percentage: (isSixMonth
-                                    ? investmentPlanList[1]?.profit
-                                    : investmentPlanList[0]?.profit) ??
-                                0,
-                              promotionName: (isSixMonth
-                                  ? investmentPlanList[1]?.promotion?.name
-                                  : investmentPlanList[0]?.promotion?.name) ??
-                                  "-",
-    promotionAmt: (isSixMonth
-                                  ? investmentPlanList[1]?.promotion?.amount
-                                  : investmentPlanList[0]?.promotion?.amount) ??
-                                  "-",
-                            promotionMinInve: (isSixMonth
-                                ? investmentPlanList[1]?.promotion?.minInvestAmount
-                                : investmentPlanList[0]?.promotion?.minInvestAmount) ?? 0,
-                            promotionNetworkAmt: (isSixMonth
-                                ? investmentPlanList[1]?.promotion?.networkPercentage
-                                : investmentPlanList[0]?.promotion?.networkPercentage) ?? "-",
-    promotionStartDate: (isSixMonth
-                                  ? investmentPlanList[1]?.promotion?.startDate
-                                  : investmentPlanList[0]?.promotion?.startDate) ??
-                                  "-",
-    promotionEndDate: (isSixMonth
-                                  ? investmentPlanList[1]?.promotion?.endDate
-                                  : investmentPlanList[0]?.promotion?.endDate) ??
-                                  "-",
-                              isPromotion: (isSixMonth
-                                  ? investmentPlanList[1]?.promotion?.isAvailable == true ? true : false
-                                  : investmentPlanList[0]?.promotion?.isAvailable == true  ? true : false),
-                          );
-                        }));
+                        isSixMonth
+                            ? investmentPlanList[1]?.isAllow == 0
+                                ? context.showSnack(
+                                    AppLocalizations.of(context)!
+                                        .sry_accept_trans_error_msg,
+                                    Colors.white,
+                                    Colors.red,
+                                    Icons.close,
+                                  )
+                                : Navigator.of(context)
+                                    .push(MaterialPageRoute(builder: (context) {
+                                    return InvestmentScreen(
+                                      isSixMonth: isSixMonth,
+                                      second_wallet_balance:
+                                          widget.second_wallet_balance,
+                                      investmentPlanId: (isSixMonth
+                                              ? investmentPlanList[1]?.id
+                                              : investmentPlanList[0]?.id) ??
+                                          0,
+                                      investmentType: (isSixMonth
+                                              ? investmentPlanList[1]?.name
+                                              : investmentPlanList[0]?.name) ??
+                                          "-",
+                                      percentage: (isSixMonth
+                                              ? investmentPlanList[1]?.profit
+                                              : investmentPlanList[0]
+                                                  ?.profit) ??
+                                          0,
+                                      promotionName: (isSixMonth
+                                              ? investmentPlanList[1]
+                                                  ?.promotion
+                                                  ?.name
+                                              : investmentPlanList[0]
+                                                  ?.promotion
+                                                  ?.name) ??
+                                          "-",
+                                      promotionAmt: (isSixMonth
+                                              ? investmentPlanList[1]
+                                                  ?.promotion
+                                                  ?.amount
+                                              : investmentPlanList[0]
+                                                  ?.promotion
+                                                  ?.amount) ??
+                                          "-",
+                                      promotionStartDate: (isSixMonth
+                                              ? investmentPlanList[1]
+                                                  ?.promotion
+                                                  ?.startDate
+                                              : investmentPlanList[0]
+                                                  ?.promotion
+                                                  ?.startDate) ??
+                                          "-",
+                                      promotionEndDate: (isSixMonth
+                                              ? investmentPlanList[1]
+                                                  ?.promotion
+                                                  ?.endDate
+                                              : investmentPlanList[0]
+                                                  ?.promotion
+                                                  ?.endDate) ??
+                                          "-",
+                                      promotionMinInve: (isSixMonth
+                                              ? investmentPlanList[1]
+                                                  ?.promotion
+                                                  ?.minInvestAmount
+                                              : investmentPlanList[0]
+                                                  ?.promotion
+                                                  ?.minInvestAmount) ??
+                                          0,
+                                      promotionNetworkAmt: (isSixMonth
+                                              ? investmentPlanList[1]
+                                                  ?.promotion
+                                                  ?.networkPercentage
+                                              : investmentPlanList[0]
+                                                  ?.promotion
+                                                  ?.networkPercentage) ??
+                                          "-",
+                                      isPromotion: (isSixMonth
+                                          ? investmentPlanList[1]
+                                                      ?.promotion
+                                                      ?.isAvailable ==
+                                                  true
+                                              ? true
+                                              : false
+                                          : investmentPlanList[0]
+                                                      ?.promotion
+                                                      ?.isAvailable ==
+                                                  true
+                                              ? true
+                                              : false),
+                                    );
+                                  }))
+                            : Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                                return InvestmentScreen(
+                                  isSixMonth: isSixMonth,
+                                  second_wallet_balance:
+                                      widget.second_wallet_balance,
+                                  investmentPlanId: (isSixMonth
+                                          ? investmentPlanList[1]?.id
+                                          : investmentPlanList[0]?.id) ??
+                                      0,
+                                  investmentType: (isSixMonth
+                                          ? investmentPlanList[1]?.name
+                                          : investmentPlanList[0]?.name) ??
+                                      "-",
+                                  percentage: (isSixMonth
+                                          ? investmentPlanList[1]?.profit
+                                          : investmentPlanList[0]?.profit) ??
+                                      0,
+                                  promotionName: (isSixMonth
+                                          ? investmentPlanList[1]
+                                              ?.promotion
+                                              ?.name
+                                          : investmentPlanList[0]
+                                              ?.promotion
+                                              ?.name) ??
+                                      "-",
+                                  promotionAmt: (isSixMonth
+                                          ? investmentPlanList[1]
+                                              ?.promotion
+                                              ?.amount
+                                          : investmentPlanList[0]
+                                              ?.promotion
+                                              ?.amount) ??
+                                      "-",
+                                  promotionMinInve: (isSixMonth
+                                          ? investmentPlanList[1]
+                                              ?.promotion
+                                              ?.minInvestAmount
+                                          : investmentPlanList[0]
+                                              ?.promotion
+                                              ?.minInvestAmount) ??
+                                      0,
+                                  promotionNetworkAmt: (isSixMonth
+                                          ? investmentPlanList[1]
+                                              ?.promotion
+                                              ?.networkPercentage
+                                          : investmentPlanList[0]
+                                              ?.promotion
+                                              ?.networkPercentage) ??
+                                      "-",
+                                  promotionStartDate: (isSixMonth
+                                          ? investmentPlanList[1]
+                                              ?.promotion
+                                              ?.startDate
+                                          : investmentPlanList[0]
+                                              ?.promotion
+                                              ?.startDate) ??
+                                      "-",
+                                  promotionEndDate: (isSixMonth
+                                          ? investmentPlanList[1]
+                                              ?.promotion
+                                              ?.endDate
+                                          : investmentPlanList[0]
+                                              ?.promotion
+                                              ?.endDate) ??
+                                      "-",
+                                  isPromotion: (isSixMonth
+                                      ? investmentPlanList[1]
+                                                  ?.promotion
+                                                  ?.isAvailable ==
+                                              true
+                                          ? true
+                                          : false
+                                      : investmentPlanList[0]
+                                                  ?.promotion
+                                                  ?.isAvailable ==
+                                              true
+                                          ? true
+                                          : false),
+                                );
+                              }));
                       }),
                   const AdsBannerWidget(paddingbottom: 0,),
-                  // MaterialButton(
-                  //   color: Colors.blue,
-                  //   shape: RoundedRectangleBorder(
-                  //     borderRadius: BorderRadius.circular(45),
-                  //   ),
-                  //   height: 45,
-                  //   elevation: 0,
-                  //   onPressed: () {
-                  //     Navigator.of(context)
-                  //         .push(MaterialPageRoute(builder: (context) {
-                  //       return InvestmentScreen(
-                  //         is_yearly: is_yearly,
-                  //         second_wallet_balance: widget.second_wallet_balance,
-                  //       );
-                  //     }));
-                  //   },
-                  //   child: const SizedBox(
-                  //     height: 20,
-                  //     child: Center(
-                  //         child: Text(
-                  //       '',
-                  //       style: TextStyle(
-                  //         color: Colors.white,
-                  //       ),
-                  //     )),
-                  //   ),
-                  // ),
                   const SizedBox(
                     height: 50,
                   ),

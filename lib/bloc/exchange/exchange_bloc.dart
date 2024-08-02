@@ -1,7 +1,8 @@
-import 'package:nathan_app/helpers/base_network.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/objects/exchange/exchange_ob.dart';
-import 'package:nathan_app/models/utils/app_constants.dart';
+import 'package:flutter/foundation.dart';
+import 'package:fnge/helpers/base_network.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/objects/exchange/exchange_ob.dart';
+import 'package:fnge/models/utils/app_constants.dart';
 import 'package:rxdart/subjects.dart';
 
 class ExchangeBloc extends BaseNetwork {
@@ -11,7 +12,11 @@ class ExchangeBloc extends BaseNetwork {
   exchange(Map<String, dynamic> map) async {
     postReq(EXCHANGE, params: map, onDataCallBack: (ResponseOb resp) {
       if (resp.success == true) {
-        resp.data = ExchangeOb.fromJson(resp.data);
+        if (kIsWeb) {
+          resp.data = ExchangeOb.fromJson(resp.data);
+        } else {
+          resp.data = ExchangeOb.fromJson(resp.data);
+        }
       }
       exchangeController.sink.add(resp);
     }, errorCallBack: (ResponseOb resp) {

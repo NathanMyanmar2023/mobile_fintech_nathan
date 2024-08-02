@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_version_checker/flutter_app_version_checker.dart';
-import 'package:nathan_app/widgets/nathan_text_view.dart';
+import 'package:fnge/widgets/nathan_text_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../helpers/shared_pref.dart';
@@ -17,7 +17,7 @@ class AppBarTitleView extends StatefulWidget {
 class _AppBarTitleViewState extends State<AppBarTitleView> {
   String APP_STORE_URL = "https://apps.apple.com/mm/app/1664gym/id1664655431";
   String PLAY_STORE_URL =
-      "https://play.google.com/store/apps/details?id=com.fintech.nathan";
+      "https://play.google.com/store/apps/details?id=com.fngc.fn";
 
   void goBack() {
     Navigator.pop(context);

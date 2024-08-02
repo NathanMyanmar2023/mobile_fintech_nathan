@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
-import 'package:nathan_app/config/config.dart';
+import 'package:fnge/config/config.dart';
 
 const API_URL = "${Config.productionUrl}api/";
 const App_Version = Config.releaseVersion;

@@ -2,13 +2,13 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
-import 'package:nathan_app/bloc/transfer/check_user_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/screens/transfer/confirm_transfer_screen.dart';
-import 'package:nathan_app/views/widgets/error_alert_widget.dart';
-import 'package:nathan_app/widgets/long_button_view.dart';
-import 'package:nathan_app/widgets/text_field_with_label_view.dart';
+import 'package:fnge/bloc/transfer/check_user_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/screens/transfer/confirm_transfer_screen.dart';
+import 'package:fnge/views/widgets/error_alert_widget.dart';
+import 'package:fnge/widgets/long_button_view.dart';
+import 'package:fnge/widgets/text_field_with_label_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../widgets/app_bar_title_view.dart';
@@ -359,73 +359,6 @@ class _TransferScreenState extends State<TransferScreen> {
                   const AdsBannerWidget(
                     paddingbottom: 0,
                   ),
-                  // MaterialButton(
-                  //   color: Colors.blue,
-                  //   shape: RoundedRectangleBorder(
-                  //     borderRadius: BorderRadius.circular(45),
-                  //   ),
-                  //   height: 45,
-                  //   elevation: 0,
-                  //   onPressed: () {
-                  //     if (amount_tec.text == "" || phone_tec.text == "") {
-                  //       showDialog(
-                  //         context: context,
-                  //         builder: (context) {
-                  //           return ErrorAlert(
-                  //             "Oops !",
-                  //             Image.asset('images/welcome.png'),
-                  //             "Please fill all fields",
-                  //           );
-                  //         },
-                  //       );
-                  //       return;
-                  //     } else {
-                  //       if (double.parse(widget.main_wallet_balance) <
-                  //           double.parse(amount_tec.text)) {
-                  //         showDialog(
-                  //           context: context,
-                  //           builder: (context) {
-                  //             return ErrorAlert(
-                  //               "Oops !",
-                  //               Image.asset('images/welcome.png'),
-                  //               "You don't have enough balance",
-                  //             );
-                  //           },
-                  //         );
-                  //         return;
-                  //       } else {
-                  //         if (note_tec.text == "") {
-                  //           transfer_note = "Transfer Note";
-                  //         } else {
-                  //           transfer_note = note_tec.text;
-                  //         }
-                  //
-                  //         Map<String, dynamic> map = {
-                  //           'amount': amount_tec.text.toString(),
-                  //           'phone': _phone_code +
-                  //               (phone_tec.text.startsWith('0')
-                  //                   ? phone_tec.text.substring(1)
-                  //                   : phone_tec.text),
-                  //         };
-                  //         print(map);
-                  //         _check_user_bloc.check_user(map);
-                  //         setState(() {
-                  //           isLoading = true;
-                  //         });
-                  //       }
-                  //     }
-                  //   },
-                  //   child: const SizedBox(
-                  //     height: 20,
-                  //     child: Center(
-                  //         child: Text(
-                  //       'Next',
-                  //       style: TextStyle(
-                  //         color: Colors.white,
-                  //       ),
-                  //     )),
-                  //   ),
-                  // ),
                   const SizedBox(
                     height: 40,
                   ),

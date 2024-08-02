@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:nathan_app/bloc/transfer/transfer_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/screens/register_screen.dart';
-import 'package:nathan_app/views/screens/transfer/success_transfer_screen.dart';
-import 'package:nathan_app/views/widgets/error_alert_widget.dart';
-import 'package:nathan_app/widgets/long_button_view.dart';
+import 'package:fnge/bloc/transfer/transfer_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/screens/register_screen.dart';
+import 'package:fnge/views/screens/transfer/success_transfer_screen.dart';
+import 'package:fnge/views/widgets/error_alert_widget.dart';
+import 'package:fnge/widgets/long_button_view.dart';
 
 class TransferPasswordScreen extends StatefulWidget {
   final String phone;

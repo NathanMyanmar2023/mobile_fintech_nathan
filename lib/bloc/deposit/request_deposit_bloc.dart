@@ -2,12 +2,13 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:mime/mime.dart';
-import 'package:nathan_app/helpers/base_network.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/objects/deposit/deposit_ob.dart';
-import 'package:nathan_app/objects/presign_ob.dart';
-import 'package:nathan_app/models/utils/app_constants.dart';
+import 'package:fnge/helpers/base_network.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/objects/deposit/deposit_ob.dart';
+import 'package:fnge/objects/presign_ob.dart';
+import 'package:fnge/models/utils/app_constants.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:uuid/uuid.dart';
 import 'package:path/path.dart' as Path;
@@ -32,14 +33,20 @@ class RequestDepositBloc extends BaseNetwork {
     };
 
     //TODO:get presign url
-    postReq(PRESIGN, params: presignMap, onDataCallBack: (ResponseOb resp) async {
+    postReq(PRESIGN, params: presignMap,
+        onDataCallBack: (ResponseOb resp) async {
       if (resp.success == true) {
-        resp.data = PresignOb.fromJson(resp.data);
+        if (kIsWeb) {
+          resp.data = PresignOb.fromJson(resp.data);
+        } else {
+          resp.data = PresignOb.fromJson(resp.data);
+        }
         String presignUrl = resp.data.data.presign.toString();
-print("doofo 4${resp.data}");
+        print("doofo 4${resp.data}");
         //TODO:upload image to space
         Uint8List image = file.readAsBytesSync();
-        Options options = Options(contentType: lookupMimeType(file.path), headers: {
+        Options options =
+            Options(contentType: lookupMimeType(file.path), headers: {
           'Accept': "*/*",
           'Content-Length': image.length,
           'Connection': 'keep-alive',
@@ -47,7 +54,8 @@ print("doofo 4${resp.data}");
         });
 
         Dio dio = Dio();
-        Response response = await dio.put(presignUrl, data: Stream.fromIterable(image.map((e) => [e])), options: options);
+        Response response = await dio.put(presignUrl,
+            data: Stream.fromIterable(image.map((e) => [e])), options: options);
         //if upload image success
         print("doodo ${response.statusCode}");
         if (response.statusCode == 200) {
@@ -60,7 +68,11 @@ print("doofo 4${resp.data}");
             onDataCallBack: (ResponseOb resp) {
               print("DEPOSIT ${resp.success}");
               if (resp.success == true) {
-                resp.data = DepositOb.fromJson(resp.data);
+                if (kIsWeb) {
+                  resp.data = DepositOb.fromJson(resp.data);
+                } else {
+                  resp.data = DepositOb.fromJson(resp.data);
+                }
                 print("DEPOSIT dat ${resp.data}");
               }
               requestDepositController.sink.add(resp);

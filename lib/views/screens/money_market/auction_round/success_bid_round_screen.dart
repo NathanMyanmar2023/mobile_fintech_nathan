@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:nathan_app/objects/investment/investment_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/screens/main_screen.dart';
-import 'package:nathan_app/views/widgets/my_separator.dart';
-import 'package:nathan_app/widgets/long_button_view.dart';
+import 'package:fnge/objects/investment/investment_ob.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/screens/main_screen.dart';
+import 'package:fnge/views/widgets/my_separator.dart';
+import 'package:fnge/widgets/long_button_view.dart';
 
 class SuccessBidRoundScreen extends StatefulWidget {
   final int roundId;
@@ -224,10 +224,11 @@ class _SuccessBidRoundScreenState extends State<SuccessBidRoundScreen> {
     );
   }
 
-  String formatDateTimeFromUtc(dynamic time){
+  String formatDateTimeFromUtc(dynamic time) {
     try {
-      return new DateFormat("MMM d, yyyy").format(new DateFormat("yyyy-MM-dd'T'HH:mm:ss").parseUTC(time).toLocal());
-    } catch (e){
+      return new DateFormat("MMM d, yyyy").format(
+          new DateFormat("yyyy-MM-dd'T'HH:mm:ss").parseUTC(time).toLocal());
+    } catch (e) {
       return new DateFormat("MMM d, yyyy").format(new DateTime.now());
     }
   }

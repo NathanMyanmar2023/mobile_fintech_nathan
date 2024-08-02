@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nathan_app/bloc/order_list_bloc.dart';
-import 'package:nathan_app/extensions/navigation_extensions.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/objects/order_list_ob.dart';
-import 'package:nathan_app/pages/order_detail_page.dart';
-import 'package:nathan_app/resources/colors.dart';
+import 'package:fnge/bloc/order_list_bloc.dart';
+import 'package:fnge/extensions/navigation_extensions.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/objects/order_list_ob.dart';
+import 'package:fnge/pages/order_detail_page.dart';
+import 'package:fnge/resources/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OrderListPage extends StatefulWidget {
@@ -65,57 +65,60 @@ class _OrderListPageState extends State<OrderListPage> {
           ),
         ),
       ),
-      body: orderList.isEmpty ? Center(child: Text(
-                  AppLocalizations.of(context)!.no_more_data,),
-              ) : ListView.builder(
-        padding: const EdgeInsets.only(bottom: 12),
-        itemCount: orderList.length,
-        itemBuilder: (BuildContext context, int index) => GestureDetector(
-          onTap: () =>
-            navigateToNextPage(
-              context: context,
-              nextPage: OrderDetailPage(orderId: orderList[index].orderId),
-            ),
-          child: Card(
-            margin: const EdgeInsets.only(top: 12, left: 16, right: 16),
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    orderList[index].orderId ?? "-",
-                    style: const TextStyle(
-                      color: colorPrimary,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w800,
+      body: orderList.isEmpty
+          ? Center(
+              child: Text(
+                AppLocalizations.of(context)!.no_more_data,
+              ),
+            )
+          : ListView.builder(
+              padding: const EdgeInsets.only(bottom: 12),
+              itemCount: orderList.length,
+              itemBuilder: (BuildContext context, int index) => GestureDetector(
+                onTap: () => navigateToNextPage(
+                  context: context,
+                  nextPage: OrderDetailPage(orderId: orderList[index].orderId),
+                ),
+                child: Card(
+                  margin: const EdgeInsets.only(top: 12, left: 16, right: 16),
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          orderList[index].orderId ?? "-",
+                          style: const TextStyle(
+                            color: colorPrimary,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        Text(
+                          orderList[index].status ?? "-",
+                          style: const TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        Text(
+                          orderList[index].data ?? "-",
+                          style: const TextStyle(
+                            color: colorGrey,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  Text(
-                    orderList[index].status ?? "-",
-                    style: const TextStyle(
-                      color: Colors.green,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  Text(
-                    orderList[index].data ?? "-",
-                    style: const TextStyle(
-                      color: colorGrey,
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
-          ),
-        ),
-      ),
     );
   }
 }

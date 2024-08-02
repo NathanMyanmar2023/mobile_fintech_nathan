@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_launcher_icons/config/config.dart';
-import 'package:nathan_app/models/response_objects/add_to_cart/add_to_cart_response_object.dart';
-import 'package:nathan_app/models/response_objects/cart/cart_response_object.dart';
-import 'package:nathan_app/models/response_objects/delivery_region/delivery_region_response_object.dart';
-import 'package:nathan_app/models/response_objects/delivery_township/delivery_township_response_object.dart';
-import 'package:nathan_app/models/response_objects/update_delivery_address/update_delivery_address_response_object.dart';
-import 'package:nathan_app/models/utils/app_constants.dart';
+import 'package:fnge/models/response_objects/add_to_cart/add_to_cart_response_object.dart';
+import 'package:fnge/models/response_objects/cart/cart_response_object.dart';
+import 'package:fnge/models/response_objects/delivery_region/delivery_region_response_object.dart';
+import 'package:fnge/models/response_objects/delivery_township/delivery_township_response_object.dart';
+import 'package:fnge/models/response_objects/update_delivery_address/update_delivery_address_response_object.dart';
+import 'package:fnge/models/utils/app_constants.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'api_service.g.dart';
@@ -25,13 +25,12 @@ abstract class ApiService {
 
   @POST(MAKE_CheckOut)
   Future<AddToCartResponseObject> makeCheckOut(
-      @Header('Authorization') String token,
-      @Header('X-API-KEY') String apiKey,
-      @Field('township_id') int townshipId,
-      @Field('address') String address,
-      @Header('setLanguage') String language,
-      );
-
+    @Header('Authorization') String token,
+    @Header('X-API-KEY') String apiKey,
+    @Field('township_id') int townshipId,
+    @Field('address') String address,
+    @Header('setLanguage') String language,
+  );
 
   @GET(GET_CART)
   Future<CartResponseObject> getCart(

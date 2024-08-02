@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:fluttericon/iconic_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
-import 'package:nathan_app/views/screens/history/application_fees_history_screen.dart';
-import 'package:nathan_app/views/screens/history/deposit_history/deposit_history_screen.dart';
-import 'package:nathan_app/views/screens/history/exchange_history/exchange_history_screen.dart';
-import 'package:nathan_app/views/screens/history/invest_profit_history/invest_profit_history_screen.dart';
-import 'package:nathan_app/views/screens/history/investment_history/investment_history_screen.dart';
-import 'package:nathan_app/views/screens/history/network_profit_history/network_profit_history_screen.dart';
-import 'package:nathan_app/views/screens/history/phone_bill_history/phone_bill_history_screen.dart';
-import 'package:nathan_app/views/screens/history/referral_incentive_history/referral_incentive_history_screen.dart';
-import 'package:nathan_app/views/screens/history/return_money_history/return_money_history_screen.dart';
-import 'package:nathan_app/views/screens/history/transfer_history/transfer_history_screen.dart';
-import 'package:nathan_app/views/screens/history/withdraw_history/withdraw_history_screen.dart';
-import 'package:nathan_app/views/screens/main_screen.dart';
-import 'package:nathan_app/views/widgets/select_history_widget.dart';
+import 'package:fnge/views/screens/history/application_fees_history_screen.dart';
+import 'package:fnge/views/screens/history/deposit_history/deposit_history_screen.dart';
+import 'package:fnge/views/screens/history/exchange_history/exchange_history_screen.dart';
+import 'package:fnge/views/screens/history/invest_profit_history/invest_profit_history_screen.dart';
+import 'package:fnge/views/screens/history/investment_history/investment_history_screen.dart';
+import 'package:fnge/views/screens/history/network_profit_history/network_profit_history_screen.dart';
+import 'package:fnge/views/screens/history/phone_bill_history/phone_bill_history_screen.dart';
+import 'package:fnge/views/screens/history/referral_incentive_history/referral_incentive_history_screen.dart';
+import 'package:fnge/views/screens/history/return_money_history/return_money_history_screen.dart';
+import 'package:fnge/views/screens/history/transfer_history/transfer_history_screen.dart';
+import 'package:fnge/views/screens/history/withdraw_history/withdraw_history_screen.dart';
+import 'package:fnge/views/screens/main_screen.dart';
+import 'package:fnge/views/widgets/select_history_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../Ads_banner/ads_banner_widget.dart';
@@ -65,7 +65,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 history_name: AppLocalizations.of(context)!.investment_history,
                 history_icon: Icons.account_balance_outlined,
               ),
-              const AdsBannerWidget(paddingTop: 10, paddingbottom: 10,),
+              //   const AdsBannerWidget(paddingTop: 10, paddingbottom: 10,),
               SelectHistoryWidget(
                 target_page: const PromotionHistoryScreen(),
                 history_name: AppLocalizations.of(context)!.promotion_history,
@@ -84,13 +84,15 @@ class _HistoryPageState extends State<HistoryPage> {
               ),
               SelectHistoryWidget(
                 target_page: const ReturnMoneyHistoryScreen(),
-                history_name: AppLocalizations.of(context)!.return_money_history,
+                history_name:
+                    AppLocalizations.of(context)!.return_money_history,
                 history_icon: Icons.account_balance_wallet_outlined,
               ),
-              const AdsBannerWidget(paddingTop: 10, paddingbottom: 10,),
+              //  const AdsBannerWidget(paddingTop: 10, paddingbottom: 10,),
               SelectHistoryWidget(
                 target_page: const ApplicationFeesHistoryScreen(),
-                history_name: AppLocalizations.of(context)!.application_fees_history,
+                history_name:
+                    AppLocalizations.of(context)!.application_fees_history,
                 history_icon: Icons.feed_outlined,
               ),
               const SelectHistoryWidget(
@@ -106,21 +108,27 @@ class _HistoryPageState extends State<HistoryPage> {
               const SizedBox(
                 width: 10,
               ),
-              if (MainScreen.role == "1") SelectHistoryWidget(
-                target_page: const NetworkProfitHistoryScreen(),
-                history_name: AppLocalizations.of(context)!.network_profit_history,
-                history_icon: Icons.account_tree_outlined,
-              ),
-              if (MainScreen.role == "1") SelectHistoryWidget(
-                target_page: const ShoppingNetworkHistoryScreen(),
-                history_name: AppLocalizations.of(context)!.shopping_network_history,
-                history_icon: Icons.shopping_basket_sharp,
-              ),
-              if (MainScreen.role == "1") SelectHistoryWidget(
-                      target_page: const ReferralIncentiveHistoryScreen(),
-                      history_name: AppLocalizations.of(context)!.referral_incentive_history,
-                      history_icon: Icons.dataset_linked_outlined,
-              ),
+              if (MainScreen.role == "1")
+                SelectHistoryWidget(
+                  target_page: const NetworkProfitHistoryScreen(),
+                  history_name:
+                      AppLocalizations.of(context)!.network_profit_history,
+                  history_icon: Icons.account_tree_outlined,
+                ),
+              if (MainScreen.role == "1")
+                SelectHistoryWidget(
+                  target_page: const ShoppingNetworkHistoryScreen(),
+                  history_name:
+                      AppLocalizations.of(context)!.shopping_network_history,
+                  history_icon: Icons.shopping_basket_sharp,
+                ),
+              if (MainScreen.role == "1")
+                SelectHistoryWidget(
+                  target_page: const ReferralIncentiveHistoryScreen(),
+                  history_name:
+                      AppLocalizations.of(context)!.referral_incentive_history,
+                  history_icon: Icons.dataset_linked_outlined,
+                ),
               const AdsBannerWidget(paddingTop: 10, paddingbottom: 0,),
               // MainScreen.role == "1"
               //     ? const SelectHistoryWidget(

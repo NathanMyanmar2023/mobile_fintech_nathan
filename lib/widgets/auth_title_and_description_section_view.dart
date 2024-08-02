@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nathan_app/resources/colors.dart';
+import 'package:fnge/resources/colors.dart';
 
 class AuthTitleAndDescriptionSectionView extends StatelessWidget {
   final String title;

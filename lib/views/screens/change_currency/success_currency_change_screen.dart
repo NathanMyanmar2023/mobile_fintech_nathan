@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nathan_app/views/screens/main_screen.dart';
+import 'package:fnge/views/screens/main_screen.dart';
 
 class SuccessCurrencyChangeScreen extends StatefulWidget {
   const SuccessCurrencyChangeScreen({super.key});
@@ -14,7 +14,8 @@ class _SuccessCurrencyChangeScreenState
   @override
   Widget build(BuildContext context) {
     return MediaQuery(
-      data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+      data: MediaQuery.of(context)
+          .copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
         backgroundColor: Colors.white,
         body: SizedBox(

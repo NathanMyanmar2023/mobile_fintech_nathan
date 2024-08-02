@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/bloc/otp/request_otp_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/widgets/error_alert_widget.dart';
-import 'package:nathan_app/widgets/long_button_view.dart';
+import 'package:fnge/bloc/otp/request_otp_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/widgets/error_alert_widget.dart';
+import 'package:fnge/widgets/long_button_view.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../../bloc/forgot_password/forgot_verify_bloc.dart';
 import '../../../helpers/shared_pref.dart';

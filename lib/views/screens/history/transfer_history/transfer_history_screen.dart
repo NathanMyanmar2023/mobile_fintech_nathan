@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/bloc/history/transfer_history/transfer_history_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/widgets/history/transfer_history_selector_widget.dart';
+import 'package:fnge/bloc/history/transfer_history/transfer_history_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/widgets/history/transfer_history_selector_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TransferHistoryScreen extends StatefulWidget {
@@ -83,7 +83,7 @@ class _TransferHistoryScreenState extends State<TransferHistoryScreen> {
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
-    //  _transfer_history_bloc.getTransferHistory(page);
+      //  _transfer_history_bloc.getTransferHistory(page);
       print("getting page - $page");
     }
   }
@@ -147,48 +147,55 @@ class _TransferHistoryScreenState extends State<TransferHistoryScreen> {
             ),
             body: RefreshIndicator(
               onRefresh: refersh,
-              child: history_list.isEmpty ? Center(child: Text(AppLocalizations.of(context)!.no_more_data,),) : ListView.builder(
-                controller: scroll_controller,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount: history_list.length,
-                itemBuilder: (context, index) {
-                  if (index < history_list.length) {
-                    final history = history_list[index];
-                    return TransferHistorySelectorWidget(
-                      id: history[0],
-                      is_transfer: history[1],
-                      sender_name: history[2],
-                      sender_phone: history[3],
-                      currency: history[4],
-                      receiver_name: history[5],
-                      receiver_phone: history[6],
-                      amount: history[7],
-                      note: history[8],
-                      created_at: history[9],
-                    );
-                  } else {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 20),
-                      child: Center(
-                        child: hasMore
-                            ? const SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                ))
-                            : Text(
-                          AppLocalizations.of(context)!.no_more_data,
-                                style: TextStyle(
-                                  fontSize: 13,
-                                ),
-                              ),
+              child: history_list.isEmpty
+                  ? Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.no_more_data,
                       ),
-                    );
-                  }
-                },
-              ),
+                    )
+                  : ListView.builder(
+                      controller: scroll_controller,
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      itemCount: history_list.length,
+                      itemBuilder: (context, index) {
+                        if (index < history_list.length) {
+                          final history = history_list[index];
+                          return TransferHistorySelectorWidget(
+                            id: history[0],
+                            is_transfer: history[1],
+                            sender_name: history[2],
+                            sender_phone: history[3],
+                            currency: history[4],
+                            receiver_name: history[5],
+                            receiver_phone: history[6],
+                            amount: history[7],
+                            note: history[8],
+                            created_at: history[9],
+                          );
+                        } else {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 20),
+                            child: Center(
+                              child: hasMore
+                                  ? const SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                      ))
+                                  : Text(
+                                      AppLocalizations.of(context)!
+                                          .no_more_data,
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                            ),
+                          );
+                        }
+                      },
+                    ),
             )),
       );
     }

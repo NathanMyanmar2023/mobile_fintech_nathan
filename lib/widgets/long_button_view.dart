@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nathan_app/resources/colors.dart';
+import 'package:fnge/resources/colors.dart';
 
 class LongButtonView extends StatelessWidget {
   final String text;
@@ -25,7 +25,7 @@ class LongButtonView extends StatelessWidget {
       onTap: () => onTap(),
       child: Container(
         width: width,
-        padding: const EdgeInsets.symmetric(vertical: 12),
+        padding: const EdgeInsets.symmetric(vertical: 15),
         decoration: BoxDecoration(
           color: backgroundColor ?? colorPrimary,
           borderRadius: borderRadius ?? BorderRadius.circular(100),
@@ -34,7 +34,7 @@ class LongButtonView extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-              fontSize: 15,
+              fontSize: 16,
               fontWeight: FontWeight.w700,
               color: textColor ?? colorWhite,
             ),
@@ -44,7 +44,6 @@ class LongButtonView extends StatelessWidget {
     );
   }
 }
-
 
 class textButtonView extends StatelessWidget {
   final String text;
@@ -72,7 +71,7 @@ class textButtonView extends StatelessWidget {
       onTap: () => onTap(),
       child: Container(
         width: width,
-          padding: const EdgeInsets.symmetric(vertical: 5),
+        padding: const EdgeInsets.symmetric(vertical: 5),
         decoration: BoxDecoration(
           color: backgroundColor ?? colorPrimary,
           borderRadius: borderRadius ?? BorderRadius.circular(100),
@@ -91,6 +90,7 @@ class textButtonView extends StatelessWidget {
     );
   }
 }
+
 class LongInfoView extends StatelessWidget {
   final String titleText;
   final String msgText;
@@ -127,18 +127,23 @@ class LongInfoView extends StatelessWidget {
             style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w400,
-             // color: colorSeconary,
+              // color: colorSeconary,
             ),
           ),
           Row(
             children: [
-              showIcon ? const Padding(
-                padding:  EdgeInsets.only(right: 8),
-                child:  Icon(Icons.wallet, color: colorPrimary,),
-              ) : const SizedBox(),
+              showIcon
+                  ? const Padding(
+                      padding: EdgeInsets.only(right: 8),
+                      child: Icon(
+                        Icons.wallet,
+                        color: colorPrimary,
+                      ),
+                    )
+                  : const SizedBox(),
               Text(
                 msgText,
-                style:const TextStyle(
+                style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w700,
                   color: colorBlack,

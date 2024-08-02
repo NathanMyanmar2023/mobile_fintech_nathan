@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nathan_app/models/response_objects/cart/cart_response_object.dart';
-import 'package:nathan_app/models/utils/app_utils.dart';
-import 'package:nathan_app/view_models/cart_view_model.dart';
-import 'package:nathan_app/views/widgets/ecommerce/cart_item_loading_widget.dart';
-import 'package:nathan_app/views/widgets/ecommerce/cart_item_widget.dart';
-import 'package:nathan_app/views/widgets/ecommerce/no_delivery_address_widget.dart';
+import 'package:fnge/models/response_objects/cart/cart_response_object.dart';
+import 'package:fnge/models/utils/app_utils.dart';
+import 'package:fnge/view_models/cart_view_model.dart';
+import 'package:fnge/views/widgets/ecommerce/cart_item_loading_widget.dart';
+import 'package:fnge/views/widgets/ecommerce/cart_item_widget.dart';
+import 'package:fnge/views/widgets/ecommerce/no_delivery_address_widget.dart';
 import 'package:provider/provider.dart';
 
 class CartScreen extends StatefulWidget {
@@ -21,7 +21,8 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     CartViewModel cartViewModel = context.watch<CartViewModel>();
     return MediaQuery(
-      data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+      data: MediaQuery.of(context)
+          .copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
@@ -152,12 +153,10 @@ class _CartScreenState extends State<CartScreen> {
                                 controller: scrollController,
                                 physics: const AlwaysScrollableScrollPhysics(),
                                 padding: EdgeInsets.zero,
-                                itemCount:
-                                    cartViewModel.cartItemList.length,
+                                itemCount: cartViewModel.cartItemList.length,
                                 itemBuilder: (context, index) {
-
                                   CartItems cartItems =
-                                  cartViewModel.cartItemList[index];
+                                      cartViewModel.cartItemList[index];
                                   return CartItemWidget(
                                     cartItems: cartItems,
                                     onTap: () {},

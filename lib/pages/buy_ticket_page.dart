@@ -2,17 +2,18 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/bloc/buy_ticket_bloc.dart';
-import 'package:nathan_app/bloc/check_ticket_bloc.dart';
-import 'package:nathan_app/extensions/navigation_extensions.dart';
-import 'package:nathan_app/extensions/string_extensions.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/objects/buy_ticket_ob.dart';
-import 'package:nathan_app/objects/check_ticket_ob.dart';
-import 'package:nathan_app/objects/lucky_draw_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/widgets/error_alert_widget.dart';
-import 'package:nathan_app/widgets/long_button_view.dart';
+import 'package:fnge/bloc/buy_ticket_bloc.dart';
+import 'package:fnge/bloc/check_ticket_bloc.dart';
+import 'package:fnge/extensions/navigation_extensions.dart';
+import 'package:fnge/extensions/string_extensions.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/objects/buy_ticket_ob.dart';
+import 'package:fnge/objects/check_ticket_ob.dart';
+import 'package:fnge/objects/lucky_draw_ob.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/resources/constants.dart';
+import 'package:fnge/views/widgets/error_alert_widget.dart';
+import 'package:fnge/widgets/long_button_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BuyTicketPage extends StatefulWidget {
@@ -63,7 +64,7 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Image.asset('images/welcome.png', height: 100, width: 100),
+                    Image.asset(welcomeLogo, height: 100, width: 100),
                     const SizedBox(height: 10),
                     Text(
                       "Your ticket${((resp.data as BuyTicketOb).data?.length ?? 0) > 1 ? "s are" : " is"} ${(resp.data as BuyTicketOb).data?.join(",") ?? " - "}.",
@@ -95,7 +96,7 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Image.asset('images/welcome.png', height: 100, width: 100),
+                    Image.asset(welcomeLogo, height: 100, width: 100),
                     const SizedBox(height: 10),
                     Text(
                       resp.message.toString(),
@@ -138,7 +139,7 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Image.asset('images/welcome.png', height: 100, width: 100),
+                    Image.asset(welcomeLogo, height: 100, width: 100),
                     const SizedBox(height: 10),
                     Text(
                       "Ticket number ${(resp.data as CheckTicketOb).data?.join(",") ?? "-"} ${((resp.data as CheckTicketOb).data?.length ?? 0) > 1 ? "are" : "is"} available. Are you sure that you like to buy this ticket?",
@@ -171,7 +172,7 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Image.asset('images/welcome.png', height: 100, width: 100),
+                    Image.asset(welcomeLogo, height: 100, width: 100),
                     const SizedBox(height: 10),
                     Text(
                       resp.message.toString(),
@@ -205,7 +206,7 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
           builder: (context) {
             return ErrorAlert(
               "Error",
-              Image.asset('images/welcome.png'),
+              Image.asset(welcomeLogo),
               "Enter ticket number.",
             );
           });
@@ -287,7 +288,7 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
                     ),
                     onPressed: () => Navigator.of(context).pop(),
                   ),
-                  title:  Text(
+                  title: Text(
                     AppLocalizations.of(context)!.buy_ticket,
                     style: TextStyle(
                       fontSize: 16,
@@ -321,8 +322,9 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
                     const SizedBox(
                       height: 4,
                     ),
-                     Text(
-                      AppLocalizations.of(context)!.chosse_ur_ticket_no_available_buy,
+                    Text(
+                      AppLocalizations.of(context)!
+                          .chosse_ur_ticket_no_available_buy,
                       style: TextStyle(
                         fontSize: 14,
                       ),
@@ -342,7 +344,8 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
                         ticketTec.text = cleanedValue;
                       },
                       decoration: InputDecoration(
-                        hintText: AppLocalizations.of(context)!.check_ticket_want_here,
+                        hintText: AppLocalizations.of(context)!
+                            .check_ticket_want_here,
                         contentPadding: const EdgeInsets.symmetric(
                           horizontal: 12.0,
                           vertical: 8.0,
@@ -354,12 +357,13 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
                     ),
                     const SizedBox(height: 16.0),
                     LongButtonView(
-                      text: AppLocalizations.of(context)!.check_ticket_available,
+                      text:
+                          AppLocalizations.of(context)!.check_ticket_available,
                       onTap: () => checkTicket(),
                     ),
                     const SizedBox(height: 16.0),
-                     Text(
-                       AppLocalizations.of(context)!.prizes,
+                    Text(
+                      AppLocalizations.of(context)!.prizes,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w800,
@@ -380,7 +384,8 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
                     const SizedBox(
                       height: 4.0,
                     ),
-                     Text(AppLocalizations.of(context)!.rules,
+                    Text(
+                      AppLocalizations.of(context)!.rules,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w800,

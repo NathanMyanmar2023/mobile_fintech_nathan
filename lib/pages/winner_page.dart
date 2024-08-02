@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:nathan_app/bloc/winner_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/objects/winner_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
+import 'package:fnge/bloc/winner_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/objects/winner_ob.dart';
+import 'package:fnge/resources/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WinnerPage extends StatefulWidget {
@@ -62,20 +62,22 @@ class _WinnerPageState extends State<WinnerPage> {
           ),
         ),
       ),
-      body: winnerList.isEmpty ?
-      Padding(
-        padding: const EdgeInsets.only(top: 50),
-        child:  Center(
-          child: Text(
-            AppLocalizations.of(context)!.no_more_data,),
-        ),
-      ) : ListView.builder(
-        itemCount: winnerList.length,
-        padding: const EdgeInsets.only(bottom: 8),
-        itemBuilder: (BuildContext context, int index) => WinnerView(
-          winnerData: winnerList[index],
-        ),
-      ),
+      body: winnerList.isEmpty
+          ? Padding(
+              padding: const EdgeInsets.only(top: 50),
+              child: Center(
+                child: Text(
+                  AppLocalizations.of(context)!.no_more_data,
+                ),
+              ),
+            )
+          : ListView.builder(
+              itemCount: winnerList.length,
+              padding: const EdgeInsets.only(bottom: 8),
+              itemBuilder: (BuildContext context, int index) => WinnerView(
+                winnerData: winnerList[index],
+              ),
+            ),
     );
   }
 }

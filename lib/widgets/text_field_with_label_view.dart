@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nathan_app/resources/colors.dart';
+import 'package:fnge/resources/colors.dart';
 
 class TextFieldWithLabelView extends StatelessWidget {
   final TextEditingController controller;
@@ -55,10 +55,12 @@ class TextFieldWithLabelView extends StatelessWidget {
             hintText: hintText,
             prefixIcon: icon == null
                 ? null
-                : showWidget ? viewWidget : Icon(
-                    icon,
-                    color: colorPrimary,
-                  ),
+                : showWidget
+                    ? viewWidget
+                    : Icon(
+                        icon,
+                        color: colorPrimary,
+                      ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(100.0),
             ),

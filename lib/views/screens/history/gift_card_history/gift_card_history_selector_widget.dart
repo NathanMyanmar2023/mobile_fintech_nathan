@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:nathan_app/extensions/string_extensions.dart';
+import 'package:fnge/extensions/string_extensions.dart';
 
 class GiftCardHistorySelectorWidget extends StatelessWidget {
   final String id;
@@ -17,25 +17,25 @@ class GiftCardHistorySelectorWidget extends StatelessWidget {
   final String completedTime;
   const GiftCardHistorySelectorWidget({
     super.key,
-  required this.id,
-  required this.userId,
-  required this.tag,
-  required this.playerId,
-  required this.serverId,
-  required this.giftCardAmount,
-  required this.unit,
-  required this.priceMmk,
-  required this.status,
-  required this.remarks,
-  required this.purchasedTime,
-  required this.completedTime,
-
+    required this.id,
+    required this.userId,
+    required this.tag,
+    required this.playerId,
+    required this.serverId,
+    required this.giftCardAmount,
+    required this.unit,
+    required this.priceMmk,
+    required this.status,
+    required this.remarks,
+    required this.purchasedTime,
+    required this.completedTime,
   });
 
   @override
   Widget build(BuildContext context) {
     return MediaQuery(
-      data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+      data: MediaQuery.of(context)
+          .copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -52,8 +52,10 @@ class GiftCardHistorySelectorWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: status == "Success"
-                    ? Colors.green.shade50 : status == "Fail" ? Colors.red.shade50
-                    : Colors.orange.shade50,
+                    ? Colors.green.shade50
+                    : status == "Fail"
+                        ? Colors.red.shade50
+                        : Colors.orange.shade50,
               ),
               padding: EdgeInsets.zero,
               child: SizedBox(
@@ -61,8 +63,16 @@ class GiftCardHistorySelectorWidget extends StatelessWidget {
                 width: 60,
                 child: Center(
                   child: Icon(
-                    status == "Success" ? Icons.check_outlined : status == "Fail" ? Icons.close : Icons.access_time,
-                    color: status == "Success" ? Colors.green : status == "Fail" ? Colors.red : Colors.orange,
+                    status == "Success"
+                        ? Icons.check_outlined
+                        : status == "Fail"
+                            ? Icons.close
+                            : Icons.access_time,
+                    color: status == "Success"
+                        ? Colors.green
+                        : status == "Fail"
+                            ? Colors.red
+                            : Colors.orange,
                   ),
                 ),
               ),
@@ -93,13 +103,18 @@ class GiftCardHistorySelectorWidget extends StatelessWidget {
                           status,
                           style: TextStyle(
                             fontSize: 14,
-                            color: status == "Success" ? Colors.green : status == "Fail" ? Colors.red : Colors.orange,
-                          ),),
+                            color: status == "Success"
+                                ? Colors.green
+                                : status == "Fail"
+                                    ? Colors.red
+                                    : Colors.orange,
+                          ),
+                        ),
                       ),
                     ],
                   ),
                   Text(
-                   "Player ID - $playerId",
+                    "Player ID - $playerId",
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.grey.shade800,
@@ -123,28 +138,32 @@ class GiftCardHistorySelectorWidget extends StatelessWidget {
                       color: Colors.grey.shade500,
                     ),
                   ),
-                  remarks.isNotEmpty ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Remarks",
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        remarks,
-                        style: const TextStyle(
-                          fontSize: 15,
-                          color: Colors.red,
-                        ),
-                      ),
-                    ],
-                  ) : const SizedBox(),
-                  const SizedBox(height: 5,),
+                  remarks.isNotEmpty
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Remarks",
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              remarks,
+                              style: const TextStyle(
+                                fontSize: 15,
+                                color: Colors.red,
+                              ),
+                            ),
+                          ],
+                        )
+                      : const SizedBox(),
+                  const SizedBox(
+                    height: 5,
+                  ),
                   Text(
                     "Purchased Time - $purchasedTime",
                     style: TextStyle(
@@ -152,13 +171,15 @@ class GiftCardHistorySelectorWidget extends StatelessWidget {
                       color: Colors.grey.shade400,
                     ),
                   ),
-                  completedTime.isNotEmpty ? Text(
-                    "Completed Time - $completedTime",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey.shade400,
-                    ),
-                  ) : const SizedBox(),
+                  completedTime.isNotEmpty
+                      ? Text(
+                          "Completed Time - $completedTime",
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey.shade400,
+                          ),
+                        )
+                      : const SizedBox(),
                 ],
               ),
             ),

@@ -1,17 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nathan_app/helpers/shared_pref.dart';
+import 'package:fnge/helpers/shared_pref.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/screens/about_screen.dart';
-import 'package:nathan_app/views/screens/main_screen.dart';
-import 'package:nathan_app/views/screens/password/change_password_screen.dart';
-import 'package:nathan_app/views/screens/rank/rank_screen.dart';
-import 'package:nathan_app/views/screens/t_and_c_screen.dart';
-import 'package:nathan_app/views/screens/welcome_screen.dart';
-import 'package:nathan_app/views/widgets/profile_menu_widget.dart';
-import 'package:nathan_app/widgets/long_button_view.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/screens/about_screen.dart';
+import 'package:fnge/views/screens/main_screen.dart';
+import 'package:fnge/views/screens/password/change_password_screen.dart';
+import 'package:fnge/views/screens/rank/rank_screen.dart';
+import 'package:fnge/views/screens/t_and_c_screen.dart';
+import 'package:fnge/views/screens/welcome_screen.dart';
+import 'package:fnge/views/widgets/profile_menu_widget.dart';
+import 'package:fnge/widgets/long_button_view.dart';
 import '../../Ads_banner/ads_banner_widget.dart';
 import 'choose_lan_view.dart';
 
@@ -194,8 +194,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         horizontal: 20, vertical: 20),
                     child: Row(
                       children: [
-                         Text(
-                           AppLocalizations.of(context)!.refer_code,
+                        Text(
+                          AppLocalizations.of(context)!.refer_code,
                           style: const TextStyle(
                             fontSize: 14,
                             color: colorWhite,
@@ -238,9 +238,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const SizedBox(
                     height: 20,
                   ),
-                AdsBannerWidget(paddingTop: MainScreen.role == '1' ? 0 : 10, paddingbottom: 10,),
+                //  AdsBannerWidget(paddingTop: MainScreen.role == '1' ? 0 : 10, paddingbottom: 10,),
                 if (MainScreen.role == '1')
-                   SizedBox(
+                  SizedBox(
                     width: double.infinity,
                     child: Text(
                       AppLocalizations.of(context)!.account_status,
@@ -259,7 +259,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 const ChooseLanView(),
                 if (MainScreen.role == '1')
-                   ProfileMenuWidget(
+                  ProfileMenuWidget(
                     icon: Icons.leaderboard_outlined,
                     label: AppLocalizations.of(context)!.rank,
                     targe_page: const RankScreen(),
@@ -267,7 +267,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                 SizedBox(
+                SizedBox(
                   width: double.infinity,
                   child: Text(
                     AppLocalizations.of(context)!.security_privacy,
@@ -279,7 +279,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                 ProfileMenuWidget(
+                ProfileMenuWidget(
                   icon: Icons.lock_outline,
                   label: AppLocalizations.of(context)!.change_password,
                   targe_page: const ChangePasswordScreen(),
@@ -287,7 +287,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                 ProfileMenuWidget(
+                ProfileMenuWidget(
                   icon: Icons.privacy_tip_outlined,
                   label: AppLocalizations.of(context)!.terms_conditions,
                   targe_page: const TAndCScreen(),
@@ -307,7 +307,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                 ProfileMenuWidget(
+                ProfileMenuWidget(
                   icon: Icons.info_outline,
                   label: AppLocalizations.of(context)!.about_application,
                   targe_page: const AboutScreen(),
@@ -327,7 +327,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   text: AppLocalizations.of(context)!.logout,
                   onTap: () => logout(),
                 ),
-                const AdsBannerWidget(),
+                //  const AdsBannerWidget(),
                 // MaterialButton(
                 //   color: Colors.red,
                 //   shape: RoundedRectangleBorder(

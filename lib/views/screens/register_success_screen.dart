@@ -1,6 +1,5 @@
-
 import 'package:flutter/material.dart';
-import 'package:nathan_app/views/screens/main_screen.dart';
+import 'package:fnge/views/screens/main_screen.dart';
 
 class RegisterSuccessScreen extends StatefulWidget {
   const RegisterSuccessScreen({super.key});
@@ -15,7 +14,8 @@ class _RegisterSuccessScreenState extends State<RegisterSuccessScreen> {
   @override
   Widget build(BuildContext context) {
     return MediaQuery(
-      data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+      data: MediaQuery.of(context)
+          .copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
         backgroundColor: Colors.white,
         body: SizedBox(
@@ -55,7 +55,8 @@ class _RegisterSuccessScreenState extends State<RegisterSuccessScreen> {
               ),
               MaterialButton(
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
                     return const MainScreen();
                   }));
                   print("Get Started");

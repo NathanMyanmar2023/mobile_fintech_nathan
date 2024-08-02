@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:nathan_app/models/services/api_status.dart';
-import 'package:nathan_app/view_models/add_address_view_model.dart';
-import 'package:nathan_app/view_models/cart_view_model.dart';
-import 'package:nathan_app/views/widgets/common/input/text_input_widget.dart';
+import 'package:fnge/models/services/api_status.dart';
+import 'package:fnge/view_models/add_address_view_model.dart';
+import 'package:fnge/view_models/cart_view_model.dart';
+import 'package:fnge/views/widgets/common/input/text_input_widget.dart';
 import 'package:provider/provider.dart';
 
 class AddAddressScreen extends StatefulWidget {
@@ -21,7 +21,8 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
         context.watch<AddAddressViewModel>();
     CartViewModel cartViewModel = context.watch<CartViewModel>();
     return MediaQuery(
-      data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+      data: MediaQuery.of(context)
+          .copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
         backgroundColor: Colors.grey.shade200,
         appBar: PreferredSize(

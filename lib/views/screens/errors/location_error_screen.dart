@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nathan_app/views/screens/splash_screen.dart';
+import 'package:fnge/views/screens/splash_screen.dart';
 
 class LocationErrorScreen extends StatelessWidget {
   const LocationErrorScreen({super.key});
@@ -7,7 +7,8 @@ class LocationErrorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MediaQuery(
-      data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+      data: MediaQuery.of(context)
+          .copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
         body: SizedBox(
           width: double.infinity,
@@ -42,11 +43,12 @@ class LocationErrorScreen extends StatelessWidget {
               ),
               MaterialButton(
                 onPressed: () {
-                  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) {
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (BuildContext context) {
                     return const SplashScreen();
                   }), (route) => false);
-                },color: const Color.fromARGB(255, 63, 116, 242),
-                
+                },
+                color: const Color.fromARGB(255, 63, 116, 242),
                 child: const SizedBox(
                   height: 30,
                   width: 100,

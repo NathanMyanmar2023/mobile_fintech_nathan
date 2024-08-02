@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:nathan_app/objects/application_fee_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
+import 'package:fnge/objects/application_fee_ob.dart';
+import 'package:fnge/resources/colors.dart';
 
 class ApplicationFeesWidget extends StatelessWidget {
   final ApplicationFeeData data;
