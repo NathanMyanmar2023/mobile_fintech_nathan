@@ -95,7 +95,7 @@ import 'dart:developer';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:nathan_app/resources/colors.dart';
+import 'package:fnge/resources/colors.dart';
 
 class MessagingService {
   static String? fcmToken; // Variable to store the FCM token
@@ -112,7 +112,7 @@ class MessagingService {
     AwesomeNotifications().initialize('resource://drawable/notification_icon', [
       NotificationChannel(
         channelKey: "sound_channel", channelName: "Notifications",
-        channelDescription: "Fintech Nathan",
+        channelDescription: "FNGC",
         importance: NotificationImportance.High,
         vibrationPattern: highVibrationPattern,
         channelShowBadge: true,

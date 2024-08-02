@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:nathan_app/objects/history/invest_profit_history_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
+import 'package:fnge/objects/history/invest_profit_history_ob.dart';
+import 'package:fnge/resources/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InvestProfitHistorySelectorWidget extends StatelessWidget {

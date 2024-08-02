@@ -1,10 +1,10 @@
 // import 'package:flutter/material.dart';
-// import 'package:nathan_app/bloc/profile/profile_bloc.dart';
-// import 'package:nathan_app/extensions/navigation_extensions.dart';
-// import 'package:nathan_app/pages/change_password_page.dart';
-// import 'package:nathan_app/resources/colors.dart';
-// import 'package:nathan_app/resources/constants.dart';
-// import 'package:nathan_app/widgets/long_button_view.dart';
+// import 'package:fnge/bloc/profile/profile_bloc.dart';
+// import 'package:fnge/extensions/navigation_extensions.dart';
+// import 'package:fnge/pages/change_password_page.dart';
+// import 'package:fnge/resources/colors.dart';
+// import 'package:fnge/resources/constants.dart';
+// import 'package:fnge/widgets/long_button_view.dart';
 // import 'package:provider/provider.dart';
 //
 // class ProfilePage extends StatelessWidget {

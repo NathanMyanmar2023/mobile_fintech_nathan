@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/bloc/checkout_bloc.dart';
-import 'package:nathan_app/bloc/region_bloc.dart';
-import 'package:nathan_app/bloc/township_bloc.dart';
-import 'package:nathan_app/extensions/navigation_extensions.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/objects/region_ob.dart';
-import 'package:nathan_app/objects/township_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/resources/constants.dart';
-import 'package:nathan_app/widgets/long_button_view.dart';
+import 'package:fnge/bloc/checkout_bloc.dart';
+import 'package:fnge/bloc/region_bloc.dart';
+import 'package:fnge/bloc/township_bloc.dart';
+import 'package:fnge/extensions/navigation_extensions.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/objects/region_ob.dart';
+import 'package:fnge/objects/township_ob.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/resources/constants.dart';
+import 'package:fnge/widgets/long_button_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CheckOutPage extends StatefulWidget {
@@ -27,7 +27,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
 
   final _checkoutBloc = CheckoutBloc();
   late Stream<ResponseOb> _checkoutStream;
-  
+
   final _regionBloc = RegionBloc();
   late Stream<ResponseOb> _regionStream;
   List<RegionData> regionList = [];
@@ -35,7 +35,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
   final _townShipBloc = TownshipBloc();
   late Stream<ResponseOb> _townshipStream;
   List<TownShipData> townShipList = [];
-bool ischange = false;
+  bool ischange = false;
   bool isTownchange = false;
   @override
   void initState() {
@@ -72,7 +72,9 @@ bool ischange = false;
             context: context,
             builder: (context) {
               return AlertDialog(
-                title:  Text(AppLocalizations.of(context)!.success,),
+                title: Text(
+                  AppLocalizations.of(context)!.success,
+                ),
                 content: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
@@ -135,6 +137,7 @@ bool ischange = false;
       }
     });
   }
+
   int selectedRegionId = 0;
   int selectedTownshipId = 0;
   TownShipData? valueData;
@@ -203,7 +206,9 @@ bool ischange = false;
                         const SizedBox(height: 4),
                         DropdownButton<RegionData>(
                           isExpanded: true,
-                          value: ischange ? regionList[selectedRegionId-1] : regionList.first,
+                          value: ischange
+                              ? regionList[selectedRegionId - 1]
+                              : regionList.first,
                           onChanged: (newValue) {
                             _townShipBloc.getTownShip(id: newValue?.id ?? 0);
                             selectedRegionId = newValue!.id ?? 0;
@@ -236,7 +241,7 @@ bool ischange = false;
                         const SizedBox(height: 4),
                         DropdownButton<TownShipData>(
                           isExpanded: true,
-                        value: isTownchange ? valueData : townShipList.first,
+                          value: isTownchange ? valueData : townShipList.first,
                           onChanged: (newValue) {
                             selectedTownshipId = newValue!.id ?? 0;
                             setState(() {
@@ -272,7 +277,8 @@ bool ischange = false;
                             hintText: "Tun***",
                             labelStyle: const TextStyle(color: colorPrimary),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: colorGrey.withOpacity(0.3)),
+                              borderSide:
+                                  BorderSide(color: colorGrey.withOpacity(0.3)),
                             ),
                             focusedBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(color: colorPrimary),
@@ -301,7 +307,8 @@ bool ischange = false;
                             hintText: "09****",
                             labelStyle: const TextStyle(color: colorPrimary),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: colorGrey.withOpacity(0.3)),
+                              borderSide:
+                                  BorderSide(color: colorGrey.withOpacity(0.3)),
                             ),
                             focusedBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(color: colorPrimary),
@@ -329,7 +336,8 @@ bool ischange = false;
                             hintText: "No.45,***",
                             labelStyle: const TextStyle(color: colorPrimary),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: colorGrey.withOpacity(0.3)),
+                              borderSide:
+                                  BorderSide(color: colorGrey.withOpacity(0.3)),
                             ),
                             focusedBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(color: colorPrimary),
@@ -357,7 +365,8 @@ bool ischange = false;
                             hintText: "note****",
                             labelStyle: const TextStyle(color: colorPrimary),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: colorGrey.withOpacity(0.3)),
+                              borderSide:
+                                  BorderSide(color: colorGrey.withOpacity(0.3)),
                             ),
                             focusedBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(color: colorPrimary),
@@ -372,15 +381,15 @@ bool ischange = false;
                     LongButtonView(
                       text: "Confirm",
                       onTap: () {
-                        _checkoutBloc.makeCheckout(
-                            data: {
-                              "township_id": isTownchange ? valueData!.id : townShipList.first.id,
-                              "receiver_name": nameController.text.trim(),
-                              "receiver_phone": phoneController.text.trim(),
-                              "address": addressController.text.trim(),
-                              "note": noteController.text.trim(),
-                            }
-                        );
+                        _checkoutBloc.makeCheckout(data: {
+                          "township_id": isTownchange
+                              ? valueData!.id
+                              : townShipList.first.id,
+                          "receiver_name": nameController.text.trim(),
+                          "receiver_phone": phoneController.text.trim(),
+                          "address": addressController.text.trim(),
+                          "note": noteController.text.trim(),
+                        });
                       },
                     ),
                   ],

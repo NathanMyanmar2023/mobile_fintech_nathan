@@ -6,17 +6,17 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:nathan_app/view_models/add_address_view_model.dart';
-import 'package:nathan_app/view_models/cart_view_model.dart';
-import 'package:nathan_app/view_models/app_language_view_model.dart';
-import 'package:nathan_app/views/notification/notification_service.dart';
-import 'package:nathan_app/views/screens/login_screen.dart';
-import 'package:nathan_app/views/screens/main_screen.dart';
-import 'package:nathan_app/views/screens/register_screen.dart';
-import 'package:nathan_app/views/screens/register_success_screen.dart';
-import 'package:nathan_app/views/screens/splash_screen.dart';
-import 'package:nathan_app/views/screens/welcome_screen.dart';
-import 'package:nathan_app/view_models/product_view_model.dart';
+import 'package:fnge/view_models/add_address_view_model.dart';
+import 'package:fnge/view_models/cart_view_model.dart';
+import 'package:fnge/view_models/app_language_view_model.dart';
+import 'package:fnge/views/notification/notification_service.dart';
+import 'package:fnge/views/screens/login_screen.dart';
+import 'package:fnge/views/screens/main_screen.dart';
+import 'package:fnge/views/screens/register_screen.dart';
+import 'package:fnge/views/screens/register_success_screen.dart';
+import 'package:fnge/views/screens/splash_screen.dart';
+import 'package:fnge/views/screens/welcome_screen.dart';
+import 'package:fnge/view_models/product_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -38,20 +38,19 @@ Future<void> main() async {
             messagingSenderId: "314757345053",
             appId: "1:314757345053:web:2d8c07ac6df85572897bf4",
             measurementId: "G-K0W6XSDX8W"));
-           // AdManagerWeb.init();
+    // AdManagerWeb.init();
   } else {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
     _deviceToken = await _saveDeviceToken();
     await MobileAds.instance.initialize();
+    // thing to add
+    List<String> testDeviceIds = ["6CB9DF638CDF0411C30830373D9580A0"];
+    RequestConfiguration configuration =
+        RequestConfiguration(testDeviceIds: testDeviceIds);
+    MobileAds.instance.updateRequestConfiguration(configuration);
   }
-
-  // // thing to add
-  // List<String> testDeviceIds = ["6CB9DF638CDF0411C30830373D9580A0"];
-  // RequestConfiguration configuration =
-  //     RequestConfiguration(testDeviceIds: testDeviceIds);
-  // MobileAds.instance.updateRequestConfiguration(configuration);
 
   AppLanguageViewModel appLanguage = AppLanguageViewModel();
   await appLanguage.fetchLocale();
@@ -103,7 +102,7 @@ class Nathan extends StatelessWidget {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               themeMode: ThemeMode.light,
-              title: 'Fintech Nathan',
+              title: 'FNGC',
               localizationsDelegates: const [
                 AppLocalizations.delegate,
                 GlobalMaterialLocalizations.delegate,

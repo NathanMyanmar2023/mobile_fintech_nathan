@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nathan_app/resources/colors.dart';
+import 'package:fnge/resources/colors.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class TopUpButtonWidget extends StatefulWidget {
@@ -28,7 +28,7 @@ class _TopUpButtonWidgetState extends State<TopUpButtonWidget> {
         ),
         color: topColors.withOpacity(0.3),
         elevation: 0,
-        padding:  EdgeInsets.zero,
+        padding: EdgeInsets.zero,
         onPressed: widget.target,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -37,7 +37,7 @@ class _TopUpButtonWidgetState extends State<TopUpButtonWidget> {
             Text(
               widget.amt_name.toString(),
               textAlign: TextAlign.center,
-              style:  TextStyle(
+              style: TextStyle(
                 fontSize: 16.sp,
                 color: colorPrimary,
                 fontWeight: FontWeight.w500,
@@ -46,7 +46,7 @@ class _TopUpButtonWidgetState extends State<TopUpButtonWidget> {
             Text(
               ' Ks',
               textAlign: TextAlign.center,
-              style:  TextStyle(
+              style: TextStyle(
                 fontSize: 13.sp,
                 color: colorPrimary,
                 fontWeight: FontWeight.w500,

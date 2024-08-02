@@ -1,4 +1,4 @@
-import 'package:nathan_app/network/api_constants.dart';
+import 'package:fnge/network/api_constants.dart';
 
 extension ExtensionString on String? {
   bool isNullOrEmpty() => (this == null) || (this?.isEmpty ?? true);

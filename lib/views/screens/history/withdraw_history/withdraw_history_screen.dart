@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/bloc/history/withdraw_history/withdraw_history_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/widgets/history/withdraw_history_selector_widget.dart';
+import 'package:fnge/bloc/history/withdraw_history/withdraw_history_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/widgets/history/withdraw_history_selector_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WithdrawHistoryScreen extends StatefulWidget {
@@ -82,7 +82,7 @@ class _WithdrawHistoryScreenState extends State<WithdrawHistoryScreen> {
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
-    //  _withdraw_history_bloc.getWithdrawHistory(page);
+      //  _withdraw_history_bloc.getWithdrawHistory(page);
       print("getting page - $page");
     }
   }
@@ -146,47 +146,54 @@ class _WithdrawHistoryScreenState extends State<WithdrawHistoryScreen> {
             ),
             body: RefreshIndicator(
               onRefresh: refersh,
-              child: history_list.isEmpty ? Center(child: Text(AppLocalizations.of(context)!.no_more_data,),) : ListView.builder(
-                controller: scroll_controller,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount: history_list.length,
-                itemBuilder: (context, index) {
-                  final history = history_list[index];
-                  if (index < history_list.length) {
-                    return WithdrawHistorySelectorWidget(
-                      id: history[0],
-                      amount: history[1],
-                      currency: history[2],
-                      account_name: history[3],
-                      account_number: history[4],
-                      payment_method_name: history[5],
-                      payment_method_icon: history[6],
-                      status: history[7],
-                      created_at: history[8],
-                    );
-                  } else {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 20),
-                      child: Center(
-                        child: hasMore
-                            ? const SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                ))
-                            :  Text(
-                          AppLocalizations.of(context)!.no_more_data,
-                                style: TextStyle(
-                                  fontSize: 13,
-                                ),
-                              ),
+              child: history_list.isEmpty
+                  ? Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.no_more_data,
                       ),
-                    );
-                  }
-                },
-              ),
+                    )
+                  : ListView.builder(
+                      controller: scroll_controller,
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      itemCount: history_list.length,
+                      itemBuilder: (context, index) {
+                        final history = history_list[index];
+                        if (index < history_list.length) {
+                          return WithdrawHistorySelectorWidget(
+                            id: history[0],
+                            amount: history[1],
+                            currency: history[2],
+                            account_name: history[3],
+                            account_number: history[4],
+                            payment_method_name: history[5],
+                            payment_method_icon: history[6],
+                            status: history[7],
+                            created_at: history[8],
+                          );
+                        } else {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 20),
+                            child: Center(
+                              child: hasMore
+                                  ? const SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                      ))
+                                  : Text(
+                                      AppLocalizations.of(context)!
+                                          .no_more_data,
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                            ),
+                          );
+                        }
+                      },
+                    ),
             )),
       );
     }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nathan_app/resources/colors.dart';
+import 'package:fnge/resources/colors.dart';
 import 'package:provider/provider.dart';
 import '../../helpers/shared_pref.dart';
 import '../../l10n/l10n.dart';
@@ -19,7 +19,7 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
   int? _selectedIndex = 0;
   late AppLanguageViewModel appLanguage;
   static final languageList = [
-    const RadioViewModel(id: 0,name: "English", value: "en"),
+    const RadioViewModel(id: 0, name: "English", value: "en"),
     const RadioViewModel(id: 1, name: "မြန်မာ", value: "my"),
   ];
   @override
@@ -56,7 +56,9 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
               ),
               const Padding(
                 padding: EdgeInsets.all(20),
-                child: Divider(height: 2,),
+                child: Divider(
+                  height: 2,
+                ),
               ),
               Expanded(
                 child: Padding(
@@ -79,9 +81,14 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(50),
                               child: Image.asset(
-                                languageList[index].value == 'en' ? 'assets/en_flag.png' : 'assets/my_flag.png',
-                                width: 30, height: 30,fit: BoxFit.cover,),
-                          ),
+                                languageList[index].value == 'en'
+                                    ? 'assets/en_flag.png'
+                                    : 'assets/my_flag.png',
+                                width: 30,
+                                height: 30,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                             const SizedBox(
                               width: 10,
                             ),
@@ -103,8 +110,10 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                       key: SharedPref.language_code,
                       value: languageList[_selectedIndex!].value,
                     );
-                    appLanguage.changeLanguage(Locale("${L10n.all[languageList[_selectedIndex!].value == "en" ? 0 : 1]}"));
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                    appLanguage.changeLanguage(Locale(
+                        "${L10n.all[languageList[_selectedIndex!].value == "en" ? 0 : 1]}"));
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
                       return const MainScreen();
                     }));
                   },

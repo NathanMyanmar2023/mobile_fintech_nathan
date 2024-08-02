@@ -4,10 +4,10 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mime/mime.dart';
-import 'package:nathan_app/helpers/base_network.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/objects/presign_ob.dart';
-import 'package:nathan_app/models/utils/app_constants.dart';
+import 'package:fnge/helpers/base_network.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/objects/presign_ob.dart';
+import 'package:fnge/models/utils/app_constants.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:uuid/uuid.dart';
 import 'package:path/path.dart' as Path;
@@ -22,7 +22,8 @@ class KycBloc extends BaseNetwork {
   Map<String, dynamic> kyc_map = {};
   int upload_image_count = 0;
 
-  uploadKyc(Map<String, dynamic> map, File? photo, File? nrcFront, File? nrcBack, File? bankStatement) {
+  uploadKyc(Map<String, dynamic> map, File? photo, File? nrcFront,
+      File? nrcBack, File? bankStatement) {
     kyc_map.addAll(map);
 
     upload_image_to_space(photo!, "photo");
@@ -42,23 +43,26 @@ class KycBloc extends BaseNetwork {
       'path': path,
     };
 
-    postReq(PRESIGN, params: presignMap, onDataCallBack: (ResponseOb resp) async {
+    postReq(PRESIGN, params: presignMap,
+        onDataCallBack: (ResponseOb resp) async {
       if (resp.success == true) {
-        if(kIsWeb) {
+        if (kIsWeb) {
           resp.data = PresignOb.fromJson(resp.data);
         } else {
           resp.data = PresignOb.fromJson(resp.data);
         }
         String presignUrl = resp.data.data.presign.toString();
         Uint8List image = file.readAsBytesSync();
-        Options options = Options(contentType: lookupMimeType(file.path), headers: {
+        Options options =
+            Options(contentType: lookupMimeType(file.path), headers: {
           'Accept': "*/*",
           'Content-Length': image.length,
           'Connection': 'keep-alive',
           'x-amz-acl': 'public-read',
         });
         Dio dio = Dio();
-        Response response = await dio.put(presignUrl, data: Stream.fromIterable(image.map((e) => [e])), options: options);
+        Response response = await dio.put(presignUrl,
+            data: Stream.fromIterable(image.map((e) => [e])), options: options);
         //if upload image success
         if (response.statusCode == 200) {
           kyc_map.addAll({"${type}_name": fullName, "${type}_path": path});

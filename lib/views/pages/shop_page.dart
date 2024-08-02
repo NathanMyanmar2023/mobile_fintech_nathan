@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:nathan_app/bloc/products/products_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
+import 'package:fnge/bloc/products/products_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../widgets/ecommerce/product_selector_widget.dart';
 
@@ -132,13 +132,15 @@ class _ShopPageState extends State<ShopPage> {
             ),
           )
         : MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+            data: MediaQuery.of(context)
+                .copyWith(textScaler: const TextScaler.linear(1.0)),
             child: Scaffold(
               backgroundColor: Colors.grey.shade200,
               body: RefreshIndicator(
                 onRefresh: refersh,
                 child: MasonryGridView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 12,
                   physics: const AlwaysScrollableScrollPhysics(),
@@ -181,7 +183,7 @@ class _ShopPageState extends State<ShopPage> {
                                     strokeWidth: 2,
                                   ))
                               : Text(
-                            AppLocalizations.of(context)!.no_more_data,
+                                  AppLocalizations.of(context)!.no_more_data,
                                   style: TextStyle(
                                     fontSize: 13,
                                   ),

@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:nathan_app/config/config.dart';
-import 'package:nathan_app/helpers/shared_pref.dart';
-import 'package:nathan_app/models/services/api_service.dart';
-import 'package:nathan_app/models/services/api_status.dart';
+import 'package:fnge/config/config.dart';
+import 'package:fnge/helpers/shared_pref.dart';
+import 'package:fnge/models/services/api_service.dart';
+import 'package:fnge/models/services/api_status.dart';
 
 class ProductViewModel extends ChangeNotifier {
   bool _loading = false;

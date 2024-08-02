@@ -1,10 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/bloc/forgot_password/forgot_password_bloc.dart';
-import 'package:nathan_app/extensions/navigation_extensions.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/resources/constants.dart';
+import 'package:fnge/bloc/forgot_password/forgot_password_bloc.dart';
+import 'package:fnge/extensions/navigation_extensions.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/resources/constants.dart';
 import '../../../helpers/response_ob.dart';
 import '../../../widgets/long_button_view.dart';
 import '../../custom/snack_bar.dart';
@@ -21,7 +20,6 @@ class ForgotPasswordScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
-
   var emailTec = TextEditingController();
   bool isLoading = false;
 
@@ -38,22 +36,25 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           isLoading = false;
         });
         if (resp.data.success == true) {
-          context.showSnack(resp.data.message,
+          context.showSnack(
+            resp.data.message,
             Colors.white,
             Colors.green,
             Icons.check,
           );
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) {
-            return ForgotPassVerifyScreen(email: emailTec.text.trim(),);
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            return ForgotPassVerifyScreen(
+              email: emailTec.text.trim(),
+            );
           }));
         } else {
-          context.showSnack(resp.data.message,
+          context.showSnack(
+            resp.data.message,
             Colors.white,
             Colors.red,
             Icons.close,
           );
-       }
+        }
       } else {
         showDialog(
             context: context,
@@ -101,6 +102,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     );
     return regExp.hasMatch(email);
   }
+
   void sendMail() {
     String email = emailTec.text.toString();
 
@@ -264,8 +266,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       onTap: () => sendMail(),
                     ),
                   ],
-                )
-            ),
+                )),
           ),
         ),
       );

@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
-import 'package:nathan_app/helpers/base_network.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/objects/investment/investment_ob.dart';
-import 'package:nathan_app/models/utils/app_constants.dart';
+import 'package:fnge/helpers/base_network.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/objects/investment/investment_ob.dart';
+import 'package:fnge/models/utils/app_constants.dart';
 import 'package:rxdart/subjects.dart';
 
 class InvestmentBloc extends BaseNetwork {
@@ -12,12 +12,12 @@ class InvestmentBloc extends BaseNetwork {
   invest(Map<String, dynamic> map) async {
     postReq(INVEST, params: map, onDataCallBack: (ResponseOb resp) {
       if (resp.success == true) {
-        if(kIsWeb) {
+        if (kIsWeb) {
           resp.data = InvestmentOb.fromJson(resp.data);
         } else {
           resp.data = InvestmentOb.fromJson(resp.data);
         }
-      } 
+      }
       investmentController.sink.add(resp);
     }, errorCallBack: (ResponseOb resp) {
       investmentController.sink.add(resp);

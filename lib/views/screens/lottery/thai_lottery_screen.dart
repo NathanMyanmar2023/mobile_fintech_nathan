@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:nathan_app/views/custom/snack_bar.dart';
-import 'package:nathan_app/widgets/nathan_text_view.dart';
+import 'package:fnge/views/custom/snack_bar.dart';
+import 'package:fnge/widgets/nathan_text_view.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../resources/colors.dart';
 import '../../../widgets/app_bar_title_view.dart';
@@ -59,7 +60,6 @@ class _ThaiLotteryScreenState extends State<ThaiLotteryScreen> {
   //   });
   // }
 
-
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
@@ -84,31 +84,83 @@ class _ThaiLotteryScreenState extends State<ThaiLotteryScreen> {
       return MediaQuery(
         data: MediaQuery.of(context)
             .copyWith(textScaler: const TextScaler.linear(1.0)),
-        child: Scaffold(
-          backgroundColor: Colors.grey.shade200,
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(70),
-            child: AppBarTitleView(
-              text: "Thai Lottery",
+        child: DefaultTabController(
+          length: 3,
+          child: Scaffold(
+            backgroundColor: Colors.grey.shade200,
+            appBar: PreferredSize(
+              preferredSize: const Size.fromHeight(70),
+              child: AppBarTitleView(
+                text: "Thai Lottery",
+              ),
             ),
-          ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
+            body: const Column(
               children: [
-                const NathanTextView(
-                  text: "Select Lottery Type",
-                  isCenter: true,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                ),
-                const SizedBox(
-                  height: 5,
+                TabBar(tabs: [
+                  Tab(
+                    text: "Home",
+                  ),
+                  Tab(
+                    text: "Purchase Ticket",
+                  ),
+                  Tab(
+                    text: "Lottery Winners",
+                  ),
+                ]),
+                Expanded(
+                  child: SizedBox(
+                    height: 300,
+                    child: TabBarView(
+                      children: [
+                        Center(
+                          child: Text("Chats"),
+                        ),
+                        Center(
+                          child: Text("Calls"),
+                        ),
+                        Center(
+                          child: Text("Settings"),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
+            //           body: Padding(
+            //             padding: const EdgeInsets.symmetric(horizontal: 25),
+            //             child: Column(
+            //               crossAxisAlignment: CrossAxisAlignment.center,
+            //               mainAxisAlignment: MainAxisAlignment.center,
+            //               children: [
+            //                 const NathanTextView(
+            //                   text: "Enter digit number",
+            //                   isCenter: true,
+            //                   fontSize: 20,
+            //                   fontWeight: FontWeight.w600,
+            //                 ),
+            //                 const SizedBox(
+            //                   height: 5,
+            //                 ),
+            //                 OtpTextField(
+            //                   numberOfFields: 6,
+            //                   focusedBorderColor: colorPrimary.withOpacity(0.5),
+            //                   enabledBorderColor: colorPrimary,
+            //                   cursorColor: colorPrimary,
+            //                   showFieldAsBox: false,
+            //                   borderWidth: 4.0,
+            //                   //runs when a code is typed in
+            //                   onCodeChanged: (String code) {
+            //                     //handle validation or checks here if necessary
+            //                   },
+            //                   //runs when every textfield is filled
+            //                   onSubmit: (String verificationCode) {
+            // print("verificationCode $verificationCode");
+            //                   },
+            //                 ),
+            //               ],
+            //             ),
+            //           ),
           ),
         ),
       );

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:nathan_app/extensions/navigation_extensions.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/resources/constants.dart';
-import 'package:nathan_app/views/screens/login_screen.dart';
-import 'package:nathan_app/views/screens/register_screen.dart';
-import 'package:nathan_app/widgets/auth_title_and_description_section_view.dart';
-import 'package:nathan_app/widgets/long_button_view.dart';
+import 'package:fnge/extensions/navigation_extensions.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/resources/constants.dart';
+import 'package:fnge/views/screens/login_screen.dart';
+import 'package:fnge/views/screens/register_screen.dart';
+import 'package:fnge/widgets/auth_title_and_description_section_view.dart';
+import 'package:fnge/widgets/long_button_view.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -39,15 +39,19 @@ class WelcomeScreen extends StatelessWidget {
                   children: [
                     const AuthTitleAndDescriptionSectionView(
                       title: "START GROW YOUR MONEY",
-                      description: "INVEST AND GROW MONEY WITH FINTECH NATHAN",
+                      description: "INVEST AND GROW MONEY WITH FNGC",
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.08,
                     ),
-                    Image.asset(
-                      appLogo,
-                      width: 200,
-                      height: 200,
+                    Container(
+                      color: Colors.white,
+                      padding: const EdgeInsets.all(25),
+                      child: Image.asset(
+                        appLogo,
+                        width: 200,
+                        height: 200,
+                      ),
                     ),
                   ],
                 ),

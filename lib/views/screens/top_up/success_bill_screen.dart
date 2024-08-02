@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/screens/main_screen.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/screens/main_screen.dart';
 
 class SuccessBillScreen extends StatefulWidget {
   final bool isGift;
@@ -73,8 +73,8 @@ class _SuccessBillScreenState extends State<SuccessBillScreen> {
                   onPressed: () {
                     Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(builder: (BuildContext context) {
-                          return const MainScreen();
-                        }), (route) => false);
+                      return const MainScreen();
+                    }), (route) => false);
                   },
                   child: const SizedBox(
                     height: 30,

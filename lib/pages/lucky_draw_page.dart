@@ -1,15 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:nathan_app/bloc/lucky_draw_bloc.dart';
-import 'package:nathan_app/extensions/navigation_extensions.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/objects/lucky_draw_ob.dart';
-import 'package:nathan_app/pages/buy_ticket_page.dart';
-import 'package:nathan_app/pages/my_ticket_page.dart';
-import 'package:nathan_app/pages/winner_page.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/resources/constants.dart';
-import 'package:nathan_app/widgets/long_button_view.dart';
+import 'package:fnge/bloc/lucky_draw_bloc.dart';
+import 'package:fnge/extensions/navigation_extensions.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/objects/lucky_draw_ob.dart';
+import 'package:fnge/pages/buy_ticket_page.dart';
+import 'package:fnge/pages/my_ticket_page.dart';
+import 'package:fnge/pages/winner_page.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/resources/constants.dart';
+import 'package:fnge/widgets/long_button_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../views/Ads_banner/ads_banner_widget.dart';
@@ -53,17 +53,19 @@ class _LuckyDrawPageState extends State<LuckyDrawPage> {
       backgroundColor: Colors.grey.shade200,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70),
-        child: AppBarTitleView(text: AppLocalizations.of(context)!.lucky_draw,),
+        child: AppBarTitleView(
+          text: AppLocalizations.of(context)!.lucky_draw,
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-           // const AdsBannerWidget(paddingTop: 0, paddingbottom: 0,),
+             const AdsBannerWidget(paddingTop: 0, paddingbottom: 0,),
             Container(
               margin: const EdgeInsets.all(12),
               child: Row(
                 children: [
-                   Text(
+                  Text(
                     AppLocalizations.of(context)!.see_who_lucky_draw_winner,
                     style: TextStyle(
                       fontSize: 15,
@@ -80,7 +82,7 @@ class _LuckyDrawPageState extends State<LuckyDrawPage> {
                         ),
                       );
                     },
-                    child:  Text(
+                    child: Text(
                       AppLocalizations.of(context)!.show,
                       style: const TextStyle(
                         fontSize: 14,
@@ -93,31 +95,34 @@ class _LuckyDrawPageState extends State<LuckyDrawPage> {
                 ],
               ),
             ),
-            luckyDrawList.isEmpty ?
-             Padding(
-              padding: const EdgeInsets.only(top: 50),
-              child:  Center(
-                child: Text(
-                  AppLocalizations.of(context)!.no_more_data,),
-              ),
-            ) : ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: luckyDrawList.length,
-              padding: const EdgeInsets.only(bottom: 8),
-              itemBuilder: (BuildContext context, int index) => LuckyDrawView(
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => BuyTicketPage(
-                      luckyDraw: luckyDrawList[index],
+            luckyDrawList.isEmpty
+                ? Padding(
+                    padding: const EdgeInsets.only(top: 50),
+                    child: Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.no_more_data,
+                      ),
+                    ),
+                  )
+                : ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: luckyDrawList.length,
+                    padding: const EdgeInsets.only(bottom: 8),
+                    itemBuilder: (BuildContext context, int index) =>
+                        LuckyDrawView(
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => BuyTicketPage(
+                            luckyDraw: luckyDrawList[index],
+                          ),
+                        ),
+                      ),
+                      luckyDrawData: luckyDrawList[index],
+                      currency: widget.currency,
+                      onTapImage: (url) => showImageDialog(context, url),
                     ),
                   ),
-                ),
-                luckyDrawData: luckyDrawList[index],
-                currency: widget.currency,
-                onTapImage: (url) => showImageDialog(context, url),
-              ),
-            ),
           ],
         ),
       ),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/bloc/history/deposit_history/deposit_history_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/widgets/history/deposit_history_selector_widget.dart';
+import 'package:fnge/bloc/history/deposit_history/deposit_history_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/widgets/history/deposit_history_selector_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DepositHistoryScreen extends StatefulWidget {
@@ -81,7 +81,7 @@ class _DepositHistoryScreenState extends State<DepositHistoryScreen> {
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
-     // _deposit_history_bloc.getDepositHistory(page);
+      // _deposit_history_bloc.getDepositHistory(page);
       print("getting page - $page");
     }
   }
@@ -145,45 +145,52 @@ class _DepositHistoryScreenState extends State<DepositHistoryScreen> {
             ),
             body: RefreshIndicator(
               onRefresh: refersh,
-              child: history_list.isEmpty ? Center(child: Text(AppLocalizations.of(context)!.no_more_data,),) : ListView.builder(
-                controller: scroll_controller,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount: history_list.length, //history_list.length + 1,
-                itemBuilder: (context, index) {
-                  if (index < history_list.length) {
-                    final history = history_list[index];
-                    return DepositHistorySelectorWidget(
-                      id: history[0],
-                      amount: history[1],
-                      status: history[2],
-                      country: history[3],
-                      currency: history[4],
-                      payment_method: history[5],
-                      created_at: history[6],
-                    );
-                  } else {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 20),
-                      child: Center(
-                        child: hasMore
-                            ? const SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                ))
-                            : Text(
-                          AppLocalizations.of(context)!.no_more_data,
-                                style: TextStyle(
-                                  fontSize: 13,
-                                ),
-                              ),
+              child: history_list.isEmpty
+                  ? Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.no_more_data,
                       ),
-                    );
-                  }
-                },
-              ),
+                    )
+                  : ListView.builder(
+                      controller: scroll_controller,
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      itemCount: history_list.length, //history_list.length + 1,
+                      itemBuilder: (context, index) {
+                        if (index < history_list.length) {
+                          final history = history_list[index];
+                          return DepositHistorySelectorWidget(
+                            id: history[0],
+                            amount: history[1],
+                            status: history[2],
+                            country: history[3],
+                            currency: history[4],
+                            payment_method: history[5],
+                            created_at: history[6],
+                          );
+                        } else {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 20),
+                            child: Center(
+                              child: hasMore
+                                  ? const SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                      ))
+                                  : Text(
+                                      AppLocalizations.of(context)!
+                                          .no_more_data,
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                            ),
+                          );
+                        }
+                      },
+                    ),
             )),
       );
     }

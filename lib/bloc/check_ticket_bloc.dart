@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
-import 'package:nathan_app/helpers/base_network.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/models/utils/app_constants.dart';
-import 'package:nathan_app/objects/check_ticket_ob.dart';
+import 'package:fnge/helpers/base_network.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/models/utils/app_constants.dart';
+import 'package:fnge/objects/check_ticket_ob.dart';
 import 'package:rxdart/subjects.dart';
 
 class CheckTicketBloc extends BaseNetwork {
@@ -12,7 +12,7 @@ class CheckTicketBloc extends BaseNetwork {
 
   checkTicket({required Map<String, dynamic> data}) async {
     postReq(CHECK_TICKET, params: data, onDataCallBack: (ResponseOb resp) {
-      if(kIsWeb) {
+      if (kIsWeb) {
         resp.data = CheckTicketOb.fromJson(resp.data);
       } else {
         resp.data = CheckTicketOb.fromJson(resp.data);

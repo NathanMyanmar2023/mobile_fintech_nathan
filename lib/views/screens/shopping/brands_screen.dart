@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:nathan_app/bloc/shopping/brands_bloc.dart';
-import 'package:nathan_app/objects/brands_ob.dart';
+import 'package:fnge/bloc/shopping/brands_bloc.dart';
+import 'package:fnge/objects/brands_ob.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../helpers/response_ob.dart';
 import '../../../pages/cart_page.dart';
@@ -14,14 +14,15 @@ import '../../Ads_banner/ads_banner_widget.dart';
 class BrandsScreen extends StatefulWidget {
   final int categoryId;
   final String categoryName;
-  const BrandsScreen({Key? key, required this.categoryId, required this.categoryName}) : super(key: key);
+  const BrandsScreen(
+      {Key? key, required this.categoryId, required this.categoryName})
+      : super(key: key);
 
   @override
   State<BrandsScreen> createState() => _BrandsScreenState();
 }
 
 class _BrandsScreenState extends State<BrandsScreen> {
-
   final _brandsBloc = BrandsBloc();
   late Stream<ResponseOb> _brandsStream;
   List<BrandData> brandsList = [];
@@ -31,11 +32,14 @@ class _BrandsScreenState extends State<BrandsScreen> {
     super.initState();
     _brandsStream = _brandsBloc.brandsStream();
     _brandsStream.listen((ResponseOb resp) {
-
-      brandsList.add(BrandData(id: 0, name: "All", photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6QF8VXMSxOoe3b3lf9GLaB0idx5u_9AWpKvnCM-odNxfFtDHczv2o7_-mOiLDaHb21qw&usqp=CAU"));
+      brandsList.add(BrandData(
+          id: 0,
+          name: "All",
+          photo:
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6QF8VXMSxOoe3b3lf9GLaB0idx5u_9AWpKvnCM-odNxfFtDHczv2o7_-mOiLDaHb21qw&usqp=CAU"));
       if (resp.success) {
         setState(() {
-         // brandsList = (resp.data as BrandsOb).data ?? [];
+          // brandsList = (resp.data as BrandsOb).data ?? [];
           brandsList.addAll((resp.data as BrandsOb).data ?? []);
         });
       } else {}
@@ -43,6 +47,7 @@ class _BrandsScreenState extends State<BrandsScreen> {
 
     _brandsBloc.getBrandsList(widget.categoryId);
   }
+
   int selectedItem = 0;
   @override
   Widget build(BuildContext context) {
@@ -64,7 +69,7 @@ class _BrandsScreenState extends State<BrandsScreen> {
               ),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            title:  Text(
+            title: Text(
               "${widget.categoryName} / ${AppLocalizations.of(context)!.brand}",
               style: const TextStyle(
                 fontSize: 18,
@@ -105,93 +110,106 @@ class _BrandsScreenState extends State<BrandsScreen> {
           ),
         ),
       ),
-      body: brandsList.isEmpty ?
-       Center(
-              child:  Text(
-                    AppLocalizations.of(context)!.no_more_data,),
-            ): DefaultTabController(
-          length: brandsList.length,
-          child: Container(
-            color: colorWhite,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15,),
-                child: Theme(
-                  data: theme.copyWith(
+      body: brandsList.isEmpty
+          ? Center(
+              child: Text(
+                AppLocalizations.of(context)!.no_more_data,
+              ),
+            )
+          : DefaultTabController(
+              length: brandsList.length,
+              child: Container(
+                color: colorWhite,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 15,
+                        ),
+                        child: Theme(
+                          data: theme.copyWith(
                             colorScheme: theme.colorScheme.copyWith(
-                            surfaceVariant: Colors.transparent,
+                              surfaceVariant: Colors.transparent,
                             ),
                           ),
-                  child: TabBar(
-                      onTap: (tabIndex) {
-                        setState(() {
-                          selectedItem = tabIndex;
-                        });
-                      },
-                    isScrollable: true,
-                    tabAlignment: TabAlignment.start,
-                    padding: EdgeInsets.zero,
-                    indicatorPadding: EdgeInsets.zero,
-                    labelPadding: EdgeInsets.zero,
-                      labelColor: colorPrimary,
-                    labelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
-                    unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w400, fontSize: 13),
-                      unselectedLabelColor: colorBlack,
-                      indicatorColor: colorWhite,
-                      indicatorWeight: 0.1,
-                      tabs: List.generate(brandsList.length, (index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 5),
-                          child: SizedBox(
-                            height: 120,
-                            width: 60,
-                            child: Tab(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                CircleAvatar(
-                                  radius: 27, // Image
-                                  backgroundColor: selectedItem == index ? colorPrimary : colorSeconary,
-                                      child: CircleAvatar(
-                                        radius: 25, // Image radius
-                                        backgroundColor: colorSeconary,
-                                        backgroundImage: NetworkImage(brandsList[index].photo ?? ""),
+                          child: TabBar(
+                            onTap: (tabIndex) {
+                              setState(() {
+                                selectedItem = tabIndex;
+                              });
+                            },
+                            isScrollable: true,
+                            tabAlignment: TabAlignment.start,
+                            padding: EdgeInsets.zero,
+                            indicatorPadding: EdgeInsets.zero,
+                            labelPadding: EdgeInsets.zero,
+                            labelColor: colorPrimary,
+                            labelStyle: const TextStyle(
+                                fontWeight: FontWeight.w600, fontSize: 14),
+                            unselectedLabelStyle: const TextStyle(
+                                fontWeight: FontWeight.w400, fontSize: 13),
+                            unselectedLabelColor: colorBlack,
+                            indicatorColor: colorWhite,
+                            indicatorWeight: 0.1,
+                            tabs: List.generate(brandsList.length, (index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(right: 5),
+                                child: SizedBox(
+                                  height: 120,
+                                  width: 60,
+                                  child: Tab(
+                                      child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      CircleAvatar(
+                                        radius: 27, // Image
+                                        backgroundColor: selectedItem == index
+                                            ? colorPrimary
+                                            : colorSeconary,
+                                        child: CircleAvatar(
+                                          radius: 25, // Image radius
+                                          backgroundColor: colorSeconary,
+                                          backgroundImage: NetworkImage(
+                                              brandsList[index].photo ?? ""),
+                                        ),
                                       ),
-                                    ),
-                                    const SizedBox(height: 5,),
-                                    Text(
-                                      brandsList[index].name ?? "",
-                                    ),
-                                  ],
-                                )),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        brandsList[index].name ?? "",
+                                      ),
+                                    ],
+                                  )),
+                                ),
+                              );
+                            }).toList(),
                           ),
-                        );
-                      }).toList(),
-
-                  ),
-                ),
-              ),
-               //  const Center(child: AdsBannerWidget(paddingbottom: 10, paddingTop: 0,)),
-               Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: 2.h),
-                  child: TabBarView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    children:
-                      List.generate(brandsList.length, (indexView) {
-                        return ShoppingPage(brandId: brandsList[indexView].id, categoryId: widget.categoryId,);
-                      }).toList(),
-
-                  ),
-                ),
-              ),
-                 // SizedBox(height: 2.h,),
-            ]),
-          )),
+                        ),
+                      ),
+                      //  const Center(child: AdsBannerWidget(paddingbottom: 10, paddingTop: 0,)),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(bottom: 2.h),
+                          child: TabBarView(
+                            physics: const NeverScrollableScrollPhysics(),
+                            children:
+                                List.generate(brandsList.length, (indexView) {
+                              return ShoppingPage(
+                                brandId: brandsList[indexView].id,
+                                categoryId: widget.categoryId,
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ),
+                      // SizedBox(height: 2.h,),
+                    ]),
+              )),
     );
   }
 }

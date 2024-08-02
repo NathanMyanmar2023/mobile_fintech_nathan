@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_launcher_icons/config/config.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/resources/constants.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/resources/constants.dart';
 
 import '../../models/utils/app_constants.dart';
 
@@ -56,7 +56,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 height: 24,
               ),
               const Text(
-                "Fintech Nathan Group of Companies",
+                "FNGC Group of Companies",
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,

@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:nathan_app/objects/investment/investment_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/screens/main_screen.dart';
-import 'package:nathan_app/views/widgets/my_separator.dart';
-import 'package:nathan_app/widgets/long_button_view.dart';
+import 'package:fnge/objects/investment/investment_ob.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/screens/main_screen.dart';
+import 'package:fnge/views/widgets/my_separator.dart';
+import 'package:fnge/widgets/long_button_view.dart';
 
 import '../../../../bloc/money_market/auction_round_monthly_bid_bloc.dart';
 import '../../../../helpers/response_ob.dart';
 import '../../../../helpers/shared_pref.dart';
 
 class DoneBidRoundScreen extends StatefulWidget {
-   final int roundId;
-   final String roundName;
+  final int roundId;
+  final String roundName;
   const DoneBidRoundScreen({
     Key? key,
-     required this.roundId,
+    required this.roundId,
     required this.roundName,
   }) : super(key: key);
 
@@ -24,7 +24,6 @@ class DoneBidRoundScreen extends StatefulWidget {
 }
 
 class _DoneBidRoundScreenState extends State<DoneBidRoundScreen> {
-
   final _roundMonthlyBidBloc = AuctionRoundMonthlyBidBloc();
   late Stream<ResponseOb> _roundMonthlyBidStream;
 
@@ -59,7 +58,7 @@ class _DoneBidRoundScreenState extends State<DoneBidRoundScreen> {
   checkUser(int lastBidUserID) async {
     String? accountId = await SharedPref.getData(key: SharedPref.accountId);
     int userId = int.parse(accountId!);
-    if(lastBidUserID == userId) {
+    if (lastBidUserID == userId) {
       setState(() {
         successUser = true;
       });
@@ -130,7 +129,9 @@ class _DoneBidRoundScreenState extends State<DoneBidRoundScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 40),
                       child: Text(
                         textAlign: TextAlign.center,
-                        successUser ? "Your are successfully for ${widget.roundName}." : "Winner Bidder name is $lastBidUsername for ${widget.roundName}.",
+                        successUser
+                            ? "Your are successfully for ${widget.roundName}."
+                            : "Winner Bidder name is $lastBidUsername for ${widget.roundName}.",
                         style: const TextStyle(
                           fontSize: 13,
                         ),
@@ -224,7 +225,9 @@ class _DoneBidRoundScreenState extends State<DoneBidRoundScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                successUser ?  "Transaction Date" : "Transaction Pay Date",
+                                successUser
+                                    ? "Transaction Date"
+                                    : "Transaction Pay Date",
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: Colors.grey.shade700,
@@ -264,10 +267,11 @@ class _DoneBidRoundScreenState extends State<DoneBidRoundScreen> {
     );
   }
 
-  String formatDateTimeFromUtc(dynamic time){
+  String formatDateTimeFromUtc(dynamic time) {
     try {
-      return new DateFormat("MMM d, yyyy").format(new DateFormat("yyyy-MM-dd'T'HH:mm:ss").parseUTC(time).toLocal());
-    } catch (e){
+      return new DateFormat("MMM d, yyyy").format(
+          new DateFormat("yyyy-MM-dd'T'HH:mm:ss").parseUTC(time).toLocal());
+    } catch (e) {
       return new DateFormat("MMM d, yyyy").format(new DateTime.now());
     }
   }

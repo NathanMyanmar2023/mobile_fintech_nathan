@@ -4,15 +4,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:nathan_app/bloc/deposit/payment_account_bloc.dart';
-import 'package:nathan_app/bloc/deposit/request_deposit_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/screens/deposit/success_deposit_screen.dart';
-import 'package:nathan_app/views/widgets/error_alert_widget.dart';
-import 'package:nathan_app/views/widgets/payment_account_widget.dart';
-import 'package:nathan_app/widgets/long_button_view.dart';
-import 'package:nathan_app/widgets/text_field_with_label_view.dart';
+import 'package:fnge/bloc/deposit/payment_account_bloc.dart';
+import 'package:fnge/bloc/deposit/request_deposit_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/screens/deposit/success_deposit_screen.dart';
+import 'package:fnge/views/widgets/error_alert_widget.dart';
+import 'package:fnge/views/widgets/payment_account_widget.dart';
+import 'package:fnge/widgets/long_button_view.dart';
+import 'package:fnge/widgets/text_field_with_label_view.dart';
 import '../../../helpers/shared_pref.dart';
 
 class DepositAccountsScreen extends StatefulWidget {
@@ -306,12 +306,12 @@ class _DepositAccountsScreenState extends State<DepositAccountsScreen> {
                               width: double.infinity,
                               height: 120,
                               child: _file != null
-                                  ? kIsWeb ?
-  Image.network(_file!.path) :
-Image.file(
-                                      _file!,
-                                      fit: BoxFit.cover,
-                                    )
+                                  ? kIsWeb
+                                      ? Image.network(_file!.path)
+                                      : Image.file(
+                                          _file!,
+                                          fit: BoxFit.cover,
+                                        )
                                   : const Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,

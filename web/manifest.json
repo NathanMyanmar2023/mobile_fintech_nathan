@@ -1,6 +1,6 @@
 {
-    "name": "nathan_app",
-    "short_name": "nathan_app",
+    "name": "fnge",
+    "short_name": "fnge",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

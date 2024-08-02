@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/screens/network/network_users_screen.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/screens/network/network_users_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LevelSelectorWidget extends StatelessWidget {

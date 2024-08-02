@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/screens/main_screen.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/screens/main_screen.dart';
 
 class SuccessKycScreen extends StatefulWidget {
   const SuccessKycScreen({super.key});

@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nathan_app/bloc/money_market/bid_stop_bloc.dart';
-import 'package:nathan_app/extensions/navigation_extensions.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/custom/snack_bar.dart';
-import 'package:nathan_app/views/screens/money_market/auction_round/success_bid_round_screen.dart';
+import 'package:fnge/bloc/money_market/bid_stop_bloc.dart';
+import 'package:fnge/extensions/navigation_extensions.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/custom/snack_bar.dart';
+import 'package:fnge/views/screens/money_market/auction_round/success_bid_round_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../../bloc/money_market/auction_round_monthly_bid_bloc.dart';
 import '../../../../bloc/money_market/request_auction_round_monthly_bid_bloc.dart';
@@ -235,22 +235,22 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
     });
   }
 
-
   oneStartBillTimer() async {
     setState(() {
       noOneStart = 10;
       const oneSec = Duration(seconds: 1);
       noOneTime = Timer.periodic(
         oneSec,
-            (Timer timer) {
+        (Timer timer) {
           if (noOneStart == 0) {
             setState(() {
               _roundMonthlyBidBloc.getRoundMonthlyBid(widget.roundId);
               timer.cancel();
               noOneTime!.cancel();
-              if(noOneStartCheck == true){
+              if (noOneStartCheck == true) {
                 setState(() {
-                  context.showSnack("There are no one users pay of bid. Now Starting final Count time!",
+                  context.showSnack(
+                    "There are no one users pay of bid. Now Starting final Count time!",
                     Colors.white,
                     Colors.red,
                     Icons.close,
@@ -260,15 +260,16 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
                   const oneSec = Duration(seconds: 1);
                   noOneTime = Timer.periodic(
                     oneSec,
-                        (Timer timer) {
+                    (Timer timer) {
                       if (noOneStart == 0) {
                         setState(() {
                           timer.cancel();
                           noOneTime!.cancel();
                           setState(() {
-                            _roundMonthlyBidBloc.getRoundMonthlyBid(widget.roundId);
+                            _roundMonthlyBidBloc
+                                .getRoundMonthlyBid(widget.roundId);
                             print("totalBidUser $totalBidUser");
-                            if(totalBidUser == 0 && noOneStartCheck == true) {
+                            if (totalBidUser == 0 && noOneStartCheck == true) {
                               print("request stop bid round");
                               // request stop bid round
                               _bidStopBloc.requestBidStop(widget.roundId);
@@ -276,8 +277,12 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
                               _bidStopStream.listen((ResponseOb resp) {
                                 print("roeo ${resp.message}");
                                 if (resp.success) {
-                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (co) =>
-                                      NoPayDoneScreen(roundNumber: widget.roundNumber,)),
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (co) => NoPayDoneScreen(
+                                              roundNumber: widget.roundNumber,
+                                            )),
                                   );
                                 } else {}
                               });
@@ -334,7 +339,7 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
                 _waittimer!.cancel();
                 setState(() {
                   _roundMonthlyBidBloc.getRoundMonthlyBid(widget.roundId);
-                  if(bidUsersLists.first.userId == userId) {
+                  if (bidUsersLists.first.userId == userId) {
                     print("same;");
                     finalCallTimer();
                   } else {
@@ -546,30 +551,32 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
                                     color: colorBlack,
                                     fontWeight: FontWeight.w600),
                               ),
-                               noOneUserPage
-                                  ? noOne ? Row(
-                                 crossAxisAlignment:
-                                 CrossAxisAlignment.center,
-                                 mainAxisAlignment:
-                                 MainAxisAlignment.center,
-                                 children: [
-                                   NathanTextView(
-                                     text: "Final Count Timer ",
-                                     fontSize: 16.sp,
-                                     color: colorBlack,
-                                   ),
-                                   NathanTextView(
-                                     text: "$noOneStart",
-                                     fontSize: 18.sp,
-                                     color: Colors.red,
-                                   ),
-                                   NathanTextView(
-                                     text: " sec.",
-                                     fontSize: 16.sp,
-                                     color: colorBlack,
-                                   ),
-                                 ],
-                               ) : const SizedBox()
+                              noOneUserPage
+                                  ? noOne
+                                      ? Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            NathanTextView(
+                                              text: "Final Count Timer ",
+                                              fontSize: 16.sp,
+                                              color: colorBlack,
+                                            ),
+                                            NathanTextView(
+                                              text: "$noOneStart",
+                                              fontSize: 18.sp,
+                                              color: Colors.red,
+                                            ),
+                                            NathanTextView(
+                                              text: " sec.",
+                                              fontSize: 16.sp,
+                                              color: colorBlack,
+                                            ),
+                                          ],
+                                        )
+                                      : const SizedBox()
                                   : finalCount
                                       ? Row(
                                           crossAxisAlignment:
@@ -745,7 +752,7 @@ class _StartRoundDetailScreenState extends State<StartRoundDetailScreen> {
                                 itemCount: bidUsersLists.length,
                                 shrinkWrap: true,
                                 itemBuilder: (BuildContext context, index) {
-                                    noOneUserPage = false;
+                                  noOneUserPage = false;
                                   return Container(
                                     padding: const EdgeInsets.all(10.0),
                                     margin:

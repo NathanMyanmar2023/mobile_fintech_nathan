@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/bloc/history/network_profit_history/network_profit_history_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/objects/history/network_profit_history_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/widgets/history/network_profit_history_selector_widget.dart';
+import 'package:fnge/bloc/history/network_profit_history/network_profit_history_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/objects/history/network_profit_history_ob.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/widgets/history/network_profit_history_selector_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NetworkProfitHistoryScreen extends StatefulWidget {
@@ -73,7 +73,7 @@ class _NetworkProfitHistoryScreenState
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
-     // _network_profit_history_bloc.getNetworkProfitHistory(page);
+      // _network_profit_history_bloc.getNetworkProfitHistory(page);
       print("getting page - $page");
     }
   }
@@ -137,39 +137,46 @@ class _NetworkProfitHistoryScreenState
             ),
             body: RefreshIndicator(
               onRefresh: refersh,
-              child: historyList.isEmpty ? Center(child: Text(AppLocalizations.of(context)!.no_more_data,),) :  ListView.builder(
-                controller: scroll_controller,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount: historyList.length,
-                itemBuilder: (context, index) {
-                  if (index < historyList.length) {
-                    final history = historyList[index];
-                    return NetworkProfitHistorySelectorWidget(
-                      data: history,
-                    );
-                  } else {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 20),
-                      child: Center(
-                        child: hasMore
-                            ? const SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                ))
-                            : Text(
-                          AppLocalizations.of(context)!.no_more_data,
-                                style: TextStyle(
-                                  fontSize: 13,
-                                ),
-                              ),
+              child: historyList.isEmpty
+                  ? Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.no_more_data,
                       ),
-                    );
-                  }
-                },
-              ),
+                    )
+                  : ListView.builder(
+                      controller: scroll_controller,
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      itemCount: historyList.length,
+                      itemBuilder: (context, index) {
+                        if (index < historyList.length) {
+                          final history = historyList[index];
+                          return NetworkProfitHistorySelectorWidget(
+                            data: history,
+                          );
+                        } else {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 20),
+                            child: Center(
+                              child: hasMore
+                                  ? const SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                      ))
+                                  : Text(
+                                      AppLocalizations.of(context)!
+                                          .no_more_data,
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                            ),
+                          );
+                        }
+                      },
+                    ),
             )),
       );
     }

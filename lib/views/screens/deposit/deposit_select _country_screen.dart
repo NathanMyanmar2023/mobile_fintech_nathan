@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_version_checker/flutter_app_version_checker.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/bloc/deposit/currency_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/widgets/currency_selector_widget.dart';
+import 'package:fnge/bloc/deposit/currency_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/widgets/currency_selector_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../widgets/app_bar_title_view.dart';
@@ -94,7 +94,11 @@ class _DepositSelectCountryScreenState
           backgroundColor: Colors.grey.shade200,
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(70),
-            child: AppBarTitleView(text: widget.isForDeposit ? AppLocalizations.of(context)!.deposit: AppLocalizations.of(context)!.withdraw,),
+            child: AppBarTitleView(
+              text: widget.isForDeposit
+                  ? AppLocalizations.of(context)!.deposit
+                  : AppLocalizations.of(context)!.withdraw,
+            ),
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -102,7 +106,7 @@ class _DepositSelectCountryScreenState
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                 // const AdsBannerWidget(paddingbottom: 0,),
+                   const AdsBannerWidget(paddingbottom: 0,),
                   const SizedBox(
                     height: 20,
                   ),
@@ -119,7 +123,7 @@ class _DepositSelectCountryScreenState
                             ))
                         .toList(),
                   ),
-                //  const AdsBannerWidget(),
+                    const AdsBannerWidget(),
                   const SizedBox(
                     height: 50,
                   ),

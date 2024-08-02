@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:nathan_app/resources/colors.dart';
+import 'package:fnge/resources/colors.dart';
 
 import '../../../../widgets/app_bar_title_view.dart';
 import '../../../../widgets/nathan_text_view.dart';
@@ -9,7 +9,9 @@ import '../../../../widgets/nathan_text_view.dart';
 class RoundDetailScreen extends StatefulWidget {
   final int roundId;
   final String roundNumber;
-  const RoundDetailScreen({Key? key, required this.roundId, required this.roundNumber}) : super(key: key);
+  const RoundDetailScreen(
+      {Key? key, required this.roundId, required this.roundNumber})
+      : super(key: key);
 
   @override
   State<RoundDetailScreen> createState() => _RoundDetailScreenState();
@@ -141,10 +143,16 @@ class _RoundDetailScreenState extends State<RoundDetailScreen> {
                               ),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Expanded(child: NathanTextView(text: "name ${index+1}",)),
-                                  NathanTextView(text: "USD1000${index+1}",),
+                                  Expanded(
+                                      child: NathanTextView(
+                                    text: "name ${index + 1}",
+                                  )),
+                                  NathanTextView(
+                                    text: "USD1000${index + 1}",
+                                  ),
                                 ],
                               ),
                             );

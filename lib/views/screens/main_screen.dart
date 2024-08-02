@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_version_checker/flutter_app_version_checker.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nathan_app/bloc/user_info_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/models/utils/navigation_utils.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/pages/history_page.dart';
-import 'package:nathan_app/views/pages/home_page.dart';
-import 'package:nathan_app/views/pages/network_page.dart';
-import 'package:nathan_app/views/screens/profile/profile_screen.dart';
-import 'package:nathan_app/views/screens/welcome_screen.dart';
-import 'package:nathan_app/views/widgets/error_alert_widget.dart';
+import 'package:fnge/bloc/user_info_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/models/utils/navigation_utils.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/pages/history_page.dart';
+import 'package:fnge/views/pages/home_page.dart';
+import 'package:fnge/views/pages/network_page.dart';
+import 'package:fnge/views/screens/profile/profile_screen.dart';
+import 'package:fnge/views/screens/welcome_screen.dart';
+import 'package:fnge/views/widgets/error_alert_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../helpers/shared_pref.dart';
@@ -72,7 +72,7 @@ class _MainScreenState extends State<MainScreen> {
   String? version;
   String APP_STORE_URL = "https://apps.apple.com/mm/app/1664gym/id1664655431";
   String PLAY_STORE_URL =
-      "https://play.google.com/store/apps/details?id=com.fintech.nathan";
+      "https://play.google.com/store/apps/details?id=com.fngc.fn";
 
   void checkPlayStoreVersion(bool change) async {
     _checker.checkUpdate().then((value) async {

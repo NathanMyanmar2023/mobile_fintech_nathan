@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/bloc/money_market/auction_detail_bloc.dart';
-import 'package:nathan_app/bloc/money_market/auction_leave_bloc.dart';
-import 'package:nathan_app/resources/colors.dart';
+import 'package:fnge/bloc/money_market/auction_detail_bloc.dart';
+import 'package:fnge/bloc/money_market/auction_leave_bloc.dart';
+import 'package:fnge/resources/colors.dart';
 import '../../../bloc/money_market/auction_insterest_bloc.dart';
 import '../../../helpers/response_ob.dart';
 import '../../../objects/money_market/auction_detail_ob.dart';
@@ -12,9 +12,7 @@ import '../../Ads_banner/ads_banner_widget.dart';
 
 class AllMemberView extends StatefulWidget {
   final int auctionId;
-  const AllMemberView({required this.auctionId,
-    Key? key})
-      : super(key: key);
+  const AllMemberView({required this.auctionId, Key? key}) : super(key: key);
 
   @override
   State<AllMemberView> createState() => _AllMemberViewState();
@@ -28,6 +26,7 @@ class _AllMemberViewState extends State<AllMemberView> {
   Future refersh() async {
     setState(() {});
   }
+
   final _auctionDetailBloc = AuctionDetailBloc();
   late Stream<ResponseOb> _auctionDetailStream;
   List<BillAuctionUserLists> billAuctionUserLists = [];
@@ -58,7 +57,8 @@ class _AllMemberViewState extends State<AllMemberView> {
           limitCount = resp.data.data.stardardLimit;
           leftUser = resp.data.data.leftUser;
           existingUsers = resp.data.data.existingUsers;
-          billAuctionUserLists = (resp.data as AuctionDetailOb).data!.billAuctionUserLists ?? [];
+          billAuctionUserLists =
+              (resp.data as AuctionDetailOb).data!.billAuctionUserLists ?? [];
         });
       } else {}
     });
@@ -102,10 +102,10 @@ class _AllMemberViewState extends State<AllMemberView> {
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Column(
                 children: [
-                //  const AdsBannerWidget(),
+                  //  const AdsBannerWidget(),
                   Expanded(
                     child: SingleChildScrollView(
-                      child:  ListView.builder(
+                      child: ListView.builder(
                         controller: scroll_controller,
                         itemCount: billAuctionUserLists.length,
                         shrinkWrap: true,
@@ -118,15 +118,27 @@ class _AllMemberViewState extends State<AllMemberView> {
                               children: [
                                 Expanded(
                                   child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       CircleAvatar(
-                                        backgroundColor: colorPrimary.withOpacity(0.8),
-                                        child: const Icon(Icons.person, color: colorWhite, size: 25,),
+                                        backgroundColor:
+                                            colorPrimary.withOpacity(0.8),
+                                        child: const Icon(
+                                          Icons.person,
+                                          color: colorWhite,
+                                          size: 25,
+                                        ),
                                       ),
-                                      const SizedBox(width: 10,),
-                                      Expanded(child: NathanTextView(text: "${billAuctionUserLists[index].username}",)),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                          child: NathanTextView(
+                                        text:
+                                            "${billAuctionUserLists[index].username}",
+                                      )),
                                     ],
                                   ),
                                 ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nathan_app/models/utils/navigation_utils.dart';
+import 'package:fnge/models/utils/navigation_utils.dart';
 
 class NoDeliveryAddressWidget extends StatelessWidget {
   const NoDeliveryAddressWidget({

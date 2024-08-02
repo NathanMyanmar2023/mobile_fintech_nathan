@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/bloc/history/referral_incentive_history/referral_incentive_history_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/views/widgets/history/referral_incentive_history_serlector_widget.dart';
+import 'package:fnge/bloc/history/referral_incentive_history/referral_incentive_history_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/views/widgets/history/referral_incentive_history_serlector_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ReferralIncentiveHistoryScreen extends StatefulWidget {
@@ -82,7 +82,7 @@ class _ReferralIncentiveHistoryScreenState
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
-    //  _referral_incentive_history_bloc.getReferralIncentiveHistory(page);
+      //  _referral_incentive_history_bloc.getReferralIncentiveHistory(page);
       print("getting page - $page");
     }
   }
@@ -102,7 +102,8 @@ class _ReferralIncentiveHistoryScreenState
   Widget build(BuildContext context) {
     if (isLoading) {
       return MediaQuery(
-        data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+        data: MediaQuery.of(context)
+            .copyWith(textScaler: const TextScaler.linear(1.0)),
         child: Scaffold(
           backgroundColor: Colors.white,
           body: SpinKitFadingFour(
@@ -119,7 +120,8 @@ class _ReferralIncentiveHistoryScreenState
       );
     } else {
       return MediaQuery(
-        data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+        data: MediaQuery.of(context)
+            .copyWith(textScaler: const TextScaler.linear(1.0)),
         child: Scaffold(
             backgroundColor: Colors.grey.shade200,
             appBar: PreferredSize(
@@ -143,43 +145,50 @@ class _ReferralIncentiveHistoryScreenState
             ),
             body: RefreshIndicator(
               onRefresh: refersh,
-              child: history_list.isEmpty ? Center(child: Text(AppLocalizations.of(context)!.no_more_data,),) : ListView.builder(
-                controller: scroll_controller,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount: history_list.length,
-                itemBuilder: (context, index) {
-                  if (index < history_list.length) {
-                    final history = history_list[index];
-                    return ReferralIncentiveHistorySelectorWidget(
-                      id: history[0],
-                      from_user_name: history[1],
-                      amount: history[2],
-                      percent: history[5],
-                      created_at: history[6],
-                    );
-                  } else {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 20),
-                      child: Center(
-                        child: hasMore
-                            ? const SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                ))
-                            : Text(
-                          AppLocalizations.of(context)!.no_more_data,
-                                style: const TextStyle(
-                                  fontSize: 13,
-                                ),
-                              ),
+              child: history_list.isEmpty
+                  ? Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.no_more_data,
                       ),
-                    );
-                  }
-                },
-              ),
+                    )
+                  : ListView.builder(
+                      controller: scroll_controller,
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      itemCount: history_list.length,
+                      itemBuilder: (context, index) {
+                        if (index < history_list.length) {
+                          final history = history_list[index];
+                          return ReferralIncentiveHistorySelectorWidget(
+                            id: history[0],
+                            from_user_name: history[1],
+                            amount: history[2],
+                            percent: history[5],
+                            created_at: history[6],
+                          );
+                        } else {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 20),
+                            child: Center(
+                              child: hasMore
+                                  ? const SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                      ))
+                                  : Text(
+                                      AppLocalizations.of(context)!
+                                          .no_more_data,
+                                      style: const TextStyle(
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                            ),
+                          );
+                        }
+                      },
+                    ),
             )),
       );
     }

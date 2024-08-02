@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/bloc/history/exchange_history/exchange_history_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/widgets/history/exchange_history_selector_widget.dart';
+import 'package:fnge/bloc/history/exchange_history/exchange_history_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/widgets/history/exchange_history_selector_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ExchangeHistoryScreen extends StatefulWidget {
@@ -80,7 +80,7 @@ class _ExchangeHistoryScreenState extends State<ExchangeHistoryScreen> {
     if (isFetching) return;
     isFetching = true;
     if (hasMore == true) {
-    //  _exchange_history_bloc.getExchangeHistory(page);
+      //  _exchange_history_bloc.getExchangeHistory(page);
       print("getting page - $page");
     }
   }
@@ -144,45 +144,52 @@ class _ExchangeHistoryScreenState extends State<ExchangeHistoryScreen> {
             ),
             body: RefreshIndicator(
               onRefresh: refersh,
-              child: history_list.isEmpty ? Center(child: Text(AppLocalizations.of(context)!.no_more_data,),) : ListView.builder(
-                controller: scroll_controller,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount: history_list.length,
-                itemBuilder: (context, index) {
-                  if (index < history_list.length) {
-                    final history = history_list[index];
-                    return ExchangeHistorySelectorWidget(
-                      id: history[0],
-                      is_to_main_wallet: history[1],
-                      from_amount: history[2],
-                      from_currency: history[3],
-                      to_amount: history[4],
-                      to_currency: history[5],
-                      created_at: history[6],
-                    );
-                  } else {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 20),
-                      child: Center(
-                        child: hasMore
-                            ? const SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                ))
-                            :  Text(
-                          AppLocalizations.of(context)!.no_more_data,
-                                style: const TextStyle(
-                                  fontSize: 13,
-                                ),
-                              ),
+              child: history_list.isEmpty
+                  ? Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.no_more_data,
                       ),
-                    );
-                  }
-                },
-              ),
+                    )
+                  : ListView.builder(
+                      controller: scroll_controller,
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      itemCount: history_list.length,
+                      itemBuilder: (context, index) {
+                        if (index < history_list.length) {
+                          final history = history_list[index];
+                          return ExchangeHistorySelectorWidget(
+                            id: history[0],
+                            is_to_main_wallet: history[1],
+                            from_amount: history[2],
+                            from_currency: history[3],
+                            to_amount: history[4],
+                            to_currency: history[5],
+                            created_at: history[6],
+                          );
+                        } else {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 20),
+                            child: Center(
+                              child: hasMore
+                                  ? const SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                      ))
+                                  : Text(
+                                      AppLocalizations.of(context)!
+                                          .no_more_data,
+                                      style: const TextStyle(
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                            ),
+                          );
+                        }
+                      },
+                    ),
             )),
       );
     }

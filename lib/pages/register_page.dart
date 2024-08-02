@@ -2,17 +2,17 @@
 // import 'package:country_code_picker/country_code_picker.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter_spinkit/flutter_spinkit.dart';
-// import 'package:nathan_app/bloc/check_phone_bloc.dart';
-// import 'package:nathan_app/bloc/check_refer_bloc.dart';
-// import 'package:nathan_app/bloc/check_username_bloc.dart';
-// import 'package:nathan_app/bloc/countries_bloc.dart';
-// import 'package:nathan_app/bloc/register_bloc.dart';
-// import 'package:nathan_app/helpers/response_ob.dart';
-// import 'package:nathan_app/views/screens/eula.dart';
-// import 'package:nathan_app/views/screens/phone_verify_screen.dart';
-// import 'package:nathan_app/views/screens/t_and_c_screen.dart';
-// import 'package:nathan_app/views/screens/welcome_screen.dart';
-// import 'package:nathan_app/views/widgets/error_alert_widget.dart';
+// import 'package:fnge/bloc/check_phone_bloc.dart';
+// import 'package:fnge/bloc/check_refer_bloc.dart';
+// import 'package:fnge/bloc/check_username_bloc.dart';
+// import 'package:fnge/bloc/countries_bloc.dart';
+// import 'package:fnge/bloc/register_bloc.dart';
+// import 'package:fnge/helpers/response_ob.dart';
+// import 'package:fnge/views/screens/eula.dart';
+// import 'package:fnge/views/screens/phone_verify_screen.dart';
+// import 'package:fnge/views/screens/t_and_c_screen.dart';
+// import 'package:fnge/views/screens/welcome_screen.dart';
+// import 'package:fnge/views/widgets/error_alert_widget.dart';
 //
 // class RegisterScreen extends StatefulWidget {
 //   const RegisterScreen({super.key});

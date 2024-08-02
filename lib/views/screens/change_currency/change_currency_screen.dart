@@ -1,12 +1,12 @@
 import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/bloc/deposit/currency_bloc.dart';
-import 'package:nathan_app/bloc/wallet/change_wallet_type_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/screens/change_currency/success_currency_change_screen.dart';
-import 'package:nathan_app/widgets/long_button_view.dart';
+import 'package:fnge/bloc/deposit/currency_bloc.dart';
+import 'package:fnge/bloc/wallet/change_wallet_type_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/screens/change_currency/success_currency_change_screen.dart';
+import 'package:fnge/widgets/long_button_view.dart';
 
 import '../../widgets/error_alert_widget.dart';
 

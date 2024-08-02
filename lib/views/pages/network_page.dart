@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
-import 'package:nathan_app/bloc/network/levels_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/views/widgets/level_selector_widget.dart';
+import 'package:fnge/bloc/network/levels_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/views/widgets/level_selector_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NetworkPage extends StatefulWidget {
@@ -154,9 +154,9 @@ class _NetworkPageState extends State<NetworkPage>
                                         ),
                                       ),
                                       const SizedBox(height: 10),
-                                       Row(
+                                      Row(
                                         children: [
-                                         const Icon(
+                                          const Icon(
                                             FontAwesome.user,
                                             color: Colors.white,
                                             size: 20,
@@ -164,7 +164,8 @@ class _NetworkPageState extends State<NetworkPage>
                                           const SizedBox(width: 5),
                                           Flexible(
                                             child: Text(
-                                              AppLocalizations.of(context)!.total_users,
+                                              AppLocalizations.of(context)!
+                                                  .total_users,
                                               maxLines: 2,
                                               softWrap: true,
                                               style: TextStyle(
@@ -207,7 +208,7 @@ class _NetworkPageState extends State<NetworkPage>
                                         ),
                                       ),
                                       const SizedBox(height: 10),
-                                       Row(
+                                      Row(
                                         children: [
                                           Icon(
                                             FontAwesome.bank,
@@ -216,7 +217,8 @@ class _NetworkPageState extends State<NetworkPage>
                                           ),
                                           SizedBox(width: 10),
                                           Text(
-                                            AppLocalizations.of(context)!.investment,
+                                            AppLocalizations.of(context)!
+                                                .investment,
                                             style: TextStyle(
                                               fontSize: 15,
                                               color: Colors.white,

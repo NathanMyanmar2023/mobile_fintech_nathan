@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:nathan_app/resources/colors.dart';
+import 'package:fnge/resources/colors.dart';
 
 class NetworkImageComponent extends StatelessWidget {
   final String url;
@@ -40,9 +40,8 @@ class NetworkImageComponent extends StatelessWidget {
       placeholder: (context, url) => const SizedBox(
         child: Center(
             child: CircularProgressIndicator(
-              backgroundColor: colorWhite,
-            )
-        ),
+          backgroundColor: colorWhite,
+        )),
         height: 30.0,
         width: 30.0,
       ),

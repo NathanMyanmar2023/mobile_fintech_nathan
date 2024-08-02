@@ -2,10 +2,10 @@ import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/screens/investment/confirm_investment_screen.dart';
-import 'package:nathan_app/views/widgets/error_alert_widget.dart';
-import 'package:nathan_app/widgets/long_button_view.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/screens/investment/confirm_investment_screen.dart';
+import 'package:fnge/views/widgets/error_alert_widget.dart';
+import 'package:fnge/widgets/long_button_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InvestmentScreen extends StatefulWidget {
@@ -244,33 +244,39 @@ class _InvestmentScreenState extends State<InvestmentScreen> {
                                 ],
                               ),
                             ),
-                            widget.promotionNetworkAmt == "0 %" ? const SizedBox() : Padding(
-                              padding: const EdgeInsets.only(left: 10, top: 5),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    "Network Percentage",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
+                            widget.promotionNetworkAmt == "0 %"
+                                ? const SizedBox()
+                                : Padding(
+                                    padding:
+                                        const EdgeInsets.only(left: 10, top: 5),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        const Text(
+                                          "Network Percentage",
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 5),
+                                          child: Text(
+                                            " - ${widget.promotionNetworkAmt}",
+                                            style: const TextStyle(
+                                              fontSize: 14,
+                                              color: colorPrimary,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 5),
-                                    child: Text(
-                                      " - ${widget.promotionNetworkAmt}",
-                                      style: const TextStyle(
-                                        fontSize: 14,
-                                        color: colorPrimary,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
                             Padding(
                               padding: const EdgeInsets.only(left: 10, top: 5),
                               child: Column(

@@ -1,13 +1,13 @@
 //
 // import 'package:dots_indicator/dots_indicator.dart';
 // import 'package:flutter/material.dart';
-// import 'package:nathan_app/extensions/navigation_extensions.dart';
-// import 'package:nathan_app/itemviews/balance_option_item_view.dart';
-// import 'package:nathan_app/itemviews/wallet_item_view.dart';
-// import 'package:nathan_app/pages/investment_page.dart';
-// import 'package:nathan_app/pages/lucky_draw_page.dart';
-// import 'package:nathan_app/pages/wallet_exchange_page.dart';
-// import 'package:nathan_app/pages/withdraw_page.dart';
+// import 'package:fnge/extensions/navigation_extensions.dart';
+// import 'package:fnge/itemviews/balance_option_item_view.dart';
+// import 'package:fnge/itemviews/wallet_item_view.dart';
+// import 'package:fnge/pages/investment_page.dart';
+// import 'package:fnge/pages/lucky_draw_page.dart';
+// import 'package:fnge/pages/wallet_exchange_page.dart';
+// import 'package:fnge/pages/withdraw_page.dart';
 // import 'package:provider/provider.dart';
 //
 // class HomePage extends StatelessWidget {

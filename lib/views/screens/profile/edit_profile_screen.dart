@@ -5,10 +5,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:nathan_app/bloc/profile/profile_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
-import 'package:nathan_app/views/screens/profile/edit_profile_success_screen.dart';
-import 'package:nathan_app/views/widgets/error_alert_widget.dart';
+import 'package:fnge/bloc/profile/profile_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
+import 'package:fnge/views/screens/profile/edit_profile_success_screen.dart';
+import 'package:fnge/views/widgets/error_alert_widget.dart';
 
 class EditProfileScreen extends StatefulWidget {
   final String current_name;
@@ -184,11 +184,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               child: _file != null
                                   ? ClipRRect(
                                       borderRadius: BorderRadius.circular(180),
-                                      child: kIsWeb ?
-  Image.network(_file!.path) : Image.file(
-                                        _file!,
-                                        fit: BoxFit.cover,
-                                      ),
+                                      child: kIsWeb
+                                          ? Image.network(_file!.path)
+                                          : Image.file(
+                                              _file!,
+                                              fit: BoxFit.cover,
+                                            ),
                                     )
                                   : profile_picture != ""
                                       ? CachedNetworkImage(

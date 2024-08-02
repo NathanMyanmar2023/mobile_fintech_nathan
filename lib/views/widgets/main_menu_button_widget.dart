@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nathan_app/resources/colors.dart';
+import 'package:fnge/resources/colors.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class MainMenuButtonWidget extends StatefulWidget {
@@ -54,7 +54,7 @@ class _MainMenuButtonWidgetState extends State<MainMenuButtonWidget> {
           Text(
             widget.menu_name.toString(),
             textAlign: TextAlign.center,
-            style:  TextStyle(
+            style: TextStyle(
               fontSize: 15.sp,
             ),
           ),

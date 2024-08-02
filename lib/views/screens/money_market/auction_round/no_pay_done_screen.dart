@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/screens/main_screen.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/screens/main_screen.dart';
 
 class NoPayDoneScreen extends StatefulWidget {
   final String roundNumber;
-  const NoPayDoneScreen({required this.roundNumber,super.key});
+  const NoPayDoneScreen({required this.roundNumber, super.key});
 
   @override
   State<NoPayDoneScreen> createState() => _NoPayDoneScreenState();

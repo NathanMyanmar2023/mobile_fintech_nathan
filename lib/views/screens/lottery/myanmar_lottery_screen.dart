@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:nathan_app/views/custom/snack_bar.dart';
-import 'package:nathan_app/widgets/nathan_text_view.dart';
+import 'package:fnge/views/custom/snack_bar.dart';
+import 'package:fnge/widgets/nathan_text_view.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../resources/colors.dart';
 import '../../../widgets/app_bar_title_view.dart';
@@ -59,7 +59,6 @@ class _MyanmarLotteryScreenState extends State<MyanmarLotteryScreen> {
   //   });
   // }
 
-
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
@@ -109,7 +108,7 @@ class _MyanmarLotteryScreenState extends State<MyanmarLotteryScreen> {
                 ),
                 const NathanTextView(
                   text:
-                  "please first select which type of lottery you want buy!",
+                      "please first select which type of lottery you want buy!",
                   isCenter: true,
                   fontSize: 14,
                   fontWeight: FontWeight.w400,

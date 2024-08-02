@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/bloc/rank/rank_bloc.dart';
-import 'package:nathan_app/helpers/response_ob.dart';
+import 'package:fnge/bloc/rank/rank_bloc.dart';
+import 'package:fnge/helpers/response_ob.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -51,7 +51,7 @@ class _RankScreenState extends State<RankScreen>
     _rank_stream.listen((ResponseOb resp) {
       if (resp.success) {
         setState(() {
-           is_ic = resp.data.data.iC.is_ic;
+          is_ic = resp.data.data.iC.is_ic;
           is_supervisor = resp.data.data.supervisor.is_supervisor;
           is_manager = resp.data.data.manager.is_manager;
           is_general_manager = resp.data.data.generalManager.is_general_manager;
@@ -59,18 +59,18 @@ class _RankScreenState extends State<RankScreen>
           is_president = resp.data.data.president.is_president;
 
           total_ic = resp.data.data.iC.total_child;
-           total_sup = resp.data.data.supervisor.total_child;
-           total_mana = resp.data.data.manager.total_child;
-           total_gm = resp.data.data.generalManager.total_child;
-           total_dir = resp.data.data.director.total_child;
-           total_pres = resp.data.data.president.total_child;
+          total_sup = resp.data.data.supervisor.total_child;
+          total_mana = resp.data.data.manager.total_child;
+          total_gm = resp.data.data.generalManager.total_child;
+          total_dir = resp.data.data.director.total_child;
+          total_pres = resp.data.data.president.total_child;
 
-           is_bonus_ic = resp.data.data.iC.is_gave_bonus;
-           is_bonus_sup = resp.data.data.supervisor.is_gave_bonus;
-           is_bonus_mana = resp.data.data.manager.is_gave_bonus;
-           is_bonus_gm = resp.data.data.generalManager.is_gave_bonus;
-           is_bonus_dir = resp.data.data.director.is_gave_bonus;
-           is_bonus_pres = resp.data.data.president.is_gave_bonus;
+          is_bonus_ic = resp.data.data.iC.is_gave_bonus;
+          is_bonus_sup = resp.data.data.supervisor.is_gave_bonus;
+          is_bonus_mana = resp.data.data.manager.is_gave_bonus;
+          is_bonus_gm = resp.data.data.generalManager.is_gave_bonus;
+          is_bonus_dir = resp.data.data.director.is_gave_bonus;
+          is_bonus_pres = resp.data.data.president.is_gave_bonus;
 
           isLoading = false;
         });
@@ -87,7 +87,8 @@ class _RankScreenState extends State<RankScreen>
     super.build(context);
     if (isLoading) {
       return MediaQuery(
-        data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+        data: MediaQuery.of(context)
+            .copyWith(textScaler: const TextScaler.linear(1.0)),
         child: Scaffold(
           body: Container(
             child: SpinKitFadingFour(
@@ -161,7 +162,8 @@ class _RankScreenState extends State<RankScreen>
                   count: total_ic,
                   target_count: 8,
                   percent: total_ic / 8,
-                  message: "Invest amount 5,000USD of 8 persons to direct referral",
+                  message:
+                      "Invest amount 5,000USD of 8 persons to direct referral",
                   title: AppLocalizations.of(context)!.ic,
                   reward_amount: "1,500",
                   icon: Icons.account_tree_outlined,
@@ -331,7 +333,9 @@ class RankWidget extends StatelessWidget {
                               color: Colors.grey.shade800,
                             ),
                           ),
-                          const SizedBox(width: 10,),
+                          const SizedBox(
+                            width: 10,
+                          ),
                           SizedBox(
                             width: bonus ? 90 : 80,
                             child: Container(
@@ -339,9 +343,11 @@ class RankWidget extends StatelessWidget {
                                   horizontal: 5, vertical: 5),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                color: bonus ? Colors.green.withOpacity(0.8) : Colors.red.withOpacity(0.5),
+                                color: bonus
+                                    ? Colors.green.withOpacity(0.8)
+                                    : Colors.red.withOpacity(0.5),
                               ),
-                              child:  Row(
+                              child: Row(
                                 children: [
                                   Icon(
                                     bonus ? Icons.check : Icons.lock,
@@ -353,7 +359,10 @@ class RankWidget extends StatelessWidget {
                                   ),
                                   Flexible(
                                     child: Text(
-                                      bonus ? "Success" : AppLocalizations.of(context)!.locked,
+                                      bonus
+                                          ? "Success"
+                                          : AppLocalizations.of(context)!
+                                              .locked,
                                       maxLines: 2,
                                       softWrap: true,
                                       style: TextStyle(

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
-import 'package:nathan_app/views/custom/snack_bar.dart';
-import 'package:nathan_app/views/screens/top_up/success_bill_screen.dart';
-import 'package:nathan_app/views/screens/top_up/top_up_button_widget.dart';
+import 'package:fnge/views/custom/snack_bar.dart';
+import 'package:fnge/views/screens/top_up/success_bill_screen.dart';
+import 'package:fnge/views/screens/top_up/top_up_button_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../bloc/top_up/operator_bloc.dart';
@@ -207,7 +207,7 @@ class _TopUpScreenState extends State<TopUpScreen> {
                           const SizedBox(
                             height: 20,
                           ),
-                        //  const AdsBannerWidget(paddingTop: 0),
+                            const AdsBannerWidget(paddingTop: 0),
                           const Text(
                             "Air Time Top-Up",
                             style: TextStyle(

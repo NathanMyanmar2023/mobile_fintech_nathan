@@ -3,10 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/bloc/money_market/auction_detail_bloc.dart';
-import 'package:nathan_app/bloc/money_market/auction_leave_bloc.dart';
-import 'package:nathan_app/extensions/navigation_extensions.dart';
-import 'package:nathan_app/resources/colors.dart';
+import 'package:fnge/bloc/money_market/auction_detail_bloc.dart';
+import 'package:fnge/bloc/money_market/auction_leave_bloc.dart';
+import 'package:fnge/extensions/navigation_extensions.dart';
+import 'package:fnge/resources/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../bloc/money_market/auction_insterest_bloc.dart';
@@ -28,8 +28,7 @@ import 'money_market_screen.dart';
 
 class AuctionGroupScreen extends StatefulWidget {
   final int auctionId;
-  const AuctionGroupScreen({required this.auctionId,
-    Key? key})
+  const AuctionGroupScreen({required this.auctionId, Key? key})
       : super(key: key);
 
   @override
@@ -52,6 +51,7 @@ class _AuctionGroupScreenState extends State<AuctionGroupScreen> {
       _auctionRound_bloc.getAuctionRound(widget.auctionId);
     });
   }
+
   final _auctionDetailBloc = AuctionDetailBloc();
   late Stream<ResponseOb> _auctionDetailStream;
   List<BillAuctionUserLists> billAuctionUserLists = [];
@@ -77,7 +77,8 @@ class _AuctionGroupScreenState extends State<AuctionGroupScreen> {
           limitCount = resp.data.data.stardardLimit;
           leftUser = resp.data.data.leftUser;
           existingUsers = resp.data.data.existingUsers;
-          billAuctionUserLists = (resp.data as AuctionDetailOb).data!.billAuctionUserLists ?? [];
+          billAuctionUserLists =
+              (resp.data as AuctionDetailOb).data!.billAuctionUserLists ?? [];
         });
       } else {}
     });
@@ -97,6 +98,7 @@ class _AuctionGroupScreenState extends State<AuctionGroupScreen> {
     });
     _auctionRound_bloc.getAuctionRound(widget.auctionId);
   }
+
   int? userId = 0;
   getUserData() async {
     String? accountId = await SharedPref.getData(key: SharedPref.accountId);
@@ -161,29 +163,34 @@ class _AuctionGroupScreenState extends State<AuctionGroupScreen> {
                           ),
                         ],
                       ),
-                      description.isNotEmpty ? Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const NathanTextView(
-                              text: "Description",
-                              fontWeight: FontWeight.w600,
-                              fontSize: 18,
-                            ),
-                            NathanTextView(
-                              text: description,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 18,
-                            ),
-                          ],
-                        ),
-                      ) : const SizedBox(),
-                      const Divider(height: 10,),
-                    //  const AdsBannerWidget(),
+                      description.isNotEmpty
+                          ? Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  const NathanTextView(
+                                    text: "Description",
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18,
+                                  ),
+                                  NathanTextView(
+                                    text: description,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18,
+                                  ),
+                                ],
+                              ),
+                            )
+                          : const SizedBox(),
+                      const Divider(
+                        height: 10,
+                      ),
+                      //  const AdsBannerWidget(),
                       Padding(
-                        padding: EdgeInsets.symmetric(vertical: leftUser > 0 ? 0 : 10),
+                        padding: EdgeInsets.symmetric(
+                            vertical: leftUser > 0 ? 0 : 10),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -192,7 +199,8 @@ class _AuctionGroupScreenState extends State<AuctionGroupScreen> {
                               text: "All Round Bid",
                               fontWeight: FontWeight.w600,
                               color: colorPrimary,
-                              fontSize: 20,),
+                              fontSize: 20,
+                            ),
                             textButtonView(
                               width: 120,
                               text: "Members View",
@@ -200,7 +208,12 @@ class _AuctionGroupScreenState extends State<AuctionGroupScreen> {
                               borderRadius: BorderRadius.circular(10),
                               backgroundColor: colorSeconary.withOpacity(0.3),
                               textColor: colorPrimary,
-                              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (co)=> AllMemberView(auctionId: widget.auctionId,))),
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (co) => AllMemberView(
+                                            auctionId: widget.auctionId,
+                                          ))),
                             ),
                           ],
                         ),
@@ -208,7 +221,9 @@ class _AuctionGroupScreenState extends State<AuctionGroupScreen> {
                     ],
                   ),
                   // get round
-                  AuctionRoundView(auctionRoundList: auctionRoundList,),
+                  AuctionRoundView(
+                    auctionRoundList: auctionRoundList,
+                  ),
                   SizedBox(height: 1.h),
                 ],
               ),
@@ -229,13 +244,14 @@ class _AuctionGroupScreenState extends State<AuctionGroupScreen> {
 
 class AuctionRoundView extends StatelessWidget {
   final List auctionRoundList;
-  const AuctionRoundView({Key? key, required this.auctionRoundList}) : super(key: key);
+  const AuctionRoundView({Key? key, required this.auctionRoundList})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: GridView.builder(
-        gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           childAspectRatio: MediaQuery.of(context).size.width /
               (MediaQuery.of(context).size.height / 2),
           crossAxisCount: 2, // number of items in each row
@@ -245,63 +261,98 @@ class AuctionRoundView extends StatelessWidget {
         padding: EdgeInsets.zero, // padding around the grid
         itemCount: auctionRoundList.length, // total number of items
         itemBuilder: (context, index) {
-          return auctionRoundList[index].statusMessage == "Pending" ? const SizedBox() : GestureDetector(
-            onTap: (){
-              auctionRoundList[index].userId != null ? print("can't go") : Navigator.push(context, MaterialPageRoute(builder: (co) =>
-              // auctionRoundList[index].userId != null ? OwnerRoundDetailScreen(
-              //   roundId: auctionRoundList[index].id,
-              //   roundNumber: auctionRoundList[index].roundNumber,
-              //   realAmt: auctionRoundList[index].realAmount.toString(),
-              //   estimateAmt: auctionRoundList[index].baseAmount.toString(),
-              //    winnerBidName: auctionRoundList[index].userinfo.username,
-              // ) :
-              auctionRoundList[index].roundBidStop == 1 ? DoneBidRoundScreen(roundId: auctionRoundList[index].id, roundName: auctionRoundList[index].roundNumber,) :
-              StartRoundDetailScreen(roundId: auctionRoundList[index].id, roundNumber: auctionRoundList[index].roundNumber,
-                baseAmount: auctionRoundList[index].baseAmount.toString(),
-              ),
-              )
-              );
-            },
-            child: Container(
-                decoration: BoxDecoration(
-                  color: topColor.withOpacity(0.5),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "${auctionRoundList[index].roundNumber}",
-                      style: const TextStyle(fontSize: 18.0, color: Colors.white, fontWeight: FontWeight.w600),
-                    ),
-                    auctionRoundList[index].userId == null ? const SizedBox() : Text(
-                      "Bid Price - ${auctionRoundList[index].realAmount}",
-                      style: const TextStyle(fontSize: 14.0, color: Colors.white, fontWeight: FontWeight.w600),
-                    ),
-                    Text(
-                      "Ask Price - ${auctionRoundList[index].baseAmount}",
-                      style: const TextStyle(fontSize: 14.0, color: Colors.white,fontWeight: FontWeight.w600),
-                    ),
-                    Column(
-                      children: [
-                        Text(
-                          auctionRoundList[index].userId == null ? "" : "Winner Bidder name",
-                          style: const TextStyle(fontSize: 15.0, color: Colors.white,fontWeight: FontWeight.w600),
-                        ),
-                        Text(
-                          auctionRoundList[index].userId == null ? "" : "${auctionRoundList[index].userinfo.username ?? ""}",
-                          style: const TextStyle(fontSize: 18.0, color: colorPrimary,fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    ),
-                  ],
-                )
-            ),
-          );
+          return auctionRoundList[index].statusMessage == "Pending"
+              ? const SizedBox()
+              : GestureDetector(
+                  onTap: () {
+                    auctionRoundList[index].userId != null
+                        ? print("can't go")
+                        : Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (co) =>
+                                  // auctionRoundList[index].userId != null ? OwnerRoundDetailScreen(
+                                  //   roundId: auctionRoundList[index].id,
+                                  //   roundNumber: auctionRoundList[index].roundNumber,
+                                  //   realAmt: auctionRoundList[index].realAmount.toString(),
+                                  //   estimateAmt: auctionRoundList[index].baseAmount.toString(),
+                                  //    winnerBidName: auctionRoundList[index].userinfo.username,
+                                  // ) :
+                                  auctionRoundList[index].roundBidStop == 1
+                                      ? DoneBidRoundScreen(
+                                          roundId: auctionRoundList[index].id,
+                                          roundName: auctionRoundList[index]
+                                              .roundNumber,
+                                        )
+                                      : StartRoundDetailScreen(
+                                          roundId: auctionRoundList[index].id,
+                                          roundNumber: auctionRoundList[index]
+                                              .roundNumber,
+                                          baseAmount: auctionRoundList[index]
+                                              .baseAmount
+                                              .toString(),
+                                        ),
+                            ));
+                  },
+                  child: Container(
+                      decoration: BoxDecoration(
+                        color: topColor.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "${auctionRoundList[index].roundNumber}",
+                            style: const TextStyle(
+                                fontSize: 18.0,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          auctionRoundList[index].userId == null
+                              ? const SizedBox()
+                              : Text(
+                                  "Bid Price - ${auctionRoundList[index].realAmount}",
+                                  style: const TextStyle(
+                                      fontSize: 14.0,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                          Text(
+                            "Ask Price - ${auctionRoundList[index].baseAmount}",
+                            style: const TextStyle(
+                                fontSize: 14.0,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                auctionRoundList[index].userId == null
+                                    ? ""
+                                    : "Winner Bidder name",
+                                style: const TextStyle(
+                                    fontSize: 15.0,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              Text(
+                                auctionRoundList[index].userId == null
+                                    ? ""
+                                    : "${auctionRoundList[index].userinfo.username ?? ""}",
+                                style: const TextStyle(
+                                    fontSize: 18.0,
+                                    color: colorPrimary,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ],
+                          ),
+                        ],
+                      )),
+                );
         },
       ),
     );
   }
 }
-

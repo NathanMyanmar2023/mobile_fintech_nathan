@@ -1,6 +1,6 @@
 // import 'package:flutter/material.dart';
-// import 'package:nathan_app/extensions/navigation_extensions.dart';
-// import 'package:nathan_app/pages/profile_page.dart';
+// import 'package:fnge/extensions/navigation_extensions.dart';
+// import 'package:fnge/pages/profile_page.dart';
 // import 'package:provider/provider.dart';
 //
 // class IndexPage extends StatelessWidget {

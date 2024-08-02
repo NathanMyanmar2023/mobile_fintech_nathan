@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nathan_app/resources/colors.dart';
-import 'package:nathan_app/views/screens/transfer/transfer_password_screen.dart';
-import 'package:nathan_app/widgets/long_button_view.dart';
+import 'package:fnge/resources/colors.dart';
+import 'package:fnge/views/screens/transfer/transfer_password_screen.dart';
+import 'package:fnge/widgets/long_button_view.dart';
 
 class ConfirmTransferScreen extends StatefulWidget {
   final String amount;

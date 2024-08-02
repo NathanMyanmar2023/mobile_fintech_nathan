@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:nathan_app/views/custom/snack_bar.dart';
-import 'package:nathan_app/views/screens/lottery/myanmar_lottery_screen.dart';
-import 'package:nathan_app/views/screens/lottery/thai_lottery_screen.dart';
-import 'package:nathan_app/widgets/nathan_text_view.dart';
+import 'package:fnge/views/custom/snack_bar.dart';
+import 'package:fnge/views/screens/lottery/myanmar_lottery_screen.dart';
+import 'package:fnge/views/screens/lottery/thai_lottery_screen.dart';
+import 'package:fnge/widgets/nathan_text_view.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../resources/colors.dart';
 import '../../../widgets/app_bar_title_view.dart';
@@ -176,24 +176,27 @@ class _LotteryScreenState extends State<LotteryScreen> {
                         height: 10,
                       ),
                       Padding(
-                        padding:  EdgeInsets.symmetric(vertical: 2.h),
+                        padding: EdgeInsets.symmetric(vertical: 2.h),
                         child: LongButtonView(
                             text: "Next",
                             borderRadius: BorderRadius.circular(10),
                             onTap: () {
-                              if(countryID == 3) {
-                                context.showSnack("Please select which type of Lottery!",
+                              if (countryID == 3) {
+                                context.showSnack(
+                                  "Please select which type of Lottery!",
                                   Colors.white,
                                   Colors.red,
                                   Icons.close,
                                 );
                               } else {
-                                  Navigator.push(context, MaterialPageRoute(builder: (co) =>
-                                  countryID == 1 ? const ThaiLotteryScreen() : const MyanmarLotteryScreen()
-                                  ));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (co) => countryID == 1
+                                            ? const ThaiLotteryScreen()
+                                            : const MyanmarLotteryScreen()));
                               }
-                            }
-                        ),
+                            }),
                       ),
                     ],
                   ),

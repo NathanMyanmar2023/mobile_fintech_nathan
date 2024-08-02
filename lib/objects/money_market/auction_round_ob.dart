@@ -1,10 +1,11 @@
-import 'package:nathan_app/objects/money_market/user_info.dart';
+import 'package:fnge/objects/money_market/user_info.dart';
 
 class AuctionRoundOb {
   AuctionRoundOb({
-      this.success, 
-      this.message, 
-      this.data,});
+    this.success,
+    this.message,
+    this.data,
+  });
 
   AuctionRoundOb.fromJson(dynamic json) {
     success = json['success'];
@@ -48,7 +49,8 @@ class RoundData {
     this.monthDone,
     this.isDone,
     this.currentTime,
-    this.createdAt,});
+    this.createdAt,
+  });
 
   RoundData.fromJson(dynamic json) {
     id = json['id'];
@@ -57,7 +59,8 @@ class RoundData {
     statusMessage = json['status_message'];
     statusCode = json['status_code'];
     roundBidStop = json['round_bid_stop'];
-    userinfo = json['userinfo'] != null ? Userinfo.fromJson(json['userinfo']) : null;
+    userinfo =
+        json['userinfo'] != null ? Userinfo.fromJson(json['userinfo']) : null;
     auctionId = json['auction_id'];
     baseAmount = json['base_amount'];
     realAmount = json['real_amount'];
@@ -107,5 +110,4 @@ class RoundData {
     map['created_at'] = createdAt;
     return map;
   }
-
 }
