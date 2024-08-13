@@ -1,14 +1,16 @@
 import 'dart:io';
+
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fnge/view_models/add_address_view_model.dart';
-import 'package:fnge/view_models/cart_view_model.dart';
 import 'package:fnge/view_models/app_language_view_model.dart';
+import 'package:fnge/view_models/cart_view_model.dart';
+import 'package:fnge/view_models/product_view_model.dart';
 import 'package:fnge/views/notification/notification_service.dart';
 import 'package:fnge/views/screens/login_screen.dart';
 import 'package:fnge/views/screens/main_screen.dart';
@@ -16,11 +18,9 @@ import 'package:fnge/views/screens/register_screen.dart';
 import 'package:fnge/views/screens/register_success_screen.dart';
 import 'package:fnge/views/screens/splash_screen.dart';
 import 'package:fnge/views/screens/welcome_screen.dart';
-import 'package:fnge/view_models/product_view_model.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'firebase_options.dart';
 
@@ -47,15 +47,13 @@ Future<void> main() async {
     await MobileAds.instance.initialize();
     // thing to add
     List<String> testDeviceIds = ["6CB9DF638CDF0411C30830373D9580A0"];
-    RequestConfiguration configuration =
-        RequestConfiguration(testDeviceIds: testDeviceIds);
+    RequestConfiguration configuration = RequestConfiguration(testDeviceIds: testDeviceIds);
     MobileAds.instance.updateRequestConfiguration(configuration);
   }
 
   AppLanguageViewModel appLanguage = AppLanguageViewModel();
   await appLanguage.fetchLocale();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
     runApp(Nathan(
       appLanguage: appLanguage,
     ));
@@ -97,14 +95,12 @@ class Nathan extends StatelessWidget {
         ],
         child: ChangeNotifierProvider(
           create: (BuildContext context) => appLanguage,
-          child:
-              Consumer<AppLanguageViewModel>(builder: (context, model, child) {
+          child: Consumer<AppLanguageViewModel>(builder: (context, model, child) {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               themeMode: ThemeMode.light,
               title: 'FNGC',
               localizationsDelegates: const [
-                AppLocalizations.delegate,
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
                 GlobalCupertinoLocalizations.delegate
@@ -114,16 +110,15 @@ class Nathan extends StatelessWidget {
                 Locale('en', 'US'),
                 Locale('my', 'MY'),
               ],
-              initialRoute: SplashScreen.id,
-              routes: {
-                SplashScreen.id: (context) => const SplashScreen(),
-                WelcomeScreen.id: (context) => const WelcomeScreen(),
-                RegisterScreen.id: (context) => const RegisterScreen(),
-                LoginScreen.id: (context) => const LoginScreen(),
-                RegisterSuccessScreen.id: (context) =>
-                    const RegisterSuccessScreen(),
-                MainScreen.id: (context) => const MainScreen(),
-              },
+              // initialRoute: SplashScreen.id,
+              // routes: {
+              //   SplashScreen.id: (context) => const SplashScreen(),
+              //   WelcomeScreen.id: (context) => const WelcomeScreen(),
+              //   RegisterScreen.id: (context) => const RegisterScreen(),
+              //   LoginScreen.id: (context) => const LoginScreen(),
+              //   RegisterSuccessScreen.id: (context) => const RegisterSuccessScreen(),
+              //   MainScreen.id: (context) => const MainScreen(),
+              // },
             );
           }),
         ),
